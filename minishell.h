@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/17 18:15:41 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:39:09 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,12 @@ typedef struct s_node
 }	t_node;
 */
 
+typedef struct s_command
+{
+	char	*input;
+	char	*prompt;
+}	t_command;
+
+char	*make_prompt(void);
+void	set_command(t_command *command);
 #endif

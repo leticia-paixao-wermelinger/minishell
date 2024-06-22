@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/17 22:56:30 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/20 15:38:29 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,33 @@ char	*make_prompt(void)
 	return (prompt);
 }
 
-int	main(void)
+int	main(int argc, char *argv[], char *envp[])
 {
-	char	*input;
-	char	*prompt;
+	t_command	command;	
+/*	char	*input;
+	char	*prompt;*/
 
+	(void)argc;
+	(void)argv;
+	(void)envp;
 	while (42)
 	{
-		prompt = make_prompt();
-		input = readline(prompt);
-		add_history(input);
-		if (my_strcmp(input, "exit") == 0)
+		set_command(&command);
+/*		prompt = make_prompt();
+		input = readline(prompt);*/
+		add_history(command.input);
+		if (my_strcmp(command.input, "exit") == 0)
 		{
-			free(input);
+			free(command.input);
 			break ;
 		}
-		printf("Passou pelas validações de erro\n");
-		free(prompt);
-		free(input);
+		free(command.prompt);
+		free(command.input);
 	}
 	rl_clear_history();
-	free(prompt);
+	free(command.prompt);
 	printf("Exiting...\n");
 }
+/*
+**envp para pegar as variáveis de ambiente (no bash, só digitar "env");
+*/

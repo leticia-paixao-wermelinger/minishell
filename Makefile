@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/06/17 18:23:40 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/06/20 15:33:26 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = \
 main.c \
+declate_structs.c
 
 OBJS = ${SRCS:.c=.o}
 

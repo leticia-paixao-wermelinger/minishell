@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/20 15:38:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/25 12:51:39 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int	main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
+	//(void)envp;
+	copy_env(envp, &command);
+	//fazer uma cópia da env -- loop p saber a quantidade de linhas p fazer o vetor + loop com strdup
 	while (42)
 	{
 		set_command(&command);
@@ -50,8 +52,20 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	rl_clear_history();
 	free(command.prompt);
+	my_clean_vect(command.my_env);
 	printf("Exiting...\n");
 }
 /*
 **envp para pegar as variáveis de ambiente (no bash, só digitar "env");
+**com a my_env eu consigo fazer 3 built-ins: env; export (cria uma nova variável de ambiente ou
+altera uma que já existe) e unset (se ela conseguir achar a variável de ambiente ela exclui essa
+variável. Se não achar, não faz nada).
+export = verifica se já existe. Se existe, modifica. Se não, cria uma nova.
+ATENÇÃO PRO "VERIFICA DE EXISTE"!!! -> retorno de erro OU da posição!
+Isso tb vai ser importante, depois, para a expansão de variáveis... "echo $USER", por exemplo, é
+expansão de variável
+Se conseguir modularizar a busca de uma variável de ambiente, a busca de erros, vai facilitar,
+depois, na unset, na export e na expansão de variáveis (ver foto de echo c $User que não existe);
+na régua de avaliação, se tiver $$ vai imprimir apenas um $, por mais q o bash coloque o pid
+echo $? está pedindo p imprimir na tela o último erro (deu certo ou deu erra) -- ver foto de echo $?
 */

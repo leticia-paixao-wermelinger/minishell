@@ -3,7 +3,7 @@ NAME = libft.a
 
 CC = cc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = \
 my_atoi.c \
@@ -30,6 +30,7 @@ my_putnbr_fd.c \
 my_putstr.c \
 my_putstr_fd.c \
 my_split.c \
+my_clean_vect.c \
 my_strchr.c \
 my_strcmp.c \
 my_strdup.c \
@@ -46,6 +47,8 @@ my_strtrim.c \
 my_substr.c \
 my_tolower.c \
 my_toupper.c \
+get_next_line.c \
+get_next_line_utils.c
 
 OBJS = ${SRCS:.c=.o}
 

@@ -1,38 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   declate_structs.c                                  :+:      :+:    :+:   */
+/*   my_clean_vect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/25 12:53:25 by lpaixao-         ###   ########.fr       */
+/*   Created: 2024/03/03 11:51:32 by lpaixao-          #+#    #+#             */
+/*   Updated: 2024/03/10 14:57:51 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	copy_env(char **envp, t_command *command)
+void	my_clean_vect(char **vect)
 {
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
-	while (envp[i])
+	while (vect[i])
 		i++;
-	command->my_env = (char **)malloc((i + 1) * sizeof(char *));
-	while (j <= i)
+	while (i >= 0)
 	{
-		command->my_env[j] = my_strdup(envp[j]);
-		j++;
+		free(vect[i]);
+		vect[i] = NULL;
+		i--;
 	}
-	command->my_env[j] = '\0';
-	return (command->my_env);
-}
-
-void	set_command(t_command *command)
-{
-	command->prompt = make_prompt();
-	command->input = readline(command->prompt);
+	free(vect);
+	vect = NULL;
 }

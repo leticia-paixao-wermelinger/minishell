@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:14:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/02/17 00:15:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:03:55 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	my_atoi(const char *nptr)
 
 int	main()
 {
-	const char	n[] = "04638";
+	const char	n[] = "4638";
 
-	printf("Minha própria atoi(): %li \n", my_atoi(n));
+	printf("Minha própria atoi(): %i \n", my_atoi(n));
 	printf("Função atoi() original: %i \n", atoi(n));
 	return (0);
 }*/

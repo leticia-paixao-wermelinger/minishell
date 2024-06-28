@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/06/27 23:03:08 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/06/28 15:55:29 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ LIBFT_PATH = libs/my_libft
 
 LISTLIB = libs/listlib/listlib.a
 
-LISTLIB_PATH = libs/my_libft
+LISTLIB_PATH = libs/listlib
 
 LIBS = $(LIBFT) $(LISTLIB)
 
@@ -45,14 +45,14 @@ LIBS = $(LIBFT) $(LISTLIB)
 $(LIBS):
 	make -s -C $(LIBFT_PATH)
 	@echo "$(COLOUR_BLUE) libft is ready to be used$(COLOUR_END)"
-	make -s -C $(LISTLIB_PATH)
+	make re -s -C $(LISTLIB_PATH) #Não sei pq apenas o make do Makefile dessa lib não está funcionando...
 	@echo "$(COLOUR_BLUE) listlib is ready to be used$(COLOUR_END)"
 
 all: $(NAME)
 	@echo "$(COLOUR_BLUE) minishell is ready to be used$(COLOUR_END)"
 
 $(NAME): $(LIBS) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -lreadline -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBS) -lreadline -o $(NAME)
 
 clean:
 	make clean -C $(LIBFT_PATH)

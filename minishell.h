@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/27 21:32:45 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:05:58 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ typedef struct s_command
 }	t_command;
 
 char	*make_prompt(void);
-char	**copy_env(t_command *command);
+void	copy_env(t_command *command);
 void	set_command(t_command *command);
 #endif

@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/27 18:44:39 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/06/27 19:06:57 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/06/28 15:51:06 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,9 +29,12 @@ LIBFT_PATH = ../my_libft
 .c.o:
 	$(CC) $(FLAGS) -c $< -o $@
 
-all: ${NAME}
+$(LIBFT):
+	make -s -C $(LIBFT_PATH)
 
-${NAME} : $(LIBFT) $(OBJS)
+all: $(LIBFT) ${NAME}
+
+${NAME} : $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 clean:
@@ -43,3 +46,5 @@ fclean: clean
 	rm -f ${NAME}
 
 re: fclean all
+
+.PHONY: all clean fclean re

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/27 21:43:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 13:05:42 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void    copy_env(t_command *command)
 	i = 0;
 	j = 0;
 	command->my_env = NULL;
-	while (envp[i])
+	while (environ[i])
 		i++;
 	create_first_node(environ[j], command->my_env);
 	temp = command->my_env->next;

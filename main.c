@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/27 22:58:39 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 19:52:20 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ char	*make_prompt(void)
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_command	command;	
-/*	char	*input;
-	char	*prompt;*/
 
 	if (argc > 1)
 	{
@@ -38,18 +36,17 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	(void)envp;
 	copy_env(&command);
-	//fazer uma cópia da env -- loop p saber a quantidade de linhas p fazer o vetor + loop com strdup
 	while (42)
 	{
 		set_command(&command);
-/*		prompt = make_prompt();
-		input = readline(prompt);*/
 		add_history(command.input);
 		if (my_strcmp(command.input, "exit") == 0)
 		{
 			free(command.input);
 			break ;
 		}
+		if (my_strcmp(command.input, "env") == 0)
+			print_env(command.my_env);
 		free(command.prompt);
 		free(command.input);
 	}

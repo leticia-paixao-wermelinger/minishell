@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 19:32:38 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 20:08:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,5 @@ t_node	*create_first_node(char *c, t_node *list);
 t_node	*create_last_node(char  *c, t_node *temp);
 void	set_command(t_command *command);
 void	print_env(t_node *list);
+void	free_list(t_node *list);
 #endif

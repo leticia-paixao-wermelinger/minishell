@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/06/28 19:28:33 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/06/28 20:08:13 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,8 @@ FLAGS = -Wall -Wextra -Werror -g
 SRCS = \
 main.c \
 declate_structs.c \
-list_functions.c
+list_functions.c \
+clear_funct.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -73,7 +74,7 @@ run: re
 	./$(NAME)
 
 val: re
-	valgrind --leak-check=full --show-leak-kinds=all ./$(NAME)
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=supressions.supp ./$(NAME)
 
 norm:
 		@echo "$(COLOUR_BLUE)Passando a Norminette com a flag -R CheckForbiddenSourceHeader: $(COLOUR_END)"

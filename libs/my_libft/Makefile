@@ -48,7 +48,9 @@ my_substr.c \
 my_tolower.c \
 my_toupper.c \
 get_next_line.c \
-get_next_line_utils.c
+get_next_line_utils.c \
+my_strcdup.c \
+fromstrcdup.c
 
 OBJS = ${SRCS:.c=.o}
 

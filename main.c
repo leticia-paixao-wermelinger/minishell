@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/25 12:51:39 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:58:39 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ int	main(int argc, char *argv[], char *envp[])
 /*	char	*input;
 	char	*prompt;*/
 
-	(void)argc;
-	(void)argv;
-	//(void)envp;
-	copy_env(envp, &command);
+	if (argc > 1)
+	{
+		my_printf("bash: %s: No such file or directory\n", argv[1]);
+		return 0;
+	}
+	(void)envp;
+	copy_env(&command);
 	//fazer uma cópia da env -- loop p saber a quantidade de linhas p fazer o vetor + loop com strdup
 	while (42)
 	{
@@ -52,7 +55,7 @@ int	main(int argc, char *argv[], char *envp[])
 	}
 	rl_clear_history();
 	free(command.prompt);
-	my_clean_vect(command.my_env);
+	//clean the list of my_env
 	printf("Exiting...\n");
 }
 /*

@@ -6,14 +6,15 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/25 12:52:31 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/27 21:32:45 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "my_libft/libft.h"
+# include "libs/my_libft/libft.h"
+# include "libs/listlib/listlib.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -27,23 +28,23 @@ enum e_error {
 	DIF = 2,
 	ORDER = 3
 };
-
+*/
 typedef struct s_node
 {
-	int				i;
-	int				val;
+	char			*key;
+	char			*value;
 	struct s_node	*next;
 }	t_node;
-*/
+
 
 typedef struct s_command
 {
 	char	*input;
 	char	*prompt;
-	char	**my_env;
+	t_node	*my_env;
 }	t_command;
 
 char	*make_prompt(void);
-char	**copy_env(char **envp, t_command *command);
+char	**copy_env(t_command *command);
 void	set_command(t_command *command);
 #endif

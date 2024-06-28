@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:19:11 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/25 12:45:52 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/27 22:39:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,6 @@ char				*gnl_my_join(char *s1, char *s2, char *string);
 char				*gnl_ft_substr(char const *s, unsigned int start, \
 			size_t len);
 char				*get_next_line(int fd);
+char				*my_strcdup(const char *s, char c);
+char				*fromstrcdup(const char *s, char c);
 #endif

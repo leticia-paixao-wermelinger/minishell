@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 20:08:32 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 23:27:06 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@
 # include <readline/history.h>
 # include <stdio.h>
 
-/*
-enum e_error {
-	NO_ERROR = 0,
-	ERROR = 1,
-	DIF = 2,
-	ORDER = 3
+enum e_flag {
+	OFF = 0,
+	ON = 1
 };
-*/
+
+enum e_ascii {
+	DOUBLE_QUOT_MARK = 34,
+	SIMPLE_QUOT_MARK = 39,
+	PIPE = 124,
+	UNPRINT_CHAR = 8
+};
+
 typedef struct s_node
 {
 	char			*key;
@@ -51,4 +55,6 @@ t_node	*create_last_node(char  *c, t_node *temp);
 void	set_command(t_command *command);
 void	print_env(t_node *list);
 void	free_list(t_node *list);
+void	input_parser(t_command *command);
+void	search_invalid_pipes(t_command *command);
 #endif

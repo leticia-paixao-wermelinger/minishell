@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/06/28 20:08:13 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/06/28 20:42:26 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,9 @@ SRCS = \
 main.c \
 declate_structs.c \
 list_functions.c \
-clear_funct.c
+clear_funct.c \
+env_builtins.c \
+parser.c
 
 OBJS = ${SRCS:.c=.o}
 

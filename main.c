@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 20:12:47 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 23:25:29 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*make_prompt(void)
 	return (prompt);
 }
 
-int	main(int argc, char *argv[], char *envp[])
+int	main(int argc, char *argv[]/*, char *envp[]*/)
 {
 	t_command	command;	
 
@@ -34,12 +34,13 @@ int	main(int argc, char *argv[], char *envp[])
 		my_printf("bash: %s: No such file or directory\n", argv[1]);
 		return 0;
 	}
-	(void)envp;
+	//(void)envp;
 	copy_env(&command);
 	while (42)
 	{
 		set_command(&command);
 		add_history(command.input);
+		input_parser(&command);
 		if (my_strcmp(command.input, "exit") == 0)
 		{
 			free(command.input);
@@ -56,9 +57,8 @@ int	main(int argc, char *argv[], char *envp[])
 	printf("Exiting...\n");
 }
 /*
-**envp para pegar as variáveis de ambiente (no bash, só digitar "env");
-**com a my_env eu consigo fazer 3 built-ins: env; export (cria uma nova variável de ambiente ou
-altera uma que já existe) e unset (se ela conseguir achar a variável de ambiente ela exclui essa
+**com a my_env eu consigo fazer 3 built-ins: env (FEITA); export (cria uma nova variável de ambiente ou
+altera uma que já existe) e unset (se ela conseguir achar a variável de ambiente, ela exclui essa
 variável. Se não achar, não faz nada).
 export = verifica se já existe. Se existe, modifica. Se não, cria uma nova.
 ATENÇÃO PRO "VERIFICA DE EXISTE"!!! -> retorno de erro OU da posição!

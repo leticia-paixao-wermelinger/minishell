@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_functions.c                                   :+:      :+:    :+:   */
+/*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 20:19:32 by lpaixao-         ###   ########.fr       */
+/*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
+/*   Updated: 2024/06/28 20:18:59 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_node	*create_first_node(char *c, t_node *list)
+void	print_env(t_node *list)
 {
-	list = (t_node *)malloc(sizeof(t_node));
-	list->key = my_strcdup(c, '=');
-	list->value = fromstrcdup(c, '=');
-	list->next = NULL;
-	return (list);
-}
+	t_node	*temp;
 
-t_node	*create_last_node(char	*c, t_node *prev)
-{
-	t_node	*new;
-
-	new = (t_node *)malloc(sizeof(t_node));
-	prev->next = new;
-	new->key = my_strcdup(c, '=');
-	new->value = fromstrcdup(c, '=');
-	new->next = NULL;
-	return (new);
+	temp = list;
+	while (temp)
+	{
+		my_printf("%s=%s\n", temp->key, temp->value);
+		temp = temp->next;
+	}
 }

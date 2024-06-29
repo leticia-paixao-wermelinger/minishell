@@ -6,12 +6,23 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 19:13:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/28 23:18:46 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+/*
+static void	print_matrix(char **matrix)
+{
+	int	i = 0;
 
+	while (matrix[i])
+	{
+		my_printf("%s\n", matrix[i]);
+		i++;
+	}
+}
+*/
 void    copy_env(t_command *command)
 {
 	extern char	**environ;

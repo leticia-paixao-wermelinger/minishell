@@ -50,7 +50,8 @@ my_toupper.c \
 get_next_line.c \
 get_next_line_utils.c \
 my_strcdup.c \
-fromstrcdup.c
+fromstrcdup.c \
+my_print_matrix.c
 
 OBJS = ${SRCS:.c=.o}
 

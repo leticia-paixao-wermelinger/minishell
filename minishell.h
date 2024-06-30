@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 23:27:06 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:06:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	print_env(t_node *list);
 void	free_list(t_node *list);
 void	input_parser(t_command *command);
 void	search_invalid_pipes(t_command *command);
+char	*my_getenv_by_list(const char *name, t_node *my_env);
+int		check_inputs(t_command *command);
 #endif

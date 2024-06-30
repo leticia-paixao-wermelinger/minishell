@@ -6,24 +6,11 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 23:25:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:06:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*make_prompt(void)
-{
-	char	cwd[1824];
-	char	*prompt;
-	char	*temp;
-
-	getcwd(cwd, sizeof(cwd));
-	temp = my_strjoin("\033[0;32m", cwd);
-	prompt = my_strjoin(temp, "\033[0m$ ");
-	free(temp);
-	return (prompt);
-}
 
 int	main(int argc, char *argv[]/*, char *envp[]*/)
 {
@@ -46,8 +33,7 @@ int	main(int argc, char *argv[]/*, char *envp[]*/)
 			free(command.input);
 			break ;
 		}
-		if (my_strcmp(command.input, "env") == 0)
-			print_env(command.my_env);
+		check_inputs(&command);
 		free(command.prompt);
 		free(command.input);
 	}

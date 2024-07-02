@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/30 19:08:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:40:18 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,13 @@ void	print_env(t_node *list)
 }
 
 //export
-
-//enset
+/*
+void	export(char *name, t_command *command)
+{
+	if (my_getenv_by_list(name, command->my_env))
+}
+*/
+//unset
 
 char	*my_getenv_by_list(const char *name, t_node *my_env)
 {

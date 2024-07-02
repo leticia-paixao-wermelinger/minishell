@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/06/29 18:03:38 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/07/01 18:59:56 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,9 @@ list_functions.c \
 clear_funct.c \
 env_builtins.c \
 parser.c \
+parser_utils.c \
+meta_split.c \
+metacharacters_utils.c \
 prompt_and_inputs.c
 
 OBJS = ${SRCS:.c=.o}

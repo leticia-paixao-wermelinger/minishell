@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/29 18:06:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/01 21:02:50 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	main(int argc, char *argv[]/*, char *envp[]*/)
 	{
 		set_command(&command);
 		add_history(command.input);
-		input_parser(&command);
 		if (my_strcmp(command.input, "exit") == 0)
 		{
 			free(command.input);
 			break ;
 		}
+		input_parser(&command);
 		check_inputs(&command);
 		free(command.prompt);
 		free(command.input);

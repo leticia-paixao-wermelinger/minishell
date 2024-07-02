@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/30 19:15:18 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/01 16:40:45 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ int	check_inputs(t_command *command)
 {
 	if (my_strcmp(command->input, "env") == 0)
 		print_env(command->my_env);
+	// O else if abaixo serve apenas para teste, pois precisaremos ainda passar a split e fazer essa verificação de outra forma:
+/*	else if (my_strcmp(command.input, "export") == 0)
+		export(name, command);*/
 //	else if (my_strcmp(command.input, __) == 0)
-	else //Apenas para testar a função my_getenv e comparar com a getenv original
-	{
-		my_printf("Minha getenv: %s\n", my_getenv_by_list(command->input, command->my_env));
-		my_printf("getenv original: %s\n", getenv(command->input));
-	}
+//	else if (my_strcmp(command.input, __) == 0)
 	return (0);
 }

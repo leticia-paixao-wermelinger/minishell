@@ -6,13 +6,13 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/01 21:02:50 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:05:18 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char *argv[]/*, char *envp[]*/)
+int	main(int argc, char *argv[])
 {
 	t_command	command;	
 
@@ -21,8 +21,7 @@ int	main(int argc, char *argv[]/*, char *envp[]*/)
 		my_printf("bash: %s: No such file or directory\n", argv[1]);
 		return 0;
 	}
-	//(void)envp;
-	copy_env(&command);
+	get_env(&command);
 	while (42)
 	{
 		set_command(&command);

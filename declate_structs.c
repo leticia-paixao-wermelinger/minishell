@@ -6,13 +6,13 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 23:31:46 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:05:50 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    copy_env(t_command *command)
+void	get_env(t_command *command)
 {
 	extern char	**environ;
 	t_node		*temp;

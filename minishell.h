@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/01 21:14:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:56:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_command
 }	t_command;
 
 char	*make_prompt(void);
-void	copy_env(t_command *command);
+void	get_env(t_command *command);
 t_node	*create_first_node(char *c, t_node *list);
 t_node	*create_last_node(char  *c, t_node *temp);
 void	set_command(t_command *command);
@@ -75,7 +75,7 @@ void	free_list(t_node *list);
 void	input_parser(t_command *command);
 void	search_invalid_metachars(t_command *command);
 int		is_metachar(char c);
-void	remove_spaces_around_metachars(char *s);
+char	*remove_spaces_around_metachars(char *s);
 void	remove_spaces_after_metachars(char *s, char *str);
 void	remove_spaces_before_metachars(char *s, char *str, int final_size);
 char	**meta_split(char const *s);

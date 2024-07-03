@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 18:59:20 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/01 20:47:21 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/03 15:55:22 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,12 @@ int	strlen_without_spaces_before_metachars(char *s)
 
 	i = my_strlen(s);
 	count = 0;
+//	my_printf("\033[0;31mstrlen_without_spaces_before_metachars:\n");
+//	my_printf("Tamanho: %i\n", i);
+	i--;
 	while (i >= 0)
 	{
+//		my_printf("s[%i] = %c\n", i, s[i]);
 		if (is_metachar(s[i]) == TRUE)
 		{
 			i--;
@@ -53,6 +57,8 @@ int	strlen_without_spaces_before_metachars(char *s)
 		count++;
 		i--;
 	}
+//	my_printf("Saiu do while c/ i = %i e count = %i\n", i, count);
+//	my_printf("\033[0m");
 	return (count);
 }
 /*

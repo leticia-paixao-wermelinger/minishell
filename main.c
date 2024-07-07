@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/03 15:05:18 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:48:06 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char *argv[])
 	}
 	rl_clear_history();
 	free(command.prompt);
+	free(command.invalid_metas);
 	free_list(command.my_env);
 	printf("Exiting...\n");
 }

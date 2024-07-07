@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/03 16:01:46 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:51:59 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,25 @@ void	search_invalid_metachars(t_command *command)
 	i = 0;
 	flag_double = OFF;
 	flag_simple = OFF;
+	malloc_str_of_invalid_metas(command);
 	while (command->input[i])
 	{
 		if (command->input[i] == DOUBLE_QUOT_MARK && flag_double == OFF)
 			flag_double = ON;
 		else if (command->input[i] == SIMPLE_QUOT_MARK && flag_simple == OFF)
-			flag_simple = ON;
+		    flag_simple = ON;
 		else if (is_metachar(command->input[i]) == TRUE && (flag_double == ON || flag_simple == ON))
+		{
+			add_meta_to_metastring(command, i);
 			command->input[i] = UNPRINT_CHAR;
+		}
 		else if (command->input[i] == DOUBLE_QUOT_MARK && flag_double == ON)
 			flag_double = OFF;
 		else if (command->input[i] == SIMPLE_QUOT_MARK && flag_simple == ON)
 			flag_simple = OFF;
 		i++;
 	}
+//	printf("Teste de str de metachars: %s\n", command->invalid_metas);
 }
 
 char	*remove_spaces_around_metachars(char *s)

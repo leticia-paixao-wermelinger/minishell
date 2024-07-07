@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/03 15:56:35 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/06 22:48:57 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_command
 {
 	char	*input;
 	char	**input_matrix;
+	char	*invalid_metas;
 	char	*prompt;
 	t_node	*my_env;
 }	t_command;
@@ -75,6 +76,8 @@ void	free_list(t_node *list);
 void	input_parser(t_command *command);
 void	search_invalid_metachars(t_command *command);
 int		is_metachar(char c);
+void	malloc_str_of_invalid_metas(t_command *command);
+void	add_meta_to_metastring(t_command *command, int i);
 char	*remove_spaces_around_metachars(char *s);
 void	remove_spaces_after_metachars(char *s, char *str);
 void	remove_spaces_before_metachars(char *s, char *str, int final_size);

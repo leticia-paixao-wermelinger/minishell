@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/06 22:48:57 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:55:37 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,24 @@ enum e_ascii {
 	NEWLINE_CHAR = 10,		// \n
 	UNPRINT_CHAR = 8
 };
+/*
+	token
+	BUILTIN;
+	EXEC;
+	PIPE (|);
+	APPEND (>>);
+	REDIRECT (>);
+	HEREDOC (<<);
+	INPUT (<);
+	FILE ();
+
+*/
 
 typedef struct s_node
 {
 	char			*key;
-	char			*value;
+	char			*value; //ls    |     ECHO
+	//enum			token;  //EXEC  PIPE  
 	struct s_node	*next;
 }	t_node;
 

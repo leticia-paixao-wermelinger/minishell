@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/06 22:51:59 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:05:21 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	input_parser(t_command *command)
 {
 	search_invalid_metachars(command);
 //	my_printf("Ajuste pré split c/ espaços: %s\n", command->input);
+	command->input = check_invalid_successive_metachars(command->input);
 	command->input = remove_spaces_around_metachars(command->input);
 	my_printf("Ajuste pré split s/ espaços: %s\n", command->input);
 	//split de metacaracteres
@@ -61,24 +62,12 @@ char	*remove_spaces_around_metachars(char *s)
 	char	*str;
 
 	new_size = strlen_without_spaces_post_metachars(s);
-//	printf("Tamanho original: %li\n", my_strlen(s));
-//	printf("Tamanho s/ espaços: %i\n", new_size);
 	str = (char *)malloc((new_size + 1) * sizeof(char));
 	remove_spaces_after_metachars(s, str);
-//	printf("Vai dar o 1 free. Str está assim: %s\n", str);
 	free(s);
-/*	for(int i = 0; i < (int)my_strlen(str); i++){
-		if (str[i] != '\0')
-			my_putchar(str[i]);
-		else
-			my_putchar('\\');
-	}*/
 	new_size = strlen_without_spaces_before_metachars(str);
-//	printf("Tamanho original: %li\n", my_strlen(str));
-//	printf("Tamanho s/ espaços: %i\n", new_size);
 	s = (char *)malloc((new_size + 1) * sizeof(char));
 	remove_spaces_before_metachars(str, s, new_size);
-//	printf("Vai retornar da remove_spaces_around_metachars. s está assim: %s\n", s);
 	free(str);
 	return (s);
 }

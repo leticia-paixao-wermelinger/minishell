@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 17:54:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/06 22:46:06 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/08 20:57:16 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,39 @@
 
 int	is_metachar(char c)
 {
-	// SÃO ESSES CARACTERES MESMO??
 	if (c == PIPE || c == LESS_THAN || c == GREATER_THAN)
 		return (TRUE);
-	else if (c == AMPERSAND || c == SEMICOLON || c == OPEN_PARENTHESIS || c == CLOSE_PARENTHESIS)
-		return (TRUE);
 	return (FALSE);
+}
+
+char	*check_invalid_successive_metachars(char *input)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (input[i])
+	{
+		if (is_metachar(input[i]) == TRUE)
+		{
+			i++;
+			while (input[i + j] == SPACE_CHAR)
+			{
+				j++;
+				if (is_metachar(input[i + j]) == TRUE)
+				{
+					if (input[i] == LESS_THAN && input[i + j] == LESS_THAN)
+					
+						break ;
+				}
+			}
+			i += j;
+			j = 0;
+		}
+		i++;
+	}
+	return (input);
 }
 
 void	malloc_str_of_invalid_metas(t_command *command)

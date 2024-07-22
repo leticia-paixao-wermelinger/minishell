@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/07/01 18:59:56 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/07/22 00:13:51 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,16 +24,19 @@ CC = cc
 FLAGS = -Wall -Wextra -Werror -g
 
 SRCS = \
-main.c \
-declate_structs.c \
-list_functions.c \
-clear_funct.c \
-env_builtins.c \
-parser.c \
-parser_utils.c \
-meta_split.c \
-metacharacters_utils.c \
-prompt_and_inputs.c
+srcs/main/main.c \
+srcs/linked_list/list_functions.c \
+srcs/cleaning/clear_funct.c \
+srcs/builtints/env/env_builtins.c \
+srcs/builtints/env/env_utils.c \
+srcs/parser/parser.c \
+srcs/parser/quot_marks_validation/parser_quotation_marks_validation.c \
+srcs/parser/quot_marks_validation/str_of_invalid_metas.c \
+srcs/parser/spaces_around_metas/spaces_around_metas_validation.c \
+srcs/parser/spaces_around_metas/strlen_spaces_around_metas.c \
+srcs/parser/meta_split.c \
+srcs/general_metachar_functions/metacharacters_utils.c \
+srcs/main/prompt_and_inputs.c
 
 OBJS = ${SRCS:.c=.o}
 

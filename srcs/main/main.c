@@ -6,11 +6,11 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/06 22:48:06 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/21 22:24:44 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 int	main(int argc, char *argv[])
 {

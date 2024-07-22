@@ -1,21 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   listlib.h                                          :+:      :+:    :+:   */
+/*   clear_funct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 18:44:04 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 12:59:21 by lpaixao-         ###   ########.fr       */
+/*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
+/*   Updated: 2024/07/21 22:31:25 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LISTLIB_H 
-# define LISTLIB_H
+#include "../../minishell.h"
 
-# include "../../minishell.h"
-# include "../my_libft/libft.h"
+void	free_list(t_node *list)
+{
+	t_node	*temp;
+	int		i;
 
-struct s_node	*create_first_node(char *c, struct s_node *list);
-struct s_node	*create_last_node(char  *c, struct s_node *temp);
-#endif
+	i = 1;
+	while (list)
+	{
+		temp = list;
+		free(temp->key);
+		free(temp->value);
+		list = list->next;
+		free(temp);
+		i++;
+	}
+}

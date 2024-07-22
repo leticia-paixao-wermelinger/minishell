@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   strlen_spaces_around_metas.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 18:59:20 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/03 15:55:22 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/21 17:39:19 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../../minishell.h"
 
 int	strlen_without_spaces_post_metachars(char *s)
 {
@@ -54,37 +54,12 @@ int	strlen_without_spaces_before_metachars(char *s)
 			while ((i >= 0) && (s[i] == SPACE_CHAR))
 				i--;
 		}
-		count++;
-		i--;
+		else
+		{
+			count++;
+			i--;
+		}
 	}
 //	my_printf("Saiu do while c/ i = %i e count = %i\n", i, count);
-//	my_printf("\033[0m");
 	return (count);
 }
-/*
-int	strlen_without_spaces_around_metachars(char *s)
-{
-	int	i;
-	int	count;
-	int	flag_meta;
-
-	i = 0;
-	count = i;
-	flag_meta = OFF;
-	while (s[i])
-	{
-		if (s[i] == SPACE_CHAR)
-			flag_meta = ON;
-		else
-			flag_meta = OFF;
-		if (is_metachar(s[i]) == TRUE)
-		{
-			i++;
-			count++;
-			while (s[i] == SPACE_CHAR)
-				i++;
-		}
-		count++;
-		i++;
-	}
-}*/

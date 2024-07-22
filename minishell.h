@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/08 18:55:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/21 23:42:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PUSH_SWAP_H
 
 # include "libs/my_libft/libft.h"
-# include "libs/listlib/listlib.h"
 # include <unistd.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -87,9 +86,10 @@ void	set_command(t_command *command);
 void	print_env(t_node *list);
 void	free_list(t_node *list);
 void	input_parser(t_command *command);
-void	search_invalid_metachars(t_command *command);
+void	change_invalid_metachars(t_command *command);
 int		is_metachar(char c);
 void	malloc_str_of_invalid_metas(t_command *command);
+char	*check_invalid_successive_metachars(char *input);
 void	add_meta_to_metastring(t_command *command, int i);
 char	*remove_spaces_around_metachars(char *s);
 void	remove_spaces_after_metachars(char *s, char *str);
@@ -97,6 +97,8 @@ void	remove_spaces_before_metachars(char *s, char *str, int final_size);
 char	**meta_split(char const *s);
 int		strlen_without_spaces_post_metachars(char *s);
 int		strlen_without_spaces_before_metachars(char *s);
+char	**return_invalid_metas(t_command *command, char **matrix);
+void	return_added_unprinted_chars(char *s, char *metas);
 char	*my_getenv_by_list(const char *name, t_node *my_env);
 int		check_inputs(t_command *command);
 #endif

@@ -1,25 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_last_node.c                                 :+:      :+:    :+:   */
+/*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/27 19:03:06 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/28 12:59:02 by lpaixao-         ###   ########.fr       */
+/*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
+/*   Updated: 2024/07/03 15:05:50 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "listlib.h"
+#include "../../../minishell.h"
 
-struct s_node	*create_last_node(char	*c, struct s_node *temp)
+void	get_env(t_command *command)
 {
-	t_node	*new;
+	extern char	**environ;
+	t_node		*temp;
+	int			i;
+	int			j;
 
-	new = (t_node *)malloc(sizeof(t_node));
-	temp->next = new;
-	new->key = my_strcdup(c, '=');
-	new->value = fromstrcdup(c, '=');
-	new->next = NULL;
-	return (new);
+	i = 0;
+	j = 0;
+	command->my_env = NULL;
+	while (environ[i])
+		i++;
+	command->my_env = create_first_node(environ[j], command->my_env);
+	temp = command->my_env;
+	while (++j < i)
+		temp = create_last_node(environ[j], temp);
 }

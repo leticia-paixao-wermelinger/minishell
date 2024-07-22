@@ -6,11 +6,11 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:17:49 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/01 18:54:15 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/21 22:24:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
 
 static int	count_tokens(char const *s)
 {
@@ -34,7 +34,7 @@ static int	count_tokens(char const *s)
 	}
 	return (count);
 }
-/*
+
 static char	*new_str(char const *s, int start, int end, char **vect)
 {
 	int		j;
@@ -74,41 +74,59 @@ static int	verification(char const *s, char **vect)
 	return (NO_ERROR);
 }
 
-static char	**make_vect(char const *s, char c, char **vect, int tokens)
+static char	**make_vect(char const *s, char **vect)
 {
-	size_t	i;
-	int		j;
-	int		start;
+	int	i;
+	int	j;
+	int	start;
+	int	size;
 
 	j = 0;
 	i = 0;
 	start = 0;
-	while (j < tokens)
+	size = my_strlen(s);
+//	printf("size == %i\n", size);
+//	printf("string == %s\n", s);
+	while (i < size && s[i])
 	{
-		if (s[i] != c && i >= 1 && s[i - 1] == c)
-			start = i;
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
-			vect[j++] = new_str(s, start, i, vect);
-		if ((i - 1) == my_strlen(s))
-			break ;
-		i++;
+		start = i;
+		while (is_metachar(s[i]) == TRUE && s[i])
+		{
+//			printf("Está no while de metachars com s[%d] == %c\n", i, s[i]);
+			if (is_metachar(s[i]) == TRUE && is_metachar(s[i + 1]) == FALSE)
+//			{
+//				printf("Vai criar incluir uma str no vetor com j == %d\n", j);
+				vect[j++] = new_str(s, start, i, vect);
+//			}
+			i++;
+		}
+		start = i;
+		while (is_metachar(s[i]) == FALSE /*&& (i < size) */&& s[i])
+		{
+//			printf("Está no while de não metas com s[%d] == %c\n", i, s[i]);
+			if (is_metachar(s[i]) == FALSE && (is_metachar(s[i + 1]) == TRUE || s[i + 1] == '\0'))
+//			{
+//				printf("Vai criar incluir uma str no vetor com j == %d\n", j);
+				vect[j++] = new_str(s, start, i, vect);
+//			}
+			i++;
+		}
 	}
 	vect[j] = NULL;
 	return (vect);
 }
-*/
+
 char	**meta_split(char const *s)
 {
 	int			tokens;
-	//char		**vect;
+	char		**vect;
 
 	tokens = count_tokens(s);
-	my_printf("Tokens: %i\n", tokens);
-	/*vect = (char **)my_calloc((tokens + 1), sizeof(char *));
+//	my_printf("Tokens: %i\n", tokens);
+	vect = (char **)my_calloc((tokens + 1), sizeof(char *));
 	if (verification(s, vect) == ERROR)
 		return (NULL);
-	return (make_vect(s, vect, tokens));*/
-	return (NULL);
+	return (make_vect(s, vect));
 }
 
 /*

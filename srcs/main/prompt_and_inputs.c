@@ -6,11 +6,17 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/01 16:40:45 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/21 22:24:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../minishell.h"
+
+void	set_command(t_command *command)
+{
+	command->prompt = make_prompt();
+	command->input = readline(command->prompt);
+}
 
 char	*make_prompt(void)
 {

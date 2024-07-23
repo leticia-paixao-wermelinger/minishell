@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/22 00:15:08 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/23 19:13:23 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void	input_parser(t_command *command)
 	command->input_matrix = return_invalid_metas(command, command->input_matrix);
 //	my_printf("Input pós split de metacaracteres:\n");
 //	print_matrix(command->input_matrix);
-	//Passar a matriz para uma lista encadeada
+	make_list_from_input(command);
+	//Imprimir a lista para teste
 }

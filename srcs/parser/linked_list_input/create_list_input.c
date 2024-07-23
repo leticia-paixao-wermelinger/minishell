@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   create_list_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/03 15:05:50 by lpaixao-         ###   ########.fr       */
+/*   Created: 2024/07/22 00:36:05 by lpaixao-          #+#    #+#             */
+/*   Updated: 2024/07/22 14:45:24 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-void	get_env(t_command *command)
+void	make_list_from_input(t_command *command)
 {
-	extern char	**environ;
-	t_node		*temp;
-	int			i;
-	int			j;
+	int		i;
+	t_node	*temp;
 
 	i = 0;
-	j = 0;
-	command->my_env = NULL;
-	while (environ[i])
-		i++;
-	command->my_env = create_first_env_node(environ[j], command->my_env);
-	temp = command->my_env;
-	while (++j < i)
-		temp = create_last_env_node(environ[j], temp);
+	command->l_input = NULL;
+	command->l_input = create_first_input_node(command->input_matrix[i], command->l_input);
+	temp = command->l_input;
+	while (command->input_matrix[++i])
+		temp = create_last_input_node(command->input_matrix[i], temp);
 }

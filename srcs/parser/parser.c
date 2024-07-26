@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/23 19:13:23 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 14:14:13 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,5 @@ void	input_parser(t_command *command)
 //	print_matrix(command->input_matrix);
 	make_list_from_input(command);
 	//Imprimir a lista para teste
+//	printlist(command->l_input);
 }

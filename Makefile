@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/07/22 00:38:35 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/07/26 16:59:59 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ srcs/parser/quot_marks_validation/str_of_invalid_metas.c \
 srcs/parser/spaces_around_metas/spaces_around_metas_validation.c \
 srcs/parser/spaces_around_metas/strlen_spaces_around_metas.c \
 srcs/parser/meta_split.c \
+srcs/lexer/lexer.c \
+srcs/lexer/find_token/set_token_1.c \
+srcs/lexer/find_token/set_token_2.c \
 srcs/general_metachar_functions/metacharacters_utils.c \
 srcs/main/prompt_and_inputs.c \
 srcs/parser/linked_list_input/create_list_input.c

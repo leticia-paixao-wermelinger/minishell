@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 13:56:17 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 20:42:18 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ enum e_token {
 	BUILTIN = 1,
 	EXEC = 2,
 	T_PIPE = 124, // |
-	APPEND = 3, // >>
-	REDIRECT = 62, // >
-	INPUT = 60, // <
-	HEREDOC = 4, // <<
+	REDIR_APPEND = 3, // >>
+	REDIR_OUT = 62, // >
+	REDIR_IN = 60, // <
+	REDIR_HEREDOC = 4, // <<
 	MY_FILE = 5
 };
 
@@ -105,6 +105,21 @@ int		check_inputs(t_command *command);
 void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
+
+// lexer:
+void	lexer(t_command *command);
+void	set_token(t_node *node, t_node *first);
+int		is_builtin(char *s);
+//int		is_exec(char *s);
+int		is_pipe(char *s);
+int		is_append(char *s);
+int		is_redir_out(char *s);
+int		is_redir_in(char *s);
+int		is_heredoc(char *s);
+int		is_file(t_node *node, t_node *list);
+int		is_redirect(int n);
+
 // Teste:
+
 void	printlist(t_node *list);
 #endif

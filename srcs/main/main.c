@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/21 22:24:44 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 17:01:19 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@ int	main(int argc, char *argv[])
 			break ;
 		}
 		input_parser(&command);
+		lexer(&command);
+		// Teste do lexer:
+		printlist(command.l_input);
 		check_inputs(&command);
 		free(command.prompt);
 		free(command.input);

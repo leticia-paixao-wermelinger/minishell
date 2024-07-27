@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 22:15:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/27 11:49:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int		is_redirect(int n);
 
 // Built In
 int		run_builtin(t_command *command, t_node *node);
+int		pwd(t_command *command);
 
 // Clear
 void	clear_input(t_command *command);

@@ -1,2 +1,2 @@
 # minishell
-Writing our own little Bash program.
+Writing my own little Bash program.

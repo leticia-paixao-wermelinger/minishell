@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:07:12 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/22 00:16:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 23:05:15 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ char	**return_invalid_metas(t_command *command, char **matrix)
 		}*/
 		i++;
 	}
+	free(command->invalid_metas);
 	return (command->input_matrix);
 }
 

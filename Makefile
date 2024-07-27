@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/07/26 16:59:59 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/07/26 22:35:06 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ srcs/lexer/find_token/set_token_1.c \
 srcs/lexer/find_token/set_token_2.c \
 srcs/general_metachar_functions/metacharacters_utils.c \
 srcs/main/prompt_and_inputs.c \
+srcs/builtints/builtins.c \
 srcs/parser/linked_list_input/create_list_input.c
 
 OBJS = ${SRCS:.c=.o}

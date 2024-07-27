@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 20:42:18 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:15:36 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ enum e_flag {
 
 enum e_error {
 	ERROR = -1,
-	NO_ERROR = 1
+	NO_ERROR = 1,
+	CLOSE
 };
 
 enum e_ascii {
@@ -85,7 +86,6 @@ t_node	*create_first_env_node(char *c, t_node *list);
 t_node	*create_last_env_node(char  *c, t_node *temp);
 void	set_command(t_command *command);
 void	print_env(t_node *list);
-void	free_list(t_node *list);
 void	input_parser(t_command *command);
 void	change_invalid_metachars(t_command *command);
 int		is_metachar(char c);
@@ -101,7 +101,7 @@ int		strlen_without_spaces_before_metachars(char *s);
 char	**return_invalid_metas(t_command *command, char **matrix);
 void	return_added_unprinted_chars(char *s, char *metas);
 char	*my_getenv_by_list(const char *name, t_node *my_env);
-int		check_inputs(t_command *command);
+int		run_commands(t_command *command);
 void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
@@ -118,6 +118,14 @@ int		is_redir_in(char *s);
 int		is_heredoc(char *s);
 int		is_file(t_node *node, t_node *list);
 int		is_redirect(int n);
+
+// Built In
+int		run_builtin(t_command *command, t_node *node);
+
+// Clear
+void	clear_input(t_command *command);
+void    clear_all(t_command *command);
+void	free_list(t_node *list);
 
 // Teste:
 

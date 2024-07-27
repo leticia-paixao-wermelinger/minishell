@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 20:48:12 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 23:11:40 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int argc, char *argv[])
 {
 	t_command	command;	
 
+	my_bzero(&command, sizeof(t_command));
 	if (argc > 1)
 	{
 		my_printf("bash: %s: No such file or directory\n", argv[1]);
@@ -26,24 +27,18 @@ int	main(int argc, char *argv[])
 	{
 		set_command(&command);
 		add_history(command.input);
-		if (my_strcmp(command.input, "exit") == 0)
-		{
-			free(command.input);
-			break ;
-		}
 		input_parser(&command);
 		lexer(&command);
 		// Teste do lexer:
-		// printlist(command.l_input);
-		check_inputs(&command);
-		free(command.prompt);
-		free(command.input);
+		//printlist(command.l_input);
+		if (run_commands(&command) == CLOSE)
+		{
+			clear_input(&command);
+			break ;
+		}
+		clear_input(&command);
 	}
-	rl_clear_history();
-	free(command.prompt);
-	free(command.invalid_metas);
-	free_list(command.my_env);
-	printf("Exiting...\n");
+	clear_all(&command);
 }
 /*
 **com a my_env eu consigo fazer 3 built-ins: env (FEITA); export (cria uma nova variável de ambiente ou

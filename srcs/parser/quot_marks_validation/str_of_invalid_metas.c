@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 23:33:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/21 23:36:39 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 23:06:44 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	malloc_str_of_invalid_metas(t_command *command)
 		i++;
 	}
 	command->invalid_metas = (char *)malloc((count + 1) * sizeof(char));
-	command->invalid_metas[count + 1] = '\0';
+	command->invalid_metas[count] = '\0';
 }
 
 void	add_meta_to_metastring(t_command *command, int i)

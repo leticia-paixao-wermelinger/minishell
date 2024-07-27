@@ -6,11 +6,27 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/21 22:31:25 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 22:56:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	clear_input(t_command *command)
+{
+	free(command->prompt);
+	free(command->input);
+	free_list(command->l_input);
+}
+
+void	clear_all(t_command *command)
+{
+	rl_clear_history();
+//	free(command->prompt);
+//	free(command->invalid_metas);
+	free_list(command->my_env);
+	printf("Exiting...\n");
+}
 
 void	free_list(t_node *list)
 {

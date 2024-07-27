@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/21 22:24:54 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/26 23:05:03 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,27 @@ char	*make_prompt(void)
 	return (prompt);
 }
 
-int	check_inputs(t_command *command)
+int	run_commands(t_command *command)
 {
-	if (my_strcmp(command->input, "env") == 0)
-		print_env(command->my_env);
-	// O else if abaixo serve apenas para teste, pois precisaremos ainda passar a split e fazer essa verificação de outra forma:
-/*	else if (my_strcmp(command.input, "export") == 0)
-		export(name, command);*/
-//	else if (my_strcmp(command.input, __) == 0)
-//	else if (my_strcmp(command.input, __) == 0)
-	return (0);
+	t_node	*list;
+	int		ret;
+
+	ret = NO_INFO;
+	list = command->l_input;
+	while (list)
+	{
+		if (is_builtin(list->value) == TRUE)
+			ret = run_builtin(command, list);
+		else
+			printf("Não é builtin. Ainda estou criando as builtins\n");
+		if (ret == ERROR)
+		{
+			printf("Validar erro\n");
+			return (ERROR);
+		}
+		else if (ret == CLOSE)
+			return (CLOSE);
+		list = list->next;
+	}
+	return (ret);
 }

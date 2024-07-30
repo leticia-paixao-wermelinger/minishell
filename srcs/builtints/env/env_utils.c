@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/29 22:01:28 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:21:07 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,30 @@ void	get_env(t_command *command)
 		temp = create_last_env_node(environ[j], temp);
 }
 
-//change_ev();
-
-//create_ev();
-
-//remove_ev();
-
-void	remove_ev()
+void	print_env_for_export(t_node *list)
 {
+	t_node	*temp;
+
+	temp = list;
+	while (temp)
+	{
+		my_printf("declare -x %s=%s\n", temp->key, temp->value);
+		temp = temp->next;
+	}
+}
+
+t_node	*my_getenv_by_list(const char *name, t_node *my_env)
+{
+	t_node	*temp;
+	int		size_key;
+
+	temp = my_env;
+	while (temp)
+	{
+		size_key = my_strlen(temp->key);
+		if (my_strncmp(name, temp->key, size_key) == 0)
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
 }

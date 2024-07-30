@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/07/29 20:44:02 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/07/29 22:20:09 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ FLAGS = -Wall -Wextra -Werror -g
 SRCS = \
 srcs/main/main.c \
 srcs/linked_list/list_functions.c \
+srcs/linked_list/change_list.c \
 srcs/cleaning/clear_funct.c \
 srcs/builtints/env/env_builtins.c \
 srcs/builtints/env/env_utils.c \

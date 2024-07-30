@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/29 20:35:38 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:41:42 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,13 +100,18 @@ int		strlen_without_spaces_post_metachars(char *s);
 int		strlen_without_spaces_before_metachars(char *s);
 char	**return_invalid_metas(t_command *command, char **matrix);
 void	return_added_unprinted_chars(char *s, char *metas);
-char	*my_getenv_by_list(const char *name, t_node *my_env);
+t_node	*my_getenv_by_list(const char *name, t_node *my_env);
 int		run_commands(t_command *command);
 void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
 
-// lexer:
+// list
+void	remove_node(t_node *node, t_node *start);
+void	change_value(t_node *node, char *str);
+void	create_new_ev(char *str, t_node *env_list);
+
+// lexer
 void	lexer(t_command *command);
 void	set_token(t_node *node, t_node *first);
 int		is_builtin(char *s);

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/29 22:01:20 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/29 23:41:09 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,59 +28,31 @@ void	print_env(t_node *list)
 
 void	my_export(char *name, t_command *command)
 {
-	char	*str;
+	t_node	*node;
+	char	*new_value;
 
 	if (!name)
 	{
 		print_env_for_export(command->my_env);
 		return ;
 	}
-	str = my_getenv_by_list(name, command->my_env);
-	if (str != NULL)
-		printf("Já existe essa variável - Mudar ela\n");
-		//change_ev();
+//VALIDAR ERRO! Se não tiver no formato VARIAVEL=value tem que dar erro!
+	node = my_getenv_by_list(name, command->my_env);
+	new_value = fromstrcdup(name, '=');
+	if (node != NULL)
+		change_value(node, new_value);
 	else
-		printf("Ainda não existe essa variável - Criar ela\n");
-		//create_ev();
+		create_new_ev(name, command->my_env);
+	free(new_value);
 }
 
-//unset
 void	my_unset(char *name, t_command *command)
 {
-	char	*str;
+	t_node	*node;
 
 	if (!name)
 		return ;
-	str = my_getenv_by_list(name, command->my_env);
-	if (str != NULL)
-		printf("Remover essa variável\n");
-		//remove_ev(str, command);
-}
-
-void	print_env_for_export(t_node *list)
-{
-	t_node	*temp;
-
-	temp = list;
-	while (temp)
-	{
-		my_printf("declare -x %s=%s\n", temp->key, temp->value);
-		temp = temp->next;
-	}
-}
-
-char	*my_getenv_by_list(const char *name, t_node *my_env)
-{
-	t_node	*temp;
-	int		size_key;
-
-	temp = my_env;
-	while (temp)
-	{
-		size_key = my_strlen(temp->key);
-		if (my_strncmp(name, temp->key, size_key) == 0)
-			return (temp->value);
-		temp = temp->next;
-	}
-	return (NULL);
+	node = my_getenv_by_list(name, command->my_env);
+	if (node != NULL)
+		remove_node(node, command->my_env);
 }

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/03 15:05:50 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:01:28 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,14 @@ void	get_env(t_command *command)
 	temp = command->my_env;
 	while (++j < i)
 		temp = create_last_env_node(environ[j], temp);
+}
+
+//change_ev();
+
+//create_ev();
+
+//remove_ev();
+
+void	remove_ev()
+{
 }

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:36:37 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 20:47:02 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/29 20:37:04 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	is_builtin(char *s)
 		return (TRUE);
 	else if (my_strcmp(s, "pwd") == 0)
 		return (TRUE);
-	else if (my_strcmp(s, "export") == 0)
+	else if (my_strncmp(s, "export", 6) == 0)
 		return (TRUE);
-	else if (my_strcmp(s, "unset") == 0)
+	else if (my_strncmp(s, "unset", 5) == 0)
 		return (TRUE);
 	else if (my_strcmp(s, "env") == 0)
 		return (TRUE);

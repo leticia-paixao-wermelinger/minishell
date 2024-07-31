@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 23:05:03 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:40:43 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	run_commands(t_command *command)
 			printf("Não é builtin. Ainda estou criando as builtins\n");
 		if (ret == ERROR)
 		{
-			printf("Validar erro\n");
+//			printf("Validar erro\n");
 			return (ERROR);
 		}
 		else if (ret == CLOSE)

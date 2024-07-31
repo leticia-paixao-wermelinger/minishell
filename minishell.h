@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/29 23:41:42 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/30 21:27:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 # include <stdio.h>
 
 enum e_flag {
-	OFF = 0,
-	ON = 1,
-	TRUE = 2,
-	FALSE = -1
+	FALSE = 0,
+	TRUE = 1,
+	OFF = 2,
+	ON = 3
 };
 
 enum e_error {
@@ -127,9 +127,11 @@ int		is_redirect(int n);
 // Built In
 int		run_builtin(t_command *command, t_node *node);
 int		pwd(t_command *command);
-void	my_export(char *name, t_command *command);
+void	my_export(char **str, t_command *command);
 void	print_env_for_export(t_node *list);
 void	my_unset(char *name, t_command *command);
+int		check_export_error(char **str);
+char	*validate_quot_marks_for_export(char *str);
 
 // Clear
 void	clear_input(t_command *command);

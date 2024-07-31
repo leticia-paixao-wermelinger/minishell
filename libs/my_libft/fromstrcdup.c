@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/27 22:27:06 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/06/27 22:40:57 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/30 23:29:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*fromstrcdup(const char *s, char c)
 
 	size = 0;
 	i = 0;
-	while (s[i] != c)
+	while (s[i] && s[i] != c)
 		i++;
 	j = i;
 	while (s[j++])

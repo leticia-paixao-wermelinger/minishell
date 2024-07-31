@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 23:11:40 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/07/30 14:39:37 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	main(int argc, char *argv[])
 		add_history(command.input);
 		input_parser(&command);
 		lexer(&command);
-		// Teste do lexer:
-		//printlist(command.l_input);
 		if (run_commands(&command) == CLOSE)
 		{
 			clear_input(&command);

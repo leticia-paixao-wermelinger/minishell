@@ -51,7 +51,9 @@ get_next_line.c \
 get_next_line_utils.c \
 my_strcdup.c \
 fromstrcdup.c \
-my_print_matrix.c
+my_print_matrix.c \
+is_there_space.c \
+is_closed_by_quot_marks.c
 
 OBJS = ${SRCS:.c=.o}
 

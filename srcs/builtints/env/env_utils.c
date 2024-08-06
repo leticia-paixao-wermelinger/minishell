@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/30 20:08:28 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/05 23:37:29 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	*validate_quot_marks_for_export(char *str)
 	int		flag_simple;
 	char	*str2;
 
-	i = 1;
+	i = 0;
 	j = 0;
 	flag_double = OFF;
 	flag_simple = OFF;
@@ -111,31 +111,45 @@ char	*validate_quot_marks_for_export(char *str)
 			break ;
 		j++;
 	}
+	printf("Vai dar malloc em str2, de tamanho %i\n", j);
 	str2 = (char *)malloc((j) * sizeof(char *));
 	j = 0;
 	flag_double = OFF;
 	flag_simple = OFF;
 	while (str[i])
 	{
-		if (str[j] == DOUBLE_QUOT_MARK && flag_double == OFF)
+		printf("str[%i] == %c\n", i, str[i]);
+		if (str[i] == DOUBLE_QUOT_MARK && flag_double == OFF)
+		{
+			printf("Aspas duplas, flag OFF\n");
 			flag_double = ON;
-		else if (str[j] == SIMPLE_QUOT_MARK && flag_simple == OFF)
+		}
+		else if (str[i] == SIMPLE_QUOT_MARK && flag_simple == OFF)
+		{
+			printf("Aspas simples, flag OFF\n");
 			flag_simple = ON;
-		else if (str[j] == DOUBLE_QUOT_MARK && flag_double == ON)
+		}
+		else if (str[i] == DOUBLE_QUOT_MARK && flag_double == ON)
 		{
 			//check_export_quot_error(str, i);
-			printf("Printar erro de aspas demais\n");
+			printf("Printar erro de aspas duplas demais\n");
 			break ;
 		}
-		else if (str[j] == SIMPLE_QUOT_MARK && flag_simple == ON)
+		else if (str[i] == SIMPLE_QUOT_MARK && flag_simple == ON)
 		{
 			//check_export_quot_error(str, i);
-			printf("Printar erro de aspas demais\n");
+			printf("Printar erro de aspas simples demais\n");
 			break ;
 		}
 		else
+		{
+			printf("Salvando valor|%c| em str2, ", str[i]);
 			str2[j] = str[i];
+			printf("str2 ficando |%c|\n", str2[j]);
+			j++;
+		}
 		i++;
 	}
+	str2[j] = '\0';
 	return (str2);
 }

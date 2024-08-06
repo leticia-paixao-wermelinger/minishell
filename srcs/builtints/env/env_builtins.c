@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/31 00:29:44 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/06 00:32:07 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ void	my_export(char **str, t_command *command)
 		print_env_for_export(command->my_env);
 		return ;
 	}
+	new_value = NULL;
 	node = my_getenv_by_list(*str, command->my_env);
-//	printf("Passou da my_getenv_by_list e está com str = |%s|\n", *str);
 	end_str = fromstrcdup(*str, '=');
-//	printf("Salvou informações em end_str e vai verificar aspas com str = |%s| e c end_str = |%s|\n", *str, end_str);
-	if (is_closed_by_quot_marks(end_str) == TRUE) // ainda ta salvando com aspas
+	if (is_closed_by_quot_marks(end_str) == TRUE)
 	{
 		printf("Verificou que está fechado por aspas e vai entrar na validate_quot_marks_for_export com str = |%s| e c end_str = |%s|\n", *str, end_str);
-		str2 = validate_quot_marks_for_export(end_str); // Eu não estou liberando a memória desse str2. Eu teria que utilizar isso em algum lugar??
+		str2 = validate_quot_marks_for_export(end_str);
+		free(*str);
+		printf("str2 após retorno de validate_quot_marks_for_export == |%s|\n", str2);
+		*str = my_strdup(str2);
+		free(str2);
 	}
 	else if (is_there_space(*str) == TRUE)
 	{
@@ -58,10 +61,14 @@ void	my_export(char **str, t_command *command)
 		free(str2);
 	}
 //	printf("Passou do if da is_there_space e vai pro fromstrcdup(str, '=')\n");
-	new_value = fromstrcdup(*str, '=');
-	printf("Passou pela fromstrcdup(*str, '='). node = |%p|, str = |%s| e new_value = |%s|\n", node, *str, new_value);
+	if (is_closed_by_quot_marks(end_str) != TRUE)
+		new_value = fromstrcdup(*str, '=');
+	printf("node = |%p|, str = |%s| e new_value = |%s|\n", node, *str, new_value);
 	if (node != NULL)
+	{
+//		printf("Chamando a change_value");
 		change_value(node, new_value);
+	}
 	else
 		create_new_ev(*str, command->my_env);
 	free(end_str);

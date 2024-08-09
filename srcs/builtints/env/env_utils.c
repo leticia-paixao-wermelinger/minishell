@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/05 23:37:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/08 01:03:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ char	*validate_quot_marks_for_export(char *str)
 	j = 0;
 	flag_double = OFF;
 	flag_simple = OFF;
-//	printf("string antes de verificar aspas: %s\n", str);
 	while (str[j])
 	{
 		if (str[j] == DOUBLE_QUOT_MARK && flag_double == OFF)
@@ -111,34 +110,26 @@ char	*validate_quot_marks_for_export(char *str)
 			break ;
 		j++;
 	}
-	printf("Vai dar malloc em str2, de tamanho %i\n", j);
 	str2 = (char *)malloc((j) * sizeof(char *));
 	j = 0;
 	flag_double = OFF;
 	flag_simple = OFF;
 	while (str[i])
 	{
-		printf("str[%i] == %c\n", i, str[i]);
 		if (str[i] == DOUBLE_QUOT_MARK && flag_double == OFF)
-		{
-			printf("Aspas duplas, flag OFF\n");
 			flag_double = ON;
-		}
 		else if (str[i] == SIMPLE_QUOT_MARK && flag_simple == OFF)
-		{
-			printf("Aspas simples, flag OFF\n");
 			flag_simple = ON;
-		}
 		else if (str[i] == DOUBLE_QUOT_MARK && flag_double == ON)
 		{
 			//check_export_quot_error(str, i);
-			printf("Printar erro de aspas duplas demais\n");
+			printf("Chegou na 2 aspas duplas\n");
 			break ;
 		}
 		else if (str[i] == SIMPLE_QUOT_MARK && flag_simple == ON)
 		{
 			//check_export_quot_error(str, i);
-			printf("Printar erro de aspas simples demais\n");
+			printf("Chegou na 2 aspas simples\n");
 			break ;
 		}
 		else

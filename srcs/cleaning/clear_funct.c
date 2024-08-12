@@ -21,16 +21,34 @@ void	clear_input(t_command *command)
 
 void	clear_all(t_command *command)
 {
+	clear_input(command);
 	rl_clear_history();
 //	free(command->prompt);
 //	free(command->invalid_metas);
-	free_list(command->my_env);
+	free_node(command->my_env);
 	printf("Exiting...\n");
 }
 
 void	free_list(t_node *list)
 {
 	t_node	*temp;
+	int		i;
+
+	i = 1;
+	while (list)
+	{
+		temp = list;
+		free(temp->key);
+		free(temp->value);
+		list = list->next;
+		free(temp);
+		i++;
+	}
+}
+
+void	free_node(t_env *list)
+{
+	t_env	*temp;
 	int		i;
 
 	i = 1;

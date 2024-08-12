@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/30 21:27:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:12:23 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdio.h>
+# include <signal.h>
+# include <sys/wait.h>
 
 enum e_flag {
 	FALSE = 0,
@@ -61,31 +63,37 @@ enum e_token {
 	MY_FILE = 5
 };
 
-typedef struct s_node
+typedef struct s_env
 {
 	char			*key;
-	char			*value; //ls    |     ECHO
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
+typedef struct s_node
+{
+	char			*key; // apagar depois
+	char			*value; //ls    |     ECHO ------- TRANSFORMAR EM UMA MATRIZ
 	int				token;  // e_token  
 	struct s_node	*next;
 }	t_node;
 
-
 typedef struct s_command
 {
 	char	*input;
-	char	**input_matrix;
+	char	**input_matrix; // 
 	char	*invalid_metas;
 	char	*prompt;
 	t_node	*l_input;
-	t_node	*my_env;
+	t_env	*my_env;
 }	t_command;
 
 char	*make_prompt(void);
 void	get_env(t_command *command);
-t_node	*create_first_env_node(char *c, t_node *list);
-t_node	*create_last_env_node(char  *c, t_node *temp);
+t_env	*create_first_env_node(char *c, t_env *list);
+t_env	*create_last_env_node(char  *c, t_env *temp);
 void	set_command(t_command *command);
-void	print_env(t_node *list);
+void	print_env(t_env *list);
 void	input_parser(t_command *command);
 void	change_invalid_metachars(t_command *command);
 int		is_metachar(char c);
@@ -100,16 +108,16 @@ int		strlen_without_spaces_post_metachars(char *s);
 int		strlen_without_spaces_before_metachars(char *s);
 char	**return_invalid_metas(t_command *command, char **matrix);
 void	return_added_unprinted_chars(char *s, char *metas);
-t_node	*my_getenv_by_list(const char *name, t_node *my_env);
+t_env	*my_getenv_by_list(const char *name, t_env *my_env);
 int		run_commands(t_command *command);
 void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
 
 // list
-void	remove_node(t_node *node, t_node *start);
-void	change_value(t_node *node, char *str);
-void	create_new_ev(char *str, t_node *env_list);
+void	remove_env(t_env *node, t_env *start);
+void	change_env_value(t_env *node, char *str);
+void	create_new_ev(char *str, t_env *env_list);
 
 // lexer
 void	lexer(t_command *command);
@@ -128,7 +136,7 @@ int		is_redirect(int n);
 int		run_builtin(t_command *command, t_node *node);
 int		pwd(t_command *command);
 void	my_export(char **str, t_command *command);
-void	print_env_for_export(t_node *list);
+void	print_env_for_export(t_env *list);
 void	my_unset(char *name, t_command *command);
 int		check_export_error(char **str);
 char	*validate_quot_marks_for_export(char *str);
@@ -137,6 +145,12 @@ char	*validate_quot_marks_for_export(char *str);
 void	clear_input(t_command *command);
 void    clear_all(t_command *command);
 void	free_list(t_node *list);
+void	free_node(t_env *list);
+
+// signals
+void	signal_handle(int sig);
+void	setup_signal_handling(void);
+void	handle_sig_error(int sig);
 
 // Teste:
 

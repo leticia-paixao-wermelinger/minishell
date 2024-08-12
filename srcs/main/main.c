@@ -22,20 +22,21 @@ int	main(int argc, char *argv[])
 		my_printf("bash: %s: No such file or directory\n", argv[1]);
 		return 0;
 	}
+
 	get_env(&command);
 	while (42)
 	{
 		set_command(&command);
+		if (command.input == NULL)
+			break ;
 		add_history(command.input);
 		input_parser(&command);
 		lexer(&command);
 		if (run_commands(&command) == CLOSE)
-		{
-			clear_input(&command);
 			break ;
-		}
 		clear_input(&command);
 	}
+//	clear_input(&command);
 	clear_all(&command);
 }
 /*

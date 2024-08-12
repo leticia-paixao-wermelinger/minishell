@@ -15,7 +15,7 @@
 void	get_env(t_command *command)
 {
 	extern char	**environ;
-	t_node		*temp;
+	t_env		*temp;
 	int			i;
 	int			j;
 
@@ -30,9 +30,9 @@ void	get_env(t_command *command)
 		temp = create_last_env_node(environ[j], temp);
 }
 
-void	print_env_for_export(t_node *list)
+void	print_env_for_export(t_env *list)
 {
-	t_node	*temp;
+	t_env	*temp;
 
 	temp = list;
 	while (temp)
@@ -42,9 +42,9 @@ void	print_env_for_export(t_node *list)
 	}
 }
 
-t_node	*my_getenv_by_list(const char *name, t_node *my_env)
+t_env	*my_getenv_by_list(const char *name, t_env *my_env)
 {
-	t_node	*temp;
+	t_env	*temp;
 	int		size_key;
 
 	temp = my_env;

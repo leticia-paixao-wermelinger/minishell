@@ -6,31 +6,29 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 14:12:57 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:12:51 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_node	*create_first_env_node(char *c, t_node *list)
+t_env	*create_first_env_node(char *c, t_env *list)
 {
-	list = (t_node *)malloc(sizeof(t_node));
+	list = (t_env *)malloc(sizeof(t_env));
 	list->key = my_strcdup(c, '=');
 	list->value = fromstrcdup(c, '=');
-	list->token = NO_INFO;
 	list->next = NULL;
 	return (list);
 }
 
-t_node	*create_last_env_node(char	*c, t_node *prev)
+t_env	*create_last_env_node(char	*c, t_env *prev)
 {
-	t_node	*new;
+	t_env	*new;
 
-	new = (t_node *)malloc(sizeof(t_node));
+	new = (t_env *)malloc(sizeof(t_env));
 	prev->next = new;
 	new->key = my_strcdup(c, '=');
 	new->value = fromstrcdup(c, '=');
-	new->token = NO_INFO;
 	new->next = NULL;
 	return (new);
 }
@@ -39,7 +37,7 @@ t_node	*create_first_input_node(char *s, t_node *list)
 {
 	list = (t_node *)malloc(sizeof(t_node));
 	list->key = NULL;
-	list->value = my_strdup(s);
+	list->value = my_strdup(s); // No lugar de dar dup, chamar a função que vai chamar a split de espaços
 	list->token = NO_INFO;
 	list->next = NULL;
 	return (list);

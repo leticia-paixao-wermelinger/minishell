@@ -12,15 +12,15 @@
 
 #include "../../minishell.h"
 
-void    change_value(t_node *node, char *str)
+void    change_env_value(t_env *node, char *str)
 {
 	free(node->value);
 	node->value = my_strdup(str);
 }
 
-void	create_new_ev(char *str, t_node *env_list)
+void	create_new_ev(char *str, t_env *env_list)
 {
-	t_node	*temp;
+	t_env	*temp;
 
 	temp = env_list;
 	while (temp)
@@ -34,9 +34,9 @@ void	create_new_ev(char *str, t_node *env_list)
 	}
 }
 
-void	remove_node(t_node *node, t_node *start)
+void	remove_env(t_env *node, t_env *start)
 {
-	t_node	*temp;
+	t_env	*temp;
 
 	temp = start;
 	while (temp)

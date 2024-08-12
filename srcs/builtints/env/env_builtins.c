@@ -14,9 +14,9 @@
 
 static void	conditions_to_export(char **str, char **end_str);
 
-void	print_env(t_node *list)
+void	print_env(t_env *list)
 {
-	t_node	*temp;
+	t_env	*temp;
 
 	temp = list;
 	while (temp)
@@ -30,7 +30,7 @@ void	print_env(t_node *list)
 
 void	my_export(char **str, t_command *command)
 {
-	t_node	*node;
+	t_env	*node;
 	char	*new_value;
 	char	*end_str;
 
@@ -48,7 +48,7 @@ void	my_export(char **str, t_command *command)
 	else
 		new_value = my_strdup(*str);
 	if (node != NULL)
-		change_value(node, new_value);
+		change_env_value(node, new_value);
 	else
 		create_new_ev(*str, command->my_env);
 	free(new_value);
@@ -78,11 +78,11 @@ static void	conditions_to_export(char **str, char **end_str)
 
 void	my_unset(char *name, t_command *command)
 {
-	t_node	*node;
+	t_env	*node;
 
 	if (!name)
 		return ;
 	node = my_getenv_by_list(name, command->my_env);
 	if (node != NULL)
-		remove_node(node, command->my_env);
+		remove_env(node, command->my_env);
 }

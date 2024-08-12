@@ -43,7 +43,8 @@ srcs/general_metachar_functions/metacharacters_utils.c \
 srcs/main/prompt_and_inputs.c \
 srcs/builtints/builtins.c \
 srcs/builtints/pwd.c \
-srcs/parser/linked_list_input/create_list_input.c
+srcs/parser/linked_list_input/create_list_input.c \
+srcs/signals/signal_handle.c
 
 OBJS = ${SRCS:.c=.o}
 

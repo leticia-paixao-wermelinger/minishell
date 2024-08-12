@@ -44,7 +44,7 @@ static int	pre_export(t_command *command, t_node *node)
 
 	str = NULL;
 	ret = NO_ERROR;
-	if (strlen(node->value) > 6)
+	if (my_strlen(node->value) > 6)
 //	{
 //		printf("Entrou no if de 'strlen'\n");
 		str = fromstrcdup(node->value, SPACE_CHAR);
@@ -73,7 +73,7 @@ static void	pre_unset(t_command *command, t_node *node)
 	char    *str;
 
 	str = NULL;
-	if (strlen(node->value) > 6)
+	if (my_strlen(node->value) > 6)
 		str = fromstrcdup(node->value, SPACE_CHAR);
 	my_unset(str, command);
 	free(str);

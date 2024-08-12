@@ -22,7 +22,7 @@ void	clear_input(t_command *command)
 void	clear_all(t_command *command)
 {
 	clear_input(command);
-	rl_clear_history();
+	clear_history(); //n esquecer de alterar depois p/ rl_clear_history();
 //	free(command->prompt);
 //	free(command->invalid_metas);
 	free_node(command->my_env);
@@ -32,9 +32,9 @@ void	clear_all(t_command *command)
 void	free_list(t_node *list)
 {
 	t_node	*temp;
-	int		i;
+	//int		i;
 
-	i = 1;
+	//i = 1;
 	while (list)
 	{
 		temp = list;
@@ -42,16 +42,16 @@ void	free_list(t_node *list)
 		free(temp->value);
 		list = list->next;
 		free(temp);
-		i++;
+		//i++;
 	}
 }
 
 void	free_node(t_env *list)
 {
 	t_env	*temp;
-	int		i;
+	//int		i;
 
-	i = 1;
+	//i = 1;
 	while (list)
 	{
 		temp = list;
@@ -59,6 +59,6 @@ void	free_node(t_env *list)
 		free(temp->value);
 		list = list->next;
 		free(temp);
-		i++;
+		//i++;
 	}
 }

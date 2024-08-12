@@ -22,7 +22,7 @@ int	main(int argc, char *argv[])
 		my_printf("bash: %s: No such file or directory\n", argv[1]);
 		return 0;
 	}
-
+	setup_signal_handling();
 	get_env(&command);
 	while (42)
 	{

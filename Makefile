@@ -23,6 +23,15 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror -g
 
+RL_FLAG = -lreadline \
+
+OS := $(shell uname)
+ifeq ($(OS), Darwin)
+
+FLAGS += -I$(shell brew --prefix readline)/include
+RL_FLAG += -L$(shell brew --prefix readline)/lib
+endif
+
 SRCS = \
 srcs/main/main.c \
 srcs/linked_list/list_functions.c \
@@ -71,7 +80,7 @@ all: $(NAME)
 	@echo "$(COLOUR_BLUE) minishell is ready to be used$(COLOUR_END)"
 
 $(NAME): $(LIBS) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(LIBS) -lreadline -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) $(LIBS) $(RL_FLAG) -o $(NAME)
 
 clean:
 	make clean -C $(LIBFT_PATH)
@@ -98,5 +107,5 @@ norm:
 	@-norminette -R CheckForbiddenSourceHeader
 
 sanitize: fclean $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(LIBS) -lreadline -o $(NAME) -fsanitize=address
+	$(CC) $(FLAGS) $(OBJS) $(LIBS) $(RL_FLAG) -o $(NAME) -fsanitize=address
 	./$(NAME)

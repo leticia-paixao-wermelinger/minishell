@@ -12,6 +12,8 @@
 
 #include "../../minishell.h"
 
+//volatile unsigned int    g_status;
+
 int	main(int argc, char *argv[])
 {
 	t_command	command;	
@@ -28,16 +30,21 @@ int	main(int argc, char *argv[])
 	{
 		set_command(&command);
 		if (command.input == NULL)
+		{
+			clear_input(&command);
 			break ;
+		}
 		add_history(command.input);
 		input_parser(&command);
 		lexer(&command);
 		if (run_commands(&command) == CLOSE)
+		{
+			clear_loop_end(&command);
 			break ;
-		clear_input(&command);
+		}
+		clear_loop_end(&command);
 	}
-//	clear_input(&command);
-	clear_all(&command);
+	final_clear(&command);
 }
 /*
 **com a my_env eu consigo fazer 3 built-ins: env (FEITA); export (cria uma nova variável de ambiente ou

@@ -28,9 +28,9 @@ void	set_token(t_node *node, t_node *first)
 {
 	if (is_builtin(node->value) == TRUE)
 		node->token = BUILTIN;
-	else if (is_pipe(node->value) == TRUE)
+	else if (is_pipe(node->value[0][0]) == TRUE)
 		node->token = T_PIPE;
-	else if (is_append(node->value) == TRUE)
+	else if (is_append(node->value[0]) == TRUE)
 		node->token = REDIR_APPEND;
 	else if (is_redir_out(node->value) == TRUE)
 		node->token = REDIR_OUT;

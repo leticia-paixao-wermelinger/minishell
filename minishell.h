@@ -72,8 +72,7 @@ typedef struct s_env
 
 typedef struct s_node
 {
-	char			*key; // apagar depois
-	char			*value; //ls    |     ECHO ------- TRANSFORMAR EM UMA MATRIZ
+	char			**value; //ls    |     ECHO ------- TRANSFORMAR EM UMA MATRIZ
 	int				token;  // e_token  
 	struct s_node	*next;
 }	t_node;
@@ -114,6 +113,17 @@ void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
 
+// is?
+int		is_pipe(char c);
+int 	is_simple_quote(char c);
+int 	is_double_quote(char c);
+int		is_append(char *s);
+int		is_redir_out(char *s);
+int		is_redir_in(char *s);
+int		is_heredoc(char *s);
+int		is_file(t_node *node, t_node *list);
+int		is_redirect(int n);
+
 // list
 void	remove_env(t_env *node, t_env *start);
 void	change_env_value(t_env *node, char *str);
@@ -122,15 +132,9 @@ void	create_new_ev(char *str, t_env *env_list);
 // lexer
 void	lexer(t_command *command);
 void	set_token(t_node *node, t_node *first);
-int		is_builtin(char *s);
+int		is_builtin(char **s);
 //int		is_exec(char *s);
-int		is_pipe(char *s);
-int		is_append(char *s);
-int		is_redir_out(char *s);
-int		is_redir_in(char *s);
-int		is_heredoc(char *s);
-int		is_file(t_node *node, t_node *list);
-int		is_redirect(int n);
+char    **tokenize_sentence(char *input);
 
 // Built In
 int		run_builtin(t_command *command, t_node *node);
@@ -143,9 +147,10 @@ char	*validate_quot_marks_for_export(char *str);
 
 // Clear
 void	clear_input(t_command *command);
-void    clear_all(t_command *command);
+void    final_clear(t_command *command);
 void	free_list(t_node *list);
-void	free_node(t_env *list);
+void	clear_loop_end(t_command *command);
+void	free_env(t_env *list);
 
 // signals
 void	signal_handle(int sig);

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/12 15:13:09 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:31:51 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	input_parser(t_command *command)
 	//split de metacaracteres
 	command->input_matrix = meta_split(command->input);
 	command->input_matrix = return_invalid_metas(command, command->input_matrix);
-//	my_printf("Input pós split de metacaracteres:\n");
+//	my_printf("Matriz pós split de metacaracteres:\n");
 //	print_matrix(command->input_matrix);
 	make_list_from_input(command);
 	my_clean_vect(command->input_matrix);

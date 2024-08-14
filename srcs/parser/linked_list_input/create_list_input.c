@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 00:36:05 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/22 14:45:24 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:35:34 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,13 @@ void	make_list_from_input(t_command *command)
 	i = 0;
 	command->l_input = NULL;
 	command->l_input = create_first_input_node(command->input_matrix[i], command->l_input);
+//	printf("Node 0:\n");
+//	printlist(command->l_input);
 	temp = command->l_input;
 	while (command->input_matrix[++i])
+	//{
 		temp = create_last_input_node(command->input_matrix[i], temp);
+		//printf("Node %i:\n", i);
+		//printlist(command->l_input);
+	//}
 }

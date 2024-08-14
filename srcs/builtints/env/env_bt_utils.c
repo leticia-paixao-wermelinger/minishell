@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/08 01:03:35 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:14:29 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,37 @@ void	print_env_for_export(t_env *list)
 		temp = temp->next;
 	}
 }
+
+int	is_valid_ev(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (is_valid_exp_char(str[i]) == TRUE)
+	{
+		while (is_valid_exp_char(str[i]) == TRUE)
+		{
+			if (is_valid_exp_char(str[i]) == TRUE)
+				i++;
+			else
+				return (ERROR);
+		}
+	}
+	else
+		return (ERROR);
+	if (str[i] == '=')
+		i++;
+	else
+		return (ERROR);
+	while (is_valid_exp_char(str[i]) == TRUE) // Válidos: #
+	{
+		if ()
+		i++;
+	}
+	return (NO_ERROR);
+}
+
+// -----------------------------------------------------------------
 
 int	check_export_error(char **str)
 {

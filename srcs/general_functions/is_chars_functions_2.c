@@ -6,11 +6,11 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:36:37 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/12 21:43:49 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:42:44 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../../minishell.h"
 
 int	is_redir_out(char *s)
 {

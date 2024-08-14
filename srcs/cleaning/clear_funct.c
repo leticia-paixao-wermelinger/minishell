@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 22:56:54 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 15:53:14 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	clear_input(t_command *command)
 
 void	final_clear(t_command *command)
 {
-//	clear_input(command);
 	clear_history(); //n esquecer de alterar depois p/ rl_clear_history();
-//	free(command->prompt);
 	free_env(command->my_env);
 	printf("Exiting...\n");
 }
@@ -41,7 +39,7 @@ void	free_list(t_node *list)
 	{
 		temp = list;
 		list = list->next;
-		free(temp->value);
+		my_clean_vect(temp->value);
 		free(temp);
 	}
 }

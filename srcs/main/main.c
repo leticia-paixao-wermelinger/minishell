@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/30 14:39:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:10:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int	main(int argc, char *argv[])
 		add_history(command.input);
 		input_parser(&command);
 		lexer(&command);
+//		printf("Printar lista do input:\n");
+//		printlist(command.l_input);
 		if (run_commands(&command) == CLOSE)
 		{
 			clear_loop_end(&command);
@@ -48,7 +50,7 @@ int	main(int argc, char *argv[])
 }
 /*
 **com a my_env eu consigo fazer 3 built-ins: env (FEITA); export (cria uma nova variável de ambiente ou
-altera uma que já existe) e unset (se ela conseguir achar a variável de ambiente, ela exclui essa
+altera uma que já existe) e unset (FEITA) (se ela conseguir achar a variável de ambiente, ela exclui essa
 variável. Se não achar, não faz nada).
 export = verifica se já existe. Se existe, modifica. Se não, cria uma nova.
 ATENÇÃO PRO "VERIFICA DE EXISTE"!!! -> retorno de erro OU da posição!

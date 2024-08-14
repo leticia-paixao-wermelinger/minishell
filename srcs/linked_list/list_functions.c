@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/12 15:12:51 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 14:31:19 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ t_env	*create_last_env_node(char	*c, t_env *prev)
 t_node	*create_first_input_node(char *s, t_node *list)
 {
 	list = (t_node *)malloc(sizeof(t_node));
-//	list->value = my_strdup(s); // No lugar de dar dup, chamar a função que vai chamar a split de espaços
 	list->value = tokenize_sentence(s);
 	list->token = NO_INFO;
 	list->next = NULL;
@@ -49,7 +48,6 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 
 	new = (t_node *)malloc(sizeof(t_node));
 	prev->next = new;
-	//new->value = my_strdup(s);
 	new->value = tokenize_sentence(s);
 	new->token = NO_INFO;
 	new->next = NULL;
@@ -69,6 +67,7 @@ void	printlist(t_node *list)
 	{
 		printf("\033[0;33m Item %i, com endereço %p\n\033[0m", i, temp);
 		printf("\033[0;31m"); // Make color red
+		printf("Matriz\n");
 		print_matrix(temp->value);
 		printf("Token: %i\n", temp->token);
 		printf("Next: %p\n\033[0m", temp->next);

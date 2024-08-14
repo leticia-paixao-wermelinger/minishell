@@ -6,13 +6,13 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/08 04:42:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 17:07:46 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-static void	conditions_to_export(char **str, char **end_str);
+//static void	conditions_to_export(char **str, char **end_str);
 
 void	print_env(t_env *list)
 {
@@ -26,8 +26,26 @@ void	print_env(t_env *list)
 	}
 }
 
-//export
+void	my_export(t_env *env, t_node *node_i)
+{
+	int	i;
 
+	i = 1;
+	if (!node_i->value[i])
+	{
+		print_env_for_export(env);
+		return ;
+	}
+	while (node_i->value[++i])
+	{
+		if (is_valid_ev(node_i->value[i]) == FALSE)
+			continue ;
+
+	}
+}
+
+//export
+/*
 void	my_export(char **str, t_command *command)
 {
 	t_env	*node;
@@ -74,15 +92,27 @@ static void	conditions_to_export(char **str, char **end_str)
 		*str = my_strdup(str2);
 		free(str2);
 	}
-}
+}*/
 
-void	my_unset(char *name, t_command *command)
+// unset
+
+void	my_unset(t_env *env, t_node *node_i)
 {
-	t_env	*node;
+	t_env	*node_env;
+	int		i;
 
-	if (!name)
-		return ;
-	node = my_getenv_by_list(name, command->my_env);
-	if (node != NULL)
-		remove_env(node, command->my_env);
+	i = 1;
+	node_env = NULL;
+	while (node_i->value[i])
+	{
+		if (!node_i->value[i])
+		{
+			i++;
+			continue ;
+		}
+		node_env = my_getenv_by_list(node_i->value[i], env);
+		if (node_env != NULL)
+			remove_env(node_env, env);
+		i++;
+	}
 }

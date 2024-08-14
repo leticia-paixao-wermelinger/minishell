@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:27:15 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/26 20:47:47 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 12:42:11 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	set_token(t_node *node, t_node *first)
 		node->token = T_PIPE;
 	else if (is_append(node->value[0]) == TRUE)
 		node->token = REDIR_APPEND;
-	else if (is_redir_out(node->value) == TRUE)
+	else if (is_redir_out(*node->value) == TRUE)
 		node->token = REDIR_OUT;
-	else if (is_redir_in(node->value) == TRUE)
+	else if (is_redir_in(*node->value) == TRUE)
 		node->token = REDIR_IN;
-	else if (is_heredoc(node->value) == TRUE)
+	else if (is_heredoc(*node->value) == TRUE)
 		node->token = REDIR_HEREDOC;
 	else if (is_file(node, first) == TRUE)
 		node->token = MY_FILE;

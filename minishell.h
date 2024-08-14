@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/12 15:12:23 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/14 16:56:39 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int		is_redir_in(char *s);
 int		is_heredoc(char *s);
 int		is_file(t_node *node, t_node *list);
 int		is_redirect(int n);
+int		is_valid_exp_char(char c);
+//int		is_char(char *s, char c);
 
 // list
 void	remove_env(t_env *node, t_env *start);
@@ -139,9 +141,9 @@ char    **tokenize_sentence(char *input);
 // Built In
 int		run_builtin(t_command *command, t_node *node);
 int		pwd(t_command *command);
-void	my_export(char **str, t_command *command);
+void	my_export(t_env *env, t_node *node_i);
 void	print_env_for_export(t_env *list);
-void	my_unset(char *name, t_command *command);
+void    my_unset(t_env *env, t_node *node_i);
 int		check_export_error(char **str);
 char	*validate_quot_marks_for_export(char *str);
 

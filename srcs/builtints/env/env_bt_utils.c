@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 17:14:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/15 13:31:16 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,12 @@ int	is_valid_ev(char *str)
 		i++;
 	else
 		return (ERROR);
-	while (is_valid_exp_char(str[i]) == TRUE) // Válidos: #
+	while (is_valid_exp_char(str[i]) == TRUE) //Fazer outra função! Válidos: #
 	{
-		//if ()
-		i++;
+		if (is_valid_exp_char(str[i]) == TRUE)
+			i++;
+		else
+			return (ERROR);
 	}
 	return (NO_ERROR);
 }

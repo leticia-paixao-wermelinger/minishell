@@ -147,6 +147,7 @@ void	print_env_for_export(t_env *list);
 void    my_unset(t_env *env, t_node *node_i);
 int		check_export_error(char **str);
 char	*validate_quot_marks_for_export(char *str);
+int	is_valid_ev(char *str);
 
 // Clear
 void	clear_input(t_command *command);

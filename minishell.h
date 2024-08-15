@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 16:56:39 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:43:27 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ int		is_valid_ev(char *str);
 
 // list
 void	remove_env(t_env *node, t_env *start);
-void	change_env_value(t_env *node, char *str);
-void	create_new_ev(char *str, t_env *env_list);
+//void	change_env_value(t_env *node, char *str);
+//void	create_new_ev(char *str, t_env *env_list);
 
 // lexer
 void	lexer(t_command *command);
@@ -147,7 +147,9 @@ void	print_env_for_export(t_env *list);
 void    my_unset(t_env *env, t_node *node_i);
 int		check_export_error(char **str);
 char	*validate_quot_marks_for_export(char *str);
-int	is_valid_ev(char *str);
+int		is_valid_ev(char *str);
+void	change_env_value(t_env *env, char *str);
+void	create_new_ev(char *str, t_env *env);
 
 // Clear
 void	clear_input(t_command *command);

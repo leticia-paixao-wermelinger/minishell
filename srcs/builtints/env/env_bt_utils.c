@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/15 13:31:16 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:01:22 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,32 @@ int	is_valid_ev(char *str)
 	return (NO_ERROR);
 }
 
-// -----------------------------------------------------------------
+void	change_env_value(t_env *node, char *str)
+{
+	printf("Entrou na change_env_value\n");
+	free(node->value);
+	node->value = my_strdup(str);
+}
 
+void	create_new_ev(char *str, t_env *env)
+{
+	t_env	*temp;
+
+	printf("Entrou na create_new_env\n");
+	temp = env;
+	while (temp)
+	{
+		if (temp->next == NULL)
+		{
+			create_last_env_node(str, temp);
+			break ;
+		}
+		temp = temp->next;
+	}
+}
+
+// -----------------------------------------------------------------
+/*
 int	check_export_error(char **str)
 {
 	int		i;
@@ -142,4 +166,4 @@ char	*validate_quot_marks_for_export(char *str)
 	}
 	str2[j] = '\0';
 	return (str2);
-}
+}*/

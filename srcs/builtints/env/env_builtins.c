@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 17:07:46 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/15 19:10:49 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,25 +26,46 @@ void	print_env(t_env *list)
 	}
 }
 
+//export
+
 void	my_export(t_env *env, t_node *node_i)
 {
-	int	i;
+	int		i;
+	char	*str;
+	t_env	*node_env;
 
-	i = 1;
-	if (!node_i->value[i])
+	printf("ENTROU NA MY_EXPORT	\n");
+	i = 0;
+	str = NULL;
+	node_env = NULL;
+	if (!node_i->value[1])
 	{
+		printf("Entrou na condição de export sem parametro\n");
 		print_env_for_export(env);
 		return ;
 	}
 	while (node_i->value[++i])
 	{
+		printf("Está no while da matriz da sentença do export no índice %i\n", i);
 		if (is_valid_ev(node_i->value[i]) == FALSE)
+		{
+			printf("value[%i] = |%s|: nome é inválido\n", i, node_i->value[i]);
 			continue ;
-
+		}
+		else
+		{
+			printf("value[%i] = |%s|: nome é válido\n", i, node_i->value[i]);
+			node_env = my_getenv_by_list(node_i->value[i], env);
+			str = fromstrcdup(node_i->value[i], '=');
+			if (node_env != NULL)
+				change_env_value(node_env, str);
+			else
+				create_new_ev(node_i->value[i], env);
+			free(str);
+		}
 	}
 }
 
-//export
 /*
 void	my_export(char **str, t_command *command)
 {

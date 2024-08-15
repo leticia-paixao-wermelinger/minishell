@@ -6,12 +6,12 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 22:18:49 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/29 23:51:45 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/15 18:45:07 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
+/*
 void    change_env_value(t_env *node, char *str)
 {
 	free(node->value);
@@ -33,7 +33,7 @@ void	create_new_ev(char *str, t_env *env_list)
 		temp = temp->next;
 	}
 }
-
+*/
 void	remove_env(t_env *node, t_env *start)
 {
 	t_env	*temp;

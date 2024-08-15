@@ -124,6 +124,7 @@ int		is_heredoc(char *s);
 int		is_file(t_node *node, t_node *list);
 int		is_redirect(int n);
 int		is_valid_exp_char(char c);
+int		is_valid_ev(char *str);
 //int		is_char(char *s, char c);
 
 // list

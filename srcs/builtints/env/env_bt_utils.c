@@ -47,7 +47,7 @@ int	is_valid_ev(char *str)
 		return (ERROR);
 	while (is_valid_exp_char(str[i]) == TRUE) // Válidos: #
 	{
-		if ()
+		//if ()
 		i++;
 	}
 	return (NO_ERROR);

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/15 19:10:49 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:11:07 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	my_export(t_env *env, t_node *node_i)
 	while (node_i->value[++i])
 	{
 		printf("Está no while da matriz da sentença do export no índice %i\n", i);
-		if (is_valid_ev(node_i->value[i]) == FALSE)
+		if (is_valid_ev(node_i->value[i]) == ERROR)
 		{
 			printf("value[%i] = |%s|: nome é inválido\n", i, node_i->value[i]);
 			continue ;

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/08/14 16:56:02 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/17 15:16:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,25 @@ int	is_append(char *s)
 int	is_valid_exp_char(char c)
 {
 	if (c >= '0' && c <= '9')
+	{
+		printf("|%c| é um número\n", c);
 		return (TRUE);
+	}
 	else if (c >= 'A' && c <= 'Z')
+	{
+		printf("|%c| é uma letra maiúscula\n", c);
 		return (TRUE);
+	}
 	else if (c >= 'a' && c <= 'z')
+	{
+		printf("|%c| é uma letra minúscula\n", c);
 		return (TRUE);
+	}
 	else if (c == '_')
+	{
+		printf("|%c| é um underline\n", c);
 		return (TRUE);
+	}
 	return (FALSE);
 }
 

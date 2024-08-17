@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/15 19:01:22 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/17 16:30:06 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ int	is_valid_ev(char *str)
 	int	i;
 
 	i = 0;
-	if (is_valid_exp_char(str[i]) == TRUE)
+	if (str[0] != '=' && is_valid_exp_char(str[0]) == TRUE)
 	{
-		while (is_valid_exp_char(str[i]) == TRUE)
+		while (str[i])
 		{
 			if (is_valid_exp_char(str[i]) == TRUE)
 				i++;
+			else if (str[i] == '=')
+				break ;
 			else
 				return (ERROR);
 		}
@@ -45,19 +47,11 @@ int	is_valid_ev(char *str)
 		i++;
 	else
 		return (ERROR);
-	while (is_valid_exp_char(str[i]) == TRUE) //Fazer outra função! Válidos: #
-	{
-		if (is_valid_exp_char(str[i]) == TRUE)
-			i++;
-		else
-			return (ERROR);
-	}
 	return (NO_ERROR);
 }
 
 void	change_env_value(t_env *node, char *str)
 {
-	printf("Entrou na change_env_value\n");
 	free(node->value);
 	node->value = my_strdup(str);
 }
@@ -66,7 +60,6 @@ void	create_new_ev(char *str, t_env *env)
 {
 	t_env	*temp;
 
-	printf("Entrou na create_new_env\n");
 	temp = env;
 	while (temp)
 	{

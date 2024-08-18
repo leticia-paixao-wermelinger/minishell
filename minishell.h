@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/15 18:43:27 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/17 17:55:15 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ char	*validate_quot_marks_for_export(char *str);
 int		is_valid_ev(char *str);
 void	change_env_value(t_env *env, char *str);
 void	create_new_ev(char *str, t_env *env);
+int		my_cd(t_node *node, t_env *env);
 
 // Clear
 void	clear_input(t_command *command);

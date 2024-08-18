@@ -6,21 +6,86 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:52:16 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/11 01:20:48 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:24:46 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	my_cd(char *path)
+static void go_home(t_env *env, char *old_pwd);
+static void	change_pwd(char *new_value, t_env *env);
+static void	change_old_pwd(char *new_value, t_env *env);
+
+int	my_cd(t_node *node, t_env *env)
 {
-	if (chdir(path) != 0)
+	char    cwd[1824];
+	t_env	*temp;
+	char	*old_pwd;
+	int		ret;
+
+	old_pwd = my_strdup((my_getenv_by_list("PWD", env))->value);
+	temp = env;
+	if (!node->value[1])
 	{
-		//ERROR
-		//print_error
-		//return (ERROR);
-	}
-	//change path of env
-	//change oldpwd of env
+		go_home(env, old_pwd);
+		free(old_pwd);
 		return (NO_ERROR);
+	}
+	ret = chdir(node->value[1]);
+	if (ret != 0)
+	{
+		printf("bash: cd: %s: No such file or directory\n", node->value[1]);
+		free(old_pwd);
+		return (ERROR);
+	}
+	change_pwd(getcwd(cwd, sizeof(cwd)), env);	
+	change_old_pwd(old_pwd, env);
+	free(old_pwd);
+	return (NO_ERROR);
+}
+
+static void	go_home(t_env *env, char *old_pwd)
+{
+	t_env	*home;
+
+	home = my_getenv_by_list("HOME", env);
+	chdir(home->value);
+	change_pwd(home->value, env);
+	change_old_pwd(old_pwd, env);
+}
+
+static void	change_pwd(char *new_value, t_env *env)
+{
+	t_env	*node;
+	
+	node = my_getenv_by_list("PWD", env);
+	free(node->value);
+	node->value = my_strdup(new_value);
+}
+
+static void	change_old_pwd(char *new_value, t_env *env)
+{
+	t_env	*node;
+	t_env	*temp;
+	char	*old_pwd;
+	char	*str;
+	
+	temp = env;
+	old_pwd = my_strdup("OLDPWD=");
+	str = NULL;
+	node = my_getenv_by_list("OLDPWD", env);
+	if (!node)
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+		str = my_strjoin(old_pwd, new_value); 
+		create_last_env_node(str, temp);
+		free(str);
+	}
+	else
+	{
+		free(node->value);
+		node->value = my_strdup(new_value);
+	}
+	free(old_pwd);
 }

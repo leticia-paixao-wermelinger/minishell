@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/07/29 22:20:09 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/08/17 17:50:23 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ srcs/cleaning/clear_funct.c \
 srcs/env/env_utils.c \
 srcs/builtints/env/env_builtins.c \
 srcs/builtints/env/env_bt_utils.c \
+srcs/builtints/cd.c \
 srcs/parser/parser.c \
 srcs/parser/quot_marks_validation/parser_quotation_marks_validation.c \
 srcs/parser/quot_marks_validation/str_of_invalid_metas.c \

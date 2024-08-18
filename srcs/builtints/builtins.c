@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 22:13:01 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/15 19:08:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/17 21:35:40 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	run_builtin(t_command *command, t_node *node)
 	if (my_strcmp(node->value[0], "echo") == 0)
 		printf("Chamar função echo\n");
 	else if (my_strcmp(node->value[0], "cd") == 0)
-		printf("Chamar função cd\n");
+		my_cd(node, command->my_env);
 	else if (my_strcmp(node->value[0], "pwd") == 0)
 		ret = pwd(command);
 	else if (my_strcmp(node->value[0], "export") == 0)

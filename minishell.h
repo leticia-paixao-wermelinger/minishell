@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/17 17:55:15 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/21 14:24:15 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ typedef struct s_env
 
 typedef struct s_node
 {
-	char			**value; //ls    |     ECHO ------- TRANSFORMAR EM UMA MATRIZ
+	char			**value;
 	int				token;  // e_token  
 	struct s_node	*next;
 }	t_node;
@@ -151,6 +151,7 @@ int		is_valid_ev(char *str);
 void	change_env_value(t_env *env, char *str);
 void	create_new_ev(char *str, t_env *env);
 int		my_cd(t_node *node, t_env *env);
+int		my_echo(t_node *node);
 
 // Clear
 void	clear_input(t_command *command);

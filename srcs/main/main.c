@@ -6,13 +6,15 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 16:10:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:30:44 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-//volatile unsigned int    g_status;
+volatile unsigned int    g_status;
+
+//extern g_status;
 
 int	main(int argc, char *argv[])
 {
@@ -28,6 +30,7 @@ int	main(int argc, char *argv[])
 	get_env(&command);
 	while (42)
 	{
+		printf("g_status = %i\n", g_status);
 		set_command(&command);
 		if (command.input == NULL)
 		{

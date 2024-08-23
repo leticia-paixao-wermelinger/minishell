@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/17 15:11:07 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:42:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,25 @@
 
 //static void	conditions_to_export(char **str, char **end_str);
 
-void	print_env(t_env *list)
+void	print_env(t_env *list, int fd)
 {
 	t_env	*temp;
 
 	temp = list;
 	while (temp)
 	{
-		my_printf("%s=%s\n", temp->key, temp->value);
+		my_putstr_fd(temp->key, fd);
+		my_putstr_fd("=", fd);
+		my_putstr_fd(temp->value, fd);
+		my_putstr_fd("\n", fd);
+		//my_printf("%s=%s\n", temp->key, temp->value);
 		temp = temp->next;
 	}
 }
 
 //export
 
-void	my_export(t_env *env, t_node *node_i)
+void	my_export(t_env *env, t_node *node_i, int fd)
 {
 	int		i;
 	char	*str;
@@ -41,7 +45,7 @@ void	my_export(t_env *env, t_node *node_i)
 	if (!node_i->value[1])
 	{
 		printf("Entrou na condição de export sem parametro\n");
-		print_env_for_export(env);
+		print_env_for_export(env, fd);
 		return ;
 	}
 	while (node_i->value[++i])

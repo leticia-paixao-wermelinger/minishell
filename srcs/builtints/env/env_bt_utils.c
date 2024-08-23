@@ -6,20 +6,25 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/17 16:30:06 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:43:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
-void	print_env_for_export(t_env *list)
+void	print_env_for_export(t_env *list, int fd)
 {
 	t_env	*temp;
 
 	temp = list;
 	while (temp)
 	{
-		my_printf("declare -x %s=%s\n", temp->key, temp->value);
+		my_putstr_fd("declare -x ", fd);
+		my_putstr_fd(temp->key, fd);
+		my_putstr_fd("=", fd);
+		my_putstr_fd(temp->value, fd);
+		my_putstr_fd("\n", fd);
+		//my_printf("declare -x %s=%s\n", temp->key, temp->value);
 		temp = temp->next;
 	}
 }

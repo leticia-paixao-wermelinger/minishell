@@ -6,17 +6,24 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/07/05 15:43:48 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/08/22 19:39:51 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+extern unsigned int g_status;
+
+/*
+Ctrl C:
+*/
 
 void	signal_handle(int sig)
 {
 	if (sig == SIGINT) // ctrl + c
 	{
 		printf("\n");
+		g_status = USED_CTRL_C;
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();

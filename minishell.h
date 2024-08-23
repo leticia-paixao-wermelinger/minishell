@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/21 14:24:15 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:43:23 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,38 @@ enum e_flag {
 	ON = 3
 };
 
+/*
+Valores Padrão:
+0: Sucesso. O comando foi executado com sucesso.
+1: Erro Geral. Indica uma falha genérica ou um erro não específico.
+Erros Comuns:
+127: Comando Não Encontrado. Código retornado quando o shell não consegue encontrar o comando especificado. É uma maneira padrão de indicar que o comando não foi encontrado no caminho especificado.
+Outros Valores:
+2-125: Podem ser utilizados por comandos e programas para indicar erros específicos. Esses valores são definidos pelos próprios programas e podem variar.
+126: Comando Não Executável. Esse código indica que o comando foi encontrado, mas não é executável (por exemplo, se não tiver permissões de execução).
+128: Usado para indicar que o comando foi terminado por um sinal. O código de saída é o número do sinal adicionado a 128 (por exemplo, 128 + 2 para SIGINT).
+
+0: Success—Indicates that the command or program executed successfully without any errors.
+1: General Error—A catch-all exit code for a variety of general errors. Often used when the command or program encounters an error, but no specific exit code is available for the situation.
+2: Misuse of shell built-ins—Indicates incorrect usage of shell built-in commands or misuse of shell syntax.
+126: Command cannot execute—The command was found, but it could not be executed, possibly due to insufficient permissions or other issues.
+127: Command not found—The command was not found in the system's PATH, indicating that either the command does not exist or the PATH variable is incorrectly set.
+128: Invalid exit argument—Returned when a script exits with an invalid argument. This usually indicates an error in the script itself.
+128 + N: Fatal error signal N—Indicates that the command or program was terminated by a fatal error signal. For example, an exit code of 137 (128 + 9) means that the command was terminated by a SIGKILL signal.
+130: Script terminated by Control-C—Indicates that the command or script was terminated by the user using Control-C (SIGINT signal).
+255: Exit status out of range—Returned when the exit status is outside the valid range (0 to 254).
+*/
+
 enum e_error {
-	ERROR = -1,
-	NO_ERROR = 1,
+	NO_ERROR = 0,
+	ERROR = 1,
+	MISUSE = 2,
+	CANT_EXEC = 126,
+	NOT_FOUND = 127,
+	INVALID_EXIT_ARG = 128,
+	FATAL_ERROR_MINUS_N = 128,
+	USED_CTRL_C = 130, // DONE
+	EXIT_STATUS_OUT_RANGE = 255,
 	CLOSE
 };
 
@@ -92,7 +121,7 @@ void	get_env(t_command *command);
 t_env	*create_first_env_node(char *c, t_env *list);
 t_env	*create_last_env_node(char  *c, t_env *temp);
 void	set_command(t_command *command);
-void	print_env(t_env *list);
+void	print_env(t_env *list, int fd);
 void	input_parser(t_command *command);
 void	change_invalid_metachars(t_command *command);
 int		is_metachar(char c);
@@ -140,10 +169,10 @@ int		is_builtin(char **s);
 char    **tokenize_sentence(char *input);
 
 // Built In
-int		run_builtin(t_command *command, t_node *node);
+int		run_builtin(t_command *command, t_node *node, int fd);
 int		pwd(t_command *command);
-void	my_export(t_env *env, t_node *node_i);
-void	print_env_for_export(t_env *list);
+void	my_export(t_env *env, t_node *node_i, int fd);
+void	print_env_for_export(t_env *list, int fd);
 void    my_unset(t_env *env, t_node *node_i);
 int		check_export_error(char **str);
 char	*validate_quot_marks_for_export(char *str);
@@ -151,7 +180,7 @@ int		is_valid_ev(char *str);
 void	change_env_value(t_env *env, char *str);
 void	create_new_ev(char *str, t_env *env);
 int		my_cd(t_node *node, t_env *env);
-int		my_echo(t_node *node);
+int		my_echo(t_node *node, int fd);
 
 // Clear
 void	clear_input(t_command *command);

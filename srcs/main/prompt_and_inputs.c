@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/07/30 14:40:43 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:08:23 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	run_commands(t_command *command)
 	while (list)
 	{
 		if (is_builtin(list->value) == TRUE)
-			ret = run_builtin(command, list);
+			ret = run_builtin(command, list, 1); // a função está enviando fd 1 por padrão. deverá ser ajustado isso posteriormente para enviar um fd específico
 		else
 			printf("Não é builtin. Ainda estou criando as builtins\n");
 		if (ret == ERROR)

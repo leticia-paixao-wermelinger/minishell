@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:52:16 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/17 22:24:46 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/22 22:13:12 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	change_old_pwd(char *new_value, t_env *env);
 int	my_cd(t_node *node, t_env *env)
 {
 	char    cwd[1824];
-	t_env	*temp;
+//	t_env	*temp;
 	char	*old_pwd;
 	int		ret;
 
 	old_pwd = my_strdup((my_getenv_by_list("PWD", env))->value);
-	temp = env;
+//	temp = env;
 	if (!node->value[1])
 	{
 		go_home(env, old_pwd);
@@ -34,7 +34,7 @@ int	my_cd(t_node *node, t_env *env)
 	ret = chdir(node->value[1]);
 	if (ret != 0)
 	{
-		printf("bash: cd: %s: No such file or directory\n", node->value[1]);
+		printf("bash: cd: %s: No such file or directory\n", node->value[1]); // Não vai pro stdout então não precisa de fd
 		free(old_pwd);
 		return (ERROR);
 	}

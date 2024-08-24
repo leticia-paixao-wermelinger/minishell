@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:43:23 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/23 16:40:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ enum e_ascii {
 	CLOSE_PARENTHESIS = 41,	// )
 	LESS_THAN = 60,			// <
 	GREATER_THAN = 62,		// >
+	DOLLAR = 36,			//$
+	QUESTION_MARK = 63,		//?
 	SPACE_CHAR = 32,		// space
 	TAB_CHAR = 9,			// \t
 	NEWLINE_CHAR = 10,		// \n

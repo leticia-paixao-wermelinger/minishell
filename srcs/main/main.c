@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 20:30:44 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/23 19:04:42 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 volatile unsigned int    g_status;
 
-//extern g_status;
+//extern unsigned int	g_status;
 
 int	main(int argc, char *argv[])
 {
@@ -42,6 +42,7 @@ int	main(int argc, char *argv[])
 		lexer(&command);
 //		printf("Printar lista do input:\n");
 //		printlist(command.l_input);
+		var_exp(&command);
 		if (run_commands(&command) == CLOSE)
 		{
 			clear_loop_end(&command);

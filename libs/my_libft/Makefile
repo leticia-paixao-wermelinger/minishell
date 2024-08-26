@@ -38,6 +38,7 @@ my_striteri.c \
 my_strjoin.c \
 my_strlcat.c \
 my_strlcpy.c \
+my_strldup.c \
 my_strlen.c \
 my_strmapi.c \
 my_strncmp.c \
@@ -51,6 +52,7 @@ get_next_line.c \
 get_next_line_utils.c \
 my_strcdup.c \
 fromstrcdup.c \
+fromstrldup.c \
 my_print_matrix.c \
 is_there_space.c \
 is_closed_by_quot_marks.c

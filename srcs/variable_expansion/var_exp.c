@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/23 19:12:28 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/26 01:12:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,27 +18,31 @@ void	var_exp(t_command *command)
 {
 	t_node	*node;
 
-	node = l_input;
+	node = command->l_input;
 	while (node)
 	{
-		search_dollar(command, command->value);
+		search_dollar(node, node->value, command->my_env);
 		node = node->next;
 	}
 }
 
-void	search_dollar(t_command *command, char **str)
+void	search_dollar(t_node *list, char **str, t_env *env)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (str[i])
 	{
+		j = 0;
 		while (str[i][j])
 		{
+			printf("Antes do if_else: str[%i][%i] = %c\n", i, j, str[i][j]);
 			if (str[i][j] == DOLLAR)
-				j += check_post_dollar(command, str, i, j);
+			{
+				j = check_post_dollar(list, str, i, j, env);
+//				printf("Depois da check_post_dollar, dentro do if: str[%i][%i] = %c\n", i, j, str[i][j]);
+			}
 			else
 				j++;
 		}
@@ -46,18 +50,29 @@ void	search_dollar(t_command *command, char **str)
 	}
 }
 
-int	check_post_dollar(t_command *command, char **str, int i, int j)
+int	check_post_dollar(t_node *list, char **str, int i, int j, t_env *env)
 {
-	int	count;
+	int	index;
 
-	count = 1;
+	index = 0;
 	j++;
-	if (str[i][j] == QUESTION_MARK)
-		// substituir em value o $? pela variável global g_status
+	(void)env;
+	//printf("Em check_post_dollar: str[%i][%i] = |%c|\n", i, j, str[i][j]);
+	if (str[i][j] == QUESTION_MARK) // PRONTO
+		index = print_global_var(list, str, i, j);
 	else if (str[i][j] == DOLLAR)
+	{
 		// substituir em value o $$ por apenas 1 $
+		//count -= 1;
+		printf("Vai colocar só um $\n");
+	}
+	else if ((int)my_strlen(str[i]) == j) // PRONTO
+		return (j);
 	else
 	{
-		// substituir o nome da variável de ambiente pelo valor da mesma
+		index = 2;
+		// substituir em value do input o nome da variável de ambiente pelo valor da mesma
+		printf("Vai imprimir o valor da variável\n");
 	}
+	return (index);
 }

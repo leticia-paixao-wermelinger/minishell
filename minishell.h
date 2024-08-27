@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/26 00:49:06 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:54:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,8 @@ void	var_exp(t_command *command);
 void	search_dollar(t_node *list, char **str, t_env *env);
 int		check_post_dollar(t_node *list, char **str, int i, int j, t_env *env);
 int		print_global_var(t_node *list, char **str, int i, int j);
+int		double_dollar(t_node *list, char **str, int i, int j);
+int		expand_variable(t_node *list, t_env *env, char **str, int i, int j);
 char	*join_strs(char *str, char *middle, int j, int jump, int *index);
 
 // Teste:

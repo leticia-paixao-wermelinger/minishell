@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/26 01:12:35 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/26 21:29:57 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,17 @@ int	check_post_dollar(t_node *list, char **str, int i, int j, t_env *env)
 	j++;
 	(void)env;
 	//printf("Em check_post_dollar: str[%i][%i] = |%c|\n", i, j, str[i][j]);
-	if (str[i][j] == QUESTION_MARK) // PRONTO
+	if (str[i][j] == QUESTION_MARK)						// PRONTO
 		index = print_global_var(list, str, i, j);
-	else if (str[i][j] == DOLLAR)
-	{
-		// substituir em value o $$ por apenas 1 $
-		//count -= 1;
-		printf("Vai colocar só um $\n");
-	}
-	else if ((int)my_strlen(str[i]) == j) // PRONTO
+	else if (str[i][j] == DOLLAR)						// PRONTO
+		index = double_dollar(list, str, i, j);
+	else if ((int)my_strlen(str[i]) == j)				 // PRONTO
 		return (j);
-	else
+	else // substituir em value do input o nome da variável de ambiente pelo valor da mesma
 	{
 		index = 2;
-		// substituir em value do input o nome da variável de ambiente pelo valor da mesma
 		printf("Vai imprimir o valor da variável\n");
+//		index = expand_variable(list, env, str, i, j);
 	}
 	return (index);
 }

@@ -6,12 +6,12 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/26 14:54:54 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/27 22:33:11 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # include "libs/my_libft/libft.h"
 # include <unistd.h>
@@ -84,34 +84,52 @@ enum e_ascii {
 
 enum e_token {
 	NO_INFO = 0,
-	BUILTIN = 1,
-	EXEC = 2,
+	COMMAND = 1,
+	ARGUMENT = 2,
+	BUILTIN = 4,
+	EXEC = 5,
 	T_PIPE = 124, // |
 	REDIR_APPEND = 3, // >>
 	REDIR_OUT = 62, // >
 	REDIR_IN = 60, // <
-	REDIR_HEREDOC = 4, // <<
-	MY_FILE = 5
+	REDIR_HEREDOC = 6, // <<
+	OUTFILE = 7,
+	INFILE  = 8
 };
+
+typedef struct s_env	t_env;
+typedef struct s_tokens	t_tokens;
+typedef struct s_node	t_node;
 
 typedef struct s_env
 {
-	char			*key;
-	char			*value;
-	struct s_env	*next;
+	char	*key;
+	char	*value;
+	t_env	*next;
 }	t_env;
+
+typedef struct s_tokens
+{
+	char			*word;
+	enum e_token	type;
+	t_tokens		*next;
+}	t_tokens;
+
 
 typedef struct s_node
 {
-	char			**value;
-	int				token;  // e_token  
-	struct s_node	*next;
+	t_token	*token;
+	int		fd_in;
+	int		fd_out;
+	pid_t	pid;
+	int		exit_status;
+	t_node	*next;
 }	t_node;
 
 typedef struct s_command
 {
 	char	*input;
-	char	**input_matrix; // 
+	char	**input_matrix; 
 	char	*invalid_metas;
 	char	*prompt;
 	t_node	*l_input;

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 14:31:19 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/28 21:56:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,22 @@ t_env	*create_last_env_node(char	*c, t_env *prev)
 
 t_node	*create_first_input_node(char *s, t_node *list)
 {
+	(void)s;
 	list = (t_node *)malloc(sizeof(t_node));
-	list->value = tokenize_sentence(s);
-	list->token = NO_INFO;
+	if (list == NULL)
+		return (NULL);
+	list->token = (t_tokens *)malloc(sizeof(t_tokens));
+	if (list->token == NULL)
+	{
+		free(list);
+		return (NULL);
+	}
+	// create token list
+		//list->value = tokenize_sentence(s);
+	list->fd_in = 0;
+	list->fd_out = 1;
+	list->pid = NO_INFO;
+	list->exit_status = NO_INFO;
 	list->next = NULL;
 	return (list);
 }
@@ -46,10 +59,17 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 {
 	t_node	*new;
 
+	(void)s;
 	new = (t_node *)malloc(sizeof(t_node));
+	new->token = (t_tokens *)malloc(sizeof(t_tokens));
+	// create token list
+		//list->value = tokenize_sentence(s);
+	new->fd_in = 0;
+	new->fd_out = 1;
+	new->pid = NO_INFO;
+	new->exit_status = NO_INFO;
 	prev->next = new;
-	new->value = tokenize_sentence(s);
-	new->token = NO_INFO;
+	//new->token = NO_INFO;
 	new->next = NULL;
 	return (new);
 }

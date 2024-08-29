@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/27 21:22:11 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:32:07 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,12 @@ int	main(int argc, char *argv[])
 			continue ;
 		}
 		add_history(command.input);
-		input_parser(&command);
-		lexer(&command);
+		parser(&command);
+//		command.input_matrix = split_sentences(command->input);
+//		lexer(&command);
 //		printf("Printar lista do input:\n");
 //		printlist(command.l_input);
-		var_exp(&command);
+//		var_exp(&command);
 		if (run_commands(&command) == CLOSE)
 		{
 			clear_loop_end(&command);

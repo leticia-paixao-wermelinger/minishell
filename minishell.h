@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/27 22:33:11 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/28 16:32:53 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,12 @@ typedef struct s_tokens
 
 typedef struct s_node
 {
-	t_token	*token;
-	int		fd_in;
-	int		fd_out;
-	pid_t	pid;
-	int		exit_status;
-	t_node	*next;
+	t_tokens	*token;
+	int			fd_in;
+	int			fd_out;
+	pid_t		pid;
+	int			exit_status;
+	t_node		*next;
 }	t_node;
 
 typedef struct s_command
@@ -142,7 +142,6 @@ t_env	*create_first_env_node(char *c, t_env *list);
 t_env	*create_last_env_node(char  *c, t_env *temp);
 void	set_command(t_command *command);
 void	print_env(t_env *list, int fd);
-void	input_parser(t_command *command);
 void	change_invalid_metachars(t_command *command);
 int		is_metachar(char c);
 void	malloc_str_of_invalid_metas(t_command *command);
@@ -161,6 +160,10 @@ int		run_commands(t_command *command);
 void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
+
+// parser
+void	parser(t_command *command);
+char	**split_sentences(char *input);
 
 // is?
 int		is_pipe(char c);

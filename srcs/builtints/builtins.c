@@ -6,14 +6,14 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 22:13:01 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:42:33 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:59:51 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 //static int	pre_export(t_command *command, t_node *node);
-
+/*
 int	run_builtin(t_command *command, t_node *node, int fd)
 {
 	int		ret;
@@ -34,7 +34,7 @@ int	run_builtin(t_command *command, t_node *node, int fd)
 	else if (my_strcmp(node->value[0], "exit") == 0) // Se der tempo, colocar parâmetros
 		ret = CLOSE;
 	return (ret);
-}
+}*/
 /*
 static int	pre_export(t_command *command, t_node *node)
 {

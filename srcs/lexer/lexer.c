@@ -6,12 +6,12 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:27:15 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 12:42:11 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:54:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
+/*
 void	lexer(t_command *command)
 {
 	t_node	*list;
@@ -42,4 +42,4 @@ void	set_token(t_node *node, t_node *first)
 		node->token = MY_FILE;
 	else
 		node->token = EXEC;
-}
+}*/

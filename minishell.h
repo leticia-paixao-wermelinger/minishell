@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/28 16:32:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:20:58 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,9 @@ int		is_valid_ev(char *str);
 
 // list
 void	remove_env(t_env *node, t_env *start);
+t_tokens    *make_list_tokens(char *s, t_node *list);
+void    create_first_input_token(char *word, t_tokens *list);
+t_tokens    *create_last_token(char *word, t_tokens *prev);
 //void	change_env_value(t_env *node, char *str);
 //void	create_new_ev(char *str, t_env *env_list);
 

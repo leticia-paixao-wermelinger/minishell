@@ -6,12 +6,12 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:52:16 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:13:12 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:53:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
+/*
 static void go_home(t_env *env, char *old_pwd);
 static void	change_pwd(char *new_value, t_env *env);
 static void	change_old_pwd(char *new_value, t_env *env);
@@ -88,4 +88,4 @@ static void	change_old_pwd(char *new_value, t_env *env)
 		node->value = my_strdup(new_value);
 	}
 	free(old_pwd);
-}
+}*/

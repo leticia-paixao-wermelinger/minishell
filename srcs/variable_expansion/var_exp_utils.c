@@ -6,14 +6,14 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/26 21:30:35 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:58:05 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 extern unsigned int   g_status;
-
+/*
 static char	*take_name_var(char *str, int j);
 
 int	print_global_var(t_node *list, char **str, int i, int j)
@@ -126,4 +126,4 @@ static char	*take_name_var(char *str, int j)
 	}
 	name[size] = '\0';
 	return (name);
-}
+}*/

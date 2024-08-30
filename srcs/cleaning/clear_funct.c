@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 15:53:14 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:50:04 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	free_list(t_node *list)
 	{
 		temp = list;
 		list = list->next;
-		my_clean_vect(temp->value);
 		free(temp);
 	}
 }

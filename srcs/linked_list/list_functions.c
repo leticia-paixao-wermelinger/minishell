@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/28 21:56:00 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:27:45 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,10 @@ t_env	*create_last_env_node(char	*c, t_env *prev)
 
 t_node	*create_first_input_node(char *s, t_node *list)
 {
-	(void)s;
 	list = (t_node *)malloc(sizeof(t_node));
 	if (list == NULL)
 		return (NULL);
-	list->token = (t_tokens *)malloc(sizeof(t_tokens));
-	if (list->token == NULL)
-	{
-		free(list);
-		return (NULL);
-	}
-	// create token list
-		//list->value = tokenize_sentence(s);
+	make_list_tokens(s, list);
 	list->fd_in = 0;
 	list->fd_out = 1;
 	list->pid = NO_INFO;
@@ -59,22 +51,55 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 {
 	t_node	*new;
 
-	(void)s;
 	new = (t_node *)malloc(sizeof(t_node));
 	new->token = (t_tokens *)malloc(sizeof(t_tokens));
-	// create token list
-		//list->value = tokenize_sentence(s);
+	if (!(new->token))
+		return (NULL);
+	make_list_tokens(s, new);
 	new->fd_in = 0;
 	new->fd_out = 1;
 	new->pid = NO_INFO;
 	new->exit_status = NO_INFO;
 	prev->next = new;
-	//new->token = NO_INFO;
 	new->next = NULL;
 	return (new);
 }
 
-// A próxima função é para testes durante a elaboração do código:
+void	create_first_input_token(char *word, t_tokens *list)
+{
+	list->word = my_strdup(word);
+	list->type = NO_INFO;
+	list->next = NULL;
+}
+
+t_tokens	*create_last_token(char *word, t_tokens *prev)
+{
+	t_tokens	*new;
+
+	new = (t_tokens *)malloc(sizeof(t_tokens));
+	if (!new)
+		return (NULL);
+	new->word = my_strdup(word);
+	new->type = NO_INFO;
+	prev->next = new;
+	new->next = NULL;
+	return (new);
+}
+
+// As próximas 2 funções são para testes durante a elaboração do código:
+
+static void	print_tokens(t_tokens *token)
+{
+	t_tokens	*temp;
+
+	temp = token;
+	while (temp)
+	{
+		printf("Word: %s\n", temp->word);
+		printf("Type: %i\n", temp->type);
+		temp = temp->next;
+	}
+}
 
 void	printlist(t_node *list)
 {
@@ -88,10 +113,17 @@ void	printlist(t_node *list)
 		printf("\033[0;33m Item %i, com endereço %p\n\033[0m", i, temp);
 		printf("\033[0;31m"); // Make color red
 		printf("Matriz\n");
-		print_matrix(temp->value);
-		printf("Token: %i\n", temp->token);
+		printf("Endereço 1 token: %p\n", temp->token);
+		printf("_________________________________________________\n");
+		print_tokens(temp->token);
+		printf("_________________________________________________\n");
+		printf("fd_in: %i\n", temp->fd_in);
+		printf("fd_out: %i\n", temp->fd_out);
+		printf("pid: %i\n", temp->pid);
+		printf("exit_status: %i\n", temp->exit_status);
 		printf("Next: %p\n\033[0m", temp->next);
 		printf("\033[0m"); // Return to original color
+		printf("Próximo:");
 		i++;
 		temp = temp->next;
 	}

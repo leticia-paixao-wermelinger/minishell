@@ -6,14 +6,14 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/26 21:29:57 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 16:02:23 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 extern unsigned int   g_status;
-
+/*
 void	var_exp(t_command *command)
 {
 	t_node	*node;
@@ -71,4 +71,4 @@ int	check_post_dollar(t_node *list, char **str, int i, int j, t_env *env)
 //		index = expand_variable(list, env, str, i, j);
 	}
 	return (index);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:08:23 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:56:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*make_prompt(void)
 	free(temp);
 	return (prompt);
 }
-
+/*
 int	run_commands(t_command *command)
 {
 	t_node	*list;
@@ -54,4 +54,4 @@ int	run_commands(t_command *command)
 		list = list->next;
 	}
 	return (ret);
-}
+}*/

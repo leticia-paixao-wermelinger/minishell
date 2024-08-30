@@ -6,12 +6,12 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 22:31:08 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:44:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:53:55 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
+/*
 int	my_echo(t_node *node, int fd)
 {
 	int	i;
@@ -30,4 +30,4 @@ int	my_echo(t_node *node, int fd)
 	}
 	my_putstr_fd("\n", fd);
 	return (NO_ERROR);
-}
+}*/

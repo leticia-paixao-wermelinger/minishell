@@ -6,14 +6,14 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:42:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:52:53 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../minishell.h"
 
 //static void	conditions_to_export(char **str, char **end_str);
-
+/*
 void	print_env(t_env *list, int fd)
 {
 	t_env	*temp;
@@ -69,7 +69,7 @@ void	my_export(t_env *env, t_node *node_i, int fd)
 		}
 	}
 }
-
+*/
 /*
 void	my_export(char **str, t_command *command)
 {
@@ -118,7 +118,7 @@ static void	conditions_to_export(char **str, char **end_str)
 		free(str2);
 	}
 }*/
-
+/*
 // unset
 
 void	my_unset(t_env *env, t_node *node_i)
@@ -140,4 +140,4 @@ void	my_unset(t_env *env, t_node *node_i)
 			remove_env(node_env, env);
 		i++;
 	}
-}
+}*/

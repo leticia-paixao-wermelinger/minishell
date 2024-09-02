@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/30 16:26:47 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/02 01:25:31 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ void	parser(t_command *command)
 {
 	//VAlIDAR PIPES DUPLOS!
 	command->input_matrix = split_sentences(command->input);
-	my_printf("Matriz pós split:\n");
-	print_matrix(command->input_matrix);
+//	my_printf("Matriz pós split:\n");
+//	print_matrix(command->input_matrix);
 	make_list_from_input(command);
 	my_clean_vect(command->input_matrix);
 	//Imprimir a lista para teste
-	printlist(command->l_input);
+//	printlist(command->l_input);
 }
 
 char    **split_sentences(char *input)

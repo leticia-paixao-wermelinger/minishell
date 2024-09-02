@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/30 18:20:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/02 01:46:33 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ typedef struct s_command
 {
 	char	*input;
 	char	**input_matrix; 
-	char	*invalid_metas;
+//	char	*invalid_metas;
 	char	*prompt;
 	t_node	*l_input;
 	t_env	*my_env;

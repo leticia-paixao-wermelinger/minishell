@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/29 15:50:04 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/02 00:56:53 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	clear_loop_end(t_command *command)
 {
-	clear_input(command);
 	free_list(command->l_input);
+	clear_input(command);
 }
 
 void	clear_input(t_command *command)
@@ -33,13 +33,25 @@ void	final_clear(t_command *command)
 
 void	free_list(t_node *list)
 {
-	t_node	*temp;
+	t_node		*temp;
+	t_node		*next_node;
+	t_tokens	*temp_token;
+	t_tokens	*next_token;
 
 	while (list)
 	{
 		temp = list;
-		list = list->next;
+		temp_token = temp->token;
+		while (temp_token)
+		{
+			next_token = temp_token->next;
+			free(temp_token->word);
+			free(temp_token);
+			temp_token = next_token;
+		}
+		next_node = list->next;
 		free(temp);
+		list = next_node;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/03 15:46:44 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 17:07:37 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	parser(t_command *command)
 {
-	//VAlIDAR PIPES DUPLOS!
+	// VAlIDAR PIPES DUPLOS!
+	// Validar aspas ímpares, menos aspas qe estejam dentro de outra, como em "oie'"
 	command->input_matrix = split_sentence_by_char(command->input, '|');
 //	my_printf("Matriz pós split:\n");
 //	print_matrix(command->input_matrix);

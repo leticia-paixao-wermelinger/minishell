@@ -6,17 +6,17 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/29 15:58:05 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 19:23:16 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 extern unsigned int   g_status;
-/*
-static char	*take_name_var(char *str, int j);
 
-int	print_global_var(t_node *list, char **str, int i, int j)
+//static char	*take_name_var(char *str, int j);
+
+int	print_global_var(t_node *list, char *str, int j)
 {
 	char	*number;
 	char	*temp;
@@ -24,7 +24,7 @@ int	print_global_var(t_node *list, char **str, int i, int j)
 
 	number = my_itoa(g_status);
 	index = my_strlen(number);
-	temp = join_strs(str[i], number, (j - 1), 1, &index);
+	temp = join_strs(str, number, (j - 1), 1, &index);
 	free(list->value[i]);
 	list->value[i] = my_strdup(temp); 
 	free(temp);
@@ -32,7 +32,7 @@ int	print_global_var(t_node *list, char **str, int i, int j)
 //	printf("Ao final de print_global_var, index = %i, list->value[index] = %c\n", index, list->value[i][index]);
 	return (index);
 }
-
+/*
 int	double_dollar(t_node *list, char **str, int i, int j)
 {
 	int		index;

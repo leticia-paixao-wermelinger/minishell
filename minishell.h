@@ -130,7 +130,7 @@ typedef struct s_command
 {
 	char	*input;
 	char	**input_matrix; 
-//	char	*invalid_metas;
+	char	*invalid_metas;
 	char	*prompt;
 	t_node	*l_input;
 	t_env	*my_env;
@@ -214,6 +214,8 @@ void    final_clear(t_command *command);
 void	free_list(t_node *list);
 void	clear_loop_end(t_command *command);
 void	free_env(t_env *list);
+void	free_sentences(char **sentences);
+void	free_tokens(t_tokens *token);
 
 // signals
 void	signal_handle(int sig);

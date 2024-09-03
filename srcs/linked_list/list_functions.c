@@ -38,7 +38,7 @@ t_node	*create_first_input_node(char *s, t_node *list)
 	list = (t_node *)malloc(sizeof(t_node));
 	if (list == NULL)
 		return (NULL);
-	make_list_tokens(s, list);
+	make_list_tokens(s, list);	
 	list->fd_in = 0;
 	list->fd_out = 1;
 	list->pid = NO_INFO;
@@ -52,10 +52,15 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 	t_node	*new;
 
 	new = (t_node *)malloc(sizeof(t_node));
+	if (!new)
+		return (NULL);
 	new->token = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!(new->token))
+	{
+		free(new);
 		return (NULL);
-	make_list_tokens(s, new);
+	}
+	make_list_tokens(s, new); 
 	new->fd_in = 0;
 	new->fd_out = 1;
 	new->pid = NO_INFO;

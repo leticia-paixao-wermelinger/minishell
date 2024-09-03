@@ -42,14 +42,52 @@ t_tokens	*make_list_tokens(char *s, t_node *list)
 	sentence = my_split(s, ' ');
 	print_matrix(sentence);
 	list->token = (t_tokens *)malloc(sizeof(t_tokens));
-	temp_word = list->token;
-	if (!temp_word)
+	if (!(list->token))
 	{
+		free_sentences(sentence);
 		free(list);
 		return (NULL);
 	}
+	temp_word = list->token;
 	create_first_input_token(sentence[i], temp_word);
 	while (sentence[++i])
+	{
 		temp_word = create_last_token(sentence[i], temp_word);
+		if (!temp_word)
+		{
+			free_sentences(sentence);
+			free_tokens(list->token);
+			free(list);
+			return (NULL);
+		}
+	}
+	free_sentences(sentence);
 	return (list->token);
+}
+
+void	free_sentences(char **sentences)
+{
+	int	i;
+
+	i = 0;
+	if (!sentences)
+		return;
+	while (sentences[i])
+	{
+		free(sentences[i]);
+		i++;
+	}
+	free(sentences);
+}
+
+void	free_tokens(t_tokens *token)
+{
+	t_tokens	*temp;
+	while (token)
+	{
+		temp = token->next;
+		free(token->word);
+		free(token);
+		token = temp;
+	}
 }

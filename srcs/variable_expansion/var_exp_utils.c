@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/03 19:23:16 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 20:01:42 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ extern unsigned int   g_status;
 
 //static char	*take_name_var(char *str, int j);
 
-int	print_global_var(t_node *list, char *str, int j)
+int	print_global_var(t_tokens *token, char *str, int j)
 {
 	char	*number;
 	char	*temp;
@@ -25,8 +25,8 @@ int	print_global_var(t_node *list, char *str, int j)
 	number = my_itoa(g_status);
 	index = my_strlen(number);
 	temp = join_strs(str, number, (j - 1), 1, &index);
-	free(list->value[i]);
-	list->value[i] = my_strdup(temp); 
+	free(token->word);
+	token->word = my_strdup(temp); 
 	free(temp);
 	free(number);
 //	printf("Ao final de print_global_var, index = %i, list->value[index] = %c\n", index, list->value[i][index]);
@@ -72,7 +72,7 @@ int	expand_variable(t_node *list, t_env *env, char **str, int i, int j)
 	free(key);
 	printf("Ao final de expand_variable, index = %i, list->value[index] = %c\n", index, list->value[i][index]);
 	return (index);
-}
+}*/
 
 char	*join_strs(char *str, char *middle, int j, int jump, int *index)
 {
@@ -100,7 +100,7 @@ char	*join_strs(char *str, char *middle, int j, int jump, int *index)
 	free(temp2);
 	return (temp3);
 }
-
+/*
 static char	*take_name_var(char *str, int j)
 {
 	int		i;

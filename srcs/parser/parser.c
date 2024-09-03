@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/02 01:25:31 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:46:44 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	parser(t_command *command)
 {
 	//VAlIDAR PIPES DUPLOS!
-	command->input_matrix = split_sentences(command->input);
+	command->input_matrix = split_sentence_by_char(command->input, '|');
 //	my_printf("Matriz pós split:\n");
 //	print_matrix(command->input_matrix);
 	make_list_from_input(command);
@@ -24,7 +24,7 @@ void	parser(t_command *command)
 //	printlist(command->l_input);
 }
 
-char    **split_sentences(char *input)
+char    **split_sentence_by_char(char *input, char c)
 {
     int quote_state;
     int i;
@@ -37,7 +37,7 @@ char    **split_sentences(char *input)
                 quote_state ^= 1;
             else if (is_double_quote(input[i]) && (quote_state == 0 || quote_state == 2))
                 quote_state ^= 2;
-            else if (is_pipe(input[i]) && quote_state == 0) //sem aspas ao redor do pipe
+            else if (is_char(input[i], c) && quote_state == 0) //sem aspas ao redor do pipe
                     input[i] = UNPRINT_CHAR;
             i++;
     }

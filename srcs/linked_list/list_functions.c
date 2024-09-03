@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/30 18:27:45 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:26:49 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,6 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
-	new->token = (t_tokens *)malloc(sizeof(t_tokens));
-	if (!(new->token))
-	{
-		free(new);
-		return (NULL);
-	}
 	make_list_tokens(s, new); 
 	new->fd_in = 0;
 	new->fd_out = 1;

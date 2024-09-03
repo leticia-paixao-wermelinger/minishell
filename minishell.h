@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/02 01:46:33 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:39:24 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,8 @@ t_node	*create_last_input_node(char *s, t_node *prev);
 
 // parser
 void	parser(t_command *command);
-char	**split_sentences(char *input);
+char	**split_sentence_by_char(char *input, char c);
+//char	**split_sentences(char *input);
 
 // is?
 int		is_pipe(char c);
@@ -177,6 +178,7 @@ int		is_file(t_node *node, t_node *list);
 int		is_redirect(int n);
 int		is_valid_exp_char(char c);
 int		is_valid_ev(char *str);
+int		is_char(char o, char c);
 //int		is_char(char *s, char c);
 
 // list

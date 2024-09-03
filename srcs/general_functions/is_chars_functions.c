@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/08/17 15:16:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:39:33 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,10 @@ int	is_char(char *s, char c)
 	return (FALSE);
 }
 */
-/*
-int is_space_or(char c)
+
+int is_char(char o, char c)
 {
-    return (c == ' ' || c == '\t');
+	if (o == c)
+		return (TRUE);
+	return (FALSE);
 }
-*/

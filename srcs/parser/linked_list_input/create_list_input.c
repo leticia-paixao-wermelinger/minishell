@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 00:36:05 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/01 19:02:07 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/03 15:47:04 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ t_tokens	*make_list_tokens(char *s, t_node *list)
 	int			i;
 
 	i = 0;
-	sentence = my_split(s, ' ');
+	sentence = split_sentence_by_char(s, ' ');
+//	sentence = my_split(s, ' ');
 	print_matrix(sentence);
 	list->token = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!(list->token))

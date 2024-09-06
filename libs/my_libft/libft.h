@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:19:11 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/25 22:04:51 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/05 14:33:29 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int					my_putstr(char *s);
 void				my_putstr_fd(char *s, int fd);
 char				**my_split(char const *s, char c);
 void				my_clean_vect(char **vect);
+int					my_str_end_cmp(const char *s1, const char *s2);
 char				*my_strchr(const char *s, int c);
 int					my_strcmp(const char *s1, const char *s2);
 char				*my_strdup(const char *s);

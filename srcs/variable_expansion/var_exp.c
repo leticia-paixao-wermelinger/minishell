@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/04 15:50:20 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:29:36 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	search_dollar(t_node *list, t_tokens *node_token, t_env *env)
 				i = check_post_dollar(token, token->word, i, env);
 			else
 				i++;
+		//	printf("Em search_dollar, depois do if else, token->word[%i] == %c, da string: %s\n", i - 1, token->word[i - 1], token->word);
 		}
 		token = token->next;
 	}
@@ -71,10 +72,10 @@ int	check_post_dollar(t_tokens *token, char *str, int j, t_env *env)
 		return (j);
 	else // substituir em value do input o nome da variável de ambiente pelo valor da mesma
 	{
-//		j += 2;
 		printf("Vai imprimir o valor da variável\n");
-		index = expand_variable(token, env, str, j);
+		index += j + expand_variable(token, env, str, j);
 	}
+	printf("Ao final de check_post_dollar, com index = %i\n", index);
 	//index = j;
 	return (index);
 }

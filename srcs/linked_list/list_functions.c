@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/03 13:26:49 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/05 16:56:26 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,19 @@ t_tokens	*create_last_token(char *word, t_tokens *prev)
 static void	print_tokens(t_tokens *token)
 {
 	t_tokens	*temp;
+	int			i = 0;
 
 	temp = token;
 	while (temp)
 	{
 		printf("Word: %s\n", temp->word);
+		i = 0;
+		while (temp->word[i])
+		{
+			printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
+			i++;
+		}
+		printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
 		printf("Type: %i\n", temp->type);
 		temp = temp->next;
 	}

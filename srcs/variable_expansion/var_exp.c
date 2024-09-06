@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/05 16:29:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:10:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,18 @@ void	var_exp(t_command *command)
 	node = command->l_input;
 	while (node)
 	{
-		search_dollar(node, node->token, command->my_env);
+		search_dollar(node->token, command->my_env);
 		node = node->next;
 	}
 	printf("Lista do input:\n");
 	printlist(command->l_input);
 }
 
-void	search_dollar(t_node *list, t_tokens *node_token, t_env *env)
+void	search_dollar(t_tokens *node_token, t_env *env)
 {
 	t_tokens	*token;
 	int			i;
 
-	(void)list;
 	token = node_token;
 	while (token)
 	{
@@ -41,10 +40,9 @@ void	search_dollar(t_node *list, t_tokens *node_token, t_env *env)
 		while (token->word[i])
 		{
 			if (token->word[i] == DOLLAR)
-				i = check_post_dollar(token, token->word, i, env);
+				check_post_dollar(token, token->word, i, env);
 			else
 				i++;
-		//	printf("Em search_dollar, depois do if else, token->word[%i] == %c, da string: %s\n", i - 1, token->word[i - 1], token->word);
 		}
 		token = token->next;
 	}
@@ -56,26 +54,22 @@ int	check_post_dollar(t_tokens *token, char *str, int j, t_env *env)
 
 	index = 0;
 	j++;
-	(void)env;
-	printf("Em check_post_dollar: str[%i] = |%c|\n", j, str[j]);
-	if (str[j] == QUESTION_MARK)						// PRONTO
+	if (str[j] == QUESTION_MARK)
 	{
 		printf("str[%i] == question_mark\n", j);
 		index = print_global_var(token, str, j);
 	}
-	else if (str[j] == DOLLAR)							// PRONTO
+	else if (str[j] == DOLLAR)
 	{
 		printf("str[%i] == dollar\n", j);
 		index = double_dollar(token, str, j);
 	}
-	else if ((int)my_strlen(str) == j)				 // PRONTO
+	else if ((int)my_strlen(str) == j)
 		return (j);
-	else // substituir em value do input o nome da variável de ambiente pelo valor da mesma
+	else
 	{
-		printf("Vai imprimir o valor da variável\n");
-		index += j + expand_variable(token, env, str, j);
+		expand_variable(token, env, str, j);
+		index = j - 2;
 	}
-	printf("Ao final de check_post_dollar, com index = %i\n", index);
-	//index = j;
 	return (index);
 }

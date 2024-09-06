@@ -6,22 +6,25 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:18:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/05 15:20:27 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/06 16:57:29 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+#include <stdio.h>
+
+
 int	my_str_end_cmp(const char *s1, const char *s2)
 {
-	size_t	c1;
-	size_t	c2;
-	int		cmp;
+	int	c1;
+	int	c2;
+	int	cmp;
 
-	c1 = my_strlen(s1) - 1;
-	c2 = my_strlen(s2) - 1;
+	c1 = (int)my_strlen(s1) - 1;
+	c2 = (int)my_strlen(s2) - 1;
 	cmp = 0;
-	while ((s1[c1] || s2[c2]))
+	while ((c1 >= 0) && (c2 >= 0) && (s1[c1]) && (s2[c2]))
 	{
 		cmp = (unsigned char)s1[c1] - (unsigned char)s2[c2];
 		if (s1[c1] != s2[c2])

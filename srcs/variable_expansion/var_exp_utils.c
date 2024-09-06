@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/05 16:39:35 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:09:11 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 
 	index = 0;
 	key = take_name_var(str, j);
-	printf("KEY == %s\n", key);
+//	printf("KEY == %s\n", key);
 	node = my_getenv_by_list(key, env);
 	if (!node || (my_str_end_cmp(node->key, key) != 0))
 	{
@@ -66,14 +66,21 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 		index = my_strlen(key) - 1;
 	}
 	else
+	{
 		temp = join_strs(str, node->value, (j - 1), (my_strlen(node->key)), &index);
+		if (!temp)
+		{
+			free(key);
+			return (ERROR);
+		}
+	}
 	free(token->word);
 	token->word = my_strdup(temp);
 /*	if (my_strlen(token->word) == 0)
 		token->word = NULL;*/
 	free(temp);
 	free(key);
-	printf("Ao final de expand_variable, index = %i\n", index);
+//	printf("Ao final de expand_variable, index = %i\n", index);
 	return (index);
 }
 
@@ -104,6 +111,8 @@ char	*join_strs(char *str, char *middle, int j, int jump, int *index)
 //		printf("temp3 = |%s|\n", temp3);
 		*index = my_strlen(temp2) - 1;
 	}
+	else
+		temp3 = strdup(temp2);
 //	printf("Ao final de join_strs, index = %i. temp3[%i] = %c\n", *index, *index, temp3[*index]);
 	free(temp1);
 	free(temp2);
@@ -125,6 +134,8 @@ static char	*take_name_var(char *str, int j)
 		i++;
 	}
 	name = (char *)malloc((size + 1) * sizeof(char));
+	if (!name)
+		return (NULL);
 	size = 0;
 	while (str[j] && j < i)
 	{

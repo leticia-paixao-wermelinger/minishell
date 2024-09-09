@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/06 17:08:24 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:26:07 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ enum e_token {
 	REDIR_OUT = 62, // >
 	REDIR_IN = 60, // <
 	REDIR_HEREDOC = 6, // <<
-	OUTFILE = 7,
-	INFILE  = 8
+	REDIR_FILE
 };
 
 typedef struct s_env	t_env;
@@ -164,6 +163,7 @@ t_node	*create_last_input_node(char *s, t_node *prev);
 // parser
 void	parser(t_command *command);
 char	**split_sentence_by_char(char *input, char c);
+int		is_builtin(char *s);
 //char	**split_sentences(char *input);
 
 // is?
@@ -175,7 +175,7 @@ int		is_redir_out(char *s);
 int		is_redir_in(char *s);
 int		is_heredoc(char *s);
 int		is_file(t_node *node, t_node *list);
-int		is_redirect(int n);
+int		is_redirect(char *str);
 int		is_valid_exp_char(char c);
 int		is_valid_ev(char *str);
 int		is_char(char o, char c);
@@ -191,10 +191,14 @@ t_tokens    *create_last_token(char *word, t_tokens *prev);
 
 // lexer
 void	lexer(t_command *command);
-void	set_token(t_node *node, t_node *first);
-int		is_builtin(char **s);
+//void	set_token(t_node *node, t_node *first);
 //int		is_exec(char *s);
 char    **tokenize_sentence(char *input);
+
+// parser
+void	search_tokens(t_node *input);
+void    set_token(t_tokens *token, int command, int count);
+int		is_builtin(char *s);
 
 // Built In
 int		run_builtin(t_command *command, t_node *node, int fd);

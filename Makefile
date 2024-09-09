@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/08/25 19:30:39 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/09 17:57:24 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,8 +50,8 @@ srcs/parser/spaces_around_metas/spaces_around_metas_validation.c \
 srcs/parser/spaces_around_metas/strlen_spaces_around_metas.c \
 srcs/parser/meta_split.c \
 srcs/parser/tokenize_sentence/tokenize_sentence.c \
+srcs/parser/tokenize_words.c \
 srcs/lexer/lexer.c \
-srcs/lexer/find_token/set_token_1.c \
 srcs/general_functions/metacharacters_utils.c \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \

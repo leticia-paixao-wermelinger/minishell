@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/06 17:20:16 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:10:57 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,15 @@ int	main(int argc, char *argv[])
 		}
 		add_history(command.input);
 		parser(&command);
-//		command.input_matrix = split_sentences(command->input);
 //		lexer(&command);
 //		printf("Printar lista do input:\n");
 //		printlist(command.l_input);
 		var_exp(&command);
-		if (run_commands(&command) == CLOSE)
+/*		if (run_commands(&command) == CLOSE)
 		{
 			clear_loop_end(&command);
 			break ;
-		}
+		}*/
 		clear_loop_end(&command);
 	}
 	final_clear(&command);

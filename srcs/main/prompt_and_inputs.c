@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/06 17:23:55 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/09 15:11:37 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*make_prompt(void)
 	free(temp);
 	return (prompt);
 }
-
+/*
 int	run_commands(t_command *command)
 {
 	t_node		*list;
@@ -59,4 +59,4 @@ int	run_commands(t_command *command)
 		list = list->next;
 	}
 	return (ret);
-}
+}*/

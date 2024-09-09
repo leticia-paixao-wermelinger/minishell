@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/03 17:07:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:25:08 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	parser(t_command *command)
 //	print_matrix(command->input_matrix);
 	make_list_from_input(command);
 	my_clean_vect(command->input_matrix);
+	search_tokens(command->l_input);
 	//Imprimir a lista para teste
 //	printlist(command->l_input);
 }

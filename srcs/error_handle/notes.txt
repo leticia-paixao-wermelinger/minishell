@@ -1,0 +1,99 @@
+INÍCIO E FINAL SYNTAX:
+
+jazevedo@DESKTOP-J1C9402:~$ < echo
+bash: echo: No such file or directory
+jazevedo@DESKTOP-J1C9402:~$ echo <
+bash: syntax error near unexpected token `newline'
+jazevedo@DESKTOP-J1C9402:~$ << echo
+> echo
+jazevedo@DESKTOP-J1C9402:~$ echo <<
+bash: syntax error near unexpected token `newline'
+jazevedo@DESKTOP-J1C9402:~$ > echo
+jazevedo@DESKTOP-J1C9402:~$ echo >
+bash: syntax error near unexpected token `newline'
+jazevedo@DESKTOP-J1C9402:~$ >> echo
+jazevedo@DESKTOP-J1C9402:~$ echo >>
+bash: syntax error near unexpected token `newline'
+
+PIPE SYNTAX: ' | '
+
+jazevedo@DESKTOP-J1C9402:~$ echo | < ls
+bash: ls: No such file or directory
+jazevedo@DESKTOP-J1C9402:~$ echo | << ls
+> ls
+jazevedo@DESKTOP-J1C9402:~$ echo | >> ls
+jazevedo@DESKTOP-J1C9402:~$ echo | > ls
+jazevedo@DESKTOP-J1C9402:~$ echo | | ls
+bash: syntax error near unexpected token `|'
+jazevedo@DESKTOP-J1C9402:~$ echo | || ls
+bash: syntax error near unexpected token `||'
+jazevedo@DESKTOP-J1C9402:~$ echo | && ls
+bash: syntax error near unexpected token `&&'
+
+OUTPUT SYNTAX: ' > '
+
+jazevedo@DESKTOP-J1C9402:~$ echo > < ls
+bash: syntax error near unexpected token `<'
+jazevedo@DESKTOP-J1C9402:~$ echo > << ls
+bash: syntax error near unexpected token `<<'
+jazevedo@DESKTOP-J1C9402:~$ echo > >> ls
+bash: syntax error near unexpected token `>>'
+jazevedo@DESKTOP-J1C9402:~$ echo > > ls
+bash: syntax error near unexpected token `>'
+jazevedo@DESKTOP-J1C9402:~$ echo > | ls
+bash: syntax error near unexpected token `|'
+jazevedo@DESKTOP-J1C9402:~$ echo > || ls
+bash: syntax error near unexpected token `||'
+jazevedo@DESKTOP-J1C9402:~$ echo > && ls
+bash: syntax error near unexpected token `&&'
+
+HEREDOC SYNTAX: ' << '
+
+jazevedo@DESKTOP-J1C9402:~$ echo << < ls
+bash: syntax error near unexpected token `<'
+jazevedo@DESKTOP-J1C9402:~$ echo << << ls
+bash: syntax error near unexpected token `<<'
+jazevedo@DESKTOP-J1C9402:~$ echo << >> ls
+bash: syntax error near unexpected token `>>'
+jazevedo@DESKTOP-J1C9402:~$ echo << > ls
+bash: syntax error near unexpected token `>'
+jazevedo@DESKTOP-J1C9402:~$ echo << | ls
+bash: syntax error near unexpected token `|'
+jazevedo@DESKTOP-J1C9402:~$ echo << || ls
+bash: syntax error near unexpected token `||'
+jazevedo@DESKTOP-J1C9402:~$ echo << && ls
+bash: syntax error near unexpected token `&&'
+
+INPUT SYNTAX ' < '
+
+jazevedo@DESKTOP-J1C9402:~$ echo < < ls
+bash: syntax error near unexpected token `<'
+jazevedo@DESKTOP-J1C9402:~$ echo < << ls
+bash: syntax error near unexpected token `<<'
+jazevedo@DESKTOP-J1C9402:~$ echo < >> ls
+bash: syntax error near unexpected token `>>'
+jazevedo@DESKTOP-J1C9402:~$ echo < > ls
+bash: syntax error near unexpected token `>'
+jazevedo@DESKTOP-J1C9402:~$ echo < | ls
+bash: syntax error near unexpected token `|'
+	jazevedo@DESKTOP-J1C9402:~$ echo < || ls
+	bash: syntax error near unexpected token `||'
+jazevedo@DESKTOP-J1C9402:~$ echo < && ls
+bash: syntax error near unexpected token `&&'
+
+APPEND SYNTAX: ' >> '
+
+jazevedo@DESKTOP-J1C9402:~$ echo >> < ls
+bash: syntax error near unexpected token `<'
+jazevedo@DESKTOP-J1C9402:~$ echo >> << ls
+bash: syntax error near unexpected token `<<'
+jazevedo@DESKTOP-J1C9402:~$ echo >> >> ls
+bash: syntax error near unexpected token `>>'
+jazevedo@DESKTOP-J1C9402:~$ echo >> > ls
+bash: syntax error near unexpected token `>'
+jazevedo@DESKTOP-J1C9402:~$ echo >> | ls
+bash: syntax error near unexpected token `|'
+jazevedo@DESKTOP-J1C9402:~$ echo >> || ls
+bash: syntax error near unexpected token `||'
+jazevedo@DESKTOP-J1C9402:~$ echo >> && ls
+bash: syntax error near unexpected token `&&'

@@ -6,13 +6,17 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/06 17:10:00 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:18:38 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
 extern unsigned int   g_status;
+
+/*
+VALIDAR ASPAS SIMPLES: NÃO PODE EXPANDIR
+*/
 
 void	var_exp(t_command *command)
 {

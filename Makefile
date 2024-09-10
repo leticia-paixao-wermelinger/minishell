@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/09 23:47:25 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/10 16:39:25 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ srcs/builtints/env/env_bt_utils.c \
 srcs/builtints/cd.c \
 srcs/builtints/echo.c \
 srcs/builtints/exit.c \
+srcs/error_handle/input_validation.c \
 srcs/parser/parser.c \
 srcs/parser/quot_marks_validation/parser_quotation_marks_validation.c \
 srcs/parser/quot_marks_validation/str_of_invalid_metas.c \
@@ -78,21 +79,21 @@ srcs/signals/signal_handle.c
 
 OBJS = ${SRCS:.c=.o}
 
+%.o: %.c
+	$(CC) $(FLAGS) -c $< -o $@
+
 LIBFT = libs/my_libft/libft.a
 
 LIBFT_PATH = libs/my_libft
 
 LIBS = $(LIBFT)
 
-%.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+all: $(NAME)
+	@echo "$(BLINK)$(BOLD)$(BL)✅ minishell is ready to be used$(RESET)"
 
 $(LIBS):
 	make -s -C $(LIBFT_PATH)
 	@echo "$(BL)📚 libft is ready to be used$(RESET)"
-
-all: $(NAME)
-	@echo "$(BLINK)$(BOLD)$(BL)✅ minishell is ready to be used$(RESET)"
 
 $(NAME): $(LIBS) $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) $(LIBS) $(RL_FLAG) -o $(NAME)

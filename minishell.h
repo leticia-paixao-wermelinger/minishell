@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/09 20:26:07 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:40:17 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,9 @@ void    create_first_input_token(char *word, t_tokens *list);
 t_tokens    *create_last_token(char *word, t_tokens *prev);
 //void	change_env_value(t_env *node, char *str);
 //void	create_new_ev(char *str, t_env *env_list);
+
+// error
+int		first_input_validation(t_command *command);
 
 // lexer
 void	lexer(t_command *command);

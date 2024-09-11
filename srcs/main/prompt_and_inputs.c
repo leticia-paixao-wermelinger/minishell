@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/09 15:11:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:47:03 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*make_prompt(void)
 	free(temp);
 	return (prompt);
 }
-/*
+
 int	run_commands(t_command *command)
 {
 	t_node		*list;
@@ -42,21 +42,20 @@ int	run_commands(t_command *command)
 	while (list)
 	{
 		temp_words = list->token;
-		while (temp_words)
-		{
-			if (is_builtin(temp_words) == TRUE)
-				ret = run_builtin(command, list, 1); // a função está enviando fd 1 por padrão. deverá ser ajustado isso posteriormente para enviar um fd específico
+		/*while (temp_words)
+		{*/
+			if (temp_words->type == BUILTIN)
+				ret = run_builtin(list->token, command->my_env, 1); // a função está enviando fd 1 por padrão. deverá ser ajustado isso posteriormente para enviar um fd específico
 			else
 				printf("Não é builtin. Ainda estou criando as builtins\n");
 			if (ret == ERROR)
 			{
-//				printf("Validar erro\n");
 				return (ERROR);
 			}
 			else if (ret == CLOSE)
 				return (CLOSE);
-		}
+		//}
 		list = list->next;
 	}
 	return (ret);
-}*/
+}

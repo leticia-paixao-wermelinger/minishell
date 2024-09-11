@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/10 16:40:17 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:02:55 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,8 @@ void    set_token(t_tokens *token, int command, int count);
 int		is_builtin(char *s);
 
 // Built In
-int		run_builtin(t_command *command, t_node *node, int fd);
-int		pwd(t_command *command);
+int		run_builtin(t_tokens *token, t_env *env, int fd);
+int		pwd(void);
 void	my_export(t_env *env, t_node *node_i, int fd);
 void	print_env_for_export(t_env *list, int fd);
 void    my_unset(t_env *env, t_node *node_i);
@@ -214,8 +214,8 @@ char	*validate_quot_marks_for_export(char *str);
 int		is_valid_ev(char *str);
 void	change_env_value(t_env *env, char *str);
 void	create_new_ev(char *str, t_env *env);
-int		my_cd(t_node *node, t_env *env);
-int		my_echo(t_node *node, int fd);
+int		my_cd(t_tokens *node, t_env *env);
+int		my_echo(t_tokens *node, int fd);
 
 // Clear
 void	clear_input(t_command *command);

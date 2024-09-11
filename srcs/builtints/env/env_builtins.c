@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/29 15:52:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:35:40 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,19 +118,21 @@ static void	conditions_to_export(char **str, char **end_str)
 		free(str2);
 	}
 }*/
-/*
+
 // unset
 
-void	my_unset(t_env *env, t_node *node_i)
+void	my_unset(t_env *env, t_tokens *node_i)
 {
 	t_env	*node_env;
+	t_tokens	*temp;
 	int		i;
 
 	i = 1;
+	temp = node_i;
 	node_env = NULL;
-	while (node_i->value[i])
+	while (temp)
 	{
-		if (!node_i->value[i])
+		if (!temp->word)
 		{
 			i++;
 			continue ;
@@ -138,6 +140,6 @@ void	my_unset(t_env *env, t_node *node_i)
 		node_env = my_getenv_by_list(node_i->value[i], env);
 		if (node_env != NULL)
 			remove_env(node_env, env);
-		i++;
+		temp = temp->next;
 	}
-}*/
+}

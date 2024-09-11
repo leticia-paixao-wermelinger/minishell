@@ -6,28 +6,36 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 22:31:08 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/29 15:53:55 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/11 17:31:38 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-/*
-int	my_echo(t_node *node, int fd)
+
+int	my_echo(t_tokens *node, int fd)
 {
-	int	i;
-	int	size;
+	int			i;
+	int			size;
+	int			flag_nl;
+	t_tokens	*temp;
 
 	i = 1;
 	size = 0;
-	while (node->value[size])
-		size++;
-	while (node->value[i])
+	temp = node;
+	flag_nl = ON;
+	if (strcmp(temp->word, "-n") == 0)
 	{
-		my_putstr_fd(node->value[i], fd);
-		if (i < (size - 1))
-			my_putstr_fd(" ", fd);
-		i++;
+		flag_nl = OFF;
+		temp = temp->next;
 	}
-	my_putstr_fd("\n", fd);
+	while (temp)
+	{
+		my_putstr_fd(temp->word, fd);
+		if (temp->next != NULL)
+			my_putstr_fd(" ", fd);
+		temp = temp->next;
+	}
+	if (flag_nl ==	ON)
+		my_putstr_fd("\n", fd);
 	return (NO_ERROR);
-}*/
+}

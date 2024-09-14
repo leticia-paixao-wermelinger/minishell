@@ -28,8 +28,8 @@ void	var_exp(t_command *command)
 		search_dollar(node->token, command->my_env);
 		node = node->next;
 	}
-	printf("Lista do input:\n");
-	printlist(command->l_input);
+//	printf("Lista do input:\n");
+//	printlist(command->l_input);
 }
 
 void	search_dollar(t_tokens *node_token, t_env *env)

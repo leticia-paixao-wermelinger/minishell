@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 22:13:01 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/11 18:31:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/14 14:58:26 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,9 @@ int	run_builtin(t_tokens *token, t_env *env, int fd)
 	else if (my_strcmp(token->word, "pwd") == 0) // AJUSTADO
 		ret = pwd();
 	else if (my_strcmp(token->word, "export") == 0)
-		printf("Falta ajustar export\n");
-		//my_export(env, token->next, fd);
+		//printf("Falta ajustar export\n");
+		my_export(env, token->next, fd);
 	else if (my_strcmp(token->word, "unset") == 0)
-		//printf("Falta ajustar unset\n");
 		my_unset(env, token->next);
 	else if (my_strcmp(token->word, "env") == 0)
 		print_env(env, fd);

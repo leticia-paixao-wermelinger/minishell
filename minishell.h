@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/11 18:02:55 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/14 15:00:12 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,9 +206,9 @@ int		is_builtin(char *s);
 // Built In
 int		run_builtin(t_tokens *token, t_env *env, int fd);
 int		pwd(void);
-void	my_export(t_env *env, t_node *node_i, int fd);
+void    my_export(t_env *env, t_tokens *node_t, int fd);
 void	print_env_for_export(t_env *list, int fd);
-void    my_unset(t_env *env, t_node *node_i);
+void    my_unset(t_env *env, t_tokens *node_i);
 int		check_export_error(char **str);
 char	*validate_quot_marks_for_export(char *str);
 int		is_valid_ev(char *str);

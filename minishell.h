@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/14 15:00:12 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/14 16:47:47 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,6 +191,8 @@ t_tokens    *create_last_token(char *word, t_tokens *prev);
 
 // error
 int		first_input_validation(t_command *command);
+int		n_quote_validation(char *str);
+void	print_error(char *str);
 
 // lexer
 void	lexer(t_command *command);

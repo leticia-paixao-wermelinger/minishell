@@ -28,7 +28,6 @@ int	main(int argc, char *argv[])
 	get_env(&command);
 	while (42)
 	{
-		printf("g_status = %i\n", g_status);
 		set_command(&command);
 		if (command.input == NULL)
 		{

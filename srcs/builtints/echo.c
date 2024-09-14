@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 22:31:08 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/11 17:31:38 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/14 17:28:01 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int	my_echo(t_tokens *node, int fd)
 	size = 0;
 	temp = node;
 	flag_nl = ON;
+	if (node == NULL)
+	{
+		my_putstr_fd("\n", fd);
+		return (NO_ERROR);
+	}
 	if (strcmp(temp->word, "-n") == 0)
 	{
 		flag_nl = OFF;

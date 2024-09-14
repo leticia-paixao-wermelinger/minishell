@@ -6,18 +6,22 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:44 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/10 19:34:05 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/14 17:02:14 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+extern volatile unsigned int	g_status;
 
 static int  check_pipe(char *str);
 //static int	check_pipe_and_redir(char *str);
 
 int	first_input_validation(t_command *command)
 {
-	if (check_pipe(command->input) == ERROR)
+	if (n_quote_validation(command->input) == ERROR)
+		return (ERROR);
+	else if (check_pipe(command->input) == ERROR)
 		return (ERROR);
 /*	else if (check_pipe_and_redir(command->input) == ERROR)
 		return (ERROR);*/
@@ -36,21 +40,24 @@ static int	check_pipe(char *str)
 	i = 0;
 	if (str[i] == PIPE)
 	{
-		printf("bash: syntax error near unexpected token `|'\n");
+		g_status = MISUSE;
+		print_error("bash: syntax error near unexpected token `|'\n");
 		return (ERROR);
 	}
 	while (str[i])
 	{
 		if (str[i] == PIPE && str[i + 1] == PIPE)
 		{
-			printf("bash: syntax error near unexpected token `||'\n");
+			g_status = MISUSE;
+			print_error("bash: syntax error near unexpected token `||'\n"); // fui testar e, em teoria, ele não dá erro aqui...
 			return (ERROR);
 		}
 		i++;
 	}
 	if (str[i - 1] == PIPE)
 	{
-		printf("bash: syntax error near unexpected token `|'\n");
+		g_status = MISUSE;
+		print_error("bash: syntax error near unexpected token `|'\n");
 		return (ERROR);
 	}
 	return (NO_ERROR);

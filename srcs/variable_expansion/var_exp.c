@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/10 15:18:38 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/15 11:52:34 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,12 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 		while (token->word[i])
 		{
 			if (token->word[i] == DOLLAR)
-				check_post_dollar(token, token->word, i, env);
+			{
+				if (dollar_is_closed_by_single_quote(&(token->word)) == TRUE)
+					i++;
+				else
+					check_post_dollar(token, token->word, i, env);
+			}
 			else
 				i++;
 		}

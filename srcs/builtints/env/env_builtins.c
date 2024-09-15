@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/14 15:11:12 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/14 23:04:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,10 @@ void	print_env(t_env *list, int fd)
 
 void	my_export(t_env *env, t_tokens *node_t, int fd)
 {
-	int			i;
 	char		*str;
 	t_env		*node_env;
 	t_tokens	*temp;
 
-	i = 0;
 	str = NULL;
 	node_env = NULL;
 	temp = node_t;

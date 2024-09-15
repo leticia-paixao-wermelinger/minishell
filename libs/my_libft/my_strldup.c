@@ -26,6 +26,7 @@ char	*my_strldup(const char *s, int i)
 	my_strlcpy(dest, s, (size + 1));
 	return (dest);
 }
+
 /*
 #include <stdio.h>
 

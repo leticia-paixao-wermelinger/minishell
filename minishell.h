@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/15 11:55:09 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/15 16:59:31 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,9 @@ t_tokens    *create_last_token(char *word, t_tokens *prev);
 int		first_input_validation(t_command *command);
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_single_quote(char **str);
-void	remove_simple_quote(char **str, int i);
+void	remove_quote(char **str, int i, enum e_ascii quote);
 void	print_error(char *str);
+void	remove_all_quotes(t_node *list, int quote);
 
 // lexer
 void	lexer(t_command *command);

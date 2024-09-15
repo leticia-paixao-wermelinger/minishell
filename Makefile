@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/14 16:47:15 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/15 12:51:49 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,6 +59,7 @@ srcs/builtints/exit.c \
 srcs/error_handle/input_validation.c \
 srcs/error_handle/print_error.c \
 srcs/error_handle/quote_validation.c \
+srcs/error_handle/remove_quotes.c \
 srcs/parser/parser.c \
 srcs/parser/quot_marks_validation/parser_quotation_marks_validation.c \
 srcs/parser/quot_marks_validation/str_of_invalid_metas.c \

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/15 21:56:55 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/16 19:17:13 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ typedef struct s_tokens
 	t_tokens		*next;
 }	t_tokens;
 
-
 typedef struct s_node
 {
 	t_tokens	*token;
@@ -160,9 +159,10 @@ void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
 void	pre_exec(t_command   *command);
+char    **tokenize_sentence(char *input);
 
 // parser
-void	parser(t_command *command);
+int		parser(t_command *command);
 char	**split_sentence_by_char(char *input, char c);
 int		is_builtin(char *s);
 //char	**split_sentences(char *input);
@@ -197,12 +197,10 @@ int		dollar_is_closed_by_single_quote(char **str);
 void	remove_quote(char **str, int i, enum e_ascii quote);
 void	print_error(char *str);
 void	remove_all_quotes(t_node *list, int quote);
-
-// lexer
-void	lexer(t_command *command);
-//void	set_token(t_node *node, t_node *first);
-//int		is_exec(char *s);
-char    **tokenize_sentence(char *input);
+int		check_pipe_init_and_end(char *str);
+int		general_input_validation(t_node *node);
+int		validate_words(char *str);
+int		check_double_pipe(t_node *node);
 
 // parser
 void	search_tokens(t_node *input);

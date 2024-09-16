@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/15 17:18:43 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/16 18:49:42 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ srcs/error_handle/input_validation.c \
 srcs/error_handle/print_error.c \
 srcs/error_handle/quote_validation.c \
 srcs/error_handle/remove_quotes.c \
+srcs/error_handle/pipe_validation.c \
 srcs/parser/parser.c \
 srcs/parser/quot_marks_validation/parser_quotation_marks_validation.c \
 srcs/parser/quot_marks_validation/str_of_invalid_metas.c \
@@ -68,7 +69,6 @@ srcs/parser/spaces_around_metas/strlen_spaces_around_metas.c \
 srcs/parser/meta_split.c \
 srcs/parser/tokenize_sentence/tokenize_sentence.c \
 srcs/parser/tokenize_words.c \
-srcs/lexer/lexer.c \
 srcs/general_functions/metacharacters_utils.c \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \

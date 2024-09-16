@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/15 16:59:31 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/15 21:56:55 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ int		run_commands(t_command *command);
 void	make_list_from_input(t_command *command);
 t_node	*create_first_input_node(char *s, t_node *list);
 t_node	*create_last_input_node(char *s, t_node *prev);
+void	pre_exec(t_command   *command);
 
 // parser
 void	parser(t_command *command);
@@ -209,7 +210,7 @@ void    set_token(t_tokens *token, int command, int count);
 int		is_builtin(char *s);
 
 // Built In
-int		run_builtin(t_tokens *token, t_env *env, int fd);
+int		run_builtin(t_command *command, t_tokens *token, t_env *env, int fd);
 int		pwd(void);
 void    my_export(t_env *env, t_tokens *node_t, int fd);
 void	print_env_for_export(t_env *list, int fd);
@@ -221,6 +222,7 @@ void	change_env_value(t_env *env, char *str);
 void	create_new_ev(char *str, t_env *env);
 int		my_cd(t_tokens *node, t_env *env);
 int		my_echo(t_tokens *node, int fd);
+int		my_exit(t_tokens *token, t_command *command);
 
 // Clear
 void	clear_input(t_command *command);

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/02 00:56:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/15 22:04:14 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	final_clear(t_command *command)
 {
 	clear_history(); //n esquecer de alterar depois p/ rl_clear_history();
 	free_env(command->my_env);
-	printf("Exiting...\n");
 }
 
 void	free_list(t_node *list)

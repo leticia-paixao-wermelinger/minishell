@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/11 17:47:03 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/15 22:03:31 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	run_commands(t_command *command)
 		/*while (temp_words)
 		{*/
 			if (temp_words->type == BUILTIN)
-				ret = run_builtin(list->token, command->my_env, 1); // a função está enviando fd 1 por padrão. deverá ser ajustado isso posteriormente para enviar um fd específico
+				ret = run_builtin(command, list->token, command->my_env, 1); // a função está enviando fd 1 por padrão. deverá ser ajustado isso posteriormente para enviar um fd específico
 			else
 				printf("Não é builtin. Ainda estou criando as builtins\n");
 			if (ret == ERROR)

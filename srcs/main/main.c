@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/15 17:06:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/15 21:50:05 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int argc, char *argv[])
 	my_bzero(&command, sizeof(t_command));
 	if (argc > 1)
 	{
-		my_printf("bash: %s: No such file or directory\n", argv[1]);
+		my_printf("bash: %s: No such file or directory\n", argv[1]); // Colocar no FD = 2
 		return 0;
 	}
 	setup_signal_handling();
@@ -49,9 +49,7 @@ int	main(int argc, char *argv[])
 //		lexer(&command);
 //		printf("Printar lista do input:\n");
 //		printlist(command.l_input);
-		remove_all_quotes(command.l_input, DOUBLE_QUOT_MARK);
-		var_exp(&command);
-		remove_all_quotes(command.l_input, SIMPLE_QUOT_MARK);
+		pre_exec(&command);
 		if (run_commands(&command) == CLOSE)
 		{
 			clear_loop_end(&command);

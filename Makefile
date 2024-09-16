@@ -6,7 +6,7 @@
 #    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/15 12:51:49 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/15 17:18:43 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ srcs/general_functions/metacharacters_utils.c \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \
 srcs/main/prompt_and_inputs.c \
+srcs/main/pre_exec.c \
 srcs//variable_expansion/var_exp.c \
 srcs//variable_expansion/var_exp_utils.c \
 srcs/builtints/builtins.c \

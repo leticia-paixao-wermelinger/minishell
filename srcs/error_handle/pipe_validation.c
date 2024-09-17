@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:45:54 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/17 11:59:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:52:53 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,30 @@ char	*remove_after_double_pipe(char **str, int i)
 	*str = NULL;
 	return (temp);
 }
-/*
+
 int	check_following_pipes(char *str)
 {
 	int	i;
+	int	f_pipe;
 
 	i = 0;
+	f_pipe = OFF;
 	while (str[i])
 	{
+		if (str[i] == PIPE && f_pipe == OFF)
+			f_pipe = ON;
+		else if (str[i] == PIPE && f_pipe == ON)
+		{
+			print_error("bash: syntax error near unexpected token `|'\n");
+			return (ERROR);
+		}
+		else if (str[i] != PIPE && str[i] != SPACE_CHAR && f_pipe == ON)
+			f_pipe = OFF;
 		i++;
 	}
 	return (NO_ERROR);
 }
-*/
+
 /*
 The following function checks if there are pipes and redirects put together
 */

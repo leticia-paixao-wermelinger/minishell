@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/16 22:19:54 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:54:03 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ int		check_pipe_init_and_end(char *str);
 int		general_input_validation(t_node *node);
 int		validate_words(char *str);
 int		check_double_pipe_together(char **str);
+int		check_following_pipes(char *str);
 
 // parser
 void	search_tokens(t_node *input);

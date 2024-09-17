@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:44 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/16 19:18:41 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/17 11:59:16 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,16 @@
 
 int	first_input_validation(t_command *command)
 {
+	if (!(command->input))
+		return (ERROR);
 	if (n_quote_validation(command->input) == ERROR)
 		return (ERROR);
 	else if (check_pipe_init_and_end(command->input) == ERROR)
 		return (ERROR);
-//	else if (check_double_pipe......) // Remover o q vier depois na string
+/*	else if (check_following_pipes(command->input) == ERROR)
+		return (ERROR);*/
+	else if (check_double_pipe_together(&(command->input)) == ERROR) // Testar p ver a ordem qesse e os anteriores de pipes seguidos mas  c espaços tem q ficar
+		return (NO_ERROR);
 	return (NO_ERROR);
 }
 
@@ -33,7 +38,7 @@ int	general_input_validation(t_node *node)
 		token = temp->token;
 		while (token)
 		{
-			if (token->word[0] == DOUBLE_QUOT_MARK || token->word[0] == SIMPLE_QUOT_MARK)
+			if (token->word == NULL || token->word[0] == DOUBLE_QUOT_MARK || token->word[0] == SIMPLE_QUOT_MARK)
 			{
 				token = token->next;
 				continue ;

@@ -76,8 +76,8 @@ $ echo < > ls
 bash: syntax error near unexpected token `>'
 $ echo < | ls
 bash: syntax error near unexpected token `|'
-	$ echo < || ls
-	bash: syntax error near unexpected token `||'
+$ echo < || ls
+bash: syntax error near unexpected token `||'
 $ echo < && ls
 bash: syntax error near unexpected token `&&'
 

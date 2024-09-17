@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:58:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/09 20:44:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/17 00:00:18 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	search_tokens(t_node *input)
 
 void	set_token(t_tokens *token, int command, int count)
 {
+	if (token->word == NULL)
+		return ;
 	if (token->type == REDIR_FILE)
 		return ;
 	else if (is_builtin(token->word) == TRUE)
@@ -73,6 +75,8 @@ static int	check_start(t_tokens *token)
 
 	node = token;
 	count = 0;
+	if (node->word == NULL)
+		return (count);
 	while (node)
 	{
 		if (is_redirect(node->word) == TRUE)

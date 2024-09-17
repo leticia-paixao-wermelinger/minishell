@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 12:49:42 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/15 17:08:48 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/17 00:06:47 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@ void	remove_all_quotes(t_node *list, int quote)
 		while (token)
 		{
 			i = 0;
+			if (token->word == NULL)
+			{
+				token = token->next;
+				continue ;
+			}
 			while (token->word[i])
 			{
 				if (token->word[i] == quote && quote_is_valid(token->word, i, quote) == TRUE)

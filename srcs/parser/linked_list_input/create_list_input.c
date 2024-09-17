@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 00:36:05 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/03 15:47:04 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/16 23:54:49 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ t_tokens	*make_list_tokens(char *s, t_node *list)
 	}
 	temp_word = list->token;
 	create_first_input_token(sentence[i], temp_word);
+	if (sentence[i] == NULL)
+		return (list->token);
 	while (sentence[++i])
 	{
 		temp_word = create_last_token(sentence[i], temp_word);

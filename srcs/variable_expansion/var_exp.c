@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/15 11:52:34 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/17 00:07:51 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 	while (token)
 	{
 		i = 0;
+		if (token->word == NULL)
+		{
+			token = token->next;
+			continue ;
+		}
 		while (token->word[i])
 		{
 			if (token->word[i] == DOLLAR)

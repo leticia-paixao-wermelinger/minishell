@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/16 18:02:23 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/16 23:42:35 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	main(int argc, char *argv[])
 		add_history(command.input);
 		if (parser(&command) == ERROR)
 			continue ;
-//		lexer(&command);
 //		printf("Printar lista do input:\n");
 //		printlist(command.l_input);
 		pre_exec(&command);

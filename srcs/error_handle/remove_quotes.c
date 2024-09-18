@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quotes.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/15 12:49:42 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/17 00:06:47 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../includes/minishell.h"
 
 static void remove_quote_2(char *temp, char **str);
-int quote_is_valid(char *str, int j, int quote);
+static int quote_is_valid(char *str, int j, int quote);
 
 void	remove_all_quotes(t_node *list, int quote)
 {
@@ -45,7 +45,7 @@ void	remove_all_quotes(t_node *list, int quote)
 	}
 }
 
-int	quote_is_valid(char *str, int j, int quote)
+static int	quote_is_valid(char *str, int j, int quote)
 {
 	int				i;
 	int				sec_quote;
@@ -75,9 +75,9 @@ void	remove_quote(char **str, int i, enum e_ascii quote)
 	char	*first;
 	char	*temp;
 	char	*seccond;
-	
+
 	first = NULL;
-	temp = fromstrldup(*str, i); 
+	temp = fromstrldup(*str, i);
 	seccond = my_strcdup(temp, quote);
 	free(temp);
 	if (i != 0)

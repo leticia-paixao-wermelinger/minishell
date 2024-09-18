@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_words.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:58:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/17 00:00:18 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../includes/minishell.h"
 
 static void do_redir(t_tokens *token, enum e_token value);
 static int  check_start(t_tokens *token);

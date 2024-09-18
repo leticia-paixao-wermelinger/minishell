@@ -1,42 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   execve_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 22:31:08 by lpaixao-          #+#    #+#             */
+/*   Created: 2024/08/14 17:46:24 by lraggio           #+#    #+#             */
 /*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	my_echo(t_tokens *node, int fd)
+int     env_list_size(t_env *list)
 {
-	int			flag_nl;
-	t_tokens	*temp;
+    int         i;
 
-	temp = node;
-	flag_nl = ON;
-	if (node == NULL)
-	{
-		my_putstr_fd("\n", fd);
-		return (NO_ERROR);
-	}
-	if (strcmp(temp->word, "-n") == 0)
-	{
-		flag_nl = OFF;
-		temp = temp->next;
-	}
-	while (temp)
-	{
-		my_putstr_fd(temp->word, fd);
-		if (temp->next != NULL)
-			my_putstr_fd(" ", fd);
-		temp = temp->next;
-	}
-	if (flag_nl ==	ON)
-		my_putstr_fd("\n", fd);
-	return (NO_ERROR);
+    i = 0;
+    while (list)
+    {
+        i++;
+        list = list->next;
+    }
+    return (i);
+}
+
+int     count_tokens_in_node(t_node *sentence)
+{
+    int         i;
+    t_node      *node;
+    t_tokens    *current_token;
+
+    i = 0;
+    node = sentence;
+    while (node)
+    {
+        current_token = node->token;
+        while (current_token)
+        {
+            i++;
+            current_token = current_token->next;
+        }
+        node = node->next;
+    }
+    return (i);
 }

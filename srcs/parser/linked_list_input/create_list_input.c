@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   create_list_input.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 00:36:05 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/16 23:54:49 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:29:12 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../../../includes/minishell.h"
 
 void	make_list_from_input(t_command *command)
 {

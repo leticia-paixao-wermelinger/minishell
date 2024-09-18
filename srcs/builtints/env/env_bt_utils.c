@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_bt_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 15:32:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/22 22:43:54 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:29:12 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../../../includes/minishell.h"
 
 void	print_env_for_export(t_env *list, int fd)
 {

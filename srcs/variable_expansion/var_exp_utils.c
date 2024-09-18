@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   var_exp_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/06 17:09:11 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../includes/minishell.h"
 
 extern unsigned int   g_status;
 
@@ -26,7 +26,7 @@ int	print_global_var(t_tokens *token, char *str, int j)
 	index = my_strlen(number);
 	temp = join_strs(str, number, (j - 1), 1, &index);
 	free(token->word);
-	token->word = my_strdup(temp); 
+	token->word = my_strdup(temp);
 	free(temp);
 	free(number);
 //	printf("Ao final de print_global_var, index = %i, list->value[index] = %c\n", index, token->word[index]);
@@ -41,7 +41,7 @@ int	double_dollar(t_tokens *token, char *str, int j)
 	index = 0;
 	temp = join_strs(str, "$", (j - 1), 1, &index);
 	free(token->word);
-	token->word = my_strdup(temp); 
+	token->word = my_strdup(temp);
 	free(temp);
 	index++;
 //	printf("Ao final de double_dollar, index = %i, list->value[index] = %c\n", index, token->word[index]);

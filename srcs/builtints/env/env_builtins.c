@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtins.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/14 23:04:32 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:29:12 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../../../includes/minishell.h"
 
 //static void	conditions_to_export(char **str, char **end_str);
 

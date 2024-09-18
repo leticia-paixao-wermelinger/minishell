@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize_sentence.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:50:49 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/08/14 14:26:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../minishell.h"
+#include "../../includes/minishell.h"
 
 char    **tokenize_sentence(char *input)
 {
     int quote_state;
     int i;
-    
+
     quote_state = 0;
     i = 0;
     while (input[i])

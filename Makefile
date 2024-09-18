@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+         #
+#    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/16 18:49:42 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/18 16:25:08 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,14 +62,8 @@ srcs/error_handle/quote_validation.c \
 srcs/error_handle/remove_quotes.c \
 srcs/error_handle/pipe_validation.c \
 srcs/parser/parser.c \
-srcs/parser/quot_marks_validation/parser_quotation_marks_validation.c \
-srcs/parser/quot_marks_validation/str_of_invalid_metas.c \
-srcs/parser/spaces_around_metas/spaces_around_metas_validation.c \
-srcs/parser/spaces_around_metas/strlen_spaces_around_metas.c \
-srcs/parser/meta_split.c \
-srcs/parser/tokenize_sentence/tokenize_sentence.c \
+srcs/parser/tokenize_sentence.c \
 srcs/parser/tokenize_words.c \
-srcs/general_functions/metacharacters_utils.c \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \
 srcs/main/prompt_and_inputs.c \
@@ -79,7 +73,14 @@ srcs//variable_expansion/var_exp_utils.c \
 srcs/builtints/builtins.c \
 srcs/builtints/pwd.c \
 srcs/parser/linked_list_input/create_list_input.c \
-srcs/signals/signal_handle.c
+srcs/signals/signal_handle.c \
+srcs/exec/init_execve.c \
+srcs/exec/execve_utils.c \
+srcs/exec/clean_execve.c \
+srcs/exec/run_execve.c \
+srcs/exec/pipe_execution.c \
+srcs/exec/executor.c \
+srcs/exec/fd.c
 
 OBJS = ${SRCS:.c=.o}
 

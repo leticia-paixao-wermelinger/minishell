@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   clean_execve.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/17 22:31:08 by lpaixao-          #+#    #+#             */
+/*   Created: 2024/08/21 16:17:35 by lraggio           #+#    #+#             */
 /*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	my_echo(t_tokens *node, int fd)
+void    free_matrix(char **matrix)
 {
-	int			flag_nl;
-	t_tokens	*temp;
+    int     i;
 
-	temp = node;
-	flag_nl = ON;
-	if (node == NULL)
-	{
-		my_putstr_fd("\n", fd);
-		return (NO_ERROR);
-	}
-	if (strcmp(temp->word, "-n") == 0)
-	{
-		flag_nl = OFF;
-		temp = temp->next;
-	}
-	while (temp)
-	{
-		my_putstr_fd(temp->word, fd);
-		if (temp->next != NULL)
-			my_putstr_fd(" ", fd);
-		temp = temp->next;
-	}
-	if (flag_nl ==	ON)
-		my_putstr_fd("\n", fd);
-	return (NO_ERROR);
+    i = 0;
+    if (!matrix)
+        return ;
+    while (matrix[i])
+    {
+        free(matrix[i]);
+        i++;
+    }
+    free(matrix);
+}
+
+void    execve_clean(char *path, char **env_array, t_command *command)
+{
+    free(path);
+    free(env_array);
+	clear_loop_end(command);
+	final_clear(command);
 }

@@ -6,11 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/14 15:10:37 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../includes/minishell.h"
 
 int	is_pipe(char c)
 {
@@ -52,15 +52,6 @@ int	is_valid_exp_char(char c)
 		return (TRUE);
 	return (FALSE);
 }
-
-/*
-int	is_char(char *s, char c)
-{
-	if (my_strcmp(s, c) == 0)
-		return (TRUE);
-	return (FALSE);
-}
-*/
 
 int is_char(char o, char c)
 {

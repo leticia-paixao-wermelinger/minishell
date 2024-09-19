@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 20:24:21 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/19 17:50:22 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,14 @@ void	print_error(char *str);
 //quote_validation.c
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_single_quote(char **str);
+void	remove_closed_in_quotes_metas(char *str);
+void	return_closed_in_quotes_metas(char *str);
 //remove_quotes.c
 void	remove_all_quotes(t_node *list, int quote);
 void	remove_quote(char **str, int i, enum e_ascii quote);
+//errors_utils.c
+int		is_there_space(char *str);
+char	*strdup_tillc(char *str);
 
 //----------------GENERAL_FUNCTIONS------------------
 //is_chars_functions.c

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:26 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/18 17:21:17 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/19 14:27:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ enum e_ascii {
 	SPACE_CHAR = 32,		// space
 	TAB_CHAR = 9,			// \t
 	NEWLINE_CHAR = 10,		// \n
-	UNPRINT_CHAR = 8
+	UNPRINT_CHAR = 8,
+	UNPRINT_PIPE = 8,		// backspace (|)
+	UNPRINT_GT = 12,		// form feed (<)
+	UNPRINT_LT = 13			// carriage ret (>)
 };
 
 enum e_token {

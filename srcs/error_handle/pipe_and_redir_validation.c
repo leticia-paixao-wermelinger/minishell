@@ -6,11 +6,11 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:21:02 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 21:35:34 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:44:44 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../../includes/minishell.h"
 
 static int  pipe_first(char *str, int i);
 static int	redir_first(char *str, int i);
@@ -53,10 +53,10 @@ static int	pipe_first(char *str, int i)
 	{
 		if (str[i] == LESS_THAN && str[i + 1] != LESS_THAN)
 		{
-			s_err = fromstrldup(str, i);
+			s_err = fromstrldup(str, i + 1);
 			// As próximas funções tem q ser criadas
-/*			if (is_there_space(s_err) == TRUE)
-				s_err = strdup_tillc(s_err);*/
+			if (is_there_space(s_err) == TRUE)
+				s_err = strdup_tillc(s_err);
 			print_error("bash: ");
 			print_error(s_err);
 			print_error(": No such file or directory\n");

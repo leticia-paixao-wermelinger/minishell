@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:13 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/18 17:28:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/19 14:27:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_command
 {
 	char	*input;
 	char	**input_matrix;
-	char	*invalid_metas;
 	char	*prompt;
 	t_node	*l_input;
 	t_env	*my_env;

@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/18 21:56:03 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/19 17:51:05 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ srcs/error_handle/pipe_validation.c \
 srcs/error_handle/print_error.c \
 srcs/error_handle/quote_validation.c \
 srcs/error_handle/remove_quotes.c \
+srcs/error_handle/errors_utils.c \
 \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \

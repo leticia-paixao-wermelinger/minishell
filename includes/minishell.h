@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:23:38 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/18 20:24:21 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	free_tokens(t_tokens *token);
 //input_validation.c
 int		first_input_validation(t_command *command);
 int		general_input_validation(t_node *node);
+//pipe_and_redir_validation.c
+int		check_pipes_with_redir(char *str);
 //pipe_validation.c
 int		check_pipe_init_and_end(char *str);
 int		check_double_pipe_together(char **str);

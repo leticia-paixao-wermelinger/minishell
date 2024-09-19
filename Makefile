@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/18 16:25:08 by lraggio          ###   ########.fr        #
+#    Updated: 2024/09/18 21:56:03 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,40 +47,50 @@ endif
 
 SRCS = \
 srcs/main/main.c \
-srcs/linked_list/list_functions.c \
-srcs/linked_list/change_list.c \
-srcs/cleaning/clear_funct.c \
-srcs/env/env_utils.c \
-srcs/builtints/env/env_builtins.c \
-srcs/builtints/env/env_bt_utils.c \
-srcs/builtints/cd.c \
-srcs/builtints/echo.c \
-srcs/builtints/exit.c \
+srcs/main/prompt_and_inputs.c \
+srcs/main/pre_exec.c \
+\
+srcs/parser/parser.c \
+srcs/parser/tokenize_words.c \
+srcs/parser/linked_list_input/create_list_input.c \
+\
 srcs/error_handle/input_validation.c \
+srcs/error_handle/pipe_and_redir_validation.c \
+srcs/error_handle/pipe_validation.c \
 srcs/error_handle/print_error.c \
 srcs/error_handle/quote_validation.c \
 srcs/error_handle/remove_quotes.c \
-srcs/error_handle/pipe_validation.c \
-srcs/parser/parser.c \
-srcs/parser/tokenize_sentence.c \
-srcs/parser/tokenize_words.c \
+\
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \
-srcs/main/prompt_and_inputs.c \
-srcs/main/pre_exec.c \
+\
+srcs/signals/signal_handle.c \
+\
+srcs/linked_list/change_list.c \
+srcs/linked_list/list_functions.c \
+\
 srcs//variable_expansion/var_exp.c \
 srcs//variable_expansion/var_exp_utils.c \
-srcs/builtints/builtins.c \
-srcs/builtints/pwd.c \
-srcs/parser/linked_list_input/create_list_input.c \
-srcs/signals/signal_handle.c \
-srcs/exec/init_execve.c \
-srcs/exec/execve_utils.c \
+\
+srcs/env/env_utils.c \
+\
 srcs/exec/clean_execve.c \
-srcs/exec/run_execve.c \
-srcs/exec/pipe_execution.c \
 srcs/exec/executor.c \
-srcs/exec/fd.c
+srcs/exec/execve_utils.c \
+srcs/exec/init_execve.c \
+srcs/exec/pipe_execution.c \
+srcs/exec/run_execve.c \
+srcs/exec/fd.c \
+\
+srcs/builtints/builtins.c \
+srcs/builtints/cd.c \
+srcs/builtints/echo.c \
+srcs/builtints/exit.c \
+srcs/builtints/pwd.c \
+srcs/builtints/env/env_bt_utils.c \
+srcs/builtints/env/env_builtins.c \
+\
+srcs/cleaning/clear_funct.c
 
 OBJS = ${SRCS:.c=.o}
 

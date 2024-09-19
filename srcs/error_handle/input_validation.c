@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:44 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/18 20:20:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	first_input_validation(t_command *command)
 	else if (check_pipe_init_and_end(command->input) == ERROR)
 		return (ERROR);
 	else if (check_following_pipes(command->input) == ERROR)
+		return (ERROR);
+	else if (check_pipes_with_redir(command->input) == ERROR)
 		return (ERROR);
 	else if (check_double_pipe_together(&(command->input)) == ERROR) // Testar p ver a ordem qesse e os anteriores de pipes seguidos mas  c espaços tem q ficar
 		return (NO_ERROR);

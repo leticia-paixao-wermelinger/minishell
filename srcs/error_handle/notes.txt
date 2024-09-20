@@ -25,8 +25,16 @@ $ echo | >> ls
 $ echo | > ls
 	$ echo | | ls
 	bash: syntax error near unexpected token `|'
-$ echo | || ls
+	$ echo | || ls
+	bash: syntax error near unexpected token `||'
+$ echo ||| ls
+bash: syntax error near unexpected token `|'
+$ echo | ||| ls
 bash: syntax error near unexpected token `||'
+echo | || | ls
+bash: syntax error near unexpected token `||'
+echo || | ls
+bash: syntax error near unexpected token `|'
 $ echo | && ls
 bash: syntax error near unexpected token `&&'
 
@@ -97,5 +105,3 @@ $ echo >> || ls
 bash: syntax error near unexpected token `||'
 $ echo >> && ls
 bash: syntax error near unexpected token `&&'
-
-DÚVIDA: como vou verificar se é um "command not found" ou não sem passar o execve para verificar? É a execução que verifica isso?

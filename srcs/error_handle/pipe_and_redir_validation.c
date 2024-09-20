@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:21:02 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/19 18:44:44 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/20 17:04:41 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,19 @@ static int	pipe_first(char *str, int i)
 	return (NO_ERROR);
 }
 
+/*
+Verify if there are any errors with redir followed by other redirs or with redir followed by pipe.
+*/
+
 static int	redir_first(char *str, int i)
 {
-	(void)str;
+	int	j;
+
+	j = 0;
 	(void)i;
+	while (str[j])
+	{
+		j++;
+	}
 	return (NO_ERROR);
 }

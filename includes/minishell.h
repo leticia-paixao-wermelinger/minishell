@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/19 17:50:22 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/20 16:51:27 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int		check_following_pipes(char *str);
 char	*remove_after_double_pipe(char **str, int i);
 //print_error.c
 void	print_error(char *str);
+int		print_pipe_syntax_error(int flag);
 //quote_validation.c
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_single_quote(char **str);

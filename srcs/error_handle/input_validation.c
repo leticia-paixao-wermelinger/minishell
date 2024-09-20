@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:44 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/19 14:40:17 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/20 14:29:16 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	first_input_validation(t_command *command)
 		return (ERROR);
 	else if (check_pipe_init_and_end(command->input) == ERROR)
 		return (ERROR);
-	else if (check_double_pipe_together(&(command->input)) == ERROR)
-		return (NO_ERROR);
+/*	else if (check_double_pipe_together(&(command->input)) == ERROR)
+		return (NO_ERROR);*/
 	else if (check_following_pipes(command->input) == ERROR)
 		return (ERROR);
 	else if (check_pipes_with_redir(command->input) == ERROR)

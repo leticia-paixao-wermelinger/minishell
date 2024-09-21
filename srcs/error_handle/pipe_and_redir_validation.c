@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:21:02 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/20 17:04:41 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/20 23:50:49 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ static int	pipe_first(char *str, int i)
 		if (str[i] == LESS_THAN && str[i + 1] != LESS_THAN)
 		{
 			s_err = fromstrldup(str, i + 1);
-			// As próximas funções tem q ser criadas
 			if (is_there_space(s_err) == TRUE)
 				s_err = strdup_tillc(s_err);
 			print_error("bash: ");

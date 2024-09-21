@@ -15,27 +15,28 @@ $ >> echo
 $ echo >>
 bash: syntax error near unexpected token `newline'
 
-PIPE SYNTAX: ' | '
+PIPE SYNTAX: ' | ' ----- FEITO
 
 	$ echo | < ls
 	bash: ls: No such file or directory
-$ echo | << ls
-> ls
-$ echo | >> ls
-$ echo | > ls
+	$ echo | << ls
+	> ls
+	$ echo | >> ls
+	$ echo | > ls
 	$ echo | | ls
 	bash: syntax error near unexpected token `|'
 	$ echo | || ls
 	bash: syntax error near unexpected token `||'
-$ echo ||| ls
-bash: syntax error near unexpected token `|'
-$ echo | ||| ls
-bash: syntax error near unexpected token `||'
-echo | || | ls
-bash: syntax error near unexpected token `||'
-echo || | ls
-bash: syntax error near unexpected token `|'
-$ echo | && ls
+	$ echo ||| ls
+	bash: syntax error near unexpected token `|'
+	$ echo | ||| ls
+	bash: syntax error near unexpected token `||'
+	$ echo | || | ls
+	bash: syntax error near unexpected token `||'
+	$ echo || | ls
+	bash: syntax error near unexpected token `|'
+
+(APENAS BÔNUS) $ echo | && ls
 bash: syntax error near unexpected token `&&'
 
 OUTPUT SYNTAX: ' > '
@@ -52,7 +53,8 @@ $ echo > | ls
 bash: syntax error near unexpected token `|'
 $ echo > || ls
 bash: syntax error near unexpected token `||'
-$ echo > && ls
+
+(APENAS BÔNUS) $ echo > && ls
 bash: syntax error near unexpected token `&&'
 
 HEREDOC SYNTAX: ' << '

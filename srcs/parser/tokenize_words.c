@@ -12,8 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-static void do_redir(t_tokens *token, enum e_token value);
-static int  check_start(t_tokens *token);
+static void	do_redir(t_tokens *token, enum e_token value);
+static int 	check_start(t_tokens *token);
 
 void	search_tokens(t_node *input)
 {

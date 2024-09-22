@@ -87,13 +87,14 @@ int 	is_simple_quote(char c);
 int 	is_double_quote(char c);
 int		is_append(char *s);
 int		is_valid_exp_char(char c);
-int		is_char(char o, char c);
 //is_chars_functions_2.c
 int		is_redir_out(char *s);
 int		is_redir_in(char *s);
 int		is_heredoc(char *s);
 int		is_redirect(char *str);
 int		token_is_redir(t_tokens *node);
+//is_chars_functions_3.c
+int		is_char(char o, char c);
 
 //---------------------SIGNALS---------------------
 //signal_handle.c

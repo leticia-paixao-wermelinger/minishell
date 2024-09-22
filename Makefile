@@ -65,6 +65,7 @@ srcs/error_handle/errors_utils.c \
 \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \
+srcs/general_functions/is_chars_functions_3.c \
 \
 srcs/signals/signal_handle.c \
 \

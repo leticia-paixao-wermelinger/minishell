@@ -56,7 +56,7 @@ int	is_redirect(char *str)
 	return (FALSE);
 }
 
-int token_is_redir(t_tokens *node)
+int	token_is_redir(t_tokens *node)
 {
 	if (node->type == REDIR_APPEND || node->type == REDIR_HEREDOC)
 		return (TRUE);

@@ -19,14 +19,14 @@ int	is_pipe(char c)
 	return (FALSE);
 }
 
-int is_simple_quote(char c)
+int	is_simple_quote(char c)
 {
 	if (c == '\'')
 		return (TRUE);
 	return (FALSE);
 }
 
-int is_double_quote(char c)
+int	is_double_quote(char c)
 {
 	if (c == '\"')
 		return (TRUE);
@@ -49,13 +49,6 @@ int	is_valid_exp_char(char c)
 	else if (c >= 'a' && c <= 'z')
 		return (TRUE);
 	else if (c == '_')
-		return (TRUE);
-	return (FALSE);
-}
-
-int is_char(char o, char c)
-{
-	if (o == c)
 		return (TRUE);
 	return (FALSE);
 }

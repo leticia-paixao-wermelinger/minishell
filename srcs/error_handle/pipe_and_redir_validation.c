@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:21:02 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/20 23:50:49 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:37:09 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static int  pipe_first(char *str, int i);
 static int	redir_first(char *str, int i);
+
+extern volatile unsigned int    g_status;
 
 int	check_pipes_with_redir(char *str)
 {
@@ -56,9 +58,10 @@ static int	pipe_first(char *str, int i)
 			s_err = fromstrldup(str, i + 1);
 			if (is_there_space(s_err) == TRUE)
 				s_err = strdup_tillc(s_err);
-			print_error("bash: ");
+			print_error("minishell: ");
 			print_error(s_err);
 			print_error(": No such file or directory\n");
+			g_status = NO_ERROR;
 			free(s_err);
 			return (ERROR);
 		}
@@ -75,13 +78,22 @@ Verify if there are any errors with redir followed by other redirs or with redir
 
 static int	redir_first(char *str, int i)
 {
-	int	j;
-
-	j = 0;
-	(void)i;
-	while (str[j])
+	i++;
+	if (str[i] == LESS_THAN || str[i] == GREATER_THAN)
+		i++;
+	while (str[i])
 	{
-		j++;
+		if (str[i] == PIPE)
+		{
+			if (str[i + 1] == PIPE)
+				pipe_syntax_error(2);
+			else
+				pipe_syntax_error(1);
+			return (ERROR);
+		}
+		else if (str[i] != PIPE && str[i] != LESS_THAN && str[i] != GREATER_THAN && str[i] != SPACE_CHAR)
+			return (NO_ERROR);
+		i++;
 	}
 	return (NO_ERROR);
 }

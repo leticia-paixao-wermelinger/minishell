@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:17:04 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/19 14:38:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/21 17:45:36 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	n_quote_validation(char *str)
 	if (double_quote == ON || simple_quote == ON)
 	{
 		g_status = MISUSE;
-		print_error("bash: syntax error without quotes closure\n");
+		print_error("minishell: syntax error without quotes closure\n");
 		return (ERROR);
 	}
 	return (NO_ERROR);

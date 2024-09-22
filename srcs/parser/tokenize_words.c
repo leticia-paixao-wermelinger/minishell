@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:58:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/21 22:47:13 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,16 @@ void	set_token(t_tokens *token, int command, int count)
 static void	do_redir(t_tokens *token, enum e_token value)
 {
 	token->type = value;
-	token->next->type = REDIR_FILE;
+	if (is_append(token->next->word) == TRUE)
+		do_redir(token->next, REDIR_APPEND);
+	else if (is_redir_out(token->next->word) == TRUE)
+		do_redir(token->next, REDIR_OUT);
+	else if (is_redir_in(token->next->word) == TRUE)
+		do_redir(token->next, REDIR_IN);
+	else if (is_heredoc(token->next->word) == TRUE)
+		do_redir(token->next, REDIR_HEREDOC);
+	else
+		token->next->type = REDIR_FILE;
 }
 
 static int	check_start(t_tokens *token)

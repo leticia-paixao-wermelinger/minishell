@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:45:54 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/20 23:20:48 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/21 20:31:19 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,14 @@ int	check_pipe_init_and_end(char *str)
 	i = 0;
 	if (str[i] == PIPE)
 	{
-		g_status = MISUSE;
-		print_error("bash: syntax error near unexpected token `|'\n");
+		pipe_syntax_error(1);
 		return (ERROR);
 	}
 	while (str[i])
 		i++;
 	if (str[i - 1] == PIPE)
 	{
-		g_status = MISUSE;
-		print_error("bash: syntax error near unexpected token `|'\n");
+		pipe_syntax_error(1);
 		return (ERROR);
 	}
 	return (NO_ERROR);
@@ -64,8 +62,6 @@ static int	check_following_pipes_in_loop(char *str, int i, int ret)
 	static int	count_first_pipes = 0;
 	static int	count_sec_pipes = 0;
 
-//	printf("Está na check_following_pipes_in_loop, com str[%i] = %c\n", i, str[i]);
-//	printf("f_pipe = %i & first_pipes = %i & sec_pipes = %i\n", f_pipe, count_first_pipes, count_sec_pipes);
 	if (str[i] == PIPE && f_pipe == OFF)
 	{
 		count_first_pipes += 1;
@@ -79,7 +75,6 @@ static int	check_following_pipes_in_loop(char *str, int i, int ret)
 		count_sec_pipes += 1;
 	else if (str[i] != PIPE && str[i] != SPACE_CHAR && f_pipe == ON)
 	{
-//		printf("Vai chamar a check_error_pipes com count_first_pipes = %i & com count_sec_pipes = %i\n", count_first_pipes, count_sec_pipes);
 		ret = check_error_pipes(count_first_pipes, count_sec_pipes);
 		f_pipe = OFF;
 		count_first_pipes = 0;
@@ -92,11 +87,11 @@ static int	check_following_pipes_in_loop(char *str, int i, int ret)
 static int	check_error_pipes(int first_pipes, int sec_pipes)
 {
 	if ((first_pipes == 1 || first_pipes == 2) && sec_pipes == 1)
-		return (print_pipe_syntax_error(1));
+		return (pipe_syntax_error(1));
 	else if (first_pipes == 1 && sec_pipes >= 2)
-		return (print_pipe_syntax_error(2));
+		return (pipe_syntax_error(2));
 	else if (first_pipes == 3)
-		return (print_pipe_syntax_error(1));
+		return (pipe_syntax_error(1));
 	return (NO_ERROR);
 }
 

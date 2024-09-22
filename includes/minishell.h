@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/20 16:51:27 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/21 22:17:56 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,16 @@ int		check_following_pipes(char *str);
 char	*remove_after_double_pipe(char **str, int i);
 //print_error.c
 void	print_error(char *str);
-int		print_pipe_syntax_error(int flag);
+int		pipe_syntax_error(int flag);
+int		redir_syntax_error(enum e_token e);
 //quote_validation.c
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_single_quote(char **str);
 void	remove_closed_in_quotes_metas(char *str);
 void	return_closed_in_quotes_metas(char *str);
+// redir_validation.c
+int		input_ends_with_redir(char *str);
+int		check_following_redirs(t_tokens *node);
 //remove_quotes.c
 void	remove_all_quotes(t_node *list, int quote);
 void	remove_quote(char **str, int i, enum e_ascii quote);
@@ -89,6 +93,7 @@ int		is_redir_out(char *s);
 int		is_redir_in(char *s);
 int		is_heredoc(char *s);
 int		is_redirect(char *str);
+int		token_is_redir(t_tokens *node);
 
 //---------------------SIGNALS---------------------
 //signal_handle.c

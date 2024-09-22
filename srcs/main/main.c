@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/21 22:54:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ms_loop(t_command command)
 		if (command.input == NULL)
 		{
 			clear_input(&command);
+			g_status = NO_ERROR; // Verificar se ta funcionando depois com execve, c ./minishell e vendo o retorno com echo $? depois de dar ctrl + d
 			break ;
 		}
 		else if (my_strlen(command.input) == 0)

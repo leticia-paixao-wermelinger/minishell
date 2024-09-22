@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 15:36:37 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/21 22:33:06 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,11 @@ int	is_redirect(char *str)
 	return (FALSE);
 }
 
-/*
-int	is_redirect(int n)
+int token_is_redir(t_tokens *node)
 {
-	if (n == REDIR_APPEND || n == REDIR_HEREDOC)
+	if (node->type == REDIR_APPEND || node->type == REDIR_HEREDOC)
 		return (TRUE);
-	else if (n == REDIR_OUT || n == REDIR_IN)
+	else if (node->type == REDIR_OUT || node->type == REDIR_IN)
 		return (TRUE);
 	return (FALSE);
-}*/
+}

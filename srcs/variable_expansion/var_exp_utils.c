@@ -128,7 +128,7 @@ static char	*take_name_var(char *str, int j)
 	i = j;
 	size = 0;
 //	printf("EM TAKE_NAME VAR: str[%i] == %c\n", i, str[i]);
-	while (str[i] && str[i] != SPACE_CHAR)
+	while (str[i] && (str[i] != SPACE_CHAR || str[i] != FINAL_DOT))
 	{
 		size++;
 		i++;

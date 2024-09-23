@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/21 20:39:16 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/23 00:23:49 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,9 @@ srcs/signals/signal_handle.c \
 \
 srcs/linked_list/change_list.c \
 srcs/linked_list/list_functions.c \
+\
+srcs/redirections/find_redir.c \
+srcs/redirections/do_redir.c \
 \
 srcs//variable_expansion/var_exp.c \
 srcs//variable_expansion/var_exp_utils.c \

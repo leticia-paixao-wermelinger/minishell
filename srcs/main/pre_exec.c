@@ -14,9 +14,9 @@
 
 void	pre_exec(t_command   *command)
 {
-	find_heredoc(command->l_input);
+//	find_heredoc(command->l_input);
 	remove_all_quotes(command->l_input, DOUBLE_QUOT_MARK);
 	var_exp(command);
 	remove_all_quotes(command->l_input, SIMPLE_QUOT_MARK);
-	redirections(command->l_input);
+//	redirections(command->l_input);
 }

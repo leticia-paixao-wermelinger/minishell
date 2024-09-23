@@ -57,11 +57,11 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 
 	index = 0;
 	key = take_name_var(str, j);
-//	printf("KEY == %s\n", key);
+	printf("KEY == %s\n", key);
 	node = my_getenv_by_list(key, env);
 	if (!node || (my_str_end_cmp(node->key, key) != 0))
 	{
-//		printf("Entrou na condição de a variável não existir, com j = %i & str[j - 1] = %c\n", j, str[j - 1]);
+		printf("Entrou na condição de a variável não existir, com j = %i & str[j - 1] = %c\n", j, str[j - 1]);
 		temp = my_strldup(str, (j - 1));
 		index = my_strlen(key) - 1;
 	}
@@ -119,6 +119,11 @@ char	*join_strs(char *str, char *middle, int j, int jump, int *index)
 	return (temp3);
 }
 
+/*
+The following function finds and returns the name of the variable requested, in order to be compared
+with the list of enviromental vars
+*/
+
 static char	*take_name_var(char *str, int j)
 {
 	int		i;
@@ -128,7 +133,7 @@ static char	*take_name_var(char *str, int j)
 	i = j;
 	size = 0;
 //	printf("EM TAKE_NAME VAR: str[%i] == %c\n", i, str[i]);
-	while (str[i] && (str[i] != SPACE_CHAR || str[i] != FINAL_DOT))
+	while (str[i] && str[i] != SPACE_CHAR && str[i] != FINAL_DOT)
 	{
 		size++;
 		i++;

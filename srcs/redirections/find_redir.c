@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/23 00:11:43 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:18:42 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,28 @@ int	redirections(t_node *sentence)
 {
 	t_node		*temp;
 	t_tokens	*word;
+	int			ret;
 
 	temp = sentence;
+	ret = NO_ERROR;
 	while (temp)
 	{
 		word = temp->token;
 		while (word)
 		{
 			if (word->type == REDIR_APPEND)
-				do_append(temp, word);
+				ret = do_append(temp, word);
 			else if (word->type == REDIR_OUT)
-				do_redit_out(temp, word);
+				ret = do_redit_out(temp, word);
 			else if (word->type == REDIR_IN)
-				do_redit_in(temp, word);
+				ret = do_redit_in(temp, word);
+			if (ret == ERROR)
+				return (ERROR);
 			word = word->next;
 		}
 		temp = temp->next;
 	}
-	return (NO_ERROR);
+	return (ret);
 }
 
 int	find_heredoc(t_node *sentence)
@@ -48,7 +52,11 @@ int	find_heredoc(t_node *sentence)
 		while (word)
 		{
 			if (word->type == REDIR_HEREDOC)
-				do_heredoc(temp, word);
+			{
+				if (do_heredoc(temp, word) == ERROR)
+					return (ERROR);
+			}
+			word = word->next;
 		}
 		temp = temp->next;
 	}

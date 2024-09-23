@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/23 00:26:14 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:14:50 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int		main(int argc, char *argv[]);
 void	set_command(t_command *command);
 char	*make_prompt(void);
 //pre_exec.c
-void	pre_exec(t_command   *command);
+int		pre_exec(t_command   *command);
 
 //------------------PARSER------------------
 //parser.c

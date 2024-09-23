@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:54:32 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/23 17:15:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,11 @@ void	ms_loop(t_command command)
 			continue ;
 //		printf("Printar lista do input:\n");
 //		printlist(command.l_input);
-		pre_exec(&command);
+		if (pre_exec(&command) == ERROR)
+		{
+			clear_loop_end(&command);
+			break ;
+		}
 		if (executor(&command, command.l_input) == CLOSE)
 		{
 			clear_loop_end(&command);

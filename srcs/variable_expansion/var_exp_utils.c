@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/23 14:27:38 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ static char	*take_name_var(char *str, int j)
 	i = j;
 	size = 0;
 //	printf("EM TAKE_NAME VAR: str[%i] == %c\n", i, str[i]);
-	while (str[i] && str[i] != SPACE_CHAR && str[i] != FINAL_DOT)
+	while (str[i] && (my_isalpha(str[i]) != 0 || my_isdigit(str[i]) != 0))
 	{
 		size++;
 		i++;

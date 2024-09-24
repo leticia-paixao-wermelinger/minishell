@@ -22,7 +22,7 @@ int	parser(t_command *command)
 	command->input_matrix = split_sentence_by_char(command->input, '|');
 	my_printf("Matriz pós split:\n");
 	print_matrix(command->input_matrix);
-	make_list_from_input(command);
+	make_list_from_input(command); // Falta validar para aceitar casos sem espaço, como em <teste.txt, que deve funcionar da mesma forma que < teste.txt
 	my_clean_vect(command->input_matrix);
 	search_tokens(command->l_input);
 	if (general_input_validation(command->l_input) == ERROR)

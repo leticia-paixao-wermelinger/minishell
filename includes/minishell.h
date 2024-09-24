@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/23 17:14:50 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:38:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
 # include <errno.h>
 
 //------------------MAIN------------------
@@ -65,6 +66,8 @@ char	*remove_after_double_pipe(char **str, int i);
 void	print_error(char *str);
 int		pipe_syntax_error(int flag);
 int		redir_syntax_error(enum e_token e);
+int		no_such_file(char *str);
+int		permission_denied(char *str);
 //quote_validation.c
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_single_quote(char **str);
@@ -122,8 +125,10 @@ int		find_heredoc(t_node *sentence);
 //do_redir.c
 int		do_heredoc(t_node *sentence, t_tokens *word);
 int		do_append(t_node *sentence, t_tokens *word);
-int		do_redit_out(t_node *sentence, t_tokens *word);
-int		do_redit_in(t_node *sentence, t_tokens *word);
+int		do_redir_out(t_node *sentence, t_tokens *word);
+int		do_redir_in(t_node *sentence, t_tokens *word);
+//redir_utils.c
+int		check_permissions(char *pathname, int flag);
 
 //-----------------VARIABLE_EXPANSION---------------------
 //var_exp.c

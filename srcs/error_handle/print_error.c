@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:43:21 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:48:13 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/24 11:37:40 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,23 @@ int	redir_syntax_error(enum e_token e)
 		print_error("<<");
 	print_error("'\n");
 	g_status = MISUSE;
+	return (ERROR);
+}
+
+int	no_such_file(char *str)
+{
+	print_error("minishell: ");
+	print_error(str);
+	print_error(": No such file or directory\n");
+	g_status = ERROR;
+	return (ERROR);
+}
+
+int	permission_denied(char *str)
+{
+	print_error("minishell: ");
+	print_error(str);
+	print_error(": Permission denied\n");
+	g_status = ERROR;
 	return (ERROR);
 }

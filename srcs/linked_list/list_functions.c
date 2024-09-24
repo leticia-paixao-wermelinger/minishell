@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/24 14:20:06 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ static void	print_tokens(t_tokens *token)
 		}
 		printf("Word: %s\n", temp->word);
 		i = 0;
-		while (temp->word[i])
+/*		while (temp->word[i])
 		{
 			printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
 			i++;
-		}
-		printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
+		}*/
+//		printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
 		printf("Type: %i\n", temp->type);
 		temp = temp->next;
 	}
@@ -138,7 +138,7 @@ void	printlist(t_node *list)
 		printf("exit_status: %i\n", temp->exit_status);
 		printf("Next: %p\n\033[0m", temp->next);
 		printf("\033[0m"); // Return to original color
-		printf("Próximo:");
+		printf("Próximo:\n");
 		i++;
 		temp = temp->next;
 	}

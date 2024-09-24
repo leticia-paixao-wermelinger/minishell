@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:13 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/19 14:27:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:39:24 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_node
 	t_tokens	*token;
 	int			fd_in;
 	int			fd_out;
+//	int			fd_redir_in;
+//	int			fd_redir_out;
 	pid_t		pid;
 	int			exit_status;
 	t_node		*next;

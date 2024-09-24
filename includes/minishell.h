@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 11:38:10 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/24 15:41:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ void	handle_sig_error(int sig);
 //-----------------LINKED_LIST---------------------
 //change_list.c
 void	remove_env(t_env *node, t_env *start);
+void	remove_word_token(t_tokens *node, t_tokens *start);
 //list_functions.c
 void	create_first_input_token(char *word, t_tokens *list);
 t_env	*create_first_env_node(char *c, t_env *list);
@@ -125,7 +126,7 @@ int		find_heredoc(t_node *sentence);
 //do_redir.c
 int		do_heredoc(t_node *sentence, t_tokens *word);
 int		do_append(t_node *sentence, t_tokens *word);
-int		do_redir_out(t_node *sentence, t_tokens *word);
+int		do_redir_out(t_node *sentence, t_tokens *redir_node);
 int		do_redir_in(t_node *sentence, t_tokens *word);
 //redir_utils.c
 int		check_permissions(char *pathname, int flag);

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 14:27:46 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/24 22:38:53 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,15 @@ int	redirections(t_node *sentence)
 		word = temp->token;
 		while (word)
 		{
-			if (word->next->type == REDIR_APPEND)
-				ret = do_append(temp, word->next);
-			else if (word->next->type == REDIR_OUT)
-				ret = do_redir_out(temp, word->next);
-			else if (word->next->type == REDIR_IN)
-				ret = do_redir_in(temp, word->next);
+			if (word->next != NULL)
+			{
+				if (word->next->type == REDIR_APPEND)
+					ret = do_append(temp, word->next);
+				else if (word->next->type == REDIR_OUT)
+					ret = do_redir_out(temp, word->next);
+				else if (word->next->type == REDIR_IN)
+					ret = do_redir_in(temp, word->next);
+			}
 			if (ret == ERROR)
 				return (ERROR);
 			word = word->next;

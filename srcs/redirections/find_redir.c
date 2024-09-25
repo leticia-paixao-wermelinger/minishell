@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 22:38:53 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:23:28 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,13 @@ int	find_heredoc(t_node *sentence)
 		word = temp->token;
 		while (word)
 		{
-			if (word->type == REDIR_HEREDOC)
+			if (word->next != NULL)
 			{
-				if (do_heredoc(temp, word) == ERROR)
-					return (ERROR);
+				if (word->next->type == REDIR_HEREDOC)
+				{
+					if (do_heredoc(temp, word->next) == ERROR)
+						return (ERROR);
+				}
 			}
 			word = word->next;
 		}

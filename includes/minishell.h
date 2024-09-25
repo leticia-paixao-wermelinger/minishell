@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 22:51:09 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 12:16:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <errno.h>
+# include <limits.h>
 
 //------------------MAIN------------------
 //main.c
@@ -124,7 +125,7 @@ void	printlist(t_node *list);
 int		redirections(t_node *sentence);
 int		find_heredoc(t_node *sentence);
 //do_redir.c
-int		do_heredoc(t_node *sentence, t_tokens *word);
+int		do_heredoc(t_node *sentence, t_tokens *redir_node);
 int		do_append(t_node *sentence, t_tokens *redir_node);
 int		do_redir_out(t_node *sentence, t_tokens *redir_node);
 int		do_redir_in(t_node *sentence, t_tokens *word);

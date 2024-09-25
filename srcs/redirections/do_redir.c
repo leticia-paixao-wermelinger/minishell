@@ -6,17 +6,58 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 00:13:51 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 22:50:35 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 13:33:36 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	do_heredoc(t_node *sentence, t_tokens *word)
+/*
+Redir Heredoc (<<):
+
+The following function creates a temporary file, using pipe (opening 2 FDs, one
+to write in the file and another to read from it.
+In a loop, we wil call the readline and go saving its input to the FD that was
+created with pipe.
+If the delimiter (End of File - EOF) is sent as an input to readline,
+the loop stops.
+There is also a checking to limit the entrances to the size alloed by the fd.
+In the end, it deletes the redirect and the delimiter
+(EOF) from the linked list t_tokens.
+
+TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
+*/
+
+int	do_heredoc(t_node *sentence, t_tokens *redir_node)
 {
-	(void)sentence;
-	(void)word;
-	printf("Vai fazer heredoc com %s\n", word->word);
+	char	*delimiter;
+	char	*str;
+	int		written_to_pipe;
+	int		fds[2];
+
+	delimiter = redir_node->next->word;
+	written_to_pipe = 0;
+	str = NULL;
+	pipe(fds);
+	while (42)
+	{
+		str = readline("> ");
+		if (!str)
+			written_to_pipe += write(fds[0], "\n", 1);
+		else if (my_strcmp(str, delimiter) == 0)
+			break ;
+		else
+			written_to_pipe += write(fds[0], &str, my_strlen(str));
+		if (written_to_pipe >= PIPE_BUF)
+		{
+			print_error("minishell: heredoc limit reached, the input will be truncated\n");
+			break ;
+		}
+	}
+	close(fds[0]);
+	sentence->fd_in = fds[1];
+	remove_word_token(redir_node->next, sentence->token);
+	remove_word_token(redir_node, sentence->token);
 	return (NO_ERROR);
 }
 

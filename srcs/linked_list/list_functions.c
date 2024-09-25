@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 22:20:42 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 16:16:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_node	*create_first_input_node(char *s, t_node *list)
 	list = (t_node *)malloc(sizeof(t_node));
 	if (list == NULL)
 		return (NULL);
-	make_list_tokens(s, list);
+	make_list_tokens(&s, list);
 	list->fd_in = 0;
 	list->fd_out = 1;
 	list->pid = NO_INFO;
@@ -54,7 +54,7 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
-	make_list_tokens(s, new);
+	make_list_tokens(&s, new);
 	new->fd_in = 0;
 	new->fd_out = 1;
 	new->pid = NO_INFO;

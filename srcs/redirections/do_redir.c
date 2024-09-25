@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 00:13:51 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/25 13:33:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:40:50 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node)
 		else if (my_strcmp(str, delimiter) == 0)
 			break ;
 		else
+		{
+			// Botar expansão de variável 
 			written_to_pipe += write(fds[0], &str, my_strlen(str));
+		}
 		if (written_to_pipe >= PIPE_BUF)
 		{
 			print_error("minishell: heredoc limit reached, the input will be truncated\n");

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/25 13:23:28 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:38:00 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ int	redirections(t_node *sentence)
 					ret = do_redir_out(temp, word->next);
 				else if (word->next->type == REDIR_IN)
 					ret = do_redir_in(temp, word->next);
+				else if (word->next->type == REDIR_HEREDOC)
+					ret = do_heredoc(temp, word->next);
 			}
 			if (ret == ERROR)
 				return (ERROR);
@@ -42,7 +44,7 @@ int	redirections(t_node *sentence)
 	}
 	return (ret);
 }
-
+/*
 int	find_heredoc(t_node *sentence)
 {
 	t_node		*temp;
@@ -67,4 +69,4 @@ int	find_heredoc(t_node *sentence)
 		temp = temp->next;
 	}
 	return (NO_ERROR);
-}
+}*/

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:26 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/23 00:19:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 15:48:31 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ enum e_token {
 	REDIR_OUT = 62, // >
 	REDIR_IN = 60, // <
 	REDIR_HEREDOC = 6, // <<
-	REDIR_FILE
+	REDIR_FILE = 7,
+	HEREDOC_EOF
 };
 
 #endif

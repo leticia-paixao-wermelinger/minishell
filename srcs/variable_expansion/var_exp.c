@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/25 14:32:50 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 	while (token)
 	{
 		i = 0;
-		if (token->word == NULL)
+		if (token->word == NULL || token->type == HEREDOC_EOF)
 		{
 			token = token->next;
 			continue ;

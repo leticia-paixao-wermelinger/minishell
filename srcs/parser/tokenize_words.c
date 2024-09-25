@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:58:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/21 22:47:13 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/25 14:22:09 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	set_token(t_tokens *token, int command, int count)
 {
 	if (token->word == NULL)
 		return ;
-	if (token->type == REDIR_FILE)
+	if (token->type == REDIR_FILE || token->type == HEREDOC_EOF)
 		return ;
 	else if (is_builtin(token->word) == TRUE)
 		token->type = BUILTIN;
@@ -73,6 +73,8 @@ static void	do_redir(t_tokens *token, enum e_token value)
 		do_redir(token->next, REDIR_IN);
 	else if (is_heredoc(token->next->word) == TRUE)
 		do_redir(token->next, REDIR_HEREDOC);
+	else if (is_heredoc(token->word) == TRUE)
+		token->next->type = HEREDOC_EOF;
 	else
 		token->next->type = REDIR_FILE;
 }

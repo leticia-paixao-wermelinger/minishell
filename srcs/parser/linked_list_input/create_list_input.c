@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 00:36:05 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:29:12 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/25 16:27:48 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ void	make_list_from_input(t_command *command)
 	//}
 }
 
-t_tokens	*make_list_tokens(char *s, t_node *list)
+t_tokens	*make_list_tokens(char **s, t_node *list)
 {
 	t_tokens	*temp_word;
 	char	    **sentence;
 	int			i;
 
 	i = 0;
-	sentence = split_sentence_by_char(s, ' ');
-//	sentence = my_split(s, ' ');
+	s = fix_lack_of_spaces(s);
+	sentence = split_sentence_by_char(*s, ' ');
 	print_matrix(sentence);
 	list->token = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!(list->token))

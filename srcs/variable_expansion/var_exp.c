@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/25 14:32:50 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:22:36 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,10 @@ int	check_post_dollar(t_tokens *token, char *str, int j, t_env *env)
 	j++;
 	if (str[j] == QUESTION_MARK)
 	{
-		printf("str[%i] == question_mark\n", j);
 		index = print_global_var(token, str, j);
 	}
 	else if (str[j] == DOLLAR)
 	{
-		printf("str[%i] == dollar\n", j);
 		index = double_dollar(token, str, j);
 	}
 	else if ((int)my_strlen(str) == j)

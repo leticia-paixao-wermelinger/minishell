@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/26 00:50:46 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 01:59:55 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:41:17 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,16 @@ char	*expand_heredoc_variables(char *str, t_env *env)
 {
 	t_tokens	*list;
 
+	if (my_strlen(str) == 0)
+		return (str);
 	list = create_heredoc_list(str);
 	search_dollar(list, env);
 //	printf("ta fluindo... LISTA DO HEREDOC:\n");
 //	print_tokens(list);
-	// Guardar a lista de volta em uma string
 	free(str);
 	str = from_t_token_to_str(list);
 	free_t_tokens(list);
+
 	return (str);
 }
 

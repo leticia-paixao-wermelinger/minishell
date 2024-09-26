@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 00:13:51 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 02:10:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:18:25 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env)
 		else
 		{
 			str = expand_heredoc_variables(str, env);
-			written_to_pipe += write(fds[0], &str, my_strlen(str));
+			written_to_pipe += write(fds[0], str, my_strlen(str));
 			free(str);
 			str = NULL;
 		}

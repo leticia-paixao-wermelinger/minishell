@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 19:29:59 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/23 14:27:38 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 09:25:12 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,9 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 
 	index = 0;
 	key = take_name_var(str, j);
-	printf("KEY == %s\n", key);
 	node = my_getenv_by_list(key, env);
 	if (!node || (my_str_end_cmp(node->key, key) != 0))
 	{
-		printf("Entrou na condição de a variável não existir, com j = %i & str[j - 1] = %c\n", j, str[j - 1]);
 		temp = my_strldup(str, (j - 1));
 		index = my_strlen(key) - 1;
 	}
@@ -76,11 +74,8 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 	}
 	free(token->word);
 	token->word = my_strdup(temp);
-/*	if (my_strlen(token->word) == 0)
-		token->word = NULL;*/
 	free(temp);
 	free(key);
-//	printf("Ao final de expand_variable, index = %i\n", index);
 	return (index);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 00:13:51 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/25 14:40:50 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 02:10:58 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ In the end, it deletes the redirect and the delimiter
 TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 */
 
-int	do_heredoc(t_node *sentence, t_tokens *redir_node)
+// FALTA IMPLEMENTAR O STRL+C!
+
+int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env)
 {
 	char	*delimiter;
 	char	*str;
@@ -48,8 +50,10 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node)
 			break ;
 		else
 		{
-			// Botar expansão de variável 
+			str = expand_heredoc_variables(str, env);
 			written_to_pipe += write(fds[0], &str, my_strlen(str));
+			free(str);
+			str = NULL;
 		}
 		if (written_to_pipe >= PIPE_BUF)
 		{

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/26 01:38:36 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,36 @@ void	free_list(t_node *list)
 	t_node		*temp;
 	t_node		*next_node;
 	t_tokens	*temp_token;
-	t_tokens	*next_token;
 
 	while (list)
 	{
 		temp = list;
 		temp_token = temp->token;
-		while (temp_token)
+		free_t_tokens(temp_token);
+	/*	while (temp_token)
 		{
 			next_token = temp_token->next;
 			free(temp_token->word);
 			free(temp_token);
 			temp_token = next_token;
-		}
+		}*/
 		next_node = list->next;
 		free(temp);
 		list = next_node;
+	}
+}
+
+void	free_t_tokens(t_tokens *node)
+{
+	t_tokens	*next_token;
+
+	next_token = NULL;
+	while (node)
+	{
+		next_token = node->next;
+		free(node->word);
+		free(node);
+		node = next_token;
 	}
 }
 

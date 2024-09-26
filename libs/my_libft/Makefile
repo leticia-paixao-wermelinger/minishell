@@ -56,7 +56,8 @@ fromstrcdup.c \
 fromstrldup.c \
 my_print_matrix.c \
 is_there_space.c \
-is_closed_by_quot_marks.c
+is_closed_by_quot_marks.c \
+my_strjoin_cleaning.c
 
 OBJS = ${SRCS:.c=.o}
 

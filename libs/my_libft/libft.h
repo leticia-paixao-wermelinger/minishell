@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:19:11 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/05 14:33:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 01:57:21 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,5 @@ char				*fromstrcdup(const char *s, char c);
 void				print_matrix(char **matrix);
 int					is_there_space(char *str);
 int					is_closed_by_quot_marks(char *str);
+char				*my_strjoin_cleaning(char *s1, char *s2);
 #endif

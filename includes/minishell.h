@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/25 16:26:50 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 01:39:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void    set_token(t_tokens *token, int command, int count);
 int		is_builtin(char *s);
 //LINKED_LIST_INPUT
 //create_list_input.c
-t_tokens	*make_list_tokens(char **s, t_node *list);
+t_tokens	*make_list_tokens(char *s, t_node *list);
 void	make_list_from_input(t_command *command);
 void	free_sentences(char **sentences);
 void	free_tokens(t_tokens *token);
@@ -84,7 +84,7 @@ void	remove_quote(char **str, int i, enum e_ascii quote);
 int		is_there_space(char *str);
 char	*strdup_tillc(char *str);
 //spaces_validation.c
-char	**fix_lack_of_spaces(char **s);
+char	*fix_lack_of_spaces(char *s);
 
 //----------------GENERAL_FUNCTIONS------------------
 //is_chars_functions.c
@@ -121,13 +121,16 @@ t_node	*create_last_input_node(char *s, t_node *prev);
 t_tokens	*create_last_token(char *word, t_tokens *prev);
 //                  Teste:
 void	printlist(t_node *list);
+void	print_tokens(t_tokens *token);
+//heredoc_list.c
+t_tokens	*create_heredoc_list(char *str);
 
 //--------------------REDIRECTIONS--------------------
 //find_redir.c
-int		redirections(t_node *sentence);
+int		redirections(t_node *sentence, t_env *env);
 int		find_heredoc(t_node *sentence);
 //do_redir.c
-int		do_heredoc(t_node *sentence, t_tokens *redir_node);
+int		do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env);
 int		do_append(t_node *sentence, t_tokens *redir_node);
 int		do_redir_out(t_node *sentence, t_tokens *redir_node);
 int		do_redir_in(t_node *sentence, t_tokens *word);
@@ -144,6 +147,8 @@ int		print_global_var(t_tokens *token, char *str, int j);
 int		double_dollar(t_tokens *token, char *str, int j);
 int		expand_variable(t_tokens *token, t_env *env, char *str, int j);
 char	*join_strs(char *str, char *middle, int j, int jump, int *index);
+//heredoc_exp.c
+char	*expand_heredoc_variables(char *str, t_env *env);
 
 //---------------------------ENV-----------------------
 //env_utils.c
@@ -200,6 +205,7 @@ void	clear_loop_end(t_command *command);
 void	clear_input(t_command *command);
 void	final_clear(t_command *command);
 void	free_list(t_node *list);
+void	free_t_tokens(t_tokens *node);
 void	free_env(t_env *list);
 
 #endif

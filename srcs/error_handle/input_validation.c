@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:44 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/22 00:27:33 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/26 00:12:20 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int	first_input_validation(t_command *command)
 		return (ERROR);
 	else if (input_ends_with_redir(command->input) == ERROR)
 		return (ERROR);
+	command->input = fix_lack_of_spaces(command->input);
 	return_closed_in_quotes_metas(command->input);
 	return (NO_ERROR);
 }

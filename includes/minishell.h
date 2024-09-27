@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 01:39:54 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:22:30 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int		pipe_syntax_error(int flag);
 int		redir_syntax_error(enum e_token e);
 int		no_such_file(char *str);
 int		permission_denied(char *str);
+void	print_no_such_file(char **argv);
 //quote_validation.c
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_single_quote(char **str);
@@ -84,6 +85,8 @@ void	remove_quote(char **str, int i, enum e_ascii quote);
 int		is_there_space(char *str);
 char	*strdup_tillc(char *str);
 //spaces_validation.c
+int		only_spaces(char *str);
+char	*remove_init_and_end_spaces(char *str);
 char	*fix_lack_of_spaces(char *s);
 
 //----------------GENERAL_FUNCTIONS------------------

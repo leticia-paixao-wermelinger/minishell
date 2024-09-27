@@ -15,15 +15,11 @@
 char	*my_strldup(const char *s, int i)
 {
 	char	*dest;
-	int		size;
 
-	size = 0;
-	while (s[size] != s[i])
-		size++;
-	dest = (char *)malloc((size + 1) * sizeof(char));
+	dest = (char *)malloc(i + 1 * sizeof(char));
 	if (!dest)
 		return (NULL);
-	my_strlcpy(dest, s, (size + 1));
+	my_strlcpy(dest, s, i + 1);
 	return (dest);
 }
 

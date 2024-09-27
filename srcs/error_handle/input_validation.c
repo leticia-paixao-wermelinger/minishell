@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 15:58:44 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 00:12:20 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:00:54 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,13 @@ int	first_input_validation(t_command *command)
 {
 	if (!(command->input))
 		return (ERROR);
-	remove_closed_in_quotes_metas(command->input);
-	if (n_quote_validation(command->input) == ERROR)
+	else if (only_spaces(command->input) == ERROR)
 		return (ERROR);
-	else if (check_pipe_init_and_end(command->input) == ERROR)
+	remove_closed_in_quotes_metas(command->input);
+	command->input = remove_init_and_end_spaces(command->input);
+	if (check_pipe_init_and_end(command->input) == ERROR)
+		return (ERROR);
+	else if (n_quote_validation(command->input) == ERROR)
 		return (ERROR);
 	else if (check_following_pipes(command->input) == ERROR)
 		return (ERROR);

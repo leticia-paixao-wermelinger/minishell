@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:43:21 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/24 11:37:40 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/27 17:21:49 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,11 @@ int	permission_denied(char *str)
 	print_error(": Permission denied\n");
 	g_status = ERROR;
 	return (ERROR);
+}
+
+void	print_no_such_file(char **argv)
+{
+	print_error("minishell: ");
+	print_error(argv[1]);
+	print_error(": No such file or directory\n");
 }

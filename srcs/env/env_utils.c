@@ -6,11 +6,13 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:27:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/27 19:16:03 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static void change_sh_level(t_env *node);
 
 void	get_env(t_command *command)
 {
@@ -28,6 +30,7 @@ void	get_env(t_command *command)
 	temp = command->my_env;
 	while (++j < i)
 		temp = create_last_env_node(environ[j], temp);
+	change_sh_level(command->my_env);
 }
 
 t_env	*my_getenv_by_list(const char *name, t_env *my_env)
@@ -44,4 +47,16 @@ t_env	*my_getenv_by_list(const char *name, t_env *my_env)
 		temp = temp->next;
 	}
 	return (NULL);
+}
+
+static void	change_sh_level(t_env *node) // TESTAR JUNTO COM A EXECUÇÃO
+{
+	t_env	*level;
+	int		number;
+
+	level = NULL;
+	level = my_getenv_by_list("SHLVL", node);
+	number = my_atoi(level->value) + 1;
+	free(level->value);
+	level->value = my_itoa(number);
 }

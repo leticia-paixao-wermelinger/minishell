@@ -19,7 +19,7 @@ int	pre_exec(t_command   *command)
 	remove_all_quotes(command->l_input, SIMPLE_QUOT_MARK);
 	if (redirections(command->l_input, command->my_env))
 		return (ERROR);
-	printf("ENVIANDO A SEGUINTE LISTA PARA A EXECUÇÃO:\n");
-	printlist(command->l_input);
+//	printf("ENVIANDO A SEGUINTE LISTA PARA A EXECUÇÃO:\n");
+//	printlist(command->l_input);
 	return (NO_ERROR);
 }

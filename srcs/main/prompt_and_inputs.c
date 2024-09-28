@@ -12,11 +12,32 @@
 
 #include "../../includes/minishell.h"
 
+/**
+ * set_command - Prepares the command structure for each new input.
+ * 
+ * This function generates the shell prompt using the current working directory, 
+ * then reads user input via `readline` and stores it in the `command->input` field. 
+ * It also frees the previous prompt string if necessary.
+ *
+ * @param command: A pointer to the `t_command` structure that holds the command 
+ * input and related data.
+ */
+
 void	set_command(t_command *command)
 {
 	command->prompt = make_prompt();
 	command->input = readline(command->prompt);
 }
+
+/**
+ * make_prompt - Generates a shell prompt string.
+ * 
+ * This function creates a prompt string that consists of the current working directory 
+ * followed by a dollar sign. It uses ANSI escape codes to color the directory path in green. 
+ * The result is dynamically allocated and should be freed after use.
+ *
+ * @return char*: The generated prompt string.
+ */
 
 char	*make_prompt(void)
 {

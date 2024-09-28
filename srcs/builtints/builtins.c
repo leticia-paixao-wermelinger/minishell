@@ -30,6 +30,6 @@ int	run_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
 	else if (my_strcmp(token->word, "env") == 0)
 		print_env(env, fd);
 	else if (my_strcmp(token->word, "exit") == 0)
-		ret = my_exit(token->next, command); // Em construção!
+		ret = my_exit(token->next, command);
 	return (ret);
 }

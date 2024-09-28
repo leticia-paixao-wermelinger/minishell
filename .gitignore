@@ -1,0 +1,15 @@
+**/*.o
+**/*.out
+**/*.swp
+**/*.swx
+**/*.a
+**/*.map
+**/*.exp
+**/*.so
+**/*.exe
+**/*.mod
+*.dSYM
+.DS_Store
+.history
+.vscode
+README.md

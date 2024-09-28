@@ -12,6 +12,18 @@
 
 #include "../../includes/minishell.h"
 
+/**
+ * ms_loop - The main loop of the minishell.
+ * 
+ * This function runs the main loop of the shell, continuously prompting for user input, 
+ * parsing it, and executing commands until the user exits. It handles errors, 
+ * input clearing, and command execution. The loop terminates when the user inputs 
+ * an empty line, presses `Ctrl+D`, or when a critical error occurs.
+ *
+ * @param command: A structure of type `t_command` that holds the command input, 
+ * environment variables, and other necessary data for shell execution.
+ */
+
 void	ms_loop(t_command command)
 {
 	while (42)
@@ -44,6 +56,20 @@ void	ms_loop(t_command command)
 		clear_loop_end(&command);
 	}
 }
+
+/**
+ * main - The entry point of the minishell program.
+ * 
+ * The `main` function initializes the `t_command` structure, checks for 
+ * command-line arguments (minishell does not accept any), sets up signal handling, 
+ * and begins the main shell loop (`ms_loop`). It also ensures that environment variables 
+ * are loaded and properly clears resources before exiting.
+ *
+ * @param argc: The argument count (should be 1 for minishell to run correctly).
+ * @param argv: The argument vector (array of command-line arguments).
+ *
+ * @return int: Returns an error code if more than one argument is passed or upon critical failure.
+ */
 
 int	main(int argc, char *argv[])
 {

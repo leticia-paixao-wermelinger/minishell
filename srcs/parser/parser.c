@@ -12,6 +12,22 @@
 
 #include "../../includes/minishell.h"
 
+/**
+ * parser - Parses the given command.
+ * 
+ * This function performs an initial error validation, primarily focused on 
+ * syntax errors in the user's input. It then splits the input string by pipes, 
+ * creates a list from the processed input, and performs additional validations. 
+ * If any errors are detected during parsing, the function clears the relevant 
+ * data structures and returns an error code.
+ *
+ * @param command: A pointer to the t_command structure that holds the user's 
+ * input and necessary information for Bash processing.
+ *
+ * @return int: Returns NO_ERROR if parsing is successful, or ERROR if any 
+ * validation or processing fails.
+ */
+
 int	parser(t_command *command)
 {
 	if (first_input_validation(command) == ERROR)
@@ -33,6 +49,21 @@ int	parser(t_command *command)
 	return (NO_ERROR);
 }
 
+/**
+ * split_sentence_by_char - Splits a string by a given character, 
+ * respecting the quote state.
+ *
+ * This function iterates through the input string, checking if the characters 
+ * are inside single or double quotes. If they are not inside quotes, the function 
+ * replaces the separator character with a non-printable character (UNPRINT_CHAR) 
+ * to facilitate splitting later.
+ *
+ * @param input: The input string to be split.
+ * @param c: The character by which the string will be split.
+ *
+ * @return char**: A vector of strings resulting from the original string split.
+ */
+
 char    **split_sentence_by_char(char *input, char c)
 {
     int quote_state;
@@ -46,7 +77,7 @@ char    **split_sentence_by_char(char *input, char c)
                 quote_state ^= 1;
             else if (is_double_quote(input[i]) && (quote_state == 0 || quote_state == 2))
                 quote_state ^= 2;
-            else if (is_char(input[i], c) && quote_state == 0) //sem aspas ao redor do pipe
+            else if (is_char(input[i], c) && quote_state == 0)
                     input[i] = UNPRINT_CHAR;
             i++;
     }

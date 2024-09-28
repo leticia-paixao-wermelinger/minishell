@@ -12,6 +12,20 @@
 
 #include "../../includes/minishell.h"
 
+/**
+ * tokenize_sentence - Splits a string into tokens based on spaces, while handling quotes.
+ * 
+ * This function processes an input string, replacing spaces with a unique character 
+ * (`UNPRINT_CHAR`) when they are outside of quoted sections. It handles both single 
+ * and double quotes by tracking the current quote state, ensuring that spaces inside 
+ * quotes are preserved. The string is then split into tokens using the custom `my_split` function.
+ *
+ * @param input: The input string to be tokenized, which is a command line entered by the user.
+ *
+ * @return char**: A pointer to an array of strings (tokens) that represent the individual 
+ * parts of the input command.
+ */
+
 char	**tokenize_sentence(char *input)
 {
 	int	quote_state;

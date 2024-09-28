@@ -21,8 +21,6 @@ t_tokens	*create_heredoc_list(char *s)
 
 	i = 0;
 	sentence = split_sentence_by_char(s, ' ');
-//	printf("MATRIZ DO HEREDOC:\n");
-//	print_matrix(sentence);
 	node = (t_tokens *)malloc(sizeof(t_tokens));
 	if (!(node))
 	{

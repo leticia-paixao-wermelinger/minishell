@@ -104,13 +104,6 @@ void	print_tokens(t_tokens *token)
 			continue ;
 		}
 		printf("Word: %s\n", temp->word);
-//		i = 0;
-/*		while (temp->word[i])
-		{
-			printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
-			i++;
-		}*/
-//		printf("Endereço de %c: %p\n", temp->word[i], &temp->word[i]);
 		printf("Type: %i\n", temp->type);
 		temp = temp->next;
 	}

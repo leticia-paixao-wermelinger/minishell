@@ -130,18 +130,6 @@ void	print_tokens(t_tokens *token);
 //heredoc_list.c
 t_tokens	*create_heredoc_list(char *str);
 
-//--------------------REDIRECTIONS--------------------
-//find_redir.c
-int		redirections(t_node *sentence, t_env *env);
-int		find_heredoc(t_node *sentence);
-//do_redir.c
-int		do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env);
-int		do_append(t_node *sentence, t_tokens *redir_node);
-int		do_redir_out(t_node *sentence, t_tokens *redir_node);
-int		do_redir_in(t_node *sentence, t_tokens *word);
-//redir_utils.c
-int		check_permissions(char *pathname, int flag);
-
 //-----------------VARIABLE_EXPANSION---------------------
 //var_exp.c
 void	var_exp(t_command *command);
@@ -159,6 +147,18 @@ char	*expand_heredoc_variables(char *str, t_env *env);
 //env_utils.c
 void	get_env(t_command *command);
 t_env	*my_getenv_by_list(const char *name, t_env *my_env);
+
+//--------------------REDIRECTIONS--------------------
+//find_redir.c
+int		redirections(t_node *sentence, t_env *env);
+int		find_heredoc(t_node *sentence);
+//do_redir.c
+int		do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env);
+int		do_append(t_node *sentence, t_tokens *redir_node);
+int		do_redir_out(t_node *sentence, t_tokens *redir_node);
+int		do_redir_in(t_node *sentence, t_tokens *word);
+//redir_utils.c
+int		check_permissions(char *pathname, int flag);
 
 //---------------------EXEC-----------------------
 //clean_execve.c

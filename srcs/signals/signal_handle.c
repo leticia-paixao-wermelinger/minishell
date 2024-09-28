@@ -11,10 +11,16 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-/* The following function handles the ctrl + c (SIGINT) in its first if
-and the ctrl + "\"" (SIGQUIT) in its else if.
-The ctrl + c must simply print a new prompt.
-The ctrl + \ must do nothing. */
+
+/**
+ * signal_handle - Handles signals SIGINT (Ctrl + C) and SIGQUIT (Ctrl + \).
+ * 
+ * This function handles the behavior of the shell when receiving the SIGINT 
+ * and SIGQUIT signals. For SIGINT (Ctrl + C), it prints a new prompt without 
+ * exiting the shell. For SIGQUIT (Ctrl + \), it ignores the signal and does nothing.
+ *
+ * @param sig: The signal number received by the process.
+ */
 
 void	signal_handle(int sig)
 {
@@ -30,6 +36,16 @@ void	signal_handle(int sig)
 		return ;
 }
 
+/**
+ * setup_signal_handling - Configures signal handlers for SIGINT and SIGQUIT.
+ * 
+ * This function sets up the signal handlers for SIGINT (Ctrl + C) and SIGQUIT 
+ * (Ctrl + \) using `sigaction`. It assigns `signal_handle` as the handler for 
+ * SIGINT to manage interrupts in the shell and ignores SIGQUIT.
+ *
+ * If the signal handler setup fails for any of the signals, it calls `handle_sig_error`.
+ */
+
 void	setup_signal_handling(void)
 {
 	struct sigaction	sa;
@@ -44,6 +60,16 @@ void	setup_signal_handling(void)
 	if (sigaction(SIGQUIT, &sa, NULL) == -1)
 		handle_sig_error(SIGQUIT);
 }
+
+/**
+ * handle_sig_error - Handles errors during signal setup.
+ * 
+ * This function is called when an error occurs during the setup of signal handlers 
+ * for SIGINT or SIGQUIT. It prints an error message and terminates the program 
+ * with a failure status if the setup for either signal fails.
+ *
+ * @param sig: The signal number that failed during handler setup.
+ */
 
 void	handle_sig_error(int sig)
 {

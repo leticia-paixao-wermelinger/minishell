@@ -44,29 +44,3 @@ int	redirections(t_node *sentence, t_env *env)
 	}
 	return (ret);
 }
-/*
-int	find_heredoc(t_node *sentence)
-{
-	t_node		*temp;
-	t_tokens	*word;
-
-	temp = sentence;
-	while (temp)
-	{
-		word = temp->token;
-		while (word)
-		{
-			if (word->next != NULL)
-			{
-				if (word->next->type == REDIR_HEREDOC)
-				{
-					if (do_heredoc(temp, word->next) == ERROR)
-						return (ERROR);
-				}
-			}
-			word = word->next;
-		}
-		temp = temp->next;
-	}
-	return (NO_ERROR);
-}*/

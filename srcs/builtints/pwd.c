@@ -21,20 +21,3 @@ int pwd(void)
 	printf("%s\n", cwd);
 	return (NO_ERROR);
 }
-
-
-/*
-
-Eu havia feito a pwd pegando o valor de env, mas descobri que o pwd no bash
-continua funcionando se dermos unset no pwd, então tem que ser de outra forma.
-
-int	pwd(t_env *env)
-{
-	t_env	*node;
-
-	node = my_getenv_by_list("PWD", env);
-	if (!node)
-		return (ERROR);
-	printf("%s\n", node->value);
-	return (NO_ERROR);
-}*/

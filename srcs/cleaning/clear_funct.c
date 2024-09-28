@@ -41,13 +41,6 @@ void	free_list(t_node *list)
 		temp = list;
 		temp_token = temp->token;
 		free_t_tokens(temp_token);
-	/*	while (temp_token)
-		{
-			next_token = temp_token->next;
-			free(temp_token->word);
-			free(temp_token);
-			temp_token = next_token;
-		}*/
 		next_node = list->next;
 		free(temp);
 		list = next_node;

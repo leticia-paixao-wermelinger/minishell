@@ -15,6 +15,19 @@
 static void	do_redir(t_tokens *token, enum e_token value);
 static int 	check_start(t_tokens *token);
 
+/**
+ * search_tokens - Processes tokens in each node and assigns types to them.
+ * 
+ * This function iterates through a linked list of nodes (`t_node`), and for each node,
+ * it processes its token list (`t_tokens`). It checks if the first token in each node 
+ * represents the start of a command and then sets the token types based on the 
+ * content of each token. The token type could be a built-in command, an executable, 
+ * an argument, or a redirection operator.
+ *
+ * @param input: A pointer to the head of the linked list of input nodes (`t_node`), where 
+ * each node contains a list of tokens.
+ */
+
 void	search_tokens(t_node *input)
 {
 	t_node		*node;
@@ -40,6 +53,19 @@ void	search_tokens(t_node *input)
 	}
 }
 
+/**
+ * set_token - Assigns a type to a token based on its content and position.
+ * 
+ * This function checks the content of a token and assigns an appropriate type to it. 
+ * The type could be a built-in command, an executable, a file redirection, or an argument. 
+ * It processes redirection tokens such as append, input, output, and heredoc, ensuring 
+ * that the next token in the sequence is treated as a redirection target (e.g., a file).
+ *
+ * @param token: A pointer to the current token (`t_tokens`) that is being processed.
+ * @param command: An integer representing the position of the command token in the list.
+ * @param count: The current index of the token in the token list for the current command.
+ */
+
 void	set_token(t_tokens *token, int command, int count)
 {
 	if (token->word == NULL)
@@ -62,6 +88,19 @@ void	set_token(t_tokens *token, int command, int count)
 		token->type = ARGUMENT;
 }
 
+/**
+ * do_redir - Sets the token type for a redirection operation.
+ * 
+ * This static helper function is used to assign the correct type to tokens that represent 
+ * redirection operators (e.g., `>`, `>>`, `<`, `<<`). It recursively processes subsequent 
+ * tokens to determine if they are part of the redirection sequence and marks them 
+ * appropriately. For heredoc operations, the end-of-file token is also marked.
+ *
+ * @param token: A pointer to the current token (`t_tokens`) being processed.
+ * @param value: An enumeration value (`e_token`) that represents the type of redirection 
+ *               (e.g., `REDIR_APPEND`, `REDIR_OUT`, `REDIR_IN`, etc.).
+ */
+
 static void	do_redir(t_tokens *token, enum e_token value)
 {
 	token->type = value;
@@ -78,6 +117,20 @@ static void	do_redir(t_tokens *token, enum e_token value)
 	else
 		token->next->type = REDIR_FILE;
 }
+
+/**
+ * check_start - Determines if the first token is a redirection and calculates an offset.
+ * 
+ * This function checks the beginning of a token list to determine if the first tokens 
+ * are redirection operators (e.g., `>`, `>>`, `<`). It counts the number of redirection 
+ * tokens and skips them, returning an offset indicating how many tokens to skip 
+ * before reaching the actual command token.
+ *
+ * @param token: A pointer to the first token (`t_tokens`) in the list.
+ *
+ * @return int: The number of tokens to skip if redirection is found, or 0 if no 
+ * redirection is present at the start.
+ */
 
 static int	check_start(t_tokens *token)
 {
@@ -101,6 +154,18 @@ static int	check_start(t_tokens *token)
 	}
 	return (count);
 }
+
+/**
+ * is_builtin - Checks if a string corresponds to a built-in shell command.
+ * 
+ * This function compares a given string to a set of known built-in shell commands 
+ * (e.g., `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`). If the string matches 
+ * one of these commands, it returns `TRUE`. Otherwise, it returns `FALSE`.
+ *
+ * @param s: The string to be checked.
+ *
+ * @return int: Returns `TRUE` if the string is a built-in command, `FALSE` otherwise.
+ */
 
 int	is_builtin(char *s)
 {

@@ -32,20 +32,6 @@ int	is_heredoc(char *s)
 		return (TRUE);
 	return (FALSE);
 }
-/*
-int	is_file(t_node *node, t_node *list)
-{
-	t_node	*temp;
-
-	temp = list;
-	while (temp)
-	{
-		if (temp->next == node && is_redirect(temp->token) == TRUE)
-			return (TRUE);
-		temp = temp->next;
-	}
-	return (FALSE);
-}*/
 
 int	is_redirect(char *str)
 {

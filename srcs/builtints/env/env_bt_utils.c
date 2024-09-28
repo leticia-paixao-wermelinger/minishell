@@ -24,7 +24,6 @@ void	print_env_for_export(t_env *list, int fd)
 		my_putstr_fd("=", fd);
 		my_putstr_fd(temp->value, fd);
 		my_putstr_fd("\n", fd);
-		//my_printf("declare -x %s=%s\n", temp->key, temp->value);
 		temp = temp->next;
 	}
 }

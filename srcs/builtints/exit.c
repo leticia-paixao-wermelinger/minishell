@@ -6,15 +6,13 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:41:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/27 21:56:10 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static void clear_all(t_command *command, int ret);
-
-extern unsigned int   g_status;
 
 /*
 Eu não estou entendendo. Nos meus testes:
@@ -42,7 +40,7 @@ int	my_exit(t_tokens *token, t_command *command)
 
 	printf("exit\n");
 	if (token == NULL) // Está sem parâmetro
-		ret = g_status;
+		ret = g_status(-1);
 	else
 	{
 		ret = my_atoi(token->word);
@@ -59,7 +57,7 @@ int	my_exit(t_tokens *token, t_command *command)
 			return(ERROR);
 		}
 		else
-			g_status = ret;
+			g_status(ret);
 	}
 	clear_all(command, ret);
 	return (ERROR);

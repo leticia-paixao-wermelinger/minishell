@@ -6,13 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:07:06 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/27 21:52:06 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern volatile unsigned int	g_status;
 
 char    *get_executable_path(t_command *command, t_node *node)
 {
@@ -26,7 +24,7 @@ char    *get_executable_path(t_command *command, t_node *node)
     get_path = my_getenv_by_list("PATH", command->my_env);
     path = get_path->value;
     if (!path || !get_path->value)
-        return (print_error("PATH variable is unset or incorrectly set\n"), g_status = 127, NULL);
+        return (print_error("PATH variable is unset or incorrectly set\n"), g_status(127), NULL);
     dir = my_split(path, ':');
     if (!dir)
         return (NULL);
@@ -39,7 +37,7 @@ char    *get_executable_path(t_command *command, t_node *node)
         free(absolute_path);
         i++;
     }
-    return (print_error("Command not found\n"), g_status = 127, free_matrix(dir), NULL);
+    return (print_error("Command not found\n"), g_status(127), free_matrix(dir), NULL);
 }
 
 char    **cmd_list_to_array(t_node *sentences)

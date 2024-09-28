@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern volatile unsigned int    g_status;
-
 int	input_ends_with_redir(char *str)
 {
 	int	i;
@@ -27,7 +25,7 @@ int	input_ends_with_redir(char *str)
 			break ;
 	}
 	print_error("minishell: syntax error near unexpected token `newline'\n");
-	g_status = MISUSE;
+	g_status(MISUSE);
 	return (ERROR);
 }
 

@@ -15,8 +15,6 @@
 static int  pipe_first(char *str, int i);
 static int	redir_first(char *str, int i);
 
-extern volatile unsigned int    g_status;
-
 int	check_pipes_with_redir(char *str)
 {
 	int	i;
@@ -61,7 +59,7 @@ static int	pipe_first(char *str, int i)
 			print_error("minishell: ");
 			print_error(s_err);
 			print_error(": No such file or directory\n");
-			g_status = NO_ERROR;
+			g_status(NO_ERROR);
 			free(s_err);
 			return (ERROR);
 		}

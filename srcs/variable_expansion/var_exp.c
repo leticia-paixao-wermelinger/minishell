@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern unsigned int   g_status;
-
 void	var_exp(t_command *command)
 {
 	t_node	*node;

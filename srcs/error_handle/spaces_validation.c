@@ -16,8 +16,6 @@ static char *remove_spaces(int flag, char *str, int i);
 static char *add_space_after(char *s, int i);
 static char	*add_space_before(char *s, int i);
 
-extern volatile unsigned int    g_status;
-
 int	only_spaces(char *str)
 {
 	int	i;
@@ -34,7 +32,7 @@ int	only_spaces(char *str)
 	}
 	if (i == size)
 	{
-		g_status = NOT_FOUND;
+		g_status(NOT_FOUND);
 		return (ERROR);
 	}
 	return (NO_ERROR);

@@ -12,9 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-
-extern volatile unsigned int    g_status;
-
 int	n_quote_validation(char *str)
 {
 	int			i;
@@ -38,7 +35,7 @@ int	n_quote_validation(char *str)
 	}
 	if (double_quote == ON || simple_quote == ON)
 	{
-		g_status = MISUSE;
+		g_status(MISUSE);
 		print_error("minishell: syntax error without quotes closure\n");
 		return (ERROR);
 	}

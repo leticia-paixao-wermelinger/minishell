@@ -6,13 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/27 19:26:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/27 21:27:52 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-volatile unsigned int    g_status;
 
 void	ms_loop(t_command command)
 {
@@ -22,7 +20,7 @@ void	ms_loop(t_command command)
 		if (command.input == NULL)
 		{
 			clear_input(&command);
-			g_status = NO_ERROR; // Verificar se ta funcionando depois com execve, c ./minishell e vendo o retorno com echo $? depois de dar ctrl + d
+			g_status(NO_ERROR); // Verificar se ta funcionando depois com execve, c ./minishell e vendo o retorno com echo $? depois de dar ctrl + d
 			break ;
 		}
 		else if (my_strlen(command.input) == 0)

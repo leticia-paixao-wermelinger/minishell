@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/27 21:53:11 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void    clean_pipe(t_node *node)
 
 int     pipe_execution(t_command *command, t_node *node)
 {
-    extern volatile unsigned int	g_status;
     int     exit_status;
     int     pipe_fd[2];
     int     pid_1;
     int     pid_2;
 
-    exit_status = (int) g_status;
+    exit_status = g_status(-1);
     if (pipe(pipe_fd) == -1)
         return (perror(strerror(errno)), ERROR);
     pid_1 = fork();

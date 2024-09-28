@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern volatile unsigned int    g_status;
-
 void	print_error(char *str)
 {
 	my_putstr_fd(str, 2);
@@ -25,7 +23,7 @@ int	pipe_syntax_error(int flag)
 		print_error("minishell: syntax error near unexpected token `|'\n");
 	else if (flag == 2)
 		print_error("minishell: syntax error near unexpected token `||'\n");
-	g_status = MISUSE;
+	g_status(MISUSE);
 	return (ERROR);
 }
 
@@ -41,7 +39,7 @@ int	redir_syntax_error(enum e_token e)
 	if (e == REDIR_HEREDOC)
 		print_error("<<");
 	print_error("'\n");
-	g_status = MISUSE;
+	g_status(MISUSE);
 	return (ERROR);
 }
 
@@ -50,7 +48,7 @@ int	no_such_file(char *str)
 	print_error("minishell: ");
 	print_error(str);
 	print_error(": No such file or directory\n");
-	g_status = ERROR;
+	g_status(ERROR);
 	return (ERROR);
 }
 
@@ -59,7 +57,7 @@ int	permission_denied(char *str)
 	print_error("minishell: ");
 	print_error(str);
 	print_error(": Permission denied\n");
-	g_status = ERROR;
+	g_status(ERROR);
 	return (ERROR);
 }
 

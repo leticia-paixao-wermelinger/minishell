@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-extern unsigned int   g_status;
-
 static char	*take_name_var(char *str, int j);
 
 int	print_global_var(t_tokens *token, char *str, int j)
@@ -22,7 +20,7 @@ int	print_global_var(t_tokens *token, char *str, int j)
 	char	*temp;
 	int		index;
 
-	number = my_itoa(g_status);
+	number = my_itoa(g_status(-1));
 	index = my_strlen(number);
 	temp = join_strs(str, number, (j - 1), 1, &index);
 	free(token->word);

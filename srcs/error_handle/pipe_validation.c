@@ -15,8 +15,6 @@
 static int	check_following_pipes_in_loop(char *str, int i, int ret);
 static int	check_error_pipes(int first_pipes, int sec_pipes);
 
-extern volatile unsigned int    g_status;
-
 /*
 The following function checks if the string starts or ends with a Pipe.
 */

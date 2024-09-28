@@ -11,15 +11,10 @@
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-extern volatile unsigned int	g_status;
-
-/*
-The following function handles the ctrl + c (SIGINT) in its first if
+/* The following function handles the ctrl + c (SIGINT) in its first if
 and the ctrl + "\"" (SIGQUIT) in its else if.
 The ctrl + c must simply print a new prompt.
-The ctrl + \ must do nothing.
-*/
+The ctrl + \ must do nothing. */
 
 void	signal_handle(int sig)
 {
@@ -29,7 +24,7 @@ void	signal_handle(int sig)
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
-		g_status = USED_CTRL_C;
+		g_status(USED_CTRL_C);
 	}
 	else if (sig == SIGQUIT)
 		return ;

@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/26 00:56:38 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/27 21:29:13 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,6 +63,7 @@ srcs/error_handle/redir_validation.c \
 srcs/error_handle/remove_quotes.c \
 srcs/error_handle/errors_utils.c \
 srcs/error_handle/spaces_validation.c \
+srcs/error_handle/general_status.c \
 \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \

@@ -22,6 +22,10 @@
  * @param sig: The signal number received by the process.
  */
 
+
+
+// ---- MUDAR A DOCUMENTAÇÃO DESSA FUNÇÃO
+
 void	signal_handle(int sig)
 {
 	if (sig == SIGINT)
@@ -32,6 +36,14 @@ void	signal_handle(int sig)
 		rl_redisplay();
 		g_status(USED_CTRL_C);
 	}
+	else if (sig == SIGQUIT)
+		return ;
+}
+
+void	signal_heredoc_handle(int sig)
+{
+	if (sig == SIGINT)
+		g_status(USED_CTRL_C);
 	else if (sig == SIGQUIT)
 		return ;
 }
@@ -54,6 +66,20 @@ void	setup_signal_handling(void)
 	sa.sa_handler = signal_handle;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_RESTART;
+	if (sigaction(SIGINT, &sa, NULL) == -1)
+		handle_sig_error(SIGINT);
+	sa.sa_handler = SIG_IGN;
+	if (sigaction(SIGQUIT, &sa, NULL) == -1)
+		handle_sig_error(SIGQUIT);
+}
+
+void	setup_heredoc_signal_handling(void)
+{
+	struct sigaction	sa;
+
+	my_memset(&sa, 0, sizeof(sa));
+	sa.sa_handler = signal_heredoc_handle;
+	sigemptyset(&sa.sa_mask);
 	if (sigaction(SIGINT, &sa, NULL) == -1)
 		handle_sig_error(SIGINT);
 	sa.sa_handler = SIG_IGN;

@@ -25,10 +25,11 @@
 
 int	pre_exec(t_command   *command)
 {
+	// TA DANDO ERRO NAS ASPAS, EXEMPLO: echo "test'e $LANG" de 'aspas $LANG"'
 	remove_all_quotes(command->l_input, DOUBLE_QUOT_MARK);
 	var_exp(command);
 	remove_all_quotes(command->l_input, SIMPLE_QUOT_MARK);
-	if (redirections(command->l_input, command->my_env))
+	if (redirections(command->l_input, command->my_env, command))
 		return (ERROR);
 //	printf("ENVIANDO A SEGUINTE LISTA PARA A EXECUÇÃO:\n");
 //	printlist(command->l_input);

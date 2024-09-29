@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-int	redirections(t_node *sentence, t_env *env)
+int	redirections(t_node *sentence, t_env *env, t_command *command)
 {
 	t_node		*temp;
 	t_tokens	*word;
@@ -34,7 +34,7 @@ int	redirections(t_node *sentence, t_env *env)
 				else if (word->next->type == REDIR_IN)
 					ret = do_redir_in(temp, word->next);
 				else if (word->next->type == REDIR_HEREDOC)
-					ret = do_heredoc(temp, word->next, env);
+					ret = do_heredoc(temp, word->next, env, command);
 			}
 			if (ret == ERROR)
 				return (ERROR);

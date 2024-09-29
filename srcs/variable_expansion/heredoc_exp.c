@@ -27,7 +27,6 @@ char	*expand_heredoc_variables(char *str, t_env *env)
 	free(str);
 	str = from_t_token_to_str(list);
 	free_t_tokens(list);
-
 	return (str);
 }
 

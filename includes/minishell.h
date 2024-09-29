@@ -110,7 +110,9 @@ int		is_char(char o, char c);
 //---------------------SIGNALS---------------------
 //signal_handle.c
 void	signal_handle(int sig);
+void	setup_heredoc_signal_handling(void);
 void	setup_signal_handling(void);
+void	signal_heredoc_handle(int sig);
 void	handle_sig_error(int sig);
 
 //-----------------LINKED_LIST---------------------
@@ -150,10 +152,10 @@ t_env	*my_getenv_by_list(const char *name, t_env *my_env);
 
 //--------------------REDIRECTIONS--------------------
 //find_redir.c
-int		redirections(t_node *sentence, t_env *env);
+int		redirections(t_node *sentence, t_env *env, t_command *command);
 int		find_heredoc(t_node *sentence);
 //do_redir.c
-int		do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env);
+int		do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *command);
 int		do_append(t_node *sentence, t_tokens *redir_node);
 int		do_redir_out(t_node *sentence, t_tokens *redir_node);
 int		do_redir_in(t_node *sentence, t_tokens *word);

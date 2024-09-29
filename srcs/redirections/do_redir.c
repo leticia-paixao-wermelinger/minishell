@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env);
+
 /*
 Redir Heredoc (<<):
 
@@ -30,42 +32,81 @@ TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 
 // FALTA IMPLEMENTAR O STRL+C!
 
-int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env)
+int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *command)
+{
+	int		fds[2];
+	int		child_pid;
+	int		status;
+
+	pipe(fds);
+	printf("Vai dar o fork do heredoc.\n");
+	child_pid = fork();
+	if (child_pid == 0)
+	{
+		close(fds[0]);
+		setup_heredoc_signal_handling();
+		heredoc_loop(fds, redir_node, env);
+		close(fds[1]);
+		clear_loop_end(command);
+		final_clear(command);
+		exit(g_status(-1));
+	}
+	if (child_pid > 1)
+		waitpid(child_pid, &status, 0);
+	printf("Saiu do processo filho\n");
+	close(fds[1]);
+	sentence->fd_in = fds[0];
+	remove_word_token(redir_node->next, sentence->token);
+	remove_word_token(redir_node, sentence->token);
+	if (!WIFEXITED(status))
+		return (ERROR);
+	return (NO_ERROR);
+}
+
+static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env)
 {
 	char	*delimiter;
 	char	*str;
 	int		written_to_pipe;
-	int		fds[2];
 
 	delimiter = redir_node->next->word;
 	written_to_pipe = 0;
 	str = NULL;
-	pipe(fds);
+	g_status(0);
 	while (42)
 	{
 		str = readline("> ");
-		if (!str)
-			written_to_pipe += write(fds[0], "\n", 1);
-		else if (my_strcmp(str, delimiter) == 0)
+		if (g_status(-1) == 130)
+		{
+			free(str);
+			str = NULL;
 			break ;
+		}
+		if (!str)
+		{
+	//		written_to_pipe += write(fds[0], "\n", 1);
+			// Imprimir o erro
+			break ;
+		}
+		else if (my_strcmp(str, delimiter) == 0)
+		{
+			free(str);
+			str = NULL;
+			break ;
+		}
 		else
 		{
 			str = expand_heredoc_variables(str, env);
 			written_to_pipe += write(fds[0], str, my_strlen(str));
-			free(str);
-			str = NULL;
 		}
+		free(str);
+		str = NULL;
 		if (written_to_pipe >= PIPE_BUF)
 		{
 			print_error("minishell: heredoc limit reached, the input will be truncated\n");
 			break ;
 		}
 	}
-	close(fds[0]);
-	sentence->fd_in = fds[1];
-	remove_word_token(redir_node->next, sentence->token);
-	remove_word_token(redir_node, sentence->token);
-	return (NO_ERROR);
 }
 
 /*

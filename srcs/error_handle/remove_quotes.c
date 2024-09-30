@@ -54,8 +54,10 @@ static int	quote_is_valid(char *str, int j, int quote)
 	i = 0;
 	sec_flag = OFF;
 	if (quote == DOUBLE_QUOT_MARK)
-		sec_quote = SIMPLE_QUOT_MARK;
-	else if (quote == SIMPLE_QUOT_MARK)
+		//sec_quote = SIMPLE_QUOT_MARK;
+		sec_quote = UNPRINT_CHAR;
+	//else if (quote == SIMPLE_QUOT_MARK)
+	else if (quote == UNPRINT_CHAR)
 		sec_quote = DOUBLE_QUOT_MARK;
 	while (str[i] && i < j)
 	{

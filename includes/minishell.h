@@ -72,9 +72,10 @@ int		permission_denied(char *str);
 void	print_no_such_file(char **argv);
 //quote_validation.c
 int		n_quote_validation(char *str);
-int		dollar_is_closed_by_single_quote(char **str);
+int		dollar_is_closed_by_quote(char **str, int quote);
 void	remove_closed_in_quotes_metas(char *str);
 void	return_closed_in_quotes_metas(char *str);
+void	single_quotes_to_unprintable(t_node *list);
 // redir_validation.c
 int		input_ends_with_redir(char *str);
 int		check_following_redirs(t_tokens *node);

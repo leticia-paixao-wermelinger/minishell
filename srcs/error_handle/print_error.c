@@ -67,3 +67,16 @@ void	print_no_such_file(char **argv)
 	print_error(argv[1]);
 	print_error(": No such file or directory\n");
 }
+
+void	print_heredoc_ctrld(int	count, char *delimiter)
+{
+	char	*number;
+
+	number = my_itoa(count);
+	print_error("minishell: warning: here-document at line ");
+	print_error(number);
+	print_error(" delimited by end-of-file (wanted `");
+	print_error(delimiter);
+	print_error("')\n");
+	free(number);
+}

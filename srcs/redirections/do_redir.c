@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env);
+static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env, int count);
 
 /*
 Redir Heredoc (<<):
@@ -30,22 +30,20 @@ In the end, it deletes the redirect and the delimiter
 TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 */
 
-// FALTA IMPLEMENTAR O STRL+C!
-
 int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *command)
 {
 	int		fds[2];
 	int		child_pid;
 	int		status;
 
+	status = 0;
 	pipe(fds);
-	printf("Vai dar o fork do heredoc.\n");
 	child_pid = fork();
 	if (child_pid == 0)
 	{
 		close(fds[0]);
 		setup_heredoc_signal_handling();
-		heredoc_loop(fds, redir_node, env);
+		heredoc_loop(fds, redir_node, env, command->input_count);
 		close(fds[1]);
 		clear_loop_end(command);
 		final_clear(command);
@@ -53,7 +51,6 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 	}
 	if (child_pid > 1)
 		waitpid(child_pid, &status, 0);
-	printf("Saiu do processo filho\n");
 	close(fds[1]);
 	sentence->fd_in = fds[0];
 	remove_word_token(redir_node->next, sentence->token);
@@ -63,11 +60,12 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 	return (NO_ERROR);
 }
 
-static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env)
+static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env, int count)
 {
 	char	*delimiter;
 	char	*str;
 	int		written_to_pipe;
+	int		size;
 
 	delimiter = redir_node->next->word;
 	written_to_pipe = 0;
@@ -84,8 +82,7 @@ static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env)
 		}
 		if (!str)
 		{
-	//		written_to_pipe += write(fds[0], "\n", 1);
-			// Imprimir o erro
+			print_heredoc_ctrld(count, delimiter);
 			break ;
 		}
 		else if (my_strcmp(str, delimiter) == 0)
@@ -96,8 +93,10 @@ static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env)
 		}
 		else
 		{
-			str = expand_heredoc_variables(str, env);
-			written_to_pipe += write(fds[0], str, my_strlen(str));
+			if (only_spaces(str) != ERROR)
+				str = expand_heredoc_variables(str, env);
+			size = my_strlen(str);
+			written_to_pipe += write(fds[0], str, size);
 		}
 		free(str);
 		str = NULL;

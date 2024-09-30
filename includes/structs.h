@@ -49,6 +49,7 @@ typedef struct s_command
 	char	*input;
 	char	**input_matrix;
 	char	*prompt;
+	int		input_count;
 	t_node	*l_input;
 	t_env	*my_env;
 }	t_command;

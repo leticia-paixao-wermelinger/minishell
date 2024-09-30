@@ -29,6 +29,7 @@ void	ms_loop(t_command command)
 	while (42)
 	{
 		set_command(&command);
+		command.input_count++;
 		if (command.input == NULL)
 		{
 			clear_input(&command);

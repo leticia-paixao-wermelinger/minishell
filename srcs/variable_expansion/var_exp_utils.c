@@ -27,7 +27,6 @@ int	print_global_var(t_tokens *token, char *str, int j)
 	token->word = my_strdup(temp);
 	free(temp);
 	free(number);
-//	printf("Ao final de print_global_var, index = %i, list->value[index] = %c\n", index, token->word[index]);
 	return (index);
 }
 
@@ -42,7 +41,6 @@ int	double_dollar(t_tokens *token, char *str, int j)
 	token->word = my_strdup(temp);
 	free(temp);
 	index++;
-//	printf("Ao final de double_dollar, index = %i, list->value[index] = %c\n", index, token->word[index]);
 	return (index);
 }
 
@@ -85,28 +83,18 @@ char	*join_strs(char *str, char *middle, int j, int jump, int *index)
 	int		size_temp1;
 
 	temp3 = NULL;
-//	printf("ANTES DE TUDO NA JOIN_STRS: str = |%s|; middle = |%s|\n", str, middle);
-//	printf("Vai colocar valor em temp1, chamando my_strldup. jump = %i e str[%i] = |%c|\n", jump, j, str[j]);
 	temp1 = my_strldup(str, j);
-//	printf("temp1 = |%s|\n", temp1);
 	temp2 = my_strjoin(temp1, middle);
-//	printf("temp2 = |%s|\n", temp2);
 	size_temp1 = my_strlen(temp1);
-//	printf("size_temp1 + jump = |%i|. Ou seja, str[%i] = |%c|\n", size_temp1 + jump, size_temp1 + jump, str[size_temp1 + jump]);
-//	printf("str: |%s| & tamanho de str: |%zu|\n", str, my_strlen(str));
-//	printf("size_temp1: |%i| & jump: |%i| & size_temp1 + jump: |%i|\n", size_temp1, jump, size_temp1 + jump);
 	if ((int)my_strlen(str) != (size_temp1 + jump))
 	{
 		free(temp1);
 		temp1 = fromstrldup(str, size_temp1 + jump);
-//		printf("temp1.2 = |%s|\n", temp1);
 		temp3 = my_strjoin(temp2, temp1);
-//		printf("temp3 = |%s|\n", temp3);
 		*index = my_strlen(temp2) - 1;
 	}
 	else
 		temp3 = strdup(temp2);
-//	printf("Ao final de join_strs, index = %i. temp3[%i] = %c\n", *index, *index, temp3[*index]);
 	free(temp1);
 	free(temp2);
 	return (temp3);
@@ -125,7 +113,6 @@ static char	*take_name_var(char *str, int j)
 
 	i = j;
 	size = 0;
-//	printf("EM TAKE_NAME VAR: str[%i] == %c\n", i, str[i]);
 	while (str[i] && (my_isalpha(str[i]) != 0 || my_isdigit(str[i]) != 0))
 	{
 		size++;
@@ -138,7 +125,6 @@ static char	*take_name_var(char *str, int j)
 	while (str[j] && j < i)
 	{
 		name[size] = str[j];
-//		printf("name[%i] = %c\n", size, name[size]);
 		size++;
 		j++;
 	}

@@ -70,6 +70,7 @@ int		redir_syntax_error(enum e_token e);
 int		no_such_file(char *str);
 int		permission_denied(char *str);
 void	print_no_such_file(char **argv);
+void    print_heredoc_ctrld(int	count, char *delimiter);
 //quote_validation.c
 int		n_quote_validation(char *str);
 int		dollar_is_closed_by_quote(char **str, int quote);

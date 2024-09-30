@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:21:02 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/30 00:44:55 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/30 00:36:36 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	pipe_first(char *str, int i)
 			print_error("minishell: ");
 			print_error(s_err);
 			print_error(": No such file or directory\n");
-			g_status(NO_ERROR);
+			general_status(NO_ERROR);
 			free(s_err);
 			return (ERROR);
 		}

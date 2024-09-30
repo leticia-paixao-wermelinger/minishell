@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/30 00:43:56 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/30 00:34:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int		only_spaces(char *str);
 char	*remove_init_and_end_spaces(char *str);
 char	*fix_lack_of_spaces(char *s);
 //general_status.c
-int		g_status(int number);
+int		general_status(int number);
 
 //----------------GENERAL_FUNCTIONS------------------
 //is_chars_functions.c

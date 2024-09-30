@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/27 21:27:52 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/09/30 00:10:50 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 /**
  * ms_loop - The main loop of the minishell.
- * 
- * This function runs the main loop of the shell, continuously prompting for user input, 
- * parsing it, and executing commands until the user exits. It handles errors, 
- * input clearing, and command execution. The loop terminates when the user inputs 
+ *
+ * This function runs the main loop of the shell, continuously prompting for user input,
+ * parsing it, and executing commands until the user exits. It handles errors,
+ * input clearing, and command execution. The loop terminates when the user inputs
  * an empty line, presses `Ctrl+D`, or when a critical error occurs.
  *
- * @param command: A structure of type `t_command` that holds the command input, 
+ * @param command: A structure of type `t_command` that holds the command input,
  * environment variables, and other necessary data for shell execution.
  */
 
@@ -48,7 +48,7 @@ void	ms_loop(t_command command)
 			clear_loop_end(&command);
 			break ;
 		}
-		if (executor(&command, command.l_input) == CLOSE)
+		if (executor(&command, command.l_input) == ERROR)
 		{
 			clear_loop_end(&command);
 			break ;
@@ -59,10 +59,10 @@ void	ms_loop(t_command command)
 
 /**
  * main - The entry point of the minishell program.
- * 
- * The `main` function initializes the `t_command` structure, checks for 
- * command-line arguments (minishell does not accept any), sets up signal handling, 
- * and begins the main shell loop (`ms_loop`). It also ensures that environment variables 
+ *
+ * The `main` function initializes the `t_command` structure, checks for
+ * command-line arguments (minishell does not accept any), sets up signal handling,
+ * and begins the main shell loop (`ms_loop`). It also ensures that environment variables
  * are loaded and properly clears resources before exiting.
  *
  * @param argc: The argument count (should be 1 for minishell to run correctly).

@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/27 21:29:13 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/09/29 23:45:47 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,13 +85,16 @@ srcs//variable_expansion/heredoc_exp.c \
 \
 srcs/env/env_utils.c \
 \
-srcs/exec/clean_execve.c \
-srcs/exec/executor.c \
-srcs/exec/execve_utils.c \
 srcs/exec/init_execve.c \
-srcs/exec/pipe_execution.c \
+srcs/exec/execve_utils.c \
+srcs/exec/clean_execve.c \
 srcs/exec/run_execve.c \
-srcs/exec/fd.c \
+srcs/exec/pipe_execution.c \
+srcs/exec/executor.c \
+srcs/exec/utils.c \
+srcs/exec/make_pipe.c \
+srcs/exec/redirect.c \
+srcs/exec/print_exec_error.c \
 \
 srcs/builtints/builtins.c \
 srcs/builtints/cd.c \

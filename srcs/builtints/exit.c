@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 14:41:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/30 00:36:18 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/30 00:44:32 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	my_exit(t_tokens *token, t_command *command)
 			return(ERROR);
 		}
 		else
-			general_status(ret);
+			g_status(ret);
 	}
 	clear_all(command, ret);
 	return (ERROR);

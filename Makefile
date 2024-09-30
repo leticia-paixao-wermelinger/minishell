@@ -85,13 +85,16 @@ srcs//variable_expansion/heredoc_exp.c \
 \
 srcs/env/env_utils.c \
 \
-srcs/exec/clean_execve.c \
-srcs/exec/executor.c \
-srcs/exec/execve_utils.c \
 srcs/exec/init_execve.c \
-srcs/exec/pipe_execution.c \
+srcs/exec/execve_utils.c \
+srcs/exec/clean_execve.c \
 srcs/exec/run_execve.c \
-srcs/exec/fd.c \
+srcs/exec/pipe_execution.c \
+srcs/exec/executor.c \
+srcs/exec/utils.c \
+srcs/exec/make_pipe.c \
+srcs/exec/exec_redir.c \
+srcs/exec/print_exec_error.c \
 \
 srcs/builtints/builtins.c \
 srcs/builtints/cd.c \

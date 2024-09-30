@@ -8,6 +8,7 @@
 **/*.so
 **/*.exe
 **/*.mod
+.nfs*
 *.dSYM
 .DS_Store
 .history

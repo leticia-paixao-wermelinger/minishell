@@ -96,7 +96,9 @@ static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env, int count)
 			if (only_spaces(str) != ERROR)
 				str = expand_heredoc_variables(str, env);
 			size = my_strlen(str);
-			written_to_pipe += write(fds[0], str, size);
+			written_to_pipe += write(fds[1], str, size);
+			written_to_pipe += write(fds[1], "\n", 1);
+
 		}
 		free(str);
 		str = NULL;

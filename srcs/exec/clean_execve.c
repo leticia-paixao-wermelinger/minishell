@@ -27,10 +27,9 @@ void    free_matrix(char **matrix)
     free(matrix);
 }
 
-void    execve_clean(char *path, char **env_array, t_command *command)
+void    execve_clean(char *path, char **args, char **env_array)
 {
     free(path);
-    free(env_array);
-	clear_loop_end(command);
-	final_clear(command);
+    free_matrix(args);
+    free_matrix(env_array);
 }

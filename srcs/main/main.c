@@ -49,7 +49,7 @@ void	ms_loop(t_command command)
 			clear_loop_end(&command);
 			break ;
 		}
-		if (executor(&command, command.l_input) == CLOSE)
+		if (executor(&command, command.l_input) == ERROR)
 		{
 			clear_loop_end(&command);
 			break ;

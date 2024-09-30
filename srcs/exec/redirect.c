@@ -1,22 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general_status.c                                   :+:      :+:    :+:   */
+/*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/27 19:47:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/27 21:49:13 by lpaixao-         ###   ########.fr       */
+/*   Created: 2024/09/17 18:39:17 by lraggio           #+#    #+#             */
+/*   Updated: 2024/09/17 18:39:18 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-int	g_status(int number)
-{
-	static int	g_status = 0;
-
-	if (number >= 0)
-		g_status = number;
-	return (g_status);
-}

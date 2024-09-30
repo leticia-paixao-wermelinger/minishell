@@ -6,61 +6,33 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:11:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/28 19:30:26 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/27 21:54:32 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    run_execve(t_command *command, t_node *list)
+int    run_execve(t_command *command, t_node *list)
 {
+    int     exit_status;
     t_node      *node;
-    t_node      *temp;
+    pid_t       pid;
     char        *path;
     char        **env_array;
     char        **args;
 
+    exit_status = g_status(-1);
     env_array = envp_list_to_array(command->my_env);
-    if (access(list->token->word, X_OK) != 0) // verificar acesso em outra função mais completa!!!
-        path = get_executable_path(command, list);
-    else
-        path = list->token->word;
+    path = get_executable_path(command, list);
     node = list;
     args = cmd_list_to_array(node);
-    node->pid = fork();
-    if (node->pid != 0)
-        return ;
-    if (node->fd_out != STDOUT_FILENO)
-        dup2(node->fd_out, STDOUT_FILENO);
-    if (node->fd_in != STDIN_FILENO)
-        dup2(node->fd_in, STDIN_FILENO);
-    temp = node;
-    close_node_fds(temp);
-    execve(path, args, env_array);
-    return ;
-}
-
-void    run_pipe_execve(t_command *command, t_node *list)
-{
-    t_node      *node;
-    t_node      *temp;
-    char        *path;
-    char        **env_array;
-    char        **args;
-
-    env_array = envp_list_to_array(command->my_env);
-    if (access(list->token->word, X_OK) != 0) // verificar acesso em outra função mais completa!!!
-        path = get_executable_path(command, list);
-    else
-        path = list->token->word;
-    node = list;
-    args = cmd_list_to_array(node);
-    if (node->fd_out != STDOUT_FILENO)
-        dup2(node->fd_out, STDOUT_FILENO);
-    if (node->fd_in != STDIN_FILENO)
-        dup2(node->fd_in, STDIN_FILENO);
-    temp = node;
-    close_node_fds(temp);
-    execve(path, args, env_array);
-    return ;
+    pid = fork();
+    if (pid == 0) //child proccess
+    {
+        pid = list->pid;
+        if (execve(path, args, env_array) == -1)
+        	return (execve_clean(path, env_array, command), free_matrix(args), g_status(127), ERROR);
+    }
+    waitpid(list->pid, &exit_status, 0);
+    return (execve_clean(path, env_array, command), free_matrix(args), NO_ERROR);
 }

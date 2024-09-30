@@ -6,47 +6,40 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/30 00:24:44 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int executor(t_command *command, t_node *sentence)
+int	executor(t_command *command, t_node *sentence)
 {
-	t_env	*env;
-	t_node	*current_node;
+	t_node		*current_node;
+	int		ret;
 
-	if (is_there_space(sentence->token->word))
-		return (print_cmd_not_found(sentence), NO_ERROR);
-	if (has_pipe_or_not(sentence) == TRUE)
-		make_pipe(sentence);
-	if (has_redirect(sentence) == TRUE)
-		printf("Tem redirect!\n");
-		//if (redirections(sentence, env, command) == ERROR)
-			return (ERROR);
+	ret = NO_INFO;
 	current_node = sentence;
 	while (current_node)
 	{
-		if (!current_node->next)
-			run_simple_commands(command, current_node);
-		else
-			pipe_execution(command, current_node);
-		close_node_fds(current_node);
+		//Redirect entra aqui!
+/*		if (current_node->next)
+			ret = pipe_execution(command, current_node);
+		else */
+			ret = run_commands(command, current_node);
 		current_node = current_node->next;
 	}
-	current_node = sentence;
-	wait_cmds(current_node);
-    return (NO_ERROR);
+	return (ret);
 }
 
-void	run_simple_commands(t_command *command, t_node *node)
+int	run_commands(t_command *command, t_node *node) //Luara: separa em execve e builtin
 {
-	t_node	*current_node;
+	t_tokens	*current_token;
 
-	current_node = node;
-	if (current_node->token->type == BUILTIN)
-		run_builtin(command, current_node->token, command->my_env, current_node->fd_out);
+	current_token = node->token;
+	if (current_token->type == BUILTIN) // Let: a função está enviando fd 1 por padrão. deverá ser ajustado isso posteriormente para enviar um fd específico
+		return (run_builtin(command, node->token, command->my_env, 1), NO_ERROR);
 	else
-		run_execve(command, current_node);
+	        printf("Vai rodar execve\n");
+//		return (run_execve(command, node), NO_ERROR);
+	return (ERROR);
 }

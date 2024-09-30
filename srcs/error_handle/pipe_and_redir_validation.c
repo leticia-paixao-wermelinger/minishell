@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_and_redir_validation.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 20:21:02 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/30 00:36:36 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/09/21 20:37:09 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	pipe_first(char *str, int i)
 			print_error("minishell: ");
 			print_error(s_err);
 			print_error(": No such file or directory\n");
-			general_status(NO_ERROR);
+			g_status(NO_ERROR);
 			free(s_err);
 			return (ERROR);
 		}

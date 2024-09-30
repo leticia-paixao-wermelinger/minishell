@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+static void	change_single_quotes(char *str);
+
 int	n_quote_validation(char *str)
 {
 	int			i;
@@ -42,26 +44,25 @@ int	n_quote_validation(char *str)
 	return (NO_ERROR);
 }
 
-int	dollar_is_closed_by_single_quote(char **str)
+int	dollar_is_closed_by_quote(char **str, int quote)
 {
 	int			i;
 	int			quote_index;
-	enum e_flag simple_quote;
+	enum e_flag quote_flag;
 
 	i = 0;
-	simple_quote = OFF;
+	(void)quote_index;
+	quote_flag = OFF;
 	while ((*str)[i])
 	{
-		if ((*str)[i] == SIMPLE_QUOT_MARK && simple_quote == OFF)
+		if ((*str)[i] == quote && quote_flag == OFF)
 		{
 			quote_index = i;
-			simple_quote = ON;
+			quote_flag = ON;
 		}
-		if ((*str)[i] == DOLLAR && simple_quote == ON)
-		{
-			remove_quote(str, quote_index, SIMPLE_QUOT_MARK);
+		else if ((*str)[i] == DOLLAR && quote_flag == ON)
+		//	remove_quote(str, quote_index, quote);		// Isso aqui era p q?
 			return (TRUE);
-		}
 		i++;
 	}
 	return (FALSE);
@@ -109,6 +110,53 @@ void	return_closed_in_quotes_metas(char *str)
 			str[i] = GREATER_THAN;
 		else if (str[i] == UNPRINT_LT)
 			str[i] = LESS_THAN;
+		i++;
+	}
+}
+
+void	single_quotes_to_unprintable(t_node *list)
+{
+	t_node		*temp;
+	t_tokens	*words;
+
+	temp = list;
+	while (temp)
+	{
+		words = temp->token;
+		while (words)
+		{
+			change_single_quotes(words->word);
+			words = words->next;
+		}
+		temp = temp->next;
+	}
+}
+
+static void	change_single_quotes(char *str)
+{
+	int			i;
+	enum e_flag	double_quote;
+	enum e_flag	simple_quote;
+
+	i = 0;
+	double_quote = OFF;
+	simple_quote = OFF;
+	while (str[i])
+	{
+		if (str[i] == DOUBLE_QUOT_MARK && double_quote == OFF && simple_quote == OFF)
+			double_quote = ON;
+		else if (str[i] == SIMPLE_QUOT_MARK && simple_quote == OFF && double_quote == OFF)
+		{
+			str[i] = UNPRINT_CHAR;
+			simple_quote = ON;
+		}
+		else if (str[i] == DOUBLE_QUOT_MARK && double_quote == ON)
+			double_quote = OFF;
+		else if (str[i] == SIMPLE_QUOT_MARK && simple_quote == ON)
+		{
+			str[i] = UNPRINT_CHAR;
+			simple_quote = OFF;
+		}
 		i++;
 	}
 }

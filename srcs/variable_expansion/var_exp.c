@@ -42,7 +42,7 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 		{
 			if (token->word[i] == DOLLAR)
 			{
-				if (dollar_is_closed_by_single_quote(&(token->word)) == TRUE)
+				if (dollar_is_closed_by_quote(&(token->word), UNPRINT_CHAR) == TRUE) // Pq ta expandindo?
 					i++;
 				else
 					check_post_dollar(token, token->word, i, env);

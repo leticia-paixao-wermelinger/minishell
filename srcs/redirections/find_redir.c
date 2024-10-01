@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+static int	check_redir(t_node *temp, t_tokens *word, t_command *command);
+
 int	redirections(t_node *sentence, t_command *command)
 {
 	t_node		*temp;
@@ -25,22 +27,42 @@ int	redirections(t_node *sentence, t_command *command)
 		word = temp->token;
 		while (word)
 		{
+			printf("Está no loop de redurections com word = %s\n", word->word);
+			if (token_is_redir(word) == TRUE)
+				ret = check_redir(temp, word, command);
 			if (word->next != NULL)
-			{
-				if (word->next->type == REDIR_APPEND)
-					ret = do_append(temp, word->next);
-				else if (word->next->type == REDIR_OUT)
-					ret = do_redir_out(temp, word->next);
-				else if (word->next->type == REDIR_IN)
-					ret = do_redir_in(temp, word->next);
-				else if (word->next->type == REDIR_HEREDOC)
-					ret = do_heredoc(temp, word->next, command->my_env, command);
-			}
+				check_redir(temp, word->next, command);
+			else
+				word = word->next;
 			if (ret == ERROR)
 				return (ERROR);
-			word = word->next;
 		}
 		temp = temp->next;
 	}
+	printf("Vai retornar com a estrutura:\n");
+	printlist(command->l_input);
+	return (ret);
+}
+
+static int	check_redir(t_node *temp, t_tokens *word, t_command *command)
+{
+	int			ret;
+	t_tokens	*jump;
+
+	ret = 0;
+	// Ajustar para quando a 1 posição for um redirect
+	if (word->next->type == REDIR_APPEND)
+		ret = do_append(temp, word);
+	else if (word->next->type == REDIR_OUT)
+		ret = do_redir_out(temp, word);
+	else if (word->next->type == REDIR_IN)
+		ret = do_redir_in(temp, word);
+	else if (word->next->type == REDIR_HEREDOC)
+	{
+		printf("Vai chamar do_heredoc\n");
+		ret = do_heredoc(temp, word, command->my_env, command);
+	}
+	else
+		word = word->next;
 	return (ret);
 }

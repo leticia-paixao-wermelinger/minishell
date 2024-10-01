@@ -45,7 +45,7 @@ int	parser(t_command *command)
 		return (ERROR);
 	}
 //Imprimir a lista para teste
-//	printlist(command->l_input);
+	printlist(command->l_input);
 	return (NO_ERROR);
 }
 

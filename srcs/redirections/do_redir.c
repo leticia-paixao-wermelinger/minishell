@@ -36,6 +36,8 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 	int		child_pid;
 	int		status;
 
+	printf("Entrou na do_heredoc com redir_node->word = %s e redir_node->next->word = %s\n", redir_node->word, redir_node->next->word);
+
 	status = 0;
 	pipe(fds);
 	child_pid = fork();

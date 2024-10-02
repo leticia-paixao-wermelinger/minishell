@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:07:06 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/30 00:27:50 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/01 17:15:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ char    *get_executable_path(t_command *command, t_node *node)
 
     i = 0;
     get_path = my_getenv_by_list("PATH", command->my_env);
+    if (!get_path)
+        return (print_errno(node), NULL);//modificar msg
     path = get_path->value;
-    if (!(path) || !(get_path->value))
-        return (print_error("PATH variable is unset or incorrectly set\n"), NULL);
     dir = my_split(path, ':');
     if (!dir)
         return (NULL);
@@ -39,7 +39,7 @@ char    *get_executable_path(t_command *command, t_node *node)
         free(absolute_path);
         i++;
     }
-    return (print_cmd_not_found(node), free_matrix(dir), NULL);
+    return (print_errno(node), free_matrix(dir), NULL);
 }
 
 char    **cmd_list_to_array(t_node *sentences)

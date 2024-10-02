@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/27 21:28:52 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/01 23:22:44 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include <sys/stat.h>
 # include <errno.h>
 # include <limits.h>
+# include <fcntl.h>
+# include <sys/ioctl.h>
+#
 
 //------------------MAIN------------------
 //main.c
@@ -115,7 +118,6 @@ void	signal_handle(int sig);
 void	setup_heredoc_signal_handling(void);
 void	setup_signal_handling(void);
 void	signal_heredoc_handle(int sig);
-void	handle_sig_error(int sig);
 
 //-----------------LINKED_LIST---------------------
 //change_list.c
@@ -189,8 +191,7 @@ int	node_list_size(t_node *node);
 void	close_node_fds(t_node *node);
 void	close_node_fds(t_node *node);
 void	wait_cmds(t_node *node);
-void	print_cmd_not_found(t_node *node);
-void	print_permission_denied(t_node *node);
+void	do_dup2(t_node *node);
 //make_pipe.c
 int		has_pipe_or_not(t_node *sentence);
 int		pipe_config(t_node *node);
@@ -198,6 +199,9 @@ void	make_pipe(t_node *sentence);
 void	print_fds(t_node *node, int i);
 //exec_redir.c
 int has_redirect_or_not(t_node *sentence);
+//print_exec_error.c
+void	print_errno(t_node *node);
+
 
 //------------------------BUILTINS-----------------------
 //builtins.c

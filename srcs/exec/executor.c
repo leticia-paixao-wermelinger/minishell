@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/30 01:35:55 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/01 17:15:38 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int executor(t_command *command, t_node *sentence)
 	t_node	*current_node;
 
 	if (is_there_space(sentence->token->word))
-		return (print_cmd_not_found(sentence), NO_ERROR);
+		return (print_errno(sentence), NO_ERROR);
 	if (has_pipe_or_not(sentence) == TRUE)
 		make_pipe(sentence);
 	current_node = sentence;

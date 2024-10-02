@@ -35,15 +35,17 @@ void    run_execve(t_command *command, t_node *list)
     node = list;
     args = cmd_list_to_array(node);
     node->pid = fork();
-    if (node->pid != 0)
-        return ;
-    if (node->fd_out != STDOUT_FILENO)
-        dup2(node->fd_out, STDOUT_FILENO);
-    if (node->fd_in != STDIN_FILENO)
-        dup2(node->fd_in, STDIN_FILENO);
-    temp = node;
-    close_node_fds(temp);
-    execve(path, args, env_array);
+    if (node->pid == 0)
+    {
+            if (node->fd_out != STDOUT_FILENO)
+            dup2(node->fd_out, STDOUT_FILENO);
+        if (node->fd_in != STDIN_FILENO)
+            dup2(node->fd_in, STDIN_FILENO);
+        temp = node;
+        close_node_fds(temp);
+        execve(path, args, env_array);
+    }
+    execve_clean(path, args, env_array);
     return ;
 }
 

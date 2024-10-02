@@ -28,7 +28,11 @@ void    run_execve(t_command *command, t_node *list)
             return (print_errno(list));
         path = get_executable_path(command, list);
         if (!path)
+        {
+            free_matrix(env_array);
+            free(path);
             return ;
+        }
     }
     else
         path = list->token->word;

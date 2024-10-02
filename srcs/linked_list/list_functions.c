@@ -90,7 +90,7 @@ t_tokens	*create_last_token(char *word, t_tokens *prev)
 
 // As próximas 2 funções são para testes durante a elaboração do código:
 
-void	print_tokens(t_tokens *token)
+/*void	print_tokens(t_tokens *token)
 {
 	t_tokens	*temp;
 //	int			i = 0;
@@ -137,3 +137,4 @@ void	printlist(t_node *list)
 		temp = temp->next;
 	}
 }
+*/

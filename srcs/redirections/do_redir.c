@@ -55,6 +55,7 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 		waitpid(child_pid, &status, 0);
 	close(fds[1]);
 	sentence->fd_in = fds[0];
+	printf("Em do_redir_out, vai apagar: |%s| &%p e |%s| - &%p\n", redir_node->next->word, redir_node->next, redir_node->word, redir_node);
 	remove_word_token(redir_node->next, sentence->token);
 	remove_word_token(redir_node, sentence->token);
 	if (!WIFEXITED(status))

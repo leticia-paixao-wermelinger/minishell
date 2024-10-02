@@ -103,6 +103,7 @@ void	print_tokens(t_tokens *token)
 			temp = temp->next;
 			continue ;
 		}
+		printf("Endereço do token: %p\n", temp);
 		printf("Word: %s\n", temp->word);
 		printf("Type: %i\n", temp->type);
 		temp = temp->next;

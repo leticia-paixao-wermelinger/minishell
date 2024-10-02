@@ -22,6 +22,8 @@ void	clear_input(t_command *command)
 {
 	free(command->prompt);
 	free(command->input);
+	if (command->input_matrix != NULL)
+		my_clean_vect(command->input_matrix);
 }
 
 void	final_clear(t_command *command)
@@ -43,6 +45,7 @@ void	free_list(t_node *list)
 		free_t_tokens(temp_token);
 		next_node = list->next;
 		free(temp);
+		temp = NULL;
 		list = next_node;
 	}
 }
@@ -56,7 +59,9 @@ void	free_t_tokens(t_tokens *node)
 	{
 		next_token = node->next;
 		free(node->word);
+		node->word = NULL;
 		free(node);
+		node = NULL;
 		node = next_token;
 	}
 }
@@ -69,8 +74,11 @@ void	free_env(t_env *list)
 	{
 		temp = list;
 		free(temp->key);
+		temp->key = NULL;
 		free(temp->value);
+		temp->value = NULL;
 		list = list->next;
 		free(temp);
+		temp = NULL;
 	}
 }

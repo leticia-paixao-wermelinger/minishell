@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/09/27 21:29:13 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/10/02 15:56:14 by lpaixao-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -143,7 +143,7 @@ run: re
 	./$(NAME)
 
 val: re
-	valgrind --leak-check=full --show-leak-kinds=all --suppressions=supressions.supp ./$(NAME)
+	valgrind  --leak-check=full --show-leak-kinds=all --track-fds=yes --suppressions=supressions.supp ./$(NAME)
 
 norm:
 	@echo "$(BL)Passando a Norminette com a flag -R CheckForbiddenSourceHeader: $(RESET)"

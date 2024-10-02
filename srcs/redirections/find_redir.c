@@ -44,7 +44,7 @@ int	redirections(t_node *sentence, t_command *command)
 				}
 				flag_first = OFF;
 			}
-			else if (word->next != NULL)
+			if (word->next != NULL)
 			{
 				ret = check_redir(temp, word, command, flag_first);
 				printf("Saiu da check_redir com %p, que aponta para: %s\n", word, word->word);

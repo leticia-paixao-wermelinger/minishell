@@ -44,4 +44,3 @@ t_tokens	*create_heredoc_list(char *s)
 	my_clean_vect(sentence);
 	return (node);
 }
-

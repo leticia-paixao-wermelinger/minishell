@@ -38,6 +38,7 @@ int	parser(t_command *command)
 	command->input_matrix = split_sentence_by_char(command->input, '|');
 	make_list_from_input(command);
 	my_clean_vect(command->input_matrix);
+	command->input_matrix = NULL;
 	search_tokens(command->l_input);
 	if (general_input_validation(command->l_input) == ERROR)
 	{
@@ -45,7 +46,7 @@ int	parser(t_command *command)
 		return (ERROR);
 	}
 //Imprimir a lista para teste
-//	printlist(command->l_input);
+	printlist(command->l_input);
 	return (NO_ERROR);
 }
 

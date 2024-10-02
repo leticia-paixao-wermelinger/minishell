@@ -50,7 +50,7 @@ t_node	*create_first_input_node(char *s, t_node *list)
 t_node	*create_last_input_node(char *s, t_node *prev)
 {
 	t_node	*new;
-
+	
 	new = (t_node *)malloc(sizeof(t_node));
 	if (!new)
 		return (NULL);
@@ -103,6 +103,7 @@ void	print_tokens(t_tokens *token)
 			temp = temp->next;
 			continue ;
 		}
+		printf("Endereço do token: %p\n", temp);
 		printf("Word: %s\n", temp->word);
 		printf("Type: %i\n", temp->type);
 		temp = temp->next;

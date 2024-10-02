@@ -88,6 +88,7 @@ t_tokens	*make_list_tokens(char *s, t_node *list)
 			free_sentences(sentence);
 			free_tokens(list->token);
 			free(list);
+			list = NULL;
 			return (NULL);
 		}
 	}
@@ -116,9 +117,11 @@ void	free_sentences(char **sentences)
 	while (sentences[i])
 	{
 		free(sentences[i]);
+		sentences[i] = NULL;
 		i++;
 	}
 	free(sentences);
+	sentences = NULL;
 }
 
 /**
@@ -139,7 +142,9 @@ void	free_tokens(t_tokens *token)
 	{
 		temp = token->next;
 		free(token->word);
+		token->word = NULL;
 		free(token);
+		token = NULL;
 		token = temp;
 	}
 }

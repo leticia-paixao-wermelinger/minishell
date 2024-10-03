@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 19:28:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 19:56:52 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,7 +167,7 @@ int		check_permissions(char *pathname, int flag);
 
 //---------------------EXEC-----------------------
 //clean_execve.c
-void	execve_clean(char *path, char **args, char **env_array);
+void	execve_clean(char **args, char **env_array);
 void	free_matrix(char **matrix);
 //executor.c
 int		executor(t_command *command, t_node *sentence);

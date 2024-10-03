@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:11:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/03 19:39:02 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 19:57:23 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ void    run_execve(t_command *command, t_node *list)
 
     node = list;
     env_array = envp_list_to_array(command->my_env);
-    if (access(list->token->word, (F_OK | X_OK)) != 0)
+    if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-            return (print_errno(list));
-        path = get_executable_path(command, list);
+            return (print_errno(node));
+        path = get_executable_path(command, node);
         if (!path)
         {
             free_matrix(env_array);
-            free(path);
             return ;
         }
     }
@@ -45,7 +44,9 @@ void    run_execve(t_command *command, t_node *list)
         close_node_fds(temp);
         execve(path, args, env_array);
     }
-    execve_clean(path, args, env_array);
+    if (path != node->token->word)
+        free(path);
+    execve_clean(args, env_array);
     return ;
 }
 

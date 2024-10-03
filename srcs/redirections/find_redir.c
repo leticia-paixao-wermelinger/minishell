@@ -6,7 +6,7 @@
 /*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 09:42:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:41:04 by lpaixao-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,23 +31,28 @@ int	redirections(t_node *sentence, t_command *command)
 		word = temp->token;
 		while (word)
 		{
-			printf("Está no loop de redurections com word = %s\n", word->word);
+//			printf("Está no loop de redurections com word = %s\n", word->word);
 			if (flag_first == ON)
 			{
-				printf("1 condução de first flag\n");
+//				printf("1 condução de first flag\n");
 				if (token_is_redir(word) == TRUE)
 				{
-					printf("1 token é redir\n");
+//					printf("1 token é redir\n");
+//					printf("sentence->token->word == %s\n", sentence->token->word);
+//					printf("word == %s\n", word->word);
 					temp_token = word;
-					sentence->token = word->next->next;
-					ret = check_redir(temp, temp_token, command, flag_first);
+					//temp->token = word->next->next;
+//					printf("sentence->token->word == %s\n", sentence->token->word);
+					ret = check_redir(sentence, temp_token, command, flag_first);
+					//sentence->token = temp->token;
+					word = sentence->token;
 				}
 				flag_first = OFF;
 			}
 			if (word->next != NULL)
 			{
 				ret = check_redir(temp, word, command, flag_first);
-				printf("Saiu da check_redir com %p, que aponta para: %s\n", word, word->word);
+//				printf("Saiu da check_redir com %p, que aponta para: %s\n", word, word->word);
 				if (ret == -1)
 					word = word->next;
 			}
@@ -58,48 +63,48 @@ int	redirections(t_node *sentence, t_command *command)
 		}
 		temp = temp->next;
 	}
-	printf("Vai retornar com a estrutura:\n");
-	printlist(command->l_input);
+//	printf("Vai retornar com a estrutura:\n");
+//	printlist(command->l_input);
 	return (ret);
 }
 
-// teste: echo oieoieee > out1 > out2 > out3
-
-static int	check_redir(t_node *temp, t_tokens *word, t_command *command, int first_flag)
+static int	check_redir(t_node *sentence, t_tokens *word, t_command *command, int first_flag)
 {
 	int			ret;
-	t_tokens	*node;
+	t_tokens	*node_token;
 
 	ret = -1;
-	printf("Função check_redir recebeu o endereço %p, que aponta para: %s e c a first_flag = %i\n", word, word->word, first_flag);
+//	printf("Função check_redir recebeu o endereço %p, que aponta para: %s e c a first_flag = %i\n", word, word->word, first_flag);
+//	printf("sentence->token->word em check_redir == %s\n", sentence->token->word);
 	if (first_flag != ON)
 	{
-		printf("Entrou no if de first_flag com o endereço %p, que aponta para: %s\n", word, word->word);
-		node = word->next;
-		printf("Saiu do if de first_flag com o endereço %p, que aponta para: %s\n", word, word->word);
-
+//		printf("Entrou no if de first_flag com o endereço %p, que aponta para: %s\n", word, word->word);
+		node_token = word->next;
+//		printf("sentence->token->word em check_redir == %s\n", sentence->token->word);
+//		printf("Saiu do if de first_flag com o endereço %p, que aponta para: %s\n", word, word->word);
 	}
 	else
 	{
-		node = word;
+		node_token = word;
+//		printf("no else: sentence->token->word em check_redir == %s\n", sentence->token->word);
 	//	word = word->next->next;
 	}
-	if (node->type == REDIR_APPEND)
-		ret = do_append(temp, node);
-	else if (node->type == REDIR_OUT)
+	if (node_token->type == REDIR_APPEND)
+		ret = do_append(sentence, node_token);
+	else if (node_token->type == REDIR_OUT)
 	{
-		printf("Vai chamar do_redir_out\n");
-		ret = do_redir_out(temp, node);
+//		printf("Vai chamar do_redir_out\n");
+		ret = do_redir_out(sentence, node_token);
 	}
-	else if (node->type == REDIR_IN)
-		ret = do_redir_in(temp, node);
-	else if (node->type == REDIR_HEREDOC)
+	else if (node_token->type == REDIR_IN)
+		ret = do_redir_in(sentence, node_token);
+	else if (node_token->type == REDIR_HEREDOC)
 	{
-		printf("Vai chamar do_heredoc\n");
-		ret = do_heredoc(temp, node, command->my_env, command);
+//		printf("Vai chamar do_heredoc com sentence == %p e sentence->token == %p\n", sentence, sentence->token);
+		ret = do_heredoc(sentence, node_token, command->my_env, command);
 	}
 /*	else
 		word = word->next;*/
-	printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", word, word->word);
+//	printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", sentence->token, sentence->token->word);
 	return (ret);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 00:13:51 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 09:18:25 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:17:52 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 int	do_append(t_node *sentence, t_tokens *redir_node)
 {
 	char	*filename;
-	
+
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
 		sentence->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 19:56:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 20:25:23 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ void	run_execve(t_command *command, t_node *list);
 void	run_pipe_execve(t_command *command, t_node *list);
 //utils.c
 int	node_list_size(t_node *node);
-void	close_node_fds(t_node *node);
+void	close_all_node_fds(t_node *node);
 void	close_node_fds(t_node *node);
 void	wait_cmds(t_node *node);
 void	do_dup2(t_node *node);

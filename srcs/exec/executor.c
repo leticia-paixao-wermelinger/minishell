@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/01 17:15:38 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 20:25:35 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int executor(t_command *command, t_node *sentence)
 		make_pipe(sentence);
 	current_node = sentence;
 	if (redirections(sentence, command) == ERROR)
-		return (ERROR);
+		return (0);
 	current_node = sentence;
 	while (current_node)
 	{
@@ -35,6 +35,7 @@ int executor(t_command *command, t_node *sentence)
 	}
 	current_node = sentence;
 	wait_cmds(current_node);
+	close_all_node_fds(current_node);
     return (NO_ERROR);
 }
 

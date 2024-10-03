@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:11:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/01 17:06:48 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 19:29:08 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,13 @@ void    run_execve(t_command *command, t_node *list)
     node->pid = fork();
     if (node->pid == 0)
     {
-            if (node->fd_out != STDOUT_FILENO)
-            dup2(node->fd_out, STDOUT_FILENO);
-        if (node->fd_in != STDIN_FILENO)
-            dup2(node->fd_in, STDIN_FILENO);
+        do_dup2(node);
         temp = node;
         close_node_fds(temp);
         execve(path, args, env_array);
     }
     execve_clean(path, args, env_array);
+    path = NULL;
     return ;
 }
 

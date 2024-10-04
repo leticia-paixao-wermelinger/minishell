@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/28 19:35:39 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 00:22:11 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ void    run_pipe_builtin(t_command *command, t_node *node)
 {
     t_node  *temp;
 
-    if (node->fd_in != STDIN_FILENO)
-        dup2(node->fd_in, 0);
-    if (node->fd_out != STDOUT_FILENO)
-        dup2(node->fd_out, 0);
+    do_dup2(node);
     temp = node;
     close_node_fds(temp);
     if (is_last_node(node) == TRUE)
@@ -44,7 +41,7 @@ int    pipe_execution(t_command *command, t_node *node)
             run_pipe_builtin(command, node);
         else
             run_pipe_execve(command, node);
-        exit(NO_ERROR);
+        //exit(NO_ERROR);
     }
     return (ERROR);
 }

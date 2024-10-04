@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:11:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/03 19:57:23 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 00:18:50 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,28 @@ void    run_pipe_execve(t_command *command, t_node *list)
     char        **env_array;
     char        **args;
 
-    env_array = envp_list_to_array(command->my_env);
-    if (access(list->token->word, X_OK) != 0) // verificar acesso em outra função mais completa!!!
-        path = get_executable_path(command, list);
-    else
-        path = list->token->word;
     node = list;
+    env_array = envp_list_to_array(command->my_env);
+    if (access(node->token->word, (F_OK | X_OK)) != 0)
+    {
+        if (errno == EACCES)
+            return (print_errno(node));
+        path = get_executable_path(command, node);
+        if (!path)
+        {
+            free_matrix(env_array);
+            return ;
+        }
+    }
+    else
+        path = node->token->word;
     args = cmd_list_to_array(node);
     do_dup2(node);
     temp = node;
     close_node_fds(temp);
     execve(path, args, env_array);
+    if (path != node->token->word)
+        free(path);
+    execve_clean(args, env_array);
     return ;
 }

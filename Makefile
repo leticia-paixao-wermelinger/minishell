@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/10/02 15:56:14 by lpaixao-         ###   ########.fr        #
+#    Updated: 2024/10/03 22:03:36 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,6 @@ srcs/exec/pipe_execution.c \
 srcs/exec/executor.c \
 srcs/exec/utils.c \
 srcs/exec/make_pipe.c \
-srcs/exec/exec_redir.c \
 srcs/exec/print_exec_error.c \
 \
 srcs/builtints/builtins.c \

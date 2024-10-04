@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 20:25:23 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 22:03:06 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,8 +196,6 @@ int		has_pipe_or_not(t_node *sentence);
 int		pipe_config(t_node *node);
 void	make_pipe(t_node *sentence);
 void	print_fds(t_node *node, int i);
-//exec_redir.c
-int has_redirect_or_not(t_node *sentence);
 //print_exec_error.c
 void	print_errno(t_node *node);
 

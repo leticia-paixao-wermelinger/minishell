@@ -41,7 +41,7 @@ int    pipe_execution(t_command *command, t_node *node)
             run_pipe_builtin(command, node);
         else
             run_pipe_execve(command, node);
-        //exit(NO_ERROR);
+	exit(g_status(NO_ERROR));
     }
     return (ERROR);
 }

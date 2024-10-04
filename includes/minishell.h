@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 22:03:06 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 00:47:50 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	remove_quote(char **str, int i, enum e_ascii quote);
 //errors_utils.c
 int		is_there_space(char *str);
 char	*strdup_tillc(char *str);
+int		is_empty(char *str);
 //spaces_validation.c
 int		only_spaces(char *str);
 char	*remove_init_and_end_spaces(char *str);
@@ -170,6 +171,7 @@ int		check_permissions(char *pathname, int flag);
 void	execve_clean(char **args, char **env_array);
 void	free_matrix(char **matrix);
 //executor.c
+int		check_cmds(t_node *sentence);
 int		executor(t_command *command, t_node *sentence);
 void	run_simple_commands(t_command *command, t_node *node);
 //execve_utils.c

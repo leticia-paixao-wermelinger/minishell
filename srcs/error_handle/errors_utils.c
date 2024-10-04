@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 17:47:55 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/21 17:44:41 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/04 00:43:21 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ int	is_there_space(char *str)
 		i++;
 	}
 	return (FALSE);
+}
+
+int	is_empty(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != ' ')
+			return (FALSE);
+		i++;
+	}
+	return (TRUE);
 }
 
 char	*strdup_tillc(char *str)

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 13:52:16 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 01:09:40 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static void	go_home(t_env *env, char *old_pwd)
 	t_env	*home;
 
 	home = my_getenv_by_list("HOME", env);
+	if (!home)
+	{
+		printf("bash: cd: HOME not set\n");
+		return ;
+	}
 	chdir(home->value);
 	change_pwd(home->value, env);
 	change_old_pwd(old_pwd, env);

@@ -6,18 +6,27 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/03 23:43:45 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 00:46:42 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int	check_cmds(t_node *sentence)
+{
+	if (is_there_space(sentence->token->word))
+		return (print_errno(sentence), ERROR);
+	if (is_empty(sentence->token->word) == TRUE)
+		return (print_errno(sentence), ERROR);
+	return (NO_ERROR);
+}
+
 int executor(t_command *command, t_node *sentence)
 {
 	t_node	*current_node;
 
-	if (is_there_space(sentence->token->word))
-		return (print_errno(sentence), NO_ERROR);
+	if (check_cmds(sentence) == ERROR)
+		return (ERROR);
 	if (has_pipe_or_not(sentence) == TRUE)
 		make_pipe(sentence);
 	current_node = sentence;

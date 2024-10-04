@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/04 00:46:42 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 18:37:11 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,19 @@ int	check_cmds(t_node *sentence)
 int executor(t_command *command, t_node *sentence)
 {
 	t_node	*current_node;
+	int	has_pipe;
 
 	if (check_cmds(sentence) == ERROR)
 		return (ERROR);
-	if (has_pipe_or_not(sentence) == TRUE)
+	has_pipe = has_pipe_or_not(sentence);
+	if (has_pipe == TRUE)
 		make_pipe(sentence);
-	current_node = sentence;
 	if (redirections(sentence, command) == ERROR)
 		return (ERROR);
 	current_node = sentence;
 	while (current_node)
 	{
-		if (!current_node->next)
+		if (!has_pipe)
 			run_simple_commands(command, current_node);
 		else
 			pipe_execution(command, current_node);

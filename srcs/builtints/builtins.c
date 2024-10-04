@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 22:13:01 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 18:08:40 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	run_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
 
 	ret = NO_ERROR;
 	if (my_strcmp(token->word, "echo") == 0)
-		my_echo(token->next, fd);
+		ret = my_echo(token->next, fd);
 	else if (my_strcmp(token->word, "cd") == 0)
 		ret = my_cd(token->next, env);
 	else if (my_strcmp(token->word, "pwd") == 0)
@@ -31,5 +31,6 @@ int	run_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
 		print_env(env, fd);
 	else if (my_strcmp(token->word, "exit") == 0)
 		ret = my_exit(token->next, command);
+	g_status(ret);
 	return (ret);
 }

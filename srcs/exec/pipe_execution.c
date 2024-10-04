@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/04 00:22:11 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 18:39:14 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void    run_pipe_builtin(t_command *command, t_node *node)
     if (is_last_node(node) == TRUE)
             run_builtin(command, node->token, command->my_env, STDOUT_FILENO);
     else
-        run_builtin(command, node->token, command->my_env, node->next->fd_in);
+            run_builtin(command, node->token, command->my_env, node->next->fd_in);
 }
 
 int    pipe_execution(t_command *command, t_node *node)

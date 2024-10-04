@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/23 00:13:51 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 20:17:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 21:41:08 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 
 int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *command)
 {
-	int		fds[2];
-	int		child_pid;
-	int		status;
+	int			fds[2];
+	int			child_pid;
+	int			status;
+	t_tokens	*temp;
 
-	printf("Entrou na do_heredoc com redir_node->word = %s e redir_node->next->word = %s\n", redir_node->word, redir_node->next->word);
-
+	temp = NULL;
+//	printf("Entrou na do_heredoc com redir_node->word = %s e redir_node->next->word = %s\n", redir_node->word, redir_node->next->word);
+//	printf("Na do_heredoc, sentence->token->word = %s\n", sentence->token->word);
 	status = 0;
 	pipe(fds);
 	child_pid = fork();
@@ -55,10 +57,15 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 		waitpid(child_pid, &status, 0);
 	close(fds[1]);
 	sentence->fd_in = fds[0];
-	//printf("Em do_redir_out, vai apagar: |%s| &%p e |%s| - &%p\n", redir_node->next->word, redir_node->next, redir_node->word, redir_node);
+//	printf("Em do_redir_out, vai apagar: |%s| &%p e |%s| - &%p\n", redir_node->next->word, redir_node->next, redir_node->word, redir_node);
+//	printf("Em do_redir_out, start == |%s| &%p\n", sentence->token->word, sentence->token);
+	if (sentence->token == redir_node)
+		temp = redir_node->next->next;
 	remove_word_token(redir_node->next, sentence->token);
 	remove_word_token(redir_node, sentence->token);
-	printf("Antes de retornar heredoc, start = |%s|\n", sentence->token->word);
+	if (temp != NULL)
+		sentence->token = temp;
+//	printf("Antes de retornar heredoc, start = |%s|\n", sentence->token->word);
 	if (!WIFEXITED(status))
 		return (ERROR);
 	return (NO_ERROR);
@@ -135,6 +142,9 @@ int	do_append(t_node *sentence, t_tokens *redir_node)
 {
 	char	*filename;
 
+	t_tokens    *temp;
+
+	temp = NULL;
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
 		sentence->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);
@@ -144,8 +154,12 @@ int	do_append(t_node *sentence, t_tokens *redir_node)
 			return (ERROR);
 		sentence->fd_out = open(filename, O_WRONLY | O_APPEND);
 	}
+	if (sentence->token == redir_node)
+		temp = redir_node->next->next;
 	remove_word_token(redir_node->next, sentence->token);
 	remove_word_token(redir_node, sentence->token);
+	if (temp != NULL)
+		sentence->token = temp;
 	return (NO_ERROR);
 }
 
@@ -168,8 +182,10 @@ TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 
 int	do_redir_out(t_node *sentence, t_tokens *redir_node)
 {
-	char	*filename;
+	char		*filename;
+	t_tokens	*temp;
 
+	temp = NULL;
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
 		sentence->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);
@@ -177,10 +193,16 @@ int	do_redir_out(t_node *sentence, t_tokens *redir_node)
 	{
 		if (check_permissions(filename, W_OK) == ERROR)
 			return (ERROR);
+/*		if (sentence->fd_out != 1 || sentence->fd_out != 2)
+			close(sentence->fd_out);*/
 		sentence->fd_out = open(filename, O_WRONLY | O_TRUNC);
 	}
+	if (sentence->token == redir_node)
+		temp = redir_node->next->next;
 	remove_word_token(redir_node->next, sentence->token);
 	remove_word_token(redir_node, sentence->token);
+	if (temp != NULL)
+		sentence->token = temp;
 	return (NO_ERROR);
 }
 
@@ -198,7 +220,9 @@ of the file from the linked list t_tokens.
 int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 {
 	char	*filename;
+	t_tokens    *temp;
 
+	temp = NULL;
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
 	{
@@ -208,7 +232,11 @@ int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 	if (check_permissions(filename, R_OK) == ERROR)
 		return (ERROR);
 	sentence->fd_in = open(filename, O_RDONLY);
+	if (sentence->token == redir_node)
+		temp = redir_node->next->next;
 	remove_word_token(redir_node->next, sentence->token);
 	remove_word_token(redir_node, sentence->token);
+	if (temp != NULL)
+		sentence->token = temp;
 	return (NO_ERROR);
 }

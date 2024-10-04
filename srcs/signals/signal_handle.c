@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/03 23:39:37 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/04 14:10:36 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	signal_heredoc_handle(int sig)
 	}
 	else
 	{
-		write(1, "> ", 2);
 		ioctl(1, TIOCSTI, 1);
 		rl_on_new_line();
 		rl_replace_line("", 0);

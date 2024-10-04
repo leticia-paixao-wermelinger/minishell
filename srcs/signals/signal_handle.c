@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/01 23:16:59 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/03 23:39:37 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
  *
  * @param sig: The signal number received by the process.
  */
-
-
 
 // ---- MUDAR A DOCUMENTAÇÃO DESSA FUNÇÃO
 
@@ -41,12 +39,10 @@ void	signal_handle(int sig)
 	return ;
 }
 
-void	signal_heredoc_handle(int sig)
+void	setup_signal_handling(void)
 {
-	if (sig == SIGINT)
-		g_status(USED_CTRL_C);
-	else if (sig == SIGQUIT)
-		return ;
+	signal(SIGINT, signal_handle);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 /**
@@ -59,12 +55,6 @@ void	signal_heredoc_handle(int sig)
  * If the signal handler setup fails for any of the signals, it calls `handle_sig_error`.
  */
 
-void	setup_signal_handling(void)
-{
-	signal(SIGINT, signal_handle);
-	signal(SIGQUIT, SIG_IGN);
-}
-
 void	setup_heredoc_signal_handling(void)
 {
 	struct sigaction	sa;
@@ -76,3 +66,21 @@ void	setup_heredoc_signal_handling(void)
 	sa.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sa, NULL);
 }
+
+void	signal_heredoc_handle(int sig)
+{
+	if (sig == SIGINT)
+	{
+		signal(SIGINT, SIG_IGN);
+		g_status(USED_CTRL_C);
+		exit(130);
+	}
+	else
+	{
+		write(1, "> ", 2);
+		ioctl(1, TIOCSTI, 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+}
+

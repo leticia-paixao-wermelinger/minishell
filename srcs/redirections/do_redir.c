@@ -56,6 +56,8 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 	if (child_pid > 1)
 		waitpid(child_pid, &status, 0);
 	close(fds[1]);
+	if (sentence->fd_in != 0)
+		close(sentence->fd_in);
 	sentence->fd_in = fds[0];
 //	printf("Em do_redir_out, vai apagar: |%s| &%p e |%s| - &%p\n", redir_node->next->word, redir_node->next, redir_node->word, redir_node);
 //	printf("Em do_redir_out, start == |%s| &%p\n", sentence->token->word, sentence->token);
@@ -147,11 +149,17 @@ int	do_append(t_node *sentence, t_tokens *redir_node)
 	temp = NULL;
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
+	{
+		if (sentence->fd_out != 1 && sentence->fd_out != 2)
+			close(sentence->fd_out);
 		sentence->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	}
 	else
 	{
 		if (check_permissions(filename, W_OK) == ERROR)
 			return (ERROR);
+		if (sentence->fd_out != 1 && sentence->fd_out != 2)
+			close(sentence->fd_out);
 		sentence->fd_out = open(filename, O_WRONLY | O_APPEND);
 	}
 	if (sentence->token == redir_node)
@@ -188,13 +196,17 @@ int	do_redir_out(t_node *sentence, t_tokens *redir_node)
 	temp = NULL;
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
+	{
+		if (sentence->fd_out != 1 && sentence->fd_out != 2)
+			close(sentence->fd_out);
 		sentence->fd_out = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 0777);
+	}
 	else
 	{
 		if (check_permissions(filename, W_OK) == ERROR)
 			return (ERROR);
-/*		if (sentence->fd_out != 1 || sentence->fd_out != 2)
-			close(sentence->fd_out);*/
+		if (sentence->fd_out != 1 && sentence->fd_out != 2)
+			close(sentence->fd_out);
 		sentence->fd_out = open(filename, O_WRONLY | O_TRUNC);
 	}
 	if (sentence->token == redir_node)
@@ -231,6 +243,8 @@ int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 	}
 	if (check_permissions(filename, R_OK) == ERROR)
 		return (ERROR);
+	if (sentence->fd_in != 0)
+			close(sentence->fd_in);
 	sentence->fd_in = open(filename, O_RDONLY);
 	if (sentence->token == redir_node)
 		temp = redir_node->next->next;

@@ -19,6 +19,7 @@ int	my_echo(t_tokens *node, int fd)
 
 	temp = node;
 	flag_nl = ON;
+//	printf("Entrou na função do echo\n");
 	if (node == NULL)
 	{
 		my_putstr_fd("\n", fd);

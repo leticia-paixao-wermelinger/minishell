@@ -56,8 +56,9 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 	node = my_getenv_by_list(key, env);
 	if (!node || (my_str_end_cmp(node->key, key) != 0))
 	{
-		temp = my_strldup(str, (j - 1));
+		temp = join_strs(str, "", (j - 1), (my_strlen(key)), &index);
 		index = my_strlen(key) - 1;
+
 	}
 	else
 	{
@@ -113,7 +114,7 @@ static char	*take_name_var(char *str, int j)
 
 	i = j;
 	size = 0;
-	while (str[i] && (my_isalpha(str[i]) != 0 || my_isdigit(str[i]) != 0))
+	while (str[i] && (my_isalpha(str[i]) != 0 || my_isdigit(str[i]) != 0 || str[i] == '_'))
 	{
 		size++;
 		i++;

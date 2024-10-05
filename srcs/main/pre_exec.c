@@ -25,7 +25,8 @@
 
 int	pre_exec(t_command   *command)
 {
-	// TA DANDO ERRO NAS ASPAS, EXEMPLO: echo "test'e $LANG" de 'aspas $LANG"'
+//	printf("ENVIANDO A SEGUINTE LISTA PARA A PRÉ EXECUÇÃO:\n");
+//	printlist(command->l_input);
 	single_quotes_to_unprintable(command->l_input);
 	remove_all_quotes(command->l_input, DOUBLE_QUOT_MARK);
 	var_exp(command);

@@ -33,7 +33,7 @@ void	remove_all_quotes(t_node *list, int quote)
 				token = token->next;
 				continue ;
 			}
-			while (token->word[i])
+			while (i <= (int)my_strlen(token->word) && token->word[i])
 			{
 				if (token->word[i] == quote && quote_is_valid(token->word, i, quote) == TRUE)
 					remove_quote(&(token->word), i, quote);
@@ -113,6 +113,7 @@ static void	remove_quote_2(char *temp, char **str)
 		free(*str);
 		*str = NULL;
 		*str = my_strdup(temp);
+		printf("tamanho da str malocada em %p: %li\n", str, my_strlen(*str));
 	}
 	free(temp);
 	free(last);

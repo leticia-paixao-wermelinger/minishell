@@ -45,7 +45,10 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 				if (dollar_is_closed_by_quote(&(token->word), UNPRINT_CHAR) == TRUE)
 					i++;
 				else
-					check_post_dollar(token, token->word, i, env);
+				{
+					if (check_post_dollar(token, token->word, i, env) == CLOSE)
+						i++;
+				}
 			}
 			else
 				i++;
@@ -61,15 +64,11 @@ int	check_post_dollar(t_tokens *token, char *str, int j, t_env *env)
 	index = 0;
 	j++;
 	if (str[j] == QUESTION_MARK)
-	{
 		index = print_global_var(token, str, j);
-	}
 	else if (str[j] == DOLLAR)
-	{
 		index = double_dollar(token, str, j);
-	}
 	else if ((int)my_strlen(str) == j)
-		return (j);
+		return (CLOSE);
 	else
 	{
 		expand_variable(token, env, str, j);

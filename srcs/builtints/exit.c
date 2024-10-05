@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static void clear_all(t_command *command, int ret);
+static void clear_all(t_command *command);
 
 /*
 Eu não estou entendendo. Nos meus testes:
@@ -59,11 +59,11 @@ int	my_exit(t_tokens *token, t_command *command)
 		else
 			g_status(ret);
 	}
-	clear_all(command, ret);
+	clear_all(command);
 	return (ERROR);
 }
 
-static void	clear_all(t_command *command, int ret)
+static void	clear_all(t_command *command)
 {
 	clear_loop_end(command);
 	final_clear(command);

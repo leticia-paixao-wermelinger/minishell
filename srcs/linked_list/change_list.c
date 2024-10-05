@@ -35,7 +35,6 @@ void	remove_first_word_token(t_tokens *start)
 {
 	t_tokens *temp;
 
-	//printf("Entrou na remove_first_word_token: |%s| &%p\n", start->word, start);
 	temp = start;
 	start = start->next;
 	free(temp->word);
@@ -47,7 +46,6 @@ void	remove_word_token(t_tokens *node, t_tokens *start)
 	t_tokens *temp;
 
 	temp = start;
-	//printf("Entrou na remove_word_token: |%s| &%p >> start = |%s| &%p\n", node->word, node, start->word, start);
 	if (start == node)
 	{
 		remove_first_word_token(start);
@@ -55,10 +53,8 @@ void	remove_word_token(t_tokens *node, t_tokens *start)
 	}
 	while (temp)
 	{
-		//printf("Está no loop de remove_word_token em %s e c o next = %s\n", temp->word, temp->next->word);
 		if (temp->next == node)
 		{
-			//printf("Vai apagar: |%s| &%p\n", node->word, node);
 			temp->next = node->next;
 			free(node->word);
 			free(node);
@@ -66,5 +62,43 @@ void	remove_word_token(t_tokens *node, t_tokens *start)
 		}
 		else
 			temp = temp->next;
+	}
+}
+
+void	remove_empty_nodes(t_node *main_node)
+{
+	t_node		*sentence;
+	t_tokens	*first;
+	t_tokens	*tword;
+	t_tokens	*temp;
+
+	sentence = main_node;
+	while(sentence)
+	{
+		first = sentence->token;
+		tword = first;
+		while (first && my_strlen(first->word) == 0)
+		{
+			temp = first->next;
+			remove_word_token(tword, first);
+			tword = temp;
+			first = temp;
+			sentence->token = first;
+		}
+		while(tword)
+		{
+			if (tword->next != NULL)
+			{
+				if (my_strlen(tword->next->word) == 0)
+					remove_word_token(tword->next, first);
+				else
+					tword = tword->next;
+			}
+			else
+				break ;
+		}
+		if (!first)
+			sentence->token = NULL;
+		sentence = sentence->next;
 	}
 }

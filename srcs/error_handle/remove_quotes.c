@@ -113,7 +113,6 @@ static void	remove_quote_2(char *temp, char **str)
 		free(*str);
 		*str = NULL;
 		*str = my_strdup(temp);
-		printf("tamanho da str malocada em %p: %li\n", str, my_strlen(*str));
 	}
 	free(temp);
 	free(last);

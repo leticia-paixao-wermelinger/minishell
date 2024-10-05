@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/04 17:58:10 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/05 03:48:25 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,11 @@ void	wait_cmds(t_node *node)
 		if (node->pid != 0)
 			waitpid(node->pid, &node->exit_status, 0);
 		node = node->next;
+		/*if (WIFEXITED(node->exit_status))
+		{
+			g_status(WEXITSTATUS(node->exit_status));
+		}
+		else
+			g_status(-1);*/
 	}
 }

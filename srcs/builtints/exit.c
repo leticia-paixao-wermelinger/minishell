@@ -67,5 +67,5 @@ static void	clear_all(t_command *command, int ret)
 {
 	clear_loop_end(command);
 	final_clear(command);
-	exit(ret);
+	exit(g_status(-1));
 }

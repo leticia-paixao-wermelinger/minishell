@@ -29,9 +29,12 @@ int	pre_exec(t_command   *command)
 //	printlist(command->l_input);
 	// ajustes de aspas simples múltiplas de 2 como: echo ''$PWD''
 	single_quotes_to_unprintable(command->l_input);
-	remove_all_quotes(command->l_input, DOUBLE_QUOT_MARK);
+	remove_all_quotes(command->l_input, SIMPLE_QUOT_MARK);
+//	remove_all_quotes(command->l_input, DOUBLE_QUOT_MARK);
+//	printf("APÓS REMOÇÃO DE ASPAS DUPLAS:\n");
+//	printlist(command->l_input);
 	var_exp(command);
-	//remove_all_quotes(command->l_input, SIMPLE_QUOT_MARK);
+	remove_all_quotes(command->l_input, DOUBLE_QUOT_MARK);
 	remove_all_quotes(command->l_input, UNPRINT_CHAR);
 //	printf("ANTES DE REMOVER NODES VAZIOS:\n");
 //	printlist(command->l_input);

@@ -13,6 +13,7 @@
 #include "../../includes/minishell.h"
 
 static void	change_single_quotes(char *str);
+static int	multiple_of_2_quotes(char *str);
 
 int	n_quote_validation(char *str)
 {
@@ -125,7 +126,8 @@ void	single_quotes_to_unprintable(t_node *list)
 		words = temp->token;
 		while (words)
 		{
-			change_single_quotes(words->word);
+			if (multiple_of_2_quotes(words->word) == FALSE)
+				change_single_quotes(words->word);
 			words = words->next;
 		}
 		temp = temp->next;
@@ -159,4 +161,38 @@ static void	change_single_quotes(char *str)
 		}
 		i++;
 	}
+}
+
+static int	multiple_of_2_quotes(char *str)
+{
+	int			i;
+	int			counter;
+	enum e_flag	double_quote;
+	enum e_flag	simple_quote;
+
+	i = 0;
+	counter = 0;
+	double_quote = OFF;
+	simple_quote = OFF;
+	while (str[i])
+	{
+		if (str[i] == DOUBLE_QUOT_MARK && double_quote == OFF && simple_quote == OFF)
+			double_quote = ON;
+		else if (str[i] == SIMPLE_QUOT_MARK && simple_quote == OFF && double_quote == OFF)
+		{
+			counter++;
+			simple_quote = ON;
+		}
+		else if (str[i] == DOUBLE_QUOT_MARK && double_quote == ON)
+			double_quote = OFF;
+		else if (str[i] == SIMPLE_QUOT_MARK && simple_quote == ON)
+		{
+			counter++;
+			simple_quote = OFF;
+		}
+		i++;
+	}
+	if (counter > 3  && counter % 2 == 0)
+		return (TRUE);
+	return (FALSE);
 }

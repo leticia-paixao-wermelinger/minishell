@@ -35,9 +35,15 @@ void	remove_all_quotes(t_node *list, int quote)
 			}
 			while (i <= (int)my_strlen(token->word) && token->word[i])
 			{
+//				printf("token->word[%i] == %c\n", i, token->word[i]);
 				if (token->word[i] == quote && quote_is_valid(token->word, i, quote) == TRUE)
+				{
+//					printf("Passando: [%s]\n", token->word);
 					remove_quote(&(token->word), i, quote);
-				i++;
+//					printf("Mudou para: [%s]\n", token->word);
+				}
+				else
+					i++;
 			}
 			token = token->next;
 		}
@@ -53,11 +59,12 @@ static int	quote_is_valid(char *str, int j, int quote)
 
 	i = 0;
 	sec_flag = OFF;
+	//sec_quote = NO_INFO;
 	if (quote == DOUBLE_QUOT_MARK)
 		//sec_quote = SIMPLE_QUOT_MARK;
 		sec_quote = UNPRINT_CHAR;
 	//else if (quote == SIMPLE_QUOT_MARK)
-	else if (quote == UNPRINT_CHAR)
+	else if (quote == UNPRINT_CHAR || quote == SIMPLE_QUOT_MARK)
 		sec_quote = DOUBLE_QUOT_MARK;
 	while (str[i] && i < j)
 	{
@@ -78,6 +85,7 @@ void	remove_quote(char **str, int i, enum e_ascii quote)
 	char	*temp;
 	char	*seccond;
 
+//	printf("Está na remove_quote\n");
 	first = NULL;
 	temp = fromstrldup(*str, i);
 	seccond = my_strcdup(temp, quote);

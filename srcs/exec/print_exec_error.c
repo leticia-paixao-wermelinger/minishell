@@ -22,13 +22,11 @@ void print_errno(t_node *node)
         {
             print_error(": Permission denied\n");
             node->exit_status = 126;
-            //g_status(126);
         }
         else
         {
             print_error(": Command not found\n");
             node->exit_status = 127;
-		    //g_status(127);
         }
     }
     return ;

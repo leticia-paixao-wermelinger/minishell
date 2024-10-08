@@ -35,16 +35,24 @@ void	do_dup2(t_node *node)
 
 void	close_node_fds(t_node *node)
 {
+	printf("Entrou no close_fd pequeno\n");
 	if (node->fd_out != STDOUT_FILENO)
+	{
+		printf("Fechou o std_out\n");
 		close(node->fd_out);
+	}
 	if (node->fd_in != STDIN_FILENO)
+	{
+		printf("Fechou o std_in\n");
 		close(node->fd_in);
+	}
 }
 
 void	close_all_node_fds(t_node *node)
 {
 	while (node)
 	{
+		printf("closing:%s\n", node->token->word);
 		if (node->fd_out != STDOUT_FILENO)
 			close(node->fd_out);
 		if (node->fd_in != STDIN_FILENO)

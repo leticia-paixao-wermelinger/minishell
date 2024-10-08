@@ -41,7 +41,5 @@ int	pre_exec(t_command   *command)
 	remove_empty_nodes(command->l_input);
 //	printf("ENVIANDO A SEGUINTE LISTA PARA A EXECUÇÃO:\n");
 //	printlist(command->l_input);
-	if (check_cmds(command->l_input) == ERROR)
-		return (ERROR);
 	return (NO_ERROR);
 }

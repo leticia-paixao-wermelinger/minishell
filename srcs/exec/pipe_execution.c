@@ -25,7 +25,10 @@ void    run_pipe_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
+        {
+            close_node_fds(list);
             return (print_errno(node));
+        }
         path = get_executable_path(command, node);
         if (!path)
         {

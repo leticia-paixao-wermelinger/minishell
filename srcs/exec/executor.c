@@ -46,31 +46,37 @@ int executor(t_command *command, t_node *sentence)
 	t_node	*current_node;
 	int	has_pipe;
 
+	if (check_cmds(sentence) == ERROR)
+		return (ERROR);
 	has_pipe = has_pipe_or_not(sentence);
 	if (has_pipe == TRUE)
 		make_pipe(sentence);
 	if (redirections(sentence, command) == ERROR)
 		return (ERROR);
-	if (is_valid_cmd(sentence) == FALSE)
-		return (ERROR);
+	is_valid_cmd(sentence);
 	current_node = sentence;
 	while (current_node)
 	{
+		/*if (current_node->exit_status != NO_ERROR)
+		{
+			current_node = current_node->next;
+			continue ;
+		}*/
 		if (current_node->token != NULL)
 		{
 			if (!has_pipe)
 				run_simple_commands(command, current_node);
 			else
 				pipe_execution(command, current_node);
-			if (current_node->next->token == NULL)
-				close_all_node_fds(sentence);
 		}
+		close_node_fds(current_node);
 		current_node = current_node->next;
 	}
 	current_node = sentence;
 	wait_cmds(current_node);
 	close_all_node_fds(current_node);
-	update_status(sentence);
+	current_node = sentence;
+	update_status(current_node);
     return (NO_ERROR);
 }
 

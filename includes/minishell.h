@@ -195,7 +195,7 @@ void	close_all_node_fds(t_node *node);
 void	close_node_fds(t_node *node);
 void	wait_cmds(t_node *node);
 void	do_dup2(t_node *node);
-void	update_status(t_node *node);
+void	update_status(t_node *sentence);
 //make_pipe.c
 int		has_pipe_or_not(t_node *sentence);
 int		pipe_config(t_node *node);

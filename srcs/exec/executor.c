@@ -19,7 +19,7 @@ int	check_cmds(t_node *sentence)
 		if (sentence->next)
 			sentence = sentence->next;
 		else
-			return (ERROR);
+			return (close_node_fds(sentence), ERROR);
 	}
 	if (is_there_space(sentence->token->word))
 		print_errno(sentence);
@@ -31,21 +31,18 @@ int executor(t_command *command, t_node *sentence)
 	t_node	*current_node;
 	int	has_pipe;
 
-	if (check_cmds(sentence) == ERROR)
+	if (check_cmds(command->l_input) == ERROR)
 		return (ERROR);
 	has_pipe = has_pipe_or_not(sentence);
 	if (has_pipe == TRUE)
 		make_pipe(sentence);
 	if (redirections(sentence, command) == ERROR)
 		return (ERROR);
+	if (check_cmds(sentence) == ERROR)
+		return (ERROR);
 	current_node = sentence;
 	while (current_node)
 	{
-		if (current_node->exit_status != NO_ERROR)
-		{
-			current_node = current_node->next;
-			continue ;
-		}
 		if (!has_pipe)
 			run_simple_commands(command, current_node);
 		else
@@ -56,8 +53,7 @@ int executor(t_command *command, t_node *sentence)
 	current_node = sentence;
 	wait_cmds(current_node);
 	close_all_node_fds(current_node);
-	current_node = sentence;
-	update_status(current_node);
+	update_status(sentence);
     return (NO_ERROR);
 }
 

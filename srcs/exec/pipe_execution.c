@@ -43,7 +43,6 @@ void    run_pipe_execve(t_command *command, t_node *list)
     if (path != node->token->word)
         free(path);
     execve_clean(args, env_array);
-    //g_status(NO_ERROR);
     return ;
 }
 

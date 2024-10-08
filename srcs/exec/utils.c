@@ -63,8 +63,11 @@ void	wait_cmds(t_node *node)
 	}
 }
 
-void	update_status(t_node *node)
+void	update_status(t_node *sentence)
 {
+	t_node	*node;
+
+	node = sentence;
 	while (node)
 	{
 		if (node->exit_status != 0)

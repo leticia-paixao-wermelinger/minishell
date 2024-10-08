@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/07 20:52:02 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/07 22:21:09 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,15 @@
 
 int	check_cmds(t_node *sentence)
 {
-	if (is_empty(sentence->token->word) == TRUE)
-		return (print_errno(sentence), ERROR);
+	while (sentence->token == NULL) //pro caso $nao_existo
+	{
+		if (sentence->next)
+			sentence = sentence->next;
+		else
+			return (ERROR);
+	}
 	if (is_there_space(sentence->token->word))
-		return (print_errno(sentence), ERROR);
+		print_errno(sentence);
 	return (NO_ERROR);
 }
 

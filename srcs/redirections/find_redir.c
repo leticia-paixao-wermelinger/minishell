@@ -31,7 +31,7 @@ int	redirections(t_node *sentence, t_command *command)
 		word = temp->token;
 		while (word)
 		{
-//			printf("Está no loop de redurections com word = %s\n", word->word);
+//			printf("Está no loop de redirections com word = %s\n", word->word);
 			if (flag_first == ON)
 			{
 //				printf("1 condução de first flag\n");
@@ -44,22 +44,33 @@ int	redirections(t_node *sentence, t_command *command)
 					//temp->token = word->next->next;
 //					printf("sentence->token->word == %s\n", sentence->token->word);
 					ret = check_redir(sentence, temp_token, command, flag_first);
+//					printf("sentence->token->word pós check_redir == %s\n", sentence->token->word);
 					//sentence->token = temp->token;
 					if (ret == ERROR)
 						sentence->exit_status = 1;
 					word = sentence->token;
 				}
 				flag_first = OFF;
+//				continue ;
 			}
-			if (word->next != NULL)
+			if (!(sentence->token))
 			{
-				ret = check_redir(temp, word, command, flag_first);
-//				printf("Saiu da check_redir com %p, que aponta para: %s\n", word, word->word);
-				if (ret == -1)
+				sentence->token = NULL;
+				return (ret);
+			}
+//			printf("Endereço de word (%s) = %p\n", word->word, word);
+			if (word != NULL)
+			{
+				if (word->next != NULL)
+				{
+					ret = check_redir(temp, word, command, flag_first);
+//					printf("Saiu da check_redir com %p, que aponta para: %s\n", word, word->word);
+					if (ret == -1)
+						word = word->next;
+				}
+				else
 					word = word->next;
 			}
-			else
-				word = word->next;
 			if (ret == ERROR)
 				return (ERROR);
 		}
@@ -107,6 +118,6 @@ static int	check_redir(t_node *sentence, t_tokens *word, t_command *command, int
 	}
 /*	else
 		word = word->next;*/
-//	printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", sentence->token, sentence->token->word);
+	//printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", sentence->token, sentence->token->word);
 	return (ret);
 }

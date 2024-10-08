@@ -31,7 +31,7 @@ void	remove_env(t_env *node, t_env *start)
 	}
 }
 
-void	remove_first_word_token(t_tokens *start)
+void	remove_first_word_token(t_tokens *start, t_node *sentence)
 {
 	t_tokens *temp;
 
@@ -39,16 +39,21 @@ void	remove_first_word_token(t_tokens *start)
 	start = start->next;
 	free(temp->word);
 	free(temp);
+	if (!start)
+	{
+		printf("Entrou no if de word não existe da linha 44\n");
+		sentence->token = NULL;
+	}
 }
 
-void	remove_word_token(t_tokens *node, t_tokens *start)
+void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
 {
 	t_tokens *temp;
 
 	temp = start;
 	if (start == node)
 	{
-		remove_first_word_token(start);
+		remove_first_word_token(start, sentence);
 		return ;
 	}
 	while (temp)
@@ -62,6 +67,11 @@ void	remove_word_token(t_tokens *node, t_tokens *start)
 		}
 		else
 			temp = temp->next;
+	}
+	if (!start)
+	{
+		printf("Entrou no if de word não existen da linha 73\n");
+		sentence->token = NULL;
 	}
 }
 
@@ -80,7 +90,7 @@ void	remove_empty_nodes(t_node *main_node)
 		while (first && my_strlen(first->word) == 0)
 		{
 			temp = first->next;
-			remove_word_token(tword, first);
+			remove_word_token(tword, first, sentence);
 			tword = temp;
 			first = temp;
 			sentence->token = first;
@@ -90,7 +100,7 @@ void	remove_empty_nodes(t_node *main_node)
 			if (tword->next != NULL)
 			{
 				if (my_strlen(tword->next->word) == 0)
-					remove_word_token(tword->next, first);
+					remove_word_token(tword->next, first, sentence);
 				else
 					tword = tword->next;
 			}

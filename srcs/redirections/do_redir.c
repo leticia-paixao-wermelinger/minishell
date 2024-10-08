@@ -63,8 +63,8 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 //	printf("Em do_redir_out, start == |%s| &%p\n", sentence->token->word, sentence->token);
 	if (sentence->token == redir_node)
 		temp = redir_node->next->next;
-	remove_word_token(redir_node->next, sentence->token);
-	remove_word_token(redir_node, sentence->token);
+	remove_word_token(redir_node->next, sentence->token, sentence);
+	remove_word_token(redir_node, sentence->token, sentence);
 	if (temp != NULL)
 		sentence->token = temp;
 //	printf("Antes de retornar heredoc, start = |%s|\n", sentence->token->word);
@@ -164,8 +164,8 @@ int	do_append(t_node *sentence, t_tokens *redir_node)
 	}
 	if (sentence->token == redir_node)
 		temp = redir_node->next->next;
-	remove_word_token(redir_node->next, sentence->token);
-	remove_word_token(redir_node, sentence->token);
+	remove_word_token(redir_node->next, sentence->token, sentence);
+	remove_word_token(redir_node, sentence->token, sentence);
 	if (temp != NULL)
 		sentence->token = temp;
 	return (NO_ERROR);
@@ -211,8 +211,8 @@ int	do_redir_out(t_node *sentence, t_tokens *redir_node)
 	}
 	if (sentence->token == redir_node)
 		temp = redir_node->next->next;
-	remove_word_token(redir_node->next, sentence->token);
-	remove_word_token(redir_node, sentence->token);
+	remove_word_token(redir_node->next, sentence->token, sentence);
+	remove_word_token(redir_node, sentence->token, sentence);
 	if (temp != NULL)
 		sentence->token = temp;
 	return (NO_ERROR);
@@ -248,8 +248,8 @@ int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 	sentence->fd_in = open(filename, O_RDONLY);
 	if (sentence->token == redir_node)
 		temp = redir_node->next->next;
-	remove_word_token(redir_node->next, sentence->token);
-	remove_word_token(redir_node, sentence->token);
+	remove_word_token(redir_node->next, sentence->token, sentence);
+	remove_word_token(redir_node, sentence->token, sentence);
 	if (temp != NULL)
 		sentence->token = temp;
 	return (NO_ERROR);

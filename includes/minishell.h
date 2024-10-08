@@ -122,7 +122,8 @@ void	signal_heredoc_handle(int sig);
 //-----------------LINKED_LIST---------------------
 //change_list.c
 void	remove_env(t_env *node, t_env *start);
-void	remove_word_token(t_tokens *node, t_tokens *start);
+void	remove_first_word_token(t_tokens *start, t_node *sentence);
+void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence);
 void	remove_empty_nodes(t_node *main_node);
 //list_functions.c
 void	create_first_input_token(char *word, t_tokens *list);

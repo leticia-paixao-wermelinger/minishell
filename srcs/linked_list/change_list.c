@@ -40,10 +40,7 @@ void	remove_first_word_token(t_tokens *start, t_node *sentence)
 	free(temp->word);
 	free(temp);
 	if (!start)
-	{
-		printf("Entrou no if de word não existe da linha 44\n");
 		sentence->token = NULL;
-	}
 }
 
 void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)

@@ -25,10 +25,10 @@ int	redirections(t_node *sentence, t_command *command)
 	temp = sentence;
 	temp_token = NULL;
 	ret = NO_ERROR;
-	flag_first = ON;
 	while (temp)
 	{
 		word = temp->token;
+		flag_first = ON;
 		while (word)
 		{
 //			printf("Está no loop de redirections com word = %s\n", word->word);
@@ -43,7 +43,7 @@ int	redirections(t_node *sentence, t_command *command)
 					temp_token = word;
 					//temp->token = word->next->next;
 //					printf("sentence->token->word == %s\n", sentence->token->word);
-					ret = check_redir(sentence, temp_token, command, flag_first);
+					ret = check_redir(temp, temp_token, command, flag_first);
 //					printf("sentence->token->word pós check_redir == %s\n", sentence->token->word);
 					//sentence->token = temp->token;
 					if (ret == ERROR)
@@ -114,10 +114,10 @@ static int	check_redir(t_node *sentence, t_tokens *word, t_command *command, int
 	else if (node_token->type == REDIR_HEREDOC)
 	{
 //		printf("Vai chamar do_heredoc com sentence == %p e sentence->token == %p\n", sentence, sentence->token);
-		ret = do_heredoc(sentence, node_token, command->my_env, command);
+		ret = do_heredoc(sentence, node_token, command);
 	}
 /*	else
 		word = word->next;*/
-	//printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", sentence->token, sentence->token->word);
+//	printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", sentence->token, sentence->token->word);
 	return (ret);
 }

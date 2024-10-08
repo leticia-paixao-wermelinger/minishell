@@ -30,7 +30,7 @@ In the end, it deletes the redirect and the delimiter
 TEM QUE TESTAR O SEU FUNCIONAMENTO DEPOIS COM A EXECUÇÃO TODA INTEGRADA
 */
 
-int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *command)
+int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_command *command)
 {
 	int			fds[2];
 	int			child_pid;
@@ -47,7 +47,7 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 	{
 		close(fds[0]);
 		setup_heredoc_signal_handling();
-		heredoc_loop(fds, redir_node, env, command->input_count);
+		heredoc_loop(fds, redir_node, command->my_env, command->input_count);
 		close(fds[1]);
 		clear_loop_end(command);
 		final_clear(command);
@@ -62,11 +62,24 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_env *env, t_command *co
 //	printf("Em do_redir_out, vai apagar: |%s| &%p e |%s| - &%p\n", redir_node->next->word, redir_node->next, redir_node->word, redir_node);
 //	printf("Em do_redir_out, start == |%s| &%p\n", sentence->token->word, sentence->token);
 	if (sentence->token == redir_node)
+	{
+//		printf("Está na condição de sentence->token == redir_node\n");
 		temp = redir_node->next->next;
+	}
 	remove_word_token(redir_node->next, sentence->token, sentence);
 	remove_word_token(redir_node, sentence->token, sentence);
 	if (temp != NULL)
+//	{
+//		printf("Está na condição de temp != NULL\n");
 		sentence->token = temp;
+//	}
+//	else
+//	{
+//		printf("Entrou no else de sentence->token = NULL\n");
+//		sentence->token = NULL;
+//	}
+//	printf("No final de heredoc, vai retornar com a estrutura:\n");
+//	printlist(command->l_input);
 //	printf("Antes de retornar heredoc, start = |%s|\n", sentence->token->word);
 	if (!WIFEXITED(status))
 		return (ERROR);

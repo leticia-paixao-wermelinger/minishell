@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:26 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/30 14:58:03 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/07 21:09:32 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 /**
  * enum e_flag - Represents boolean and toggle states.
- * 
- * This enumeration defines simple boolean states: FALSE (0), TRUE (1), 
+ *
+ * This enumeration defines simple boolean states: FALSE (0), TRUE (1),
  * and toggle states OFF (2) and ON (3).
  */
 
@@ -30,7 +30,7 @@ enum e_flag
 
 /**
  * enum e_error - Defines error codes for command execution and shell behavior.
- * 
+ *
  * This enumeration includes standard exit statuses used in the shell:
  * - NO_ERROR: Command executed successfully.
  * - ERROR: General error occurred.
@@ -40,7 +40,7 @@ enum e_flag
  * - INVALID_EXIT_ARG: Script exited with an invalid argument.
  * - USED_CTRL_C: Command terminated by Ctrl-C (SIGINT).
  * - EXIT_STATUS_OUT_RANGE: Exit status is outside valid range (0-254).
- * 
+ *
  * Additional values (128 + N) indicate termination by fatal error signals.
  */
 
@@ -59,10 +59,10 @@ enum e_error {
 
 /**
  * enum e_ascii - Represents ASCII values of special characters.
- * 
- * This enumeration defines ASCII values for various characters used in 
+ *
+ * This enumeration defines ASCII values for various characters used in
  * shell commands, such as quotation marks, pipes, and redirection symbols.
- * 
+ *
  *  DOUBLE_QUOT_MARK = "
  * 	SIMPLE_QUOT_MARK = '
  * 	PIPE = |
@@ -109,10 +109,10 @@ enum e_ascii {
 
 /**
  * enum e_token - Defines token types for command parsing.
- * 
- * This enumeration specifies different token types recognized by the 
+ *
+ * This enumeration specifies different token types recognized by the
  * shell, including commands, arguments, built-ins, and redirection types.
- * 
+ *
  * T_PIPE = 124, // |
  * REDIR_APPEND = 3, // >>
  * REDIR_OUT = 62, // >

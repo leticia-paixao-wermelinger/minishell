@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:11:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/05 03:54:55 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/07 20:27:25 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ void    run_execve(t_command *command, t_node *list)
         temp = node;
         close_node_fds(temp);
         execve(path, args, env_array);
-
     }
     if (path != node->token->word)
         free(path);
     execve_clean(args, env_array);
-    g_status(NO_ERROR);
+    //g_status(NO_ERROR);
     return ;
 }

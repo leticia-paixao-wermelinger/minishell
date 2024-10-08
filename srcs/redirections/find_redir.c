@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 21:42:09 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/07 20:39:36 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ int	redirections(t_node *sentence, t_command *command)
 //					printf("sentence->token->word == %s\n", sentence->token->word);
 					ret = check_redir(sentence, temp_token, command, flag_first);
 					//sentence->token = temp->token;
+					if (ret == ERROR)
+						sentence->exit_status = 1;
 					word = sentence->token;
 				}
 				flag_first = OFF;

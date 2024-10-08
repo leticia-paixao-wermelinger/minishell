@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/05 03:56:43 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/07 21:31:02 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void    run_pipe_execve(t_command *command, t_node *list)
     if (path != node->token->word)
         free(path);
     execve_clean(args, env_array);
-    g_status(NO_ERROR);
+    //g_status(NO_ERROR);
     return ;
 }
 
@@ -74,7 +74,7 @@ int    pipe_execution(t_command *command, t_node *node)
             run_pipe_execve(command, node);
         else
             run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
-    exit(g_status(NO_ERROR));
+        exit(node->exit_status);
     }
     return (ERROR);
 }

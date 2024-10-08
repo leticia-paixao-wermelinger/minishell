@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/05 03:54:41 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/07 19:35:40 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,11 +189,12 @@ int		is_last_node(t_node *node);
 void	run_execve(t_command *command, t_node *list);
 void	run_pipe_execve(t_command *command, t_node *list);
 //utils.c
-int	node_list_size(t_node *node);
+int		node_list_size(t_node *node);
 void	close_all_node_fds(t_node *node);
 void	close_node_fds(t_node *node);
 void	wait_cmds(t_node *node);
 void	do_dup2(t_node *node);
+void	update_status(t_node *node);
 //make_pipe.c
 int		has_pipe_or_not(t_node *sentence);
 int		pipe_config(t_node *node);

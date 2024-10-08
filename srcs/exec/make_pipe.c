@@ -45,8 +45,10 @@ void	make_pipe(t_node *sentence)
         i++;
     }
     if (node)
+    {
         node->fd_out = STDOUT_FILENO;
         //print_fds(node, i + 1);
+    }
 }
 
 int	pipe_config(t_node *node)

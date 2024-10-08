@@ -48,8 +48,6 @@ int	redirections(t_node *sentence, t_command *command)
 					//sentence->token = temp->token;
 					if (ret == ERROR)
 						sentence->exit_status = 1;
-					printf("Vai retornar com a estrutura:\n");
-					printlist(command->l_input);
 					word = sentence->token;
 				}
 				flag_first = OFF;
@@ -76,14 +74,14 @@ int	redirections(t_node *sentence, t_command *command)
 			if (ret == ERROR)
 			{
 				printf("Vai retornar com a estrutura:\n");
-				printlist(command->l_input);
+				//printlist(command->l_input);
 				return (ERROR);
 			}
 		}
 		temp = temp->next;
 	}
-	printf("Vai retornar com a estrutura:\n");
-	printlist(command->l_input);
+	//printf("Vai retornar com a estrutura:\n");
+	//printlist(command->l_input);
 	return (ret);
 }
 

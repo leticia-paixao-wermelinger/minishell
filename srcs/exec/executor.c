@@ -19,10 +19,25 @@ int	check_cmds(t_node *sentence)
 		if (sentence->next)
 			sentence = sentence->next;
 		else
-			return (close_node_fds(sentence), ERROR);
+			return (ERROR);
 	}
 	if (is_there_space(sentence->token->word))
 		print_errno(sentence);
+	return (NO_ERROR);
+}
+
+int	is_valid_cmd(t_node *sentence)
+{
+	while (sentence->token == NULL)
+	{
+		if (sentence->next)
+		{
+			close_all_node_fds(sentence);
+			sentence = sentence->next;
+		}
+		else
+			return (close_all_node_fds(sentence), FALSE);
+	}
 	return (NO_ERROR);
 }
 
@@ -31,23 +46,25 @@ int executor(t_command *command, t_node *sentence)
 	t_node	*current_node;
 	int	has_pipe;
 
-	if (check_cmds(command->l_input) == ERROR)
-		return (ERROR);
 	has_pipe = has_pipe_or_not(sentence);
 	if (has_pipe == TRUE)
 		make_pipe(sentence);
 	if (redirections(sentence, command) == ERROR)
 		return (ERROR);
-	if (check_cmds(sentence) == ERROR)
+	if (is_valid_cmd(sentence) == FALSE)
 		return (ERROR);
 	current_node = sentence;
 	while (current_node)
 	{
-		if (!has_pipe)
-			run_simple_commands(command, current_node);
-		else
-			pipe_execution(command, current_node);
-		close_node_fds(current_node);
+		if (current_node->token != NULL)
+		{
+			if (!has_pipe)
+				run_simple_commands(command, current_node);
+			else
+				pipe_execution(command, current_node);
+			if (current_node->next->token == NULL)
+				close_all_node_fds(sentence);
+		}
 		current_node = current_node->next;
 	}
 	current_node = sentence;

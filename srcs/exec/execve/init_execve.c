@@ -6,11 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:07:06 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/01 17:15:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:28:02 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 char    *get_executable_path(t_command *command, t_node *node)
 {

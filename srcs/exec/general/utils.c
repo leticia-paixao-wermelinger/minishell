@@ -6,11 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 16:05:21 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:30:27 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	node_list_size(t_node *node)
 {
@@ -54,39 +54,6 @@ void	close_all_node_fds(t_node *node)
 			close(node->fd_out);
 		if (node->fd_in != STDIN_FILENO)
 			close(node->fd_in);
-		node = node->next;
-	}
-}
-
-void	wait_cmds(t_node *node)
-{
-	t_node	*current_node;
-
-	current_node = node;
-	while (current_node)
-	{
-		if (current_node->pid != 0)
-			waitpid(current_node->pid, &current_node->exit_status, 0);
-		current_node = current_node->next;
-	}
-}
-
-void	update_status(t_node *sentence)
-{
-	t_node	*node;
-
-	node = sentence;
-	while (node)
-	{
-		if (node->exit_status != 0)
-		{
-				if (node->exit_status >= 255)
-					g_status(WEXITSTATUS(node->exit_status));
-				else
-					g_status(node->exit_status);
-		}
-		else
-			g_status(NO_ERROR);
 		node = node->next;
 	}
 }

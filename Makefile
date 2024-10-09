@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/10/07 21:56:59 by lraggio          ###   ########.fr        #
+#    Updated: 2024/10/09 16:35:07 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,15 +85,16 @@ srcs//variable_expansion/heredoc_exp.c \
 \
 srcs/env/env_utils.c \
 \
-srcs/exec/init_execve.c \
-srcs/exec/execve_utils.c \
-srcs/exec/clean_execve.c \
-srcs/exec/run_execve.c \
-srcs/exec/pipe_execution.c \
-srcs/exec/executor.c \
-srcs/exec/utils.c \
-srcs/exec/make_pipe.c \
-srcs/exec/print_exec_error.c \
+srcs/exec/execve/clean_execve.c \
+srcs/exec/execve/execve_utils.c \
+srcs/exec/execve/init_execve.c \
+srcs/exec/execve/run_execve.c \
+srcs/exec/general/check_cmds.c \
+srcs/exec/general/executor.c \
+srcs/exec/general/print_exec_error.c \
+srcs/exec/general/utils.c \
+srcs/exec/pipe/make_pipe.c \
+srcs/exec/pipe/pipe_execution.c \
 \
 srcs/builtints/builtins.c \
 srcs/builtints/cd.c \

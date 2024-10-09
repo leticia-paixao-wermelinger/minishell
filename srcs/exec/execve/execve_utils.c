@@ -6,11 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:46:24 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:27:57 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int     env_list_size(t_env *list)
 {

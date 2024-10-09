@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 16:11:13 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:32:20 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,14 +169,36 @@ int		do_redir_in(t_node *sentence, t_tokens *word);
 int		check_permissions(char *pathname, int flag);
 
 //---------------------EXEC-----------------------
-//clean_execve.c
-void	execve_clean(char **args, char **env_array);
-void	free_matrix(char **matrix);
-//executor.c
+//GENERAL
+//check_cmds.c
 int		check_cmds(t_node *sentence);
+int		is_valid_cmd(t_node *sentence);
+//executor.c
 int		executor(t_command *command, t_node *sentence);
 int		execute_cmds(t_command *command, t_node *sentence, int has_pipe);
 void	run_simple_commands(t_command *command, t_node *node);
+void	update_status(t_node *sentence);
+void	wait_cmds(t_node *node);
+//print_exec_error.c
+void	print_errno(t_node *node);
+//utils.c
+int		node_list_size(t_node *node);
+void	close_all_node_fds(t_node *node);
+void	close_node_fds(t_node *node);
+void	do_dup2(t_node *node);
+//PIPE
+//make_pipe.c
+int		has_pipe_or_not(t_node *sentence);
+int		pipe_config(t_node *node);
+void	make_pipe(t_node *sentence);
+void	print_fds(t_node *node, int i);
+//pipe_execution.c
+int		pipe_execution(t_command *command, t_node *node);
+int		run_pipe_execve(t_command *command, t_node *list);
+//EXECVE
+//clean_execve.c
+void	execve_clean(char **args, char **env_array);
+void	free_matrix(char **matrix);
 //execve_utils.c
 int		env_list_size(t_env *list);
 int		count_tokens_in_node(t_node *sentence);
@@ -184,26 +206,8 @@ int		count_tokens_in_node(t_node *sentence);
 char	**envp_list_to_array(t_env *env_list);
 char	**cmd_list_to_array(t_node *sentences);
 char	*get_executable_path(t_command *command, t_node *list);
-//pipe_execution.c
-int		pipe_execution(t_command *command, t_node *node);
-int		is_last_node(t_node *node);
-int		run_pipe_execve(t_command *command, t_node *list);
 //run_execve.c
 void	run_execve(t_command *command, t_node *list);
-//utils.c
-int		node_list_size(t_node *node);
-void	close_all_node_fds(t_node *node);
-void	close_node_fds(t_node *node);
-void	wait_cmds(t_node *node);
-void	do_dup2(t_node *node);
-void	update_status(t_node *sentence);
-//make_pipe.c
-int		has_pipe_or_not(t_node *sentence);
-int		pipe_config(t_node *node);
-void	make_pipe(t_node *sentence);
-void	print_fds(t_node *node, int i);
-//print_exec_error.c
-void	print_errno(t_node *node);
 
 
 //------------------------BUILTINS-----------------------

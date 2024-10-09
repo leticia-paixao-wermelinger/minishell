@@ -6,40 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 16:15:04 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:30:21 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
-
-int	check_cmds(t_node *sentence)
-{
-	while (sentence->token == NULL) //pro caso $nao_existo
-	{
-		if (sentence->next)
-			sentence = sentence->next;
-		else
-			return (ERROR);
-	}
-	if (is_there_space(sentence->token->word))
-		print_errno(sentence);
-	return (NO_ERROR);
-}
-
-int	is_valid_cmd(t_node *sentence)
-{
-	while (sentence->token == NULL)
-	{
-		if (sentence->next)
-		{
-			close_all_node_fds(sentence);
-			sentence = sentence->next;
-		}
-		else
-			return (close_all_node_fds(sentence), FALSE);
-	}
-	return (NO_ERROR);
-}
+#include "../../../includes/minishell.h"
 
 int executor(t_command *command, t_node *sentence)
 {
@@ -98,4 +69,37 @@ void	run_simple_commands(t_command *command, t_node *node)
 		run_builtin(command, current_node->token, command->my_env, current_node->fd_out);
 	else
 		run_execve(command, current_node);
+}
+
+void	wait_cmds(t_node *node)
+{
+	t_node	*current_node;
+
+	current_node = node;
+	while (current_node)
+	{
+		if (current_node->pid != 0)
+			waitpid(current_node->pid, &current_node->exit_status, 0);
+		current_node = current_node->next;
+	}
+}
+
+void	update_status(t_node *sentence)
+{
+	t_node	*node;
+
+	node = sentence;
+	while (node)
+	{
+		if (node->exit_status != 0)
+		{
+				if (node->exit_status >= 255)
+					g_status(WEXITSTATUS(node->exit_status));
+				else
+					g_status(node->exit_status);
+		}
+		else
+			g_status(NO_ERROR);
+		node = node->next;
+	}
 }

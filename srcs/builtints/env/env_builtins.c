@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:29:12 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:20:28 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	print_env(t_env *list, int fd)
 		temp = temp->next;
 	}
 }
-
-//export
 
 void	my_export(t_env *env, t_tokens *node_t, int fd)
 {
@@ -63,8 +61,6 @@ void	my_export(t_env *env, t_tokens *node_t, int fd)
 		temp = temp->next;
 	}
 }
-
-// unset
 
 void	my_unset(t_env *env, t_tokens *node_i)
 {

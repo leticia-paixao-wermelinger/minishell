@@ -6,11 +6,11 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:55:49 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 14:17:03 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:30:33 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "../../../includes/minishell.h"
 
 int	has_pipe_or_not(t_node *sentence)
 {

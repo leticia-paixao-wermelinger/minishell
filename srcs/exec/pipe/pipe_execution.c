@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 18:10:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 18:47:15 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int    run_pipe_execve(t_command *command, t_node *list)
     else
         path = node->token->word;
     args = cmd_list_to_array(node);
+    do_dup2(node);
+    close_all_node_fds(node);
     execve(path, args, env_array);
     if (path != node->token->word)
         free(path);
@@ -62,7 +64,7 @@ void    pipe_execution(t_command *command, t_node *node)
     node->pid = fork();
     if (node->pid == 0)
     {
-        if (node->fd_in != STDIN_FILENO)
+        /*if (node->fd_in != STDIN_FILENO)
         {
             dup2(node->fd_in, STDIN_FILENO);
             close(node->fd_in);
@@ -71,7 +73,7 @@ void    pipe_execution(t_command *command, t_node *node)
         {
             dup2(node->fd_out, STDOUT_FILENO);
             close(node->fd_out);
-        }
+        }*/
         if (node->token->type != BUILTIN)
             run_pipe_execve(command, node);
         else

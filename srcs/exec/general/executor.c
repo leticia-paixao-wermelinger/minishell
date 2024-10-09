@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 20:12:29 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 20:13:56 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,6 @@ int	execute_cmds(t_command *command, t_node *sentence, int has_pipe)
 	}
 	current_node = sentence;
 	close_all_node_fds(current_node);
-	free_env(command->my_env);
-	free_list(sentence);
 	return (NO_ERROR);
 }
 

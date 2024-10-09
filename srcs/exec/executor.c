@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 15:09:26 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:15:57 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,6 @@ int	is_valid_cmd(t_node *sentence)
 	}
 	return (NO_ERROR);
 }
-
-
 
 int executor(t_command *command, t_node *sentence)
 {

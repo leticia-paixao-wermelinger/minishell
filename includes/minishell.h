@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/07 19:35:40 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:16:23 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,7 @@ void	free_matrix(char **matrix);
 //executor.c
 int		check_cmds(t_node *sentence);
 int		executor(t_command *command, t_node *sentence);
+int		execute_cmds(t_command *command, t_node *sentence, int has_pipe);
 void	run_simple_commands(t_command *command, t_node *node);
 //execve_utils.c
 int		env_list_size(t_env *list);

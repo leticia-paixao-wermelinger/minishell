@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 19:06:15 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 19:08:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,9 @@ void    pipe_execution(t_command *command, t_node *node)
         else
         {
             do_dup2(node);
+            close_all_node_fds(node);
             run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         }
-        /*if (node->fd_in != STDIN_FILENO)
-        {
-            dup2(node->fd_in, STDIN_FILENO);
-            close(node->fd_in);
-        }
-        if (node->fd_out != STDOUT_FILENO)
-        {
-            dup2(node->fd_out, STDOUT_FILENO);
-            close(node->fd_out);
-        }*/
         exit(node->exit_status);
     }
     else

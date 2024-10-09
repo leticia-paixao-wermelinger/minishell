@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 20:07:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 20:11:34 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,6 @@ void	final_clear(t_command *command)
 {
 	clear_history(); //n esquecer de alterar depois p/ rl_clear_history();
 	free_env(command->my_env);
-	if (command->l_input != NULL)
-	{
-		free_list(command->l_input);
-		command->l_input = NULL;
-	}
-	clear_input(command);
 }
 
 void	free_list(t_node *list)

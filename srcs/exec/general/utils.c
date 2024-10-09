@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 18:49:01 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 19:09:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,6 @@ int	node_list_size(t_node *node)
 	}
 	return (i);
 }
-
-/*void	do_dup2(t_node *node)
-{
-	if (node->fd_out != STDOUT_FILENO)
-        dup2(node->fd_out, STDOUT_FILENO);
-    if (node->fd_in != STDIN_FILENO)
-        dup2(node->fd_in, STDIN_FILENO);
-}*/
 
 void	do_dup2(t_node *node)
 {

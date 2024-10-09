@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 15:45:38 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:05:21 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,14 @@ void	do_dup2(t_node *node)
 
 void	close_node_fds(t_node *node)
 {
-	//printf("Entrou no close_fd pequeno\n");
-	if (node->fd_out != STDOUT_FILENO)
-		close(node->fd_out);
-	if (node->fd_in != STDIN_FILENO)
-		close(node->fd_in);
+	while (node->next != NULL)
+	{
+		if (node->fd_out != STDOUT_FILENO)
+			close(node->fd_out);
+		if (node->fd_in != STDIN_FILENO)
+			close(node->fd_in);
+		node = node->next;
+	}
 }
 
 void	close_all_node_fds(t_node *node)

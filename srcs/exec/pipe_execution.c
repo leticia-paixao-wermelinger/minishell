@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 15:14:38 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:51:51 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void    run_pipe_execve(t_command *command, t_node *list)
         path = node->token->word;
     args = cmd_list_to_array(node);
     do_dup2(node);
-    close_all_node_fds(node);
+    close_all_node_fds(list);
     execve(path, args, env_array);
     if (path != node->token->word)
         free(path);

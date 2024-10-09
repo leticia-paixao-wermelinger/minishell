@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 15:46:41 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:04:28 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_valid_cmd(t_node *sentence)
 
 int executor(t_command *command, t_node *sentence)
 {
-	//t_node	*current_node;
+	t_node	*current_node;
 	int	has_pipe;
 
 	if (check_cmds(sentence) == ERROR)
@@ -55,8 +55,9 @@ int executor(t_command *command, t_node *sentence)
 		return (ERROR);
 	is_valid_cmd(sentence);
 	execute_cmds(command, sentence, has_pipe);
-	//current_node = sentence;
-	//update_status(current_node);
+	current_node = sentence;
+	wait_cmds(current_node);
+	update_status(current_node);
     return (NO_ERROR);
 }
 

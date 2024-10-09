@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 16:30:27 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 18:12:31 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	do_dup2(t_node *node)
 
 void	close_node_fds(t_node *node)
 {
-	while (node->next != NULL)
+	while (node)
 	{
 		if (node->fd_out != STDOUT_FILENO)
 			close(node->fd_out);

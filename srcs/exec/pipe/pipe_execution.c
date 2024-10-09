@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 16:30:37 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 18:10:52 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,24 +24,19 @@ int    run_pipe_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-        {
-            return (free_matrix(env_array), print_errno(node), ERROR);
-            //return (close_all_node_fds(list), free_matrix(env_array), print_errno(node), ERROR);
-        }
+            return (close_node_fds(list), free_matrix(env_array), print_errno(node), ERROR);
         path = get_executable_path(command, node);
         if (!path)
-            return (free_matrix(env_array), ERROR);
+            return (close_node_fds(list), free_matrix(env_array), ERROR);
     }
     else
         path = node->token->word;
     args = cmd_list_to_array(node);
-    do_dup2(node);
-    close_all_node_fds(list);
     execve(path, args, env_array);
     if (path != node->token->word)
         free(path);
     execve_clean(args, env_array);
-    return (NO_ERROR);
+    exit(0);
 }
 
 void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
@@ -62,19 +57,33 @@ void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd
 		exit(my_exit(token->next, command));
 }
 
-int    pipe_execution(t_command *command, t_node *node)
+void    pipe_execution(t_command *command, t_node *node)
 {
-    int ret;
-
-    ret = NO_ERROR;
     node->pid = fork();
     if (node->pid == 0)
     {
+        if (node->fd_in != STDIN_FILENO)
+        {
+            dup2(node->fd_in, STDIN_FILENO);
+            close(node->fd_in);
+        }
+        if (node->fd_out != STDOUT_FILENO)
+        {
+            dup2(node->fd_out, STDOUT_FILENO);
+            close(node->fd_out);
+        }
         if (node->token->type != BUILTIN)
-            ret = run_pipe_execve(command, node);
+            run_pipe_execve(command, node);
         else
             run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         exit(node->exit_status);
     }
-    return (ret);
+    else
+    {
+        if (node->fd_in != STDIN_FILENO)
+            close(node->fd_in);
+        if (node->fd_out != STDOUT_FILENO)
+            close(node->fd_out);
+    }
+    return ;
 }

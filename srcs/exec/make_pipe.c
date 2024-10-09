@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 09:55:49 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/07 20:07:30 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:17:03 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,7 @@ void	make_pipe(t_node *sentence)
         i++;
     }
     if (node)
-    {
         node->fd_out = STDOUT_FILENO;
-        //print_fds(node, i + 1);
-    }
 }
 
 int	pipe_config(t_node *node)
@@ -60,5 +57,10 @@ int	pipe_config(t_node *node)
 	node->fd_out = pipe_fd[1];
     if (node->next)
 	    node->next->fd_in = pipe_fd[0];
+    else
+    {
+        close(pipe_fd[0]);
+        close(pipe_fd[1]);
+    }
 	return (NO_ERROR);
 }

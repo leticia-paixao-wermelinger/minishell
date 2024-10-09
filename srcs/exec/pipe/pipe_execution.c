@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 18:47:15 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 19:03:18 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ void    pipe_execution(t_command *command, t_node *node)
     node->pid = fork();
     if (node->pid == 0)
     {
+        if (node->token->type != BUILTIN)
+            run_pipe_execve(command, node);
+        else
+            run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         /*if (node->fd_in != STDIN_FILENO)
         {
             dup2(node->fd_in, STDIN_FILENO);
@@ -74,10 +78,6 @@ void    pipe_execution(t_command *command, t_node *node)
             dup2(node->fd_out, STDOUT_FILENO);
             close(node->fd_out);
         }*/
-        if (node->token->type != BUILTIN)
-            run_pipe_execve(command, node);
-        else
-            run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         exit(node->exit_status);
     }
     else

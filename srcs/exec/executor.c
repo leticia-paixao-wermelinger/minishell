@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/07 22:21:09 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 09:10:31 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,6 @@ int executor(t_command *command, t_node *sentence)
 	current_node = sentence;
 	while (current_node)
 	{
-		/*if (current_node->exit_status != NO_ERROR)
-		{
-			current_node = current_node->next;
-			continue ;
-		}*/
 		if (current_node->token != NULL)
 		{
 			if (!has_pipe)

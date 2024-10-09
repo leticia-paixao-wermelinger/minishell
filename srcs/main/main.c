@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 23:44:22 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:45:30 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ms_loop(t_command command)
 			break ;
 		}
 		executor(&command, command.l_input);
+		wait_cmds(command.l_input);
+		update_status(command.l_input);
 		clear_loop_end(&command);
 	}
 }

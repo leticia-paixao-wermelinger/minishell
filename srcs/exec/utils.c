@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 15:11:31 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:45:38 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,14 @@ void	close_all_node_fds(t_node *node)
 
 void	wait_cmds(t_node *node)
 {
-	while (node)
+	t_node	*current_node;
+
+	current_node = node;
+	while (current_node)
 	{
-		if (node->pid != 0)
-			waitpid(node->pid, &node->exit_status, 0);
-		node = node->next;
+		if (current_node->pid != 0)
+			waitpid(current_node->pid, &current_node->exit_status, 0);
+		current_node = current_node->next;
 	}
 }
 

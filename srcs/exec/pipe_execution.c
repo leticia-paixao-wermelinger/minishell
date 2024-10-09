@@ -6,13 +6,13 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 15:51:51 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:16:16 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void    run_pipe_execve(t_command *command, t_node *list)
+int    run_pipe_execve(t_command *command, t_node *list)
 {
     t_node      *node;
     char        *path;
@@ -24,10 +24,13 @@ void    run_pipe_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-            return (close_all_node_fds(list), free_matrix(env_array)), print_errno(node);
+        {
+            return (free_matrix(env_array), print_errno(node), ERROR);
+            //return (close_all_node_fds(list), free_matrix(env_array), print_errno(node), ERROR);
+        }
         path = get_executable_path(command, node);
         if (!path)
-            return (free_matrix(env_array));
+            return (free_matrix(env_array), ERROR);
     }
     else
         path = node->token->word;
@@ -38,7 +41,7 @@ void    run_pipe_execve(t_command *command, t_node *list)
     if (path != node->token->word)
         free(path);
     execve_clean(args, env_array);
-    return ;
+    return (NO_ERROR);
 }
 
 void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
@@ -61,15 +64,17 @@ void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd
 
 int    pipe_execution(t_command *command, t_node *node)
 {
+    int ret;
+
+    ret = NO_ERROR;
     node->pid = fork();
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
-            run_pipe_execve(command, node);
+            ret = run_pipe_execve(command, node);
         else
             run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         exit(node->exit_status);
     }
-    close_node_fds(node);
-    return (ERROR);
+    return (ret);
 }

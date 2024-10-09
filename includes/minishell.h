@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 15:16:23 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:11:13 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,9 +187,9 @@ char	*get_executable_path(t_command *command, t_node *list);
 //pipe_execution.c
 int		pipe_execution(t_command *command, t_node *node);
 int		is_last_node(t_node *node);
+int		run_pipe_execve(t_command *command, t_node *list);
 //run_execve.c
 void	run_execve(t_command *command, t_node *list);
-void	run_pipe_execve(t_command *command, t_node *list);
 //utils.c
 int		node_list_size(t_node *node);
 void	close_all_node_fds(t_node *node);

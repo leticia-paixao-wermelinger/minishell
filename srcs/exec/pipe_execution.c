@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 13:41:55 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:14:38 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void    run_pipe_execve(t_command *command, t_node *list)
 {
     t_node      *node;
-    t_node      *temp;
     char        *path;
     char        **env_array;
     char        **args;
@@ -25,23 +24,16 @@ void    run_pipe_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-        {
-            close_node_fds(list);
-            return (print_errno(node));
-        }
+            return (close_all_node_fds(list), free_matrix(env_array)), print_errno(node);
         path = get_executable_path(command, node);
         if (!path)
-        {
-            free_matrix(env_array);
-            return ;
-        }
+            return (free_matrix(env_array));
     }
     else
         path = node->token->word;
     args = cmd_list_to_array(node);
     do_dup2(node);
-    temp = node;
-    close_all_node_fds(temp);
+    close_all_node_fds(node);
     execve(path, args, env_array);
     if (path != node->token->word)
         free(path);

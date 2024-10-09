@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 20:11:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/07 20:27:25 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:12:04 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void    run_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-            return (print_errno(node));
+            return (print_errno(node), free_matrix(env_array));
         path = get_executable_path(command, node);
         if (!path)
         {

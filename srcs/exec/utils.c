@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 09:09:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:11:31 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,16 @@ void	close_node_fds(t_node *node)
 {
 	//printf("Entrou no close_fd pequeno\n");
 	if (node->fd_out != STDOUT_FILENO)
-	{
-		printf("Fechou o std_out\n");
 		close(node->fd_out);
-	}
 	if (node->fd_in != STDIN_FILENO)
-	{
-		printf("Fechou o std_in\n");
 		close(node->fd_in);
-	}
 }
 
 void	close_all_node_fds(t_node *node)
 {
 	while (node)
 	{
-		printf("closing:%s\n", node->token->word);
+		//printf("closing:%s\n", node->token->word);
 		if (node->fd_out != STDOUT_FILENO)
 			close(node->fd_out);
 		if (node->fd_in != STDIN_FILENO)

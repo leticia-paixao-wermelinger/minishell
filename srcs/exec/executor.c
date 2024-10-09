@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 09:10:31 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:09:26 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ int	is_valid_cmd(t_node *sentence)
 	return (NO_ERROR);
 }
 
+
+
 int executor(t_command *command, t_node *sentence)
 {
 	t_node	*current_node;
@@ -54,6 +56,16 @@ int executor(t_command *command, t_node *sentence)
 	if (redirections(sentence, command) == ERROR)
 		return (ERROR);
 	is_valid_cmd(sentence);
+	execute_cmds(command, sentence, has_pipe);
+	current_node = sentence;
+	update_status(current_node);
+    return (NO_ERROR);
+}
+
+int	execute_cmds(t_command *command, t_node *sentence, int has_pipe)
+{
+	t_node	*current_node;
+
 	current_node = sentence;
 	while (current_node)
 	{
@@ -70,9 +82,7 @@ int executor(t_command *command, t_node *sentence)
 	current_node = sentence;
 	wait_cmds(current_node);
 	close_all_node_fds(current_node);
-	current_node = sentence;
-	update_status(current_node);
-    return (NO_ERROR);
+	return (NO_ERROR);
 }
 
 void	run_simple_commands(t_command *command, t_node *node)

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 21:39:38 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:44:33 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,9 +228,9 @@ void	change_env_value(t_env *env, char *str);
 void	create_new_ev(char *str, t_env *env);
 int		is_valid_ev(char *str);
 //env_builtins.c
-int	print_env(t_env *list, int fd);
-int	my_export(t_env *env, t_tokens *node_t, int fd);
-int	my_unset(t_env *env, t_tokens *node_i);
+void	print_env(t_env *list, int fd);
+void	my_export(t_env *env, t_tokens *node_t, int fd);
+void	my_unset(t_env *env, t_tokens *node_i);
 
 //------------------------CLEANING-----------------------
 //clear_funct.c

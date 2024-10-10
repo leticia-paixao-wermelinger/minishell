@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:35:49 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:43:14 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd
 	else if (my_strcmp(token->word, "pwd") == 0)
 		exit(pwd());
 	else if (my_strcmp(token->word, "export") == 0)
-		exit(my_export(env, token->next, fd));
+		my_export(env, token->next, fd);
 	else if (my_strcmp(token->word, "unset") == 0)
-		exit(my_unset(env, token->next));
+		my_unset(env, token->next);
 	else if (my_strcmp(token->word, "env") == 0)
-		exit(print_env(env, fd));
+		print_env(env, fd);
 	else if (my_strcmp(token->word, "exit") == 0)
 		exit(my_exit(token->next, command));
 }

@@ -6,13 +6,13 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 21:41:02 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:45:29 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	print_env(t_env *list, int fd)
+void	print_env(t_env *list, int fd)
 {
 	t_env	*temp;
 
@@ -25,10 +25,9 @@ int	print_env(t_env *list, int fd)
 		my_putstr_fd("\n", fd);
 		temp = temp->next;
 	}
-	return (0);
 }
 
-int	my_export(t_env *env, t_tokens *node_t, int fd)
+void	my_export(t_env *env, t_tokens *node_t, int fd)
 {
 	char		*str;
 	t_env		*node_env;
@@ -40,7 +39,6 @@ int	my_export(t_env *env, t_tokens *node_t, int fd)
 	if (node_t == NULL)
 	{
 		print_env_for_export(env, fd);
-		return (0);
 	}
 	while (temp)
 	{
@@ -61,10 +59,9 @@ int	my_export(t_env *env, t_tokens *node_t, int fd)
 		}
 		temp = temp->next;
 	}
-	return (0);
 }
 
-int	my_unset(t_env *env, t_tokens *node_i)
+void	my_unset(t_env *env, t_tokens *node_i)
 {
 	t_env		*node_env;
 	t_tokens	*temp;
@@ -83,5 +80,4 @@ int	my_unset(t_env *env, t_tokens *node_i)
 			remove_env(node_env, env);
 		temp = temp->next;
 	}
-	return (0);
 }

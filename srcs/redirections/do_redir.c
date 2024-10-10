@@ -49,6 +49,7 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_command *command)
 		setup_heredoc_signal_handling();
 		heredoc_loop(fds, redir_node, command->my_env, command->input_count);
 		close(fds[1]);
+		close_all_node_fds(command->l_input);
 		clear_loop_end(command);
 		final_clear(command);
 		exit(g_status(-1));

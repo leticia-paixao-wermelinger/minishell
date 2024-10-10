@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 17:17:33 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:21:58 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ int		pipe_config(t_node *node);
 void	make_pipe(t_node *sentence);
 void	print_fds(t_node *node, int i);
 //pipe_execution.c
-void	pipe_execution(t_command *command, t_node *node);
+int		pipe_execution(t_command *command, t_node *node);
 int		run_pipe_execve(t_command *command, t_node *list);
 //EXECVE
 //clean_execve.c

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:15:29 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:21:38 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int    run_pipe_execve(t_command *command, t_node *list)
     if (path != node->token->word)
         free(path);
     execve_clean(args, env_array);
-    //exit(0);
+    return (NO_ERROR);
 }
 
 void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
@@ -59,13 +59,16 @@ void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd
 		exit(my_exit(token->next, command));
 }
 
-void    pipe_execution(t_command *command, t_node *node)
+int    pipe_execution(t_command *command, t_node *node)
 {
+    int ret;
+
+    ret = NO_ERROR;
     node->pid = fork();
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
-            run_pipe_execve(command, node);
+            ret = run_pipe_execve(command, node);
         else
         {
             do_dup2(node);
@@ -83,5 +86,5 @@ void    pipe_execution(t_command *command, t_node *node)
     }
     free_env(command->my_env);
     free_tokens(node->token);
-    return ;
+    return (ret);
 }

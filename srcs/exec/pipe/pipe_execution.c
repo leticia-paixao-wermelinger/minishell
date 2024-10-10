@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:29:35 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:32:30 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int    run_pipe_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-            return (close_node_fds(list), free_matrix(env_array), print_errno(node), exit(ERROR), ERROR);
+            return (close_node_fds(list), free_matrix(env_array), print_errno(node), ERROR);
         path = get_executable_path(command, node);
         if (!path)
-            return (close_node_fds(list), free_matrix(env_array), exit(ERROR), ERROR);
+            return (close_node_fds(list), free_matrix(env_array), ERROR);
     }
     else
         path = node->token->word;
@@ -68,14 +68,18 @@ int    pipe_execution(t_command *command, t_node *node)
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
+        {
             ret = run_pipe_execve(command, node);
+            exit(0);
+        }
         else
         {
             do_dup2(node);
             close_all_node_fds(node);
             run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
+            exit(0);
         }
-        exit(node->exit_status);
+        //exit(node->exit_status);
     }
     else
     {

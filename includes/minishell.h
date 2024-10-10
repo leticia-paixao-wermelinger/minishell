@@ -194,6 +194,7 @@ void	make_pipe(t_node *sentence);
 void	print_fds(t_node *node, int i);
 //pipe_execution.c
 int		pipe_execution(t_command *command, t_node *node);
+int		run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd);
 int		run_pipe_execve(t_command *command, t_node *list);
 //EXECVE
 //clean_execve.c

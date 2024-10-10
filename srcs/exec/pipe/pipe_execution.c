@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:25:15 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:29:35 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int    run_pipe_execve(t_command *command, t_node *list)
     if (access(node->token->word, (F_OK | X_OK)) != 0)
     {
         if (errno == EACCES)
-            return (close_node_fds(list), free_matrix(env_array), print_errno(node), ERROR);
+            return (close_node_fds(list), free_matrix(env_array), print_errno(node), exit(ERROR), ERROR);
         path = get_executable_path(command, node);
         if (!path)
-            return (close_node_fds(list), free_matrix(env_array), ERROR);
+            return (close_node_fds(list), free_matrix(env_array), exit(ERROR), ERROR);
     }
     else
         path = node->token->word;

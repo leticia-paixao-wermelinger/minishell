@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:32:30 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/09 21:35:49 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void    run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd
 	else if (my_strcmp(token->word, "pwd") == 0)
 		exit(pwd());
 	else if (my_strcmp(token->word, "export") == 0)
-		my_export(env, token->next, fd);
+		exit(my_export(env, token->next, fd));
 	else if (my_strcmp(token->word, "unset") == 0)
-		my_unset(env, token->next);
+		exit(my_unset(env, token->next));
 	else if (my_strcmp(token->word, "env") == 0)
-		print_env(env, fd);
+		exit(print_env(env, fd));
 	else if (my_strcmp(token->word, "exit") == 0)
 		exit(my_exit(token->next, command));
 }
@@ -70,16 +70,14 @@ int    pipe_execution(t_command *command, t_node *node)
         if (node->token->type != BUILTIN)
         {
             ret = run_pipe_execve(command, node);
-            exit(0);
         }
         else
         {
             do_dup2(node);
             close_all_node_fds(node);
             run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
-            exit(0);
         }
-        //exit(node->exit_status);
+        exit(node->exit_status);
     }
     else
     {

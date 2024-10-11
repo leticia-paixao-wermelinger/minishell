@@ -12,6 +12,8 @@
 
 #include "../../../includes/minishell.h"
 
+extern volatile unsigned int    g_flag;
+
 int executor(t_command *command, t_node *sentence)
 {
 	t_node	*current_node;
@@ -83,16 +85,13 @@ void	wait_cmds(t_node *node)
 void	update_status(t_node *sentence)
 {
 	t_node		*node;
-	static int	flag = OFF;
 
 	node = sentence;
-	if (g_status(-1) == 130 && flag == OFF)
+	if (g_status(-1) == 130 && g_flag == 130)
 	{
-		flag = ON;
+		g_flag = 0;
 		return ;
 	}
-	else if (flag == ON)
-		flag = OFF;
 	while (node)
 	{
 		if (node->exit_status != 0)

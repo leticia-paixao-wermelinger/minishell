@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+volatile unsigned int	g_flag;
+
 /**
  * ms_loop - The main loop of the minishell.
  *

@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+extern volatile unsigned int    g_flag;
+
 /**
  * signal_handle - Handles signals SIGINT (Ctrl + C) and SIGQUIT (Ctrl + \).
  *
@@ -35,6 +37,7 @@ void	signal_handle(int sig)
 		rl_replace_line("", 1);
 		rl_on_new_line();
 		g_status(USED_CTRL_C);
+		g_flag = 130;
 	}
 	return ;
 }

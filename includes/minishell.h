@@ -167,6 +167,7 @@ int		do_redir_out(t_node *sentence, t_tokens *redir_node);
 int		do_redir_in(t_node *sentence, t_tokens *word);
 //redir_utils.c
 int		check_permissions(char *pathname, int flag);
+void	remove_redir_nodes(t_node *sentence, t_tokens *redir_node);
 
 //---------------------EXEC-----------------------
 //GENERAL

@@ -21,3 +21,16 @@ int	check_permissions(char *pathname, int flag)
 	}
 	return (NO_ERROR);
 }
+
+void	remove_redir_nodes(t_node *sentence, t_tokens *redir_node)
+{
+	t_tokens    *temp;
+
+	temp = NULL;
+	if (sentence->token == redir_node)
+		temp = redir_node->next->next;
+	remove_word_token(redir_node->next, sentence->token, sentence);
+	remove_word_token(redir_node, sentence->token, sentence);
+	if (temp != NULL)
+		sentence->token = temp;
+}

@@ -82,4 +82,3 @@ void	signal_heredoc_handle(int sig)
 		rl_replace_line("", 0);
 	}
 }
-

@@ -213,7 +213,7 @@ void	run_execve(t_command *command, t_node *list);
 
 //------------------------BUILTINS-----------------------
 //builtins.c
-int		run_builtin(t_command *command, t_tokens *token, t_env *env, int fd);
+int		run_builtin(t_command *command, t_node *node, t_env *env, int fd);
 //cd.c
 int		my_cd(t_tokens *node, t_env *env);
 //echo.c

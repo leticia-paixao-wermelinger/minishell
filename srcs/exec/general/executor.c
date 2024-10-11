@@ -62,7 +62,7 @@ void	run_simple_commands(t_command *command, t_node *node)
 
 	current_node = node;
 	if (current_node->token->type == BUILTIN)
-		run_builtin(command, current_node->token, command->my_env, current_node->fd_out);
+		run_builtin(command, current_node, command->my_env, current_node->fd_out);
 	else
 		run_execve(command, current_node);
 }
@@ -82,9 +82,17 @@ void	wait_cmds(t_node *node)
 
 void	update_status(t_node *sentence)
 {
-	t_node	*node;
+	t_node		*node;
+	static int	flag = OFF;
 
 	node = sentence;
+	if (g_status(-1) == 130 && flag == OFF)
+	{
+		flag = ON;
+		return ;
+	}
+	else if (flag == ON)
+		flag = OFF;
 	while (node)
 	{
 		if (node->exit_status != 0)

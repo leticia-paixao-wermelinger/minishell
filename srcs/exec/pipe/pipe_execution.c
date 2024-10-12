@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/12 00:30:56 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 00:38:00 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int    pipe_execution(t_command *command, t_node *node)
 
     ret = NO_ERROR;
     node->pid = fork();
+    if (node->pid != 0)
+        return (ERROR);
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
@@ -86,12 +88,11 @@ int    pipe_execution(t_command *command, t_node *node)
 		final_clear(command);
         exit(ret);
     }
-    else
-    {
-        if (node->fd_in != STDIN_FILENO)
-            close(node->fd_in);
-        if (node->fd_out != STDOUT_FILENO)
-            close(node->fd_out);
-    }
+    close(node->fd_in);
+    close(node->fd_out);
+    /*if (node->fd_in != STDIN_FILENO)
+        close(node->fd_in);
+    if (node->fd_out != STDOUT_FILENO)
+        close(node->fd_out);*/
     return (ret);
 }

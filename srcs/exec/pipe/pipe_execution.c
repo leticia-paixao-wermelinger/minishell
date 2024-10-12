@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/11 23:27:32 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 00:12:54 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int    pipe_execution(t_command *command, t_node *node)
         }
         else
         {
-            do_dup2(node);
-            close_all_node_fds(node);
+            //do_dup2(node);
+            //close_node_fds(node);
             ret = run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         }
 		ret = node->exit_status;
@@ -92,12 +92,12 @@ int    pipe_execution(t_command *command, t_node *node)
 		final_clear(command);
         exit(ret);
     }
-    else
+    /*else
     {
         if (node->fd_in != STDIN_FILENO)
             close(node->fd_in);
         if (node->fd_out != STDOUT_FILENO)
             close(node->fd_out);
-    }
+    }*/
     return (ret);
 }

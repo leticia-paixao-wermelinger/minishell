@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/12 00:21:49 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 00:25:23 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,15 @@ void	execute_cmds(t_command *command, t_node *sentence, int has_pipe)
 		if (current_node->token != NULL)
 		{
 			if (!has_pipe)
+			{
 				run_simple_commands(command, current_node);
+			}
 			else
+			{
 				pipe_execution(command, current_node);
+			}
 		}
-		close_node_fds(sentence);
+		//close_all_node_fds(sentence);
 		current_node = current_node->next;
 	}
 	current_node = sentence;

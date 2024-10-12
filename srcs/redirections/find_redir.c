@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/07 20:39:36 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/11 23:05:07 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	redirections(t_node *sentence, t_command *command)
 					//sentence->token = temp->token;
 					if (ret == ERROR)
 						sentence->exit_status = 1;
-					printf("Vai retornar com a estrutura:\n");
-					printlist(command->l_input);
+					//printf("Vai retornar com a estrutura:\n");
+					//printlist(command->l_input);
 					word = sentence->token;
 				}
 				flag_first = OFF;

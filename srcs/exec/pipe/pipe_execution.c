@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/12 00:27:34 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 00:30:56 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,9 @@ int    pipe_execution(t_command *command, t_node *node)
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
-        {
             ret = run_pipe_execve(command, node);
-            if (!node->next)
-                close_node_fds(node);
-        }
         else
-        {
             ret = run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
-            if (!node->next)
-                close_node_fds(node);
-        }
-        //close_node_fds(node);
 		ret = node->exit_status;
 		clear_loop_end(command);
 		final_clear(command);

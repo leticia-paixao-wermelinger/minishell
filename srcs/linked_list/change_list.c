@@ -59,7 +59,9 @@ void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
 		{
 			temp->next = node->next;
 			free(node->word);
+			node->word = NULL;
 			free(node);
+			node = NULL;
 			break ;
 		}
 		else

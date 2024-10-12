@@ -33,4 +33,6 @@ void	remove_redir_nodes(t_node *sentence, t_tokens *redir_node)
 	remove_word_token(redir_node, sentence->token, sentence);
 	if (temp != NULL)
 		sentence->token = temp;
+	if (!sentence->token)
+		sentence->token = NULL;
 }

@@ -6,11 +6,34 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:43:14 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/11 22:52:44 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+char    *check_path(t_command *command, t_node *node, char **env_array)
+{
+    char    *path;
+
+    if (access(node->token->word, (F_OK | X_OK)) != 0)
+    {
+        if (errno == EACCES)
+		{
+			do_dup2(node);
+			close_node_fds(node);
+			free_matrix(env_array);
+			print_errno(node);
+        	return (NULL);
+		}
+        path = get_executable_path(command, node);
+        if (!path)
+            return (close_all_node_fds(node), free_matrix(env_array), NULL);
+    }
+    else
+        path = node->token->word;
+    return (path);
+}
 
 int    run_pipe_execve(t_command *command, t_node *list)
 {
@@ -21,22 +44,7 @@ int    run_pipe_execve(t_command *command, t_node *list)
 
     node = list;
     env_array = envp_list_to_array(command->my_env);
-    if (access(node->token->word, (F_OK | X_OK)) != 0)
-    {
-        if (errno == EACCES)
-		{
-			do_dup2(node);
-			close_node_fds(node);
-			free_matrix(env_array);
-			print_errno(node);
-        	return (ERROR);
-		}
-        path = get_executable_path(command, node);
-        if (!path)
-            return (close_all_node_fds(list), free_matrix(env_array), ERROR);
-    }
-    else
-        path = node->token->word;
+    path = check_path(command, node, env_array);
     args = cmd_list_to_array(node);
     do_dup2(node);
     close_all_node_fds(node);
@@ -83,21 +91,21 @@ int    pipe_execution(t_command *command, t_node *node)
         }
         else
         {
-            do_dup2(node);
-            close_all_node_fds(node);
+            /*do_dup2(node);
+            close_all_node_fds(node);*/
             ret = run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
         }
-		ret = node->exit_status;
+		/*ret = node->exit_status;
 		clear_loop_end(command);
-		final_clear(command);
-        exit(ret);
+		final_clear(command);*/
+        exit(node->exit_status);
     }
-    else
+    /*else
     {
         if (node->fd_in != STDIN_FILENO)
             close(node->fd_in);
         if (node->fd_out != STDOUT_FILENO)
             close(node->fd_out);
-    }
+    }/**/
     return (ret);
 }

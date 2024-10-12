@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 21:44:33 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/11 22:44:37 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ int		check_cmds(t_node *sentence);
 int		is_valid_cmd(t_node *sentence);
 //executor.c
 int		executor(t_command *command, t_node *sentence);
-int		execute_cmds(t_command *command, t_node *sentence, int has_pipe);
+void	execute_cmds(t_command *command, t_node *sentence, int has_pipe);
 void	run_simple_commands(t_command *command, t_node *node);
 void	update_status(t_node *sentence);
 void	wait_cmds(t_node *node);

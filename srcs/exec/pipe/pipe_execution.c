@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/12 00:38:00 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 00:47:36 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ int    run_pipe_execve(t_command *command, t_node *list)
     else
         path = node->token->word;
     args = cmd_list_to_array(node);
+    print_fds(node);
     do_dup2(node);
+    print_fds(node);
     close_all_node_fds(node);
     execve(path, args, env_array);
     if (path != node->token->word)
@@ -88,11 +90,5 @@ int    pipe_execution(t_command *command, t_node *node)
 		final_clear(command);
         exit(ret);
     }
-    close(node->fd_in);
-    close(node->fd_out);
-    /*if (node->fd_in != STDIN_FILENO)
-        close(node->fd_in);
-    if (node->fd_out != STDOUT_FILENO)
-        close(node->fd_out);*/
     return (ret);
 }

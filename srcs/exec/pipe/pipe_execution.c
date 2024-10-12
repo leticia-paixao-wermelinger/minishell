@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/12 01:03:02 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:15:41 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int    run_pipe_execve(t_command *command, t_node *list)
 {
     t_node      *node;
+    t_node      *temp;
     char        *path;
     char        **env_array;
     char        **args;
@@ -39,7 +40,8 @@ int    run_pipe_execve(t_command *command, t_node *list)
         path = node->token->word;
     args = cmd_list_to_array(node);
     do_dup2(node);
-    close_all_node_fds(node);
+    temp = node;
+    close_all_node_fds(temp);
     execve(path, args, env_array);
     if (path != node->token->word)
         free(path);
@@ -75,8 +77,6 @@ int    pipe_execution(t_command *command, t_node *node)
 
     ret = NO_ERROR;
     node->pid = fork();
-    if (node->pid != 0)
-        return (ERROR);
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
@@ -90,12 +90,12 @@ int    pipe_execution(t_command *command, t_node *node)
 		final_clear(command);
         exit(ret);
     }
-    else
+    /*else
     {
         if (node->fd_in != STDIN_FILENO)
             close(node->fd_in);
         if (node->fd_out != STDOUT_FILENO)
             close(node->fd_out);
-    }
+    }*/
     return (ret);
 }

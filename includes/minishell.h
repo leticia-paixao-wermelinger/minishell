@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/12 00:43:15 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/13 15:33:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int		is_char(char o, char c);
 void	signal_handle(int sig);
 void	setup_heredoc_signal_handling(void);
 void	setup_signal_handling(void);
-void	signal_heredoc_handle(int sig);
+void	heredoc_signal_handle(int sig);
 
 //-----------------LINKED_LIST---------------------
 //change_list.c

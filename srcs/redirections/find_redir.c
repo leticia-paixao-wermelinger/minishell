@@ -25,8 +25,8 @@ int	redirections(t_node *sentence, t_command *command)
 	temp = sentence;
 	temp_token = NULL;
 	ret = NO_ERROR;
-//	printf("1. Vai passar redirects na estrutura:\n");
-//	printlist(command->l_input);
+	//printf("1. Vai passar redirects na estrutura:\n");
+	//printlist(command->l_input);
 	while (temp)
 	{
 		word = temp->token;
@@ -77,16 +77,16 @@ int	redirections(t_node *sentence, t_command *command)
 			}
 			if (ret == ERROR)
 			{
-				//printf("Vai retornar com a estrutura:\n");
-				//printlist(command->l_input);
+				printf("Vai retornar com a estrutura:\n");
+				printlist(command->l_input);
 				return (ERROR);
 			}
 		}
 //		printf("6. Deu pipe\n");
 		temp = temp->next;
 	}
-	printf("Vai retornar com a estrutura:\n");
-	printlist(command->l_input);
+	//printf("Vai retornar com a estrutura:\n");
+	//printlist(command->l_input);
 	return (ret);
 }
 

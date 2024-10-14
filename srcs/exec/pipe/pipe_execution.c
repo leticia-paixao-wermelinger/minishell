@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:43:14 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:35:53 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int    run_pipe_execve(t_command *command, t_node *list)
 {
     t_node      *node;
+    t_node      *temp;
     char        *path;
     char        **env_array;
     char        **args;
@@ -33,13 +34,14 @@ int    run_pipe_execve(t_command *command, t_node *list)
 		}
         path = get_executable_path(command, node);
         if (!path)
-            return (close_all_node_fds(list), free_matrix(env_array), ERROR);
+            return (close_all_node_fds(node), free_matrix(env_array), ERROR);
     }
     else
         path = node->token->word;
     args = cmd_list_to_array(node);
     do_dup2(node);
-    close_all_node_fds(node);
+    temp = node;
+    close_all_node_fds(temp);
     execve(path, args, env_array);
     if (path != node->token->word)
         free(path);
@@ -78,26 +80,27 @@ int    pipe_execution(t_command *command, t_node *node)
     if (node->pid == 0)
     {
         if (node->token->type != BUILTIN)
-        {
             ret = run_pipe_execve(command, node);
-        }
         else
         {
-            do_dup2(node);
-            close_all_node_fds(node);
+            if (node->fd_in != STDIN_FILENO)
+                dup2(node->fd_in, STDIN_FILENO);
+            if (node->fd_out != STDOUT_FILENO)
+                dup2(node->fd_out, STDOUT_FILENO);
             ret = run_pipe_builtin(command, node->token, command->my_env, node->fd_out);
+            close_all_node_fds(node);
         }
 		ret = node->exit_status;
 		clear_loop_end(command);
 		final_clear(command);
         exit(ret);
     }
-    else
+    /*else
     {
         if (node->fd_in != STDIN_FILENO)
             close(node->fd_in);
         if (node->fd_out != STDOUT_FILENO)
             close(node->fd_out);
-    }
+    }*/
     return (ret);
 }

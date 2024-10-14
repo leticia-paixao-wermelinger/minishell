@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 21:44:33 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/13 15:33:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ int		is_char(char o, char c);
 void	signal_handle(int sig);
 void	setup_heredoc_signal_handling(void);
 void	setup_signal_handling(void);
-void	signal_heredoc_handle(int sig);
+void	heredoc_signal_handle(int sig);
 
 //-----------------LINKED_LIST---------------------
 //change_list.c
@@ -176,7 +176,7 @@ int		check_cmds(t_node *sentence);
 int		is_valid_cmd(t_node *sentence);
 //executor.c
 int		executor(t_command *command, t_node *sentence);
-int		execute_cmds(t_command *command, t_node *sentence, int has_pipe);
+void	execute_cmds(t_command *command, t_node *sentence, int has_pipe);
 void	run_simple_commands(t_command *command, t_node *node);
 void	update_status(t_node *sentence);
 void	wait_cmds(t_node *node);
@@ -192,7 +192,7 @@ void	do_dup2(t_node *node);
 int		has_pipe_or_not(t_node *sentence);
 int		pipe_config(t_node *node);
 void	make_pipe(t_node *sentence);
-void	print_fds(t_node *node, int i);
+void	print_fds(t_node *node);
 //pipe_execution.c
 int		pipe_execution(t_command *command, t_node *node);
 int		run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd);

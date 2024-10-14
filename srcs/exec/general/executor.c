@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 21:21:27 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 00:56:49 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,17 @@ int executor(t_command *command, t_node *sentence)
 	if (redirections(sentence, command) == ERROR)
 		return (ERROR);
 	is_valid_cmd(sentence);
-	if (execute_cmds(command, sentence, has_pipe) == ERROR)
-		return (ERROR);
+	execute_cmds(command, sentence, has_pipe);
 	current_node = sentence;
 	wait_cmds(current_node);
 	update_status(current_node);
 	return (NO_ERROR);
 }
 
-int	execute_cmds(t_command *command, t_node *sentence, int has_pipe)
+void	execute_cmds(t_command *command, t_node *sentence, int has_pipe)
 {
 	t_node	*current_node;
-	int	ret;
 
-	ret = NO_ERROR;
 	current_node = sentence;
 	while (current_node)
 	{
@@ -49,13 +46,13 @@ int	execute_cmds(t_command *command, t_node *sentence, int has_pipe)
 			if (!has_pipe)
 				run_simple_commands(command, current_node);
 			else
-				ret = pipe_execution(command, current_node);
+				pipe_execution(command, current_node);
 		}
+		close_node_fds(current_node);
 		current_node = current_node->next;
 	}
 	current_node = sentence;
 	close_all_node_fds(current_node);
-	return (ret);
 }
 
 void	run_simple_commands(t_command *command, t_node *node)

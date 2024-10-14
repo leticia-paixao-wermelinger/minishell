@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 17:17:25 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 19:09:55 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/12 01:11:07 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	close_all_node_fds(t_node *node)
 {
 	while (node)
 	{
-		//printf("closing:%s\n", node->token->word);
 		if (node->fd_out != STDOUT_FILENO)
 			close(node->fd_out);
 		if (node->fd_in != STDIN_FILENO)

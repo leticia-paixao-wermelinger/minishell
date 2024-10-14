@@ -6,31 +6,23 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:06:32 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 20:11:34 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:23:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	clear_loop_end(t_command *command)
-{
-	free_list(command->l_input);
-	clear_input(command);
-}
-
-void	clear_input(t_command *command)
-{
-	free(command->prompt);
-	free(command->input);
-	if (command->input_matrix != NULL)
-		my_clean_vect(command->input_matrix);
-}
-
-void	final_clear(t_command *command)
-{
-	clear_history(); //n esquecer de alterar depois p/ rl_clear_history();
-	free_env(command->my_env);
-}
+/**
+ * free_list - Frees a linked list of nodes.
+ *
+ * This function iterates through the linked list of nodes, freeing each node
+ * and its associated token data. It calls `free_t_tokens()` to free the token
+ * structure for each node.
+ *
+ * @param list: A linked list of nodes to be freed.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	free_list(t_node *list)
 {
@@ -50,6 +42,17 @@ void	free_list(t_node *list)
 	}
 }
 
+/**
+ * free_t_tokens - Frees a linked list of token nodes.
+ *
+ * This function iterates through the linked list of token nodes, freeing each
+ * token's word and the token itself.
+ *
+ * @param node: A linked list of tokens to be freed.
+ *
+ * @return void: This function does not return a value.
+ */
+
 void	free_t_tokens(t_tokens *node)
 {
 	t_tokens	*next_token;
@@ -65,6 +68,18 @@ void	free_t_tokens(t_tokens *node)
 		node = next_token;
 	}
 }
+
+/**
+ * free_env - Frees a linked list of environment variables.
+ *
+ * This function iterates through the linked list of environment variables,
+ * freeing both the key and value for each variable before freeing the node
+ * itself.
+ *
+ * @param list: A linked list of environment variables to be freed.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	free_env(t_env *list)
 {

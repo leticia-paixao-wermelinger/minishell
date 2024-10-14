@@ -6,11 +6,28 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 22:31:08 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 17:53:49 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * my_echo - Implements the behavior of the 'echo' built-in command.
+ *
+ * This function replicates the behavior of the shell's 'echo' command. It 
+ * prints the words passed as tokens to the specified file descriptor, with 
+ * an optional suppression of the trailing newline using the `-n` flag.
+ *
+ * If no tokens are passed, it simply prints a newline. If the first token is 
+ * `-n`, it suppresses the newline at the end of the output.
+ *
+ * @param node: A linked list of tokens, representing the arguments passed to 
+ *              the 'echo' command.
+ * @param fd: The file descriptor to which the output should be written.
+ *
+ * @return int: Returns `NO_ERROR` after writing to the file descriptor.
+ */
 
 int	my_echo(t_tokens *node, int fd)
 {
@@ -19,7 +36,6 @@ int	my_echo(t_tokens *node, int fd)
 
 	temp = node;
 	flag_nl = ON;
-//	printf("Entrou na função do echo\n");
 	if (node == NULL)
 	{
 		my_putstr_fd("\n", fd);
@@ -37,7 +53,7 @@ int	my_echo(t_tokens *node, int fd)
 			my_putstr_fd(" ", fd);
 		temp = temp->next;
 	}
-	if (flag_nl ==	ON)
+	if (flag_nl == ON)
 		my_putstr_fd("\n", fd);
 	return (NO_ERROR);
 }

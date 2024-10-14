@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/10/09 16:35:07 by lraggio          ###   ########.fr        #
+#    Updated: 2024/10/14 18:25:05 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,7 +104,8 @@ srcs/builtints/pwd.c \
 srcs/builtints/env/env_bt_utils.c \
 srcs/builtints/env/env_builtins.c \
 \
-srcs/cleaning/clear_funct.c
+srcs/cleaning/clear_funct.c \
+srcs/cleaning/clear_loop.c
 
 OBJS = ${SRCS:.c=.o}
 

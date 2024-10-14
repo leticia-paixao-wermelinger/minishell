@@ -6,13 +6,13 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:27:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/27 19:16:03 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:07:37 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void change_sh_level(t_env *node);
+static void	change_sh_level(t_env *node);
 
 void	get_env(t_command *command)
 {

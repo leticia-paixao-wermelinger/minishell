@@ -12,6 +12,18 @@
 
 #include "../../../includes/minishell.h"
 
+/**
+ * print_env - Prints all environment variables.
+ *
+ * This function prints each environment variable as key-value pairs in the format
+ * "key=value" followed by a newline.
+ *
+ * @param list: A linked list of environment variables.
+ * @param fd: The file descriptor to which the output will be written.
+ *
+ * @return void: This function does not return a value.
+ */
+
 void	print_env(t_env *list, int fd)
 {
 	t_env	*temp;
@@ -26,6 +38,22 @@ void	print_env(t_env *list, int fd)
 		temp = temp->next;
 	}
 }
+
+/**
+ * my_export - Handles the 'export' command to set environment variables.
+ *
+ * This function sets or updates environment variables based on the tokens passed.
+ * If no tokens are provided, it prints all environment variables in a format
+ * suitable for 'export'. For each valid token, the function either updates an 
+ * existing environment variable or creates a new one.
+ *
+ * @param env: A linked list of environment variables.
+ * @param node_t: A linked list of tokens representing the variables to be exported.
+ * @param fd: The file descriptor to which the output will be written if no tokens
+ *            are provided.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	my_export(t_env *env, t_tokens *node_t, int fd)
 {
@@ -60,6 +88,18 @@ void	my_export(t_env *env, t_tokens *node_t, int fd)
 		temp = temp->next;
 	}
 }
+
+/**
+ * my_unset - Handles the 'unset' command to remove environment variables.
+ *
+ * This function removes environment variables from the list based on the tokens
+ * passed. For each valid token, the corresponding environment variable is removed.
+ *
+ * @param env: A linked list of environment variables.
+ * @param node_i: A linked list of tokens representing the variables to be unset.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	my_unset(t_env *env, t_tokens *node_i)
 {

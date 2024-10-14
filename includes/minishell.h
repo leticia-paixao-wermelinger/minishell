@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/13 19:20:35 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:24:42 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,10 +235,11 @@ void	my_export(t_env *env, t_tokens *node_t, int fd);
 void	my_unset(t_env *env, t_tokens *node_i);
 
 //------------------------CLEANING-----------------------
-//clear_funct.c
+//clear_loop.c
 void	clear_loop_end(t_command *command);
 void	clear_input(t_command *command);
 void	final_clear(t_command *command);
+//clear_funct.c
 void	free_list(t_node *list);
 void	free_t_tokens(t_tokens *node);
 void	free_env(t_env *list);

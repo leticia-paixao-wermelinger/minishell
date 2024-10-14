@@ -104,6 +104,7 @@ void	print_tokens(t_tokens *token)
 			continue ;
 		}
 		printf("Endereço do token: %p\n", temp);
+		printf("Endereço de next: %p\n", temp->next);
 		printf("Word: %s\n", temp->word);
 		printf("Type: %i\n", temp->type);
 		temp = temp->next;

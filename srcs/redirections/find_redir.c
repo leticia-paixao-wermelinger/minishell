@@ -14,8 +14,6 @@
 
 static int	check_redir(t_node *temp, t_tokens *word, t_command *command, int first_flag);
 
-// cat < Makefile | << eof1 cat > file | << eof2 cat
-
 int	redirections(t_node *sentence, t_command *command)
 {
 	t_node		*temp;
@@ -27,6 +25,8 @@ int	redirections(t_node *sentence, t_command *command)
 	temp = sentence;
 	temp_token = NULL;
 	ret = NO_ERROR;
+//	printf("1. Vai passar redirects na estrutura:\n");
+//	printlist(command->l_input);
 	while (temp)
 	{
 		word = temp->token;
@@ -43,24 +43,17 @@ int	redirections(t_node *sentence, t_command *command)
 //					printf("sentence->token->word == %s\n", sentence->token->word);
 //					printf("word == %s\n", word->word);
 					temp_token = word;
-					//temp->token = word->next->next;
-//					printf("sentence->token->word == %s\n", sentence->token->word);
 					ret = check_redir(temp, temp_token, command, flag_first);
-//					printf("2.2. pós check_redir == %p, com %s\n", word->next, word->next->word);
-					//sentence->token = temp->token;
-					if (ret == ERROR)
-						sentence->exit_status = 1;
-//					printf("3. Vai retornar com a estrutura:\n");
-//					printlist(command->l_input);
-					if (!word)
-					{
-						temp->token = NULL;
-						break ;
-					}
-					else if (word != NULL)
-						word = word->next;
-					else if (word->next == NULL)
+					if (temp->token != NULL)
 						word = temp->token;
+					else
+						word = NULL;
+					if (ret == ERROR)
+						temp->exit_status = 1;
+//					printf("3. Está no momento com a estrutura:\n");
+//					printlist(command->l_input);
+//					printf("3.2. pós check_redir está no nó == %p, com %s\n", word, word->word);
+//					word = temp->token->next;
 				}
 				flag_first = OFF;
 			}

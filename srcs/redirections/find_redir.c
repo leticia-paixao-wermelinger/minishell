@@ -77,8 +77,8 @@ int	redirections(t_node *sentence, t_command *command)
 			}
 			if (ret == ERROR)
 			{
-				printf("Vai retornar com a estrutura:\n");
-				printlist(command->l_input);
+				//printf("Vai retornar com a estrutura:\n");
+				//printlist(command->l_input);
 				return (ERROR);
 			}
 		}

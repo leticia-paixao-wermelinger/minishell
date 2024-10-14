@@ -12,7 +12,7 @@
 
 #include "../../includes/minishell.h"
 
-static int  pipe_first(char *str, int i);
+//static int  pipe_first(char *str, int i);
 static int	redir_first(char *str, int i);
 
 int	check_pipes_with_redir(char *str)
@@ -22,12 +22,12 @@ int	check_pipes_with_redir(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == PIPE)
+		/*if (str[i] == PIPE)
 		{
 			if (pipe_first(str, i) == ERROR)
 				return (ERROR);
-		}
-		else if (str[i] == LESS_THAN || str[i] == GREATER_THAN)
+		}*/
+		if (str[i] == LESS_THAN || str[i] == GREATER_THAN)
 		{
 			if (redir_first(str, i) == ERROR)
 				return (ERROR);
@@ -43,7 +43,7 @@ bash:  ls: No such file or directory
 However, the g_status must be 0.
 */
 
-static int	pipe_first(char *str, int i)
+/*static int	pipe_first(char *str, int i)
 {
 	char	*s_err;
 
@@ -68,7 +68,7 @@ static int	pipe_first(char *str, int i)
 		i++;
 	}
 	return (NO_ERROR);
-}
+}*/
 
 /*
 Verify if there are any errors with redir followed by other redirs or with redir followed by pipe.

@@ -25,7 +25,7 @@ int	executor(t_command *command, t_node *sentence)
 	if (has_pipe == TRUE)
 		make_pipe(sentence);
 	if (redirections(sentence, command) == ERROR)
-		return (ERROR);
+		return (close_all_node_fds(sentence), ERROR);
 	is_valid_cmd(sentence);
 	execute_cmds(command, sentence, has_pipe);
 	current_node = sentence;

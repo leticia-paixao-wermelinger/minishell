@@ -237,14 +237,12 @@ of the file from the linked list t_tokens.
 int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 {
 	char	*filename;
-/*	t_tokens    *temp;
 
-	temp = NULL;*/
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
 	{
-		remove_redir_nodes(sentence, redir_node);
 		no_such_file(filename);
+		remove_redir_nodes(sentence, redir_node);
 		return (ERROR);
 	}
 	if (check_permissions(filename, R_OK) == ERROR)
@@ -253,11 +251,5 @@ int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 			close(sentence->fd_in);
 	sentence->fd_in = open(filename, O_RDONLY);
 	remove_redir_nodes(sentence, redir_node);
-/*	if (sentence->token == redir_node)
-		temp = redir_node->next->next;
-	remove_word_token(redir_node->next, sentence->token, sentence);
-	remove_word_token(redir_node, sentence->token, sentence);
-	if (temp != NULL)
-		sentence->token = temp;*/
 	return (NO_ERROR);
 }

@@ -33,14 +33,13 @@ void	remove_env(t_env *node, t_env *start)
 
 void	remove_first_word_token(t_tokens *start, t_node *sentence)
 {
-	t_tokens *temp;
-
-	temp = start;
-	start = start->next;
-	free(temp->word);
-	free(temp);
-	if (!start)
+//	printf("Entereço do q deve ser o novo head da lista = %p, com %s\n", start->next, start->next->word);
+	sentence->token = start->next;
+	free(start->word);
+	free(start);
+	if (!(sentence->token))
 		sentence->token = NULL;
+//	printf("Endereço do novo head da lista: %p, com %s\n", sentence->token, sentence->token->word);
 }
 
 void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
@@ -48,18 +47,29 @@ void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
 	t_tokens *temp;
 
 	temp = start;
+//	printf("--------REMOÇÃO DE NODE:----------\n");
+//	printf("start = %p, com %s\n", start, start->word);
+//	printf("node = %p, com %s\n", node, node->word);
 	if (start == node)
 	{
+//		printf("start = node\n");
 		remove_first_word_token(start, sentence);
 		return ;
 	}
 	while (temp)
 	{
+//		printf("No loop: temp = %p\n", temp);
 		if (temp->next == node)
 		{
-			temp->next = node->next;
+//			printf("Está no if de temp->next = node, com next = %p\n", temp->next);
+			if (temp->next)
+				temp->next = node->next;
+			else
+				temp->next = NULL;
 			free(node->word);
+			node->word = NULL;
 			free(node);
+			node = NULL;
 			break ;
 		}
 		else
@@ -67,7 +77,7 @@ void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
 	}
 	if (!start)
 	{
-		printf("Entrou no if de word não existen da linha 73\n");
+//		printf("Entrou no if de word não existe, da linha 73\n");
 		sentence->token = NULL;
 	}
 }

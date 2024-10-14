@@ -106,7 +106,7 @@ void	heredoc_signal_handle(int sig)
 	}
 	else
 	{
-		ioctl(1, TIOCSTI, "\n"); // Simulate newline input
+		ioctl(1, TIOCSTI, 1); // Simulate newline input
 		rl_on_new_line(); // Prepare readline for a new line
 		rl_replace_line("", 0); // Clear the current input line
 	}

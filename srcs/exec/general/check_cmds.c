@@ -14,7 +14,7 @@
 
 int	check_cmds(t_node *sentence)
 {
-	while (sentence->token == NULL) //pro caso $nao_existo
+	while (sentence->token == NULL)
 	{
 		if (sentence->next)
 			sentence = sentence->next;

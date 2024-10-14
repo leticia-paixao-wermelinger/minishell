@@ -12,36 +12,36 @@
 
 #include "../../../includes/minishell.h"
 
-int     env_list_size(t_env *list)
+int	env_list_size(t_env *list)
 {
-    int         i;
+	int	i;
 
-    i = 0;
-    while (list)
-    {
-        i++;
-        list = list->next;
-    }
-    return (i);
+	i = 0;
+	while (list)
+	{
+		i++;
+		list = list->next;
+	}
+	return (i);
 }
 
-int     count_tokens_in_node(t_node *sentence)
+int	count_tokens_in_node(t_node *sentence)
 {
-    int         i;
-    t_node      *node;
-    t_tokens    *current_token;
+	int			i;
+	t_node		*node;
+	t_tokens	*current_token;
 
-    i = 0;
-    node = sentence;
-    while (node)
-    {
-        current_token = node->token;
-        while (current_token)
-        {
-            i++;
-            current_token = current_token->next;
-        }
-        node = node->next;
-    }
-    return (i);
+	i = 0;
+	node = sentence;
+	while (node)
+	{
+		current_token = node->token;
+		while (current_token)
+		{
+			i++;
+			current_token = current_token->next;
+		}
+		node = node->next;
+	}
+	return (i);
 }

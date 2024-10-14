@@ -6,18 +6,18 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 22:27:09 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/12 00:56:49 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/13 20:17:14 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-extern volatile unsigned int    g_flag;
+extern volatile unsigned int	g_flag;
 
-int executor(t_command *command, t_node *sentence)
+int	executor(t_command *command, t_node *sentence)
 {
 	t_node	*current_node;
-	int	has_pipe;
+	int		has_pipe;
 
 	if (check_cmds(sentence) == ERROR)
 		return (ERROR);
@@ -61,7 +61,7 @@ void	run_simple_commands(t_command *command, t_node *node)
 
 	current_node = node;
 	if (current_node->token->type == BUILTIN)
-		run_builtin(command, current_node, command->my_env, current_node->fd_out);
+		run_builtin(command, current_node, command->my_env, node->fd_out);
 	else
 		run_execve(command, current_node);
 }
@@ -93,10 +93,10 @@ void	update_status(t_node *sentence)
 	{
 		if (node->exit_status != 0)
 		{
-				if (node->exit_status >= 255)
-					g_status(WEXITSTATUS(node->exit_status));
-				else
-					g_status(node->exit_status);
+			if (node->exit_status >= 255)
+				g_status(WEXITSTATUS(node->exit_status));
+			else
+				g_status(node->exit_status);
 		}
 		else
 			g_status(NO_ERROR);

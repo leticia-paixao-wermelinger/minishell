@@ -28,12 +28,12 @@ int	node_list_size(t_node *node)
 void	do_dup2(t_node *node)
 {
 	if (node->fd_in != STDIN_FILENO)
-    {
-        dup2(node->fd_in, STDIN_FILENO);
-        close(node->fd_in);
-    }
-    if (node->fd_out != STDOUT_FILENO)
-    {
+	{
+		dup2(node->fd_in, STDIN_FILENO);
+		close(node->fd_in);
+	}
+	if (node->fd_out != STDOUT_FILENO)
+	{
 		dup2(node->fd_out, STDOUT_FILENO);
 		close(node->fd_out);
 	}

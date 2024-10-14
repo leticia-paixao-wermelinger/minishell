@@ -12,22 +12,22 @@
 
 #include "../../../includes/minishell.h"
 
-void print_errno(t_node *node)
+void	print_errno(t_node *node)
 {
-    if (node && node->token && node->token->word)
-    {
-        print_error("minishell: ");
-        print_error(node->token->word);
-        if (errno == EACCES)
-        {
-            print_error(": Permission denied\n");
-            node->exit_status = 126;
-        }
-        else
-        {
-            print_error(": Command not found\n");
-            node->exit_status = 127;
-        }
-    }
-    return ;
+	if (node && node->token && node->token->word)
+	{
+		print_error("minishell: ");
+		print_error(node->token->word);
+		if (errno == EACCES)
+		{
+			print_error(": Permission denied\n");
+			node->exit_status = 126;
+		}
+		else
+		{
+			print_error(": Command not found\n");
+			node->exit_status = 127;
+		}
+	}
+	return ;
 }

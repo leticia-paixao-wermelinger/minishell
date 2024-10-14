@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:18:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 21:45:29 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:52:18 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 /**
  * print_env - Prints all environment variables.
  *
- * This function prints each environment variable as key-value pairs in the format
- * "key=value" followed by a newline.
+ * This function prints each environment variable as key-value pairs in the
+ * format "key=value" followed by a newline.
  *
  * @param list: A linked list of environment variables.
  * @param fd: The file descriptor to which the output will be written.
@@ -42,15 +42,16 @@ void	print_env(t_env *list, int fd)
 /**
  * my_export - Handles the 'export' command to set environment variables.
  *
- * This function sets or updates environment variables based on the tokens passed.
- * If no tokens are provided, it prints all environment variables in a format
- * suitable for 'export'. For each valid token, the function either updates an 
- * existing environment variable or creates a new one.
+ * This function sets or updates environment variables based on the tokens
+ * passed. If no tokens are provided, it prints all environment variables
+ * in a format suitable for 'export'. For each valid token, the function
+ * either updates an existing environment variable or creates a new one.
  *
  * @param env: A linked list of environment variables.
- * @param node_t: A linked list of tokens representing the variables to be exported.
- * @param fd: The file descriptor to which the output will be written if no tokens
- *            are provided.
+ * @param node_t: A linked list of tokens representing the variables to be
+ *                exported.
+ * @param fd: The file descriptor to which the output will be written if no
+ *            tokens are provided.
  *
  * @return void: This function does not return a value.
  */
@@ -92,11 +93,13 @@ void	my_export(t_env *env, t_tokens *node_t, int fd)
 /**
  * my_unset - Handles the 'unset' command to remove environment variables.
  *
- * This function removes environment variables from the list based on the tokens
- * passed. For each valid token, the corresponding environment variable is removed.
+ * This function removes environment variables from the list based on the
+ * tokens passed. For each valid token, the corresponding environment
+ * variable is removed.
  *
  * @param env: A linked list of environment variables.
- * @param node_i: A linked list of tokens representing the variables to be unset.
+ * @param node_i: A linked list of tokens representing the variables to
+ *                be unset.
  *
  * @return void: This function does not return a value.
  */

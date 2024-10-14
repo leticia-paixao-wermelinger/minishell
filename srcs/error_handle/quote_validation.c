@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 16:17:04 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/21 17:45:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:22:33 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	n_quote_validation(char *str)
 	simple_quote = OFF;
 	while (str[i])
 	{
-		if (str[i] == DOUBLE_QUOT_MARK && double_quote == OFF && simple_quote == OFF)
+		if (str[i] == DOUBLE_QUOT_MARK && double_quote == OFF
+			&& simple_quote == OFF)
 			double_quote = ON;
 		else if (str[i] == SIMPLE_QUOT_MARK && simple_quote == OFF && double_quote == OFF)
 			simple_quote = ON;

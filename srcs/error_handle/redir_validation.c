@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_validation.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:37:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/22 00:27:09 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:49:28 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	input_ends_with_redir(char *str)
 	i = my_strlen(str);
 	while (--i >= 0)
 	{
-		if (str[i] != SPACE_CHAR && str[i] != LESS_THAN && str[i] != GREATER_THAN)
+		if (str[i] != SPACE_CHAR && str[i] != LESS_THAN
+			&& str[i] != GREATER_THAN)
 			return (NO_ERROR);
 		else if (str[i] == LESS_THAN || str[i] == GREATER_THAN)
 			break ;

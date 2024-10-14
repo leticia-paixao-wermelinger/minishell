@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 18:45:54 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/21 20:31:19 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 19:01:34 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,18 @@
 static int	check_following_pipes_in_loop(char *str, int i, int ret);
 static int	check_error_pipes(int first_pipes, int sec_pipes);
 
-/*
-The following function checks if the string starts or ends with a Pipe.
-*/
+/**
+ * check_pipe_init_and_end - Validates the initial and final characters
+ *                            of a command string.
+ *
+ * This function checks if the input string starts or ends with a pipe
+ * character. If it does, an appropriate error message is generated.
+ *
+ * @param str: The input string containing the command line to be checked.
+ *
+ * @return int: Returns NO_ERROR if no errors are found, or ERROR if the
+ *              string starts or ends with a pipe character.
+ */
 
 int	check_pipe_init_and_end(char *str)
 {
@@ -39,6 +48,20 @@ int	check_pipe_init_and_end(char *str)
 	return (NO_ERROR);
 }
 
+/**
+ * check_following_pipes - Checks for consecutive pipes and validates their
+ *                         syntax in a command string.
+ *
+ * This function iterates through the input string to ensure that no two
+ * pipe characters are adjacent without a space in between. It calls a
+ * helper function to validate the syntax whenever a pipe is detected.
+ *
+ * @param str: The input string containing the command line to be checked.
+ *
+ * @return int: Returns NO_ERROR if no syntax errors are found, or ERROR
+ *              if there are consecutive pipes without proper spacing.
+ */
+
 int	check_following_pipes(char *str)
 {
 	int	i;
@@ -52,6 +75,23 @@ int	check_following_pipes(char *str)
 	}
 	return (NO_ERROR);
 }
+
+/**
+ * check_following_pipes_in_loop - Helper function to analyze the input
+ *                                  string for consecutive pipes.
+ *
+ * This function maintains static variables to track the state of pipe
+ * characters and spaces encountered. It determines the appropriate
+ * counts and checks for errors based on the pipe and space arrangement.
+ *
+ * @param str: The input string containing the command line to be checked.
+ * @param i: The current index in the input string being analyzed.
+ * @param ret: The current return status, which may be updated based on
+ *             the analysis.
+ *
+ * @return int: Returns the updated status indicating whether an error
+ *              was encountered during the validation.
+ */
 
 static int	check_following_pipes_in_loop(char *str, int i, int ret)
 {
@@ -81,6 +121,23 @@ static int	check_following_pipes_in_loop(char *str, int i, int ret)
 	}
 	return (ret);
 }
+
+/**
+ * check_error_pipes - Validates the number of pipes and identifies syntax
+ *                     errors.
+ *
+ * This function checks the counts of consecutive pipes detected in the
+ * command string and determines if any syntax errors have occurred,
+ * returning appropriate error statuses.
+ *
+ * @param first_pipes: The count of pipes detected before encountering a
+ *                     non-pipe character.
+ * @param sec_pipes: The count of pipes detected after encountering a
+ *                   space character.
+ *
+ * @return int: Returns ERROR if a syntax error is found, or NO_ERROR
+ *              if the pipe syntax is valid.
+ */
 
 static int	check_error_pipes(int first_pipes, int sec_pipes)
 {

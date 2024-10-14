@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/14 18:24:42 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 19:05:40 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,10 +65,11 @@ int		check_pipe_init_and_end(char *str);
 int		check_double_pipe_together(char **str);
 int		check_following_pipes(char *str);
 char	*remove_after_double_pipe(char **str, int i);
-//print_error.c
-void	print_error(char *str);
+//print_syntax_error.c
 int		pipe_syntax_error(int flag);
 int		redir_syntax_error(enum e_token e);
+//print_general_error.c
+void	print_error(char *str);
 int		no_such_file(char *str);
 int		permission_denied(char *str);
 void	print_no_such_file(char **argv);

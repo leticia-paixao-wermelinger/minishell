@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   general_status.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/27 19:47:34 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/27 21:49:13 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 18:38:55 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * g_status - Manages the global status of the shell.
+ *
+ * This function retrieves or sets the global status value used by the shell.
+ * If a non-negative integer is passed as an argument, it updates the global
+ * status value. If a negative integer is passed, the function ignores it and
+ * simply returns the current global status value.
+ *
+ * @param number: The new status value to set (must be non-negative). If a
+ *                negative value is passed, the function returns the current
+ *                status without modifying it.
+ *
+ * @return int: The current global status value after possible update.
+ */
 
 int	g_status(int number)
 {

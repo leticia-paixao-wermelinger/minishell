@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/10/14 18:25:05 by lraggio          ###   ########.fr        #
+#    Updated: 2024/10/14 19:06:26 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,8 @@ srcs/parser/linked_list_input/create_list_input.c \
 srcs/error_handle/input_validation.c \
 srcs/error_handle/pipe_and_redir_validation.c \
 srcs/error_handle/pipe_validation.c \
-srcs/error_handle/print_error.c \
+srcs/error_handle/print_general_error.c \
+srcs/error_handle/print_syntax_error.c \
 srcs/error_handle/quote_validation.c \
 srcs/error_handle/redir_validation.c \
 srcs/error_handle/remove_quotes.c \

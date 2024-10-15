@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/14 23:31:22 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 19:05:20 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ volatile unsigned int	g_flag;
  *       - The loop runs indefinitely until it is explicitly broken.
  */
 
+void	exec_and_clear(t_command command)
+{
+	executor(&command, command.l_input);
+	clear_loop_end(&command);
+}
+
 void	ms_loop(t_command command)
 {
 	while (42)
@@ -48,12 +54,12 @@ void	ms_loop(t_command command)
 			g_status(NO_ERROR);
 			break ;
 		}
-		else if (my_strlen(command.input) == 0)
+		add_history(command.input);
+		if (my_strlen(command.input) == 0)
 		{
 			clear_input(&command);
 			continue ;
 		}
-		add_history(command.input);
 		if (parser(&command) == ERROR)
 			continue ;
 		if (pre_exec(&command) == ERROR)
@@ -61,8 +67,7 @@ void	ms_loop(t_command command)
 			clear_loop_end(&command);
 			break ;
 		}
-		executor(&command, command.l_input);
-		clear_loop_end(&command);
+		exec_and_clear(command);
 	}
 }
 

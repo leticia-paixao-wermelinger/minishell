@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/15 18:06:29 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 19:07:32 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ int	redirections(t_node *sentence, t_command *command, int ret, int flag_first)
 				ret = handle_redirections_first(temp, &word, command,
 						&flag_first);
 			if (!(sentence->token))
-			{
-				sentence->token = NULL;
-				return (ret);
-			}
+				return (sentence->token = NULL, ret);
 			if (word != NULL)
 				ret = handle_redirections_second(temp, &word, command,
 						flag_first);

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/15 18:40:40 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 19:06:25 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 //------------------MAIN------------------
 // main.c
 int			main(int argc, char *argv[]);
+void		exec_and_clear(t_command command);
 // prompt_and_inputs.c
 void		set_command(t_command *command);
 char		*make_prompt(void);
@@ -160,6 +161,8 @@ int			print_global_var(t_tokens *token, char *str, int j);
 int			double_dollar(t_tokens *token, char *str, int j);
 int			expand_variable(t_tokens *token, t_env *env, char *str, int j);
 char		*join_strs(char *str, char *middle, int *arr, int *index);
+// var_exp_utils_2.c
+char		*take_name_var(char *str, int j);
 // heredoc_exp.c
 char		*expand_heredoc_variables(char *str, t_env *env);
 

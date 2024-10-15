@@ -6,7 +6,7 @@
 #    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/10/14 23:21:51 by lraggio          ###   ########.fr        #
+#    Updated: 2024/10/15 18:46:21 by lraggio          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ srcs/redirections/redir_utils.c \
 \
 srcs//variable_expansion/var_exp.c \
 srcs//variable_expansion/var_exp_utils.c \
+srcs//variable_expansion/var_exp_utils_2.c \
 srcs//variable_expansion/heredoc_exp.c \
 \
 srcs/env/env_utils.c \

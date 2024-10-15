@@ -6,29 +6,78 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/13 19:24:51 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 23:13:47 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-char	*check_path(t_command *cmd, t_node *node, char **env_array)
+/**
+ * @brief pipe_execution - Forks a new process to execute a command
+ *                        in a piped context.
+ *
+ * This function creates a child process to execute a command. If the
+ * command is a built-in, it calls `run_pipe_builtin`, otherwise it
+ * calls `run_pipe_execve`. The function handles the duplication of
+ * file descriptors for input and output redirection, ensuring that
+ * commands can communicate through pipes. The exit status of the child
+ * process is set and passed back to the parent process.
+ *
+ * @param command: A pointer to the `t_command` structure containing
+ *                 command information and environment variables.
+ * @param node: A pointer to the `t_node` representing the command to be
+ *              executed.
+ *
+ * @return int: Returns NO_ERROR on success, or the exit status of the
+ *              executed command if an error occurs.
+ */
+
+int	pipe_execution(t_command *command, t_node *node)
 {
-	if (access(node->token->word, (F_OK | X_OK)) != 0)
+	int	ret;
+
+	ret = NO_ERROR;
+	node->pid = fork();
+	if (node->pid == 0)
 	{
-		if (errno == EACCES)
+		if (node->token->type != BUILTIN)
+			run_pipe_execve(command, node);
+		else
 		{
 			do_dup2(node);
-			close_node_fds(node);
-			print_errno(node);
-			free_matrix(env_array);
-			return (free_matrix(env_array), NULL);
+			ret = run_pipe_builtin(command, node->token, command->my_env,
+					node->fd_out);
+			close_all_node_fds(node);
 		}
-		return (get_executable_path(cmd, node));
+		ret = node->exit_status;
+		clear_loop_end(command);
+		final_clear(command);
+		exit(ret);
 	}
-	else
-		return (node->token->word);
+	return (ret);
 }
+
+/**
+ * @brief run_pipe_execve - Executes a command using execve in a piped context.
+ *
+ * This function handles the execution of a command in a piped environment
+ * by preparing the necessary arguments and environment variables. It
+ * checks the command's path using `check_path`, then constructs an
+ * argument array with `cmd_list_to_array` and duplicates file descriptors
+ * as necessary. The function attempts to execute the command using
+ * `execve`. In case of errors, it cleans up any allocated resources.
+ *
+ * @param command: A pointer to the `t_command` structure containing
+ *                 command information and environment variables.
+ * @param list: A pointer to the head of the linked list of `t_node`
+ *              structures representing the commands to be executed.
+ *
+ * @return void: This function does not return a value.
+ *
+ * @note The function ensures proper cleanup of resources in case of
+ *       failure. If the command is not found or executable, it handles
+ *       the error gracefully.
+ */
 
 void	run_pipe_execve(t_command *command, t_node *list)
 {
@@ -54,6 +103,28 @@ void	run_pipe_execve(t_command *command, t_node *list)
 	return ;
 }
 
+/**
+ * @brief run_pipe_builtin - Executes built-in commands within a pipe.
+ *
+ * This function checks the type of the command represented by the
+ * `t_tokens` structure and executes the corresponding built-in command
+ * function (such as `echo`, `cd`, `pwd`, etc.). It uses the file
+ * descriptor `fd` for output redirection if necessary. This is
+ * important for handling built-in commands separately from external
+ * commands in the minishell.
+ *
+ * @param command: A pointer to the `t_command` structure containing
+ *                 command information and environment variables.
+ * @param token: A pointer to the `t_tokens` structure representing the
+ *               command token to be executed.
+ * @param env: A pointer to the environment list used by the built-in
+ *             commands.
+ * @param fd: The file descriptor for output redirection.
+ *
+ * @return int: Returns the exit status of the executed built-in command
+ *              or zero if no built-in command was executed.
+ */
+
 int	run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
 {
 	int	ret;
@@ -76,31 +147,41 @@ int	run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
 	return (ret);
 }
 
-int	pipe_execution(t_command *command, t_node *node)
-{
-	int	ret;
+/**
+ * @brief check_path - Verifies if a command's executable and retrieves its path.
+ *
+ * This function checks if the command specified in the given `t_node`
+ * structure is accessible and executable. If the command is not found
+ * or not executable, it attempts to retrieve its executable path from
+ * the environment. If the command has permission issues, it prints an
+ * error message and cleans up allocated resources. This is critical for
+ * the minishell to ensure that commands are valid before execution.
+ *
+ * @param cmd: A pointer to the `t_command` structure containing command
+ *             information and environment variables.
+ * @param node: A pointer to the `t_node` representing the command to be
+ *              executed.
+ * @param env_array: An array of strings representing the environment
+ *                   variables, used to search for executable paths.
+ *
+ * @return char*: Returns the executable path of the command if it exists
+ *                and is accessible, or NULL if an error occurred or
+ */
 
-	ret = NO_ERROR;
-	node->pid = fork();
-	if (node->pid == 0)
+char	*check_path(t_command *cmd, t_node *node, char **env_array)
+{
+	if (access(node->token->word, (F_OK | X_OK)) != 0)
 	{
-		if (node->token->type != BUILTIN)
-			run_pipe_execve(command, node);
-		else
+		if (errno == EACCES)
 		{
 			do_dup2(node);
-			/*if (node->fd_in != STDIN_FILENO)
-				dup2(node->fd_in, STDIN_FILENO);
-			if (node->fd_out != STDOUT_FILENO)
-				dup2(node->fd_out, STDOUT_FILENO);*/
-			ret = run_pipe_builtin(command, node->token,
-					command->my_env, node->fd_out);
-			close_all_node_fds(node);
+			close_node_fds(node);
+			print_errno(node);
+			free_matrix(env_array);
+			return (free_matrix(env_array), NULL);
 		}
-		ret = node->exit_status;
-		clear_loop_end(command);
-		final_clear(command);
-		exit(ret);
+		return (get_executable_path(cmd, node));
 	}
-	return (ret);
+	else
+		return (node->token->word);
 }

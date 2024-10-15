@@ -6,11 +6,33 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 16:17:58 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/07 21:09:52 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 00:35:37 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief create_first_env_node
+- Creates the first environment node in the linked list.
+ *
+ * This function allocates memory for a new environment node and initializes
+ * its key and value based on the provided string. The environment variable
+ * is expected to be in the format "KEY=VALUE".
+ *
+
+* @param c: A string representing the environment variable in the format
+"KEY=VALUE".
+
+* @param list: A pointer to the current list of environment nodes (can be NULL).
+ *
+ * @return t_env*: Returns a pointer to the newly created environment node.
+ *                 If memory allocation fails, returns NULL.
+ *
+ * @note This function does not handle memory cleanup for existing nodes in
+ *       the list. The caller is responsible for managing the memory of
+ *       the linked list.
+ */
 
 t_env	*create_first_env_node(char *c, t_env *list)
 {
@@ -21,7 +43,28 @@ t_env	*create_first_env_node(char *c, t_env *list)
 	return (list);
 }
 
-t_env	*create_last_env_node(char	*c, t_env *prev)
+/**
+ * @brief create_last_env_node
+- Creates a new environment node and appends it to the list.
+ *
+ * This function allocates memory for a new environment node and initializes
+ * its key and value based on the provided string. The environment variable
+ * is expected to be in the format "KEY=VALUE". The new node is appended to
+ * the end of the linked list pointed to by the previous node.
+ *
+
+* @param c: A string representing the environment variable in the format
+"KEY=VALUE".
+ * @param prev: A pointer to the last environment node in the list.
+ *
+ * @return t_env*: Returns a pointer to the newly created environment node.
+ *                 If memory allocation fails, returns NULL.
+ *
+ * @note The caller should ensure that the `prev` pointer is not NULL
+ *       before calling this function.
+ */
+
+t_env	*create_last_env_node(char *c, t_env *prev)
 {
 	t_env	*new;
 
@@ -32,6 +75,24 @@ t_env	*create_last_env_node(char	*c, t_env *prev)
 	new->next = NULL;
 	return (new);
 }
+
+/**
+ * @brief create_first_input_node
+- Creates the first input node in the linked list.
+ *
+ * This function allocates memory for a new input node and initializes it
+ * based on the provided string. It creates a list of tokens from the input
+ * string, setting up the input/output file descriptors and process ID.
+ *
+ * @param s: The input string to be tokenized and stored in the node.
+ * @param list: A pointer to the current list of input nodes (can be NULL).
+ *
+ * @return t_node*: Returns a pointer to the newly created input node.
+ *                  If memory allocation fails, returns NULL.
+ *
+ * @note This function is responsible for initializing the node's fields to
+ *       appropriate default values (e.g., file descriptors, PID).
+ */
 
 t_node	*create_first_input_node(char *s, t_node *list)
 {
@@ -46,6 +107,25 @@ t_node	*create_first_input_node(char *s, t_node *list)
 	list->next = NULL;
 	return (list);
 }
+
+/**
+ * @brief create_last_input_node
+- Creates a new input node and appends it to the list.
+ *
+ * This function allocates memory for a new input node and initializes it
+ * based on the provided string. It creates a list of tokens from the input
+ * string and appends the new node to the end of the linked list pointed to
+ * by the previous node.
+ *
+ * @param s: The input string to be tokenized and stored in the new node.
+ * @param prev: A pointer to the last input node in the list.
+ *
+ * @return t_node*: Returns a pointer to the newly created input node.
+ *                  If memory allocation fails, returns NULL.
+ *
+ * @note The caller should ensure that the `prev` pointer is not NULL
+ *       before calling this function.
+ */
 
 t_node	*create_last_input_node(char *s, t_node *prev)
 {
@@ -64,6 +144,25 @@ t_node	*create_last_input_node(char *s, t_node *prev)
 	return (new);
 }
 
+/**
+ * @brief create_first_input_token
+- Initializes the first token in the token list.
+ *
+ * This function creates the first token in a list of tokens by setting its
+ * word and type. The token is initialized with the provided word, which is
+ * duplicated to allocate memory for it. If the word is NULL, the token's
+ * word is also set to NULL.
+ *
+ * @param word: The string to be assigned to the token's word.
+
+* @param list: A pointer to the token list where the first token will be
+created.
+ *
+
+* @note The token's type is initialized to NO_INFO and the next pointer is set
+to NULL.
+ */
+
 void	create_first_input_token(char *word, t_tokens *list)
 {
 	if (!word)
@@ -72,69 +171,4 @@ void	create_first_input_token(char *word, t_tokens *list)
 		list->word = my_strdup(word);
 	list->type = NO_INFO;
 	list->next = NULL;
-}
-
-t_tokens	*create_last_token(char *word, t_tokens *prev)
-{
-	t_tokens	*new;
-
-	new = (t_tokens *)malloc(sizeof(t_tokens));
-	if (!new)
-		return (NULL);
-	new->word = my_strdup(word);
-	new->type = NO_INFO;
-	prev->next = new;
-	new->next = NULL;
-	return (new);
-}
-
-// As próximas 2 funções são para testes durante a elaboração do código:
-
-void	print_tokens(t_tokens *token)
-{
-	t_tokens	*temp;
-//	int			i = 0;
-
-	temp = token;
-	while (temp)
-	{
-		if (token->word == NULL)
-		{
-			temp = temp->next;
-			continue ;
-		}
-		printf("Endereço do token: %p\n", temp);
-		printf("Endereço de next: %p\n", temp->next);
-		printf("Word: %s\n", temp->word);
-		printf("Type: %i\n", temp->type);
-		temp = temp->next;
-	}
-}
-
-void	printlist(t_node *list)
-{
-	t_node	*temp;
-	int		i;
-
-	temp = list;
-	i = 1;
-	while (temp)
-	{
-		printf("\033[0;33m Item %i, com endereço %p\n\033[0m", i, temp);
-		printf("\033[0;31m"); // Make color red
-		printf("Matriz\n");
-		printf("Endereço 1 token: %p\n", temp->token);
-		printf("_________________________________________________\n");
-		print_tokens(temp->token);
-		printf("_________________________________________________\n");
-		printf("fd_in: %i\n", temp->fd_in);
-		printf("fd_out: %i\n", temp->fd_out);
-		printf("pid: %i\n", temp->pid);
-		printf("exit_status: %i\n", temp->exit_status);
-		printf("Next: %p\n\033[0m", temp->next);
-		printf("\033[0m"); // Return to original color
-		printf("Próximo:\n");
-		i++;
-		temp = temp->next;
-	}
 }

@@ -6,11 +6,25 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/21 20:37:50 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/14 19:49:28 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:39:56 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * input_ends_with_redir - Checks if the input ends with a redirection symbol.
+ *
+ * This function scans the input string `str` from the end to check if the
+ * last non-space character is a redirection symbol ('<' or '>'). If a
+ * redirection symbol is found at the end, it prints a syntax error message
+ * and sets the global status to MISUSE.
+ *
+ * @param str: The input string to check.
+ *
+ * @return ERROR if the input ends with a redirection symbol.
+ *         NO_ERROR if the input does not end with a redirection symbol.
+ */
 
 int	input_ends_with_redir(char *str)
 {
@@ -29,6 +43,19 @@ int	input_ends_with_redir(char *str)
 	g_status(MISUSE);
 	return (ERROR);
 }
+
+/**
+ * check_following_redirs - Validates consecutive redirections in a token list.
+ *
+ * This function checks two consecutive tokens in the list `node` and `next`.
+ * If both tokens are redirection symbols, it triggers a syntax error, printing
+ * an appropriate message and returning ERROR.
+ *
+ * @param node: The current token node to check.
+ *
+ * @return ERROR if two consecutive redirection tokens are found.
+ *         NO_ERROR if no such error is detected.
+ */
 
 int	check_following_redirs(t_tokens *node)
 {

@@ -6,13 +6,30 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/11 23:05:07 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 23:50:45 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	check_redir(t_node *temp, t_tokens *word, t_command *command, int first_flag);
+static int	check_redir(t_node *temp, t_tokens *word, t_command *command,
+				int first_flag);
+
+/**
+ * @brief redirections - Handles redirections for a linked list of commands.
+ *
+ * This function iterates through the linked list of commands and processes
+ * redirection tokens for each command. It checks for various types of
+ * redirections and applies them accordingly.
+ *
+ * @param sentence A pointer to the linked list of commands (`t_node`)
+ *                 to process for redirection.
+ * @param command A pointer to the command structure that may be needed
+ *                during redirection.
+ * @return An integer indicating the status of the redirection:
+ *         - NO_ERROR if successful,
+ *         - ERROR if a problem occurred during redirection.
+ */
 
 int	redirections(t_node *sentence, t_command *command)
 {
@@ -25,23 +42,16 @@ int	redirections(t_node *sentence, t_command *command)
 	temp = sentence;
 	temp_token = NULL;
 	ret = NO_ERROR;
-	//printf("1. Vai passar redirects na estrutura:\n");
-	//printlist(command->l_input);
 	while (temp)
 	{
 		word = temp->token;
 		flag_first = ON;
 		while (word)
 		{
-//			printf("1. Está no loop de redirections com word = %s\n", word->word);
 			if (flag_first == ON)
 			{
-//				printf("1 condução de first flag\n");
 				while (word && token_is_redir(word) == TRUE)
 				{
-//					printf("2. 1 token é redir\n");
-//					printf("sentence->token->word == %s\n", sentence->token->word);
-//					printf("word == %s\n", word->word);
 					temp_token = word;
 					ret = check_redir(temp, temp_token, command, flag_first);
 					if (temp->token != NULL)
@@ -50,10 +60,6 @@ int	redirections(t_node *sentence, t_command *command)
 						word = NULL;
 					if (ret == ERROR)
 						temp->exit_status = 1;
-//					printf("3. Está no momento com a estrutura:\n");
-//					printlist(command->l_input);
-//					printf("3.2. pós check_redir está no nó == %p, com %s\n", word, word->word);
-//					word = temp->token->next;
 				}
 				flag_first = OFF;
 			}
@@ -62,13 +68,11 @@ int	redirections(t_node *sentence, t_command *command)
 				sentence->token = NULL;
 				return (ret);
 			}
-//			printf("4. Endereço de word (%s) = %p\n", word->word, word);
 			if (word != NULL)
 			{
 				if (word->next != NULL)
 				{
 					ret = check_redir(temp, word, command, flag_first);
-//					printf("5. Saiu da check_redir com %p, que aponta para: %s\n", word, word->word);
 					if (ret == -1)
 						word = word->next;
 				}
@@ -76,57 +80,53 @@ int	redirections(t_node *sentence, t_command *command)
 					word = word->next;
 			}
 			if (ret == ERROR)
-			{
-				//printf("Vai retornar com a estrutura:\n");
-				//printlist(command->l_input);
 				return (ERROR);
-			}
 		}
-//		printf("6. Deu pipe\n");
 		temp = temp->next;
 	}
-	//printf("Vai retornar com a estrutura:\n");
-	//printlist(command->l_input);
 	return (ret);
 }
 
-static int	check_redir(t_node *sentence, t_tokens *word, t_command *command, int first_flag)
+/**
+ * @brief check_redir - Checks and executes the appropriate redirection
+ *                      for a given token.
+ *
+ * This function determines the type of redirection based on the token's type
+ * and applies the corresponding redirection function. It can handle appending,
+ * output redirection, input redirection, and here-document redirection.
+ *
+ * @param sentence A pointer to the command node (`t_node`)
+ *                 containing the redirection.
+ * @param word A pointer to the token (`t_tokens`) representing the
+ *             redirection operation.
+ * @param command A pointer to the command structure that may be needed
+ *                during redirection.
+ * @param first_flag An integer flag indicating if this is the first
+ *                   redirection check (for handling special cases).
+ * @return An integer indicating the status of the redirection:
+ *         - -1 if no valid redirection was found,
+ *         - 0 if successful,
+ *         - 1 if an error occurred.
+ */
+
+static int	check_redir(t_node *sentence, t_tokens *word, t_command *command,
+		int first_flag)
 {
 	int			ret;
 	t_tokens	*node_token;
 
 	ret = -1;
-//	printf("Função check_redir recebeu o endereço %p, que aponta para: %s e c a first_flag = %i\n", word, word->word, first_flag);
-//	printf("sentence->token->word em check_redir == %s\n", sentence->token->word);
 	if (first_flag != ON)
-	{
-//		printf("Entrou no if de first_flag com o endereço %p, que aponta para: %s\n", word, word->word);
 		node_token = word->next;
-//		printf("sentence->token->word em check_redir == %s\n", sentence->token->word);
-//		printf("Saiu do if de first_flag com o endereço %p, que aponta para: %s\n", word, word->word);
-	}
 	else
-	{
 		node_token = word;
-//		printf("no else: sentence->token->word em check_redir == %s\n", sentence->token->word);
-	//	word = word->next->next;
-	}
 	if (node_token->type == REDIR_APPEND)
 		ret = do_append(sentence, node_token);
 	else if (node_token->type == REDIR_OUT)
-	{
-//		printf("Vai chamar do_redir_out\n");
 		ret = do_redir_out(sentence, node_token);
-	}
 	else if (node_token->type == REDIR_IN)
 		ret = do_redir_in(sentence, node_token);
 	else if (node_token->type == REDIR_HEREDOC)
-	{
-//		printf("Vai chamar do_heredoc com sentence == %p e sentence->token == %p\n", sentence, sentence->token);
 		ret = do_heredoc(sentence, node_token, command);
-	}
-/*	else
-		word = word->next;*/
-	//printf("Está saindo da funçao check_redir com o endereço %p, que aponta para: %s\n", sentence->token, sentence->token->word);
 	return (ret);
 }

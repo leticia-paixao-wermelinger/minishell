@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   my_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:18:55 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/02/17 00:18:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:27:17 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,10 @@ int	main(int argc, char *argv[])
 	original = toupper(argv[1][0]);
 	co = (char)original;
 	printf("O caractere digitado foi %i (ou seja, %c) e, \
-	com a minha toupper, ele ficou %i (ou seja, %c) \n", argv[1][0], carg, a, ca);
+	com a minha toupper, ele ficou %i (ou seja, %c) \n", argv[1][0], carg, a,
+		ca);
 	printf("O caractere digitado foi %i (ou seja, %c) e, \
-	com a minha toupper, ele ficou %i (ou seja, %c) \n", argv[1][0], carg, a, co);
+	com a minha toupper, ele ficou %i (ou seja, %c) \n", argv[1][0], carg, a,
+		co);
 	return (0);
 }*/

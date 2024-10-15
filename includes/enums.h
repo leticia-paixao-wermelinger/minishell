@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:26 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/07 21:09:32 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 00:32:44 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
  * and toggle states OFF (2) and ON (3).
  */
 
-enum e_flag
+enum	e_flag
 {
 	FALSE = 0,
 	TRUE = 1,
@@ -44,7 +44,8 @@ enum e_flag
  * Additional values (128 + N) indicate termination by fatal error signals.
  */
 
-enum e_error {
+enum	e_error
+{
 	NO_ERROR = 0,
 	ERROR = 1,
 	MISUSE = 2,
@@ -84,7 +85,8 @@ enum e_error {
  * 	UNPRINT_LT = carriage ret (>)
  */
 
-enum e_ascii {
+enum	e_ascii
+{
 	DOUBLE_QUOT_MARK = 34,
 	SIMPLE_QUOT_MARK = 39,
 	PIPE = 124,
@@ -120,7 +122,8 @@ enum e_ascii {
  * REDIR_HEREDOC = 6, // <<
  */
 
-enum e_token {
+enum	e_token
+{
 	NO_INFO = 0,
 	COMMAND = 1,
 	ARGUMENT = 2,

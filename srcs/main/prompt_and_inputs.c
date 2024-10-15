@@ -6,21 +6,27 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/29 18:02:36 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/18 17:18:19 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 23:35:36 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * set_command - Prepares the command structure for each new input.
- * 
- * This function generates the shell prompt using the current working directory, 
- * then reads user input via `readline` and stores it in the `command->input` field. 
- * It also frees the previous prompt string if necessary.
+ * @brief set_command - Sets the current command input for the minishell.
  *
- * @param command: A pointer to the `t_command` structure that holds the command 
- * input and related data.
+ * This function generates a prompt string using the `make_prompt`
+ * function, displays it to the user, and reads the user's input
+ * using the `readline` function. The input is stored in the
+ * `input` field of the provided `t_command` structure.
+ *
+ * @param command: A pointer to a t_command structure that holds
+ *                 the current command state, including the prompt
+ *                 and user input.
+ *
+ * @note The function dynamically allocates memory for the prompt.
+ *       It is the caller's responsibility to free this memory
+ *       when it is no longer needed.
  */
 
 void	set_command(t_command *command)
@@ -30,13 +36,21 @@ void	set_command(t_command *command)
 }
 
 /**
- * make_prompt - Generates a shell prompt string.
- * 
- * This function creates a prompt string that consists of the current working directory 
- * followed by a dollar sign. It uses ANSI escape codes to color the directory path in green. 
- * The result is dynamically allocated and should be freed after use.
+ * @brief make_prompt - Generates a shell prompt string with the current working
+ * directory.
  *
- * @return char*: The generated prompt string.
+ * This function retrieves the current working directory using the
+ * `getcwd` function and constructs a formatted prompt string.
+ * The prompt is prefixed with a green color escape code and
+ * suffixed with a reset color escape code, followed by a dollar sign
+ * ("$ ") to indicate readiness for user input.
+ *
+ * @return A pointer to a dynamically allocated string containing
+ *         the formatted prompt. The caller is responsible for
+ *         freeing this memory when it is no longer needed.
+ *
+ * @note If `getcwd` fails, the returned prompt may be incorrect
+ *       or incomplete, but the function does not handle this error.
  */
 
 char	*make_prompt(void)

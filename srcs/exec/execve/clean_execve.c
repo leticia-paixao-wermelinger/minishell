@@ -6,11 +6,23 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/13 17:03:24 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/13 17:03:29 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:57:23 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+/**
+ * @brief free_matrix - Frees a dynamically allocated matrix of strings.
+ *
+ * This function iterates through the given matrix, freeing each
+ * string element. After freeing all strings, it frees the matrix
+ * itself to prevent memory leaks.
+ *
+ * @param matrix: A pointer to the matrix of strings to be freed.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	free_matrix(char **matrix)
 {
@@ -26,6 +38,19 @@ void	free_matrix(char **matrix)
 	}
 	free(matrix);
 }
+
+/**
+ * @brief execve_clean - Cleans up memory used by command arguments and env.
+ *
+ * This function frees the memory allocated for both the command
+ * arguments and the environment variable array, ensuring that there
+ * are no memory leaks after executing a command.
+ *
+ * @param args: The array of command arguments to be freed.
+ * @param env_array: The environment variable array to be freed.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	execve_clean(char **args, char **env_array)
 {

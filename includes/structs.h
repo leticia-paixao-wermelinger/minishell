@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/18 17:19:13 by lraggio           #+#    #+#             */
-/*   Updated: 2024/09/25 14:30:42 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:32:39 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,36 +22,36 @@ typedef struct s_node	t_node;
 
 typedef struct s_env
 {
-	char	*key;
-	char	*value;
-	t_env	*next;
-}	t_env;
+	char				*key;
+	char				*value;
+	t_env				*next;
+}						t_env;
 
 typedef struct s_tokens
 {
-	char			*word;
-	enum e_token	type;
-	t_tokens		*next;
-}	t_tokens;
+	char				*word;
+	enum e_token		type;
+	t_tokens			*next;
+}						t_tokens;
 
 typedef struct s_node
 {
-	t_tokens	*token;
-	int			fd_in;
-	int			fd_out;
-	pid_t		pid;
-	int			exit_status;
-	t_node		*next;
-}	t_node;
+	t_tokens			*token;
+	int					fd_in;
+	int					fd_out;
+	pid_t				pid;
+	int					exit_status;
+	t_node				*next;
+}						t_node;
 
 typedef struct s_command
 {
-	char	*input;
-	char	**input_matrix;
-	char	*prompt;
-	int		input_count;
-	t_node	*l_input;
-	t_env	*my_env;
-}	t_command;
+	char				*input;
+	char				**input_matrix;
+	char				*prompt;
+	int					input_count;
+	t_node				*l_input;
+	t_env				*my_env;
+}						t_command;
 
 #endif

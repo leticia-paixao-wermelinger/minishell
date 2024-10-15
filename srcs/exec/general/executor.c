@@ -40,7 +40,7 @@ int	executor(t_command *command, t_node *sentence)
 	has_pipe = has_pipe_or_not(sentence);
 	if (has_pipe == TRUE)
 		make_pipe(sentence);
-	if (redirections(sentence, command) == ERROR)
+	if (redirections(sentence, command, NO_ERROR, ON) == ERROR)
 		return (close_all_node_fds(sentence), ERROR);
 	is_valid_cmd(sentence);
 	execute_cmds(command, sentence, has_pipe);

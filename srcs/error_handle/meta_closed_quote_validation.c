@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_validation_2.c                               :+:      :+:    :+:   */
+/*   meta_closed_quote_validation.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,15 +24,12 @@
  * @return void: This function does not return a value.
  */
 
-void	remove_closed_in_quotes_metas(char *str)
+void	remove_closed_in_quotes_metas(char *str, enum e_flag double_quote, \
+		enum e_flag single_quote)
 {
 	int			i;
-	enum e_flag	double_quote;
-	enum e_flag	single_quote;
 
 	i = 0;
-	double_quote = OFF;
-	single_quote = OFF;
 	while (str[i])
 	{
 		if (str[i] == DOUBLE_QUOT_MARK && double_quote == OFF

@@ -12,8 +12,6 @@
 
 #include "../../includes/minishell.h"
 
-static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env, int count);
-
 /*
 Redir Heredoc (<<):
 
@@ -39,16 +37,7 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_command *command)
 	pipe(fds);
 	child_pid = fork();
 	if (child_pid == 0)
-	{
-		close(fds[0]);
-		setup_heredoc_signal_handling();
-		heredoc_loop(fds, redir_node, command->my_env, command->input_count);
-		close(fds[1]);
-		close_all_node_fds(command->l_input);
-		clear_loop_end(command);
-		final_clear(command);
-		exit(g_status(-1));
-	}
+		heredoc_child_process(fds, redir_node, command);
 	if (child_pid > 1)
 		waitpid(child_pid, &status, 0);
 	close(fds[1]);
@@ -59,55 +48,6 @@ int	do_heredoc(t_node *sentence, t_tokens *redir_node, t_command *command)
 	if (!WIFEXITED(status))
 		return (ERROR);
 	return (NO_ERROR);
-}
-
-static void	heredoc_loop(int *fds, t_tokens *redir_node, t_env *env, int count)
-{
-	char	*delimiter;
-	char	*str;
-	int		written_to_pipe;
-	int		size;
-
-	delimiter = redir_node->next->word;
-	written_to_pipe = 0;
-	str = NULL;
-	g_status(0);
-	while (42)
-	{
-		str = readline("> ");
-		if (g_status(-1) == 130)
-		{
-			free(str);
-			str = NULL;
-			break ;
-		}
-		if (!str)
-		{
-			print_heredoc_ctrld(count, delimiter);
-			break ;
-		}
-		else if (my_strcmp(str, delimiter) == 0)
-		{
-			free(str);
-			str = NULL;
-			break ;
-		}
-		else
-		{
-			if (only_spaces(str) != ERROR)
-				str = expand_heredoc_variables(str, env);
-			size = my_strlen(str);
-			written_to_pipe += write(fds[1], str, size);
-			written_to_pipe += write(fds[1], "\n", 1);
-		}
-		free(str);
-		str = NULL;
-		if (written_to_pipe >= PIPE_BUF)
-		{
-			print_error("ms: heredoc limit reached, input'll be truncated\n");
-			break ;
-		}
-	}
 }
 
 /*

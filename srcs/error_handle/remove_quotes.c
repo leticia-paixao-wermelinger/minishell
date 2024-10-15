@@ -14,6 +14,7 @@
 
 static void	remove_quote_2(char *temp, char **str);
 static int	quote_is_valid(char *str, int j, int quote);
+static void	remove_quotes_from_word(char **word, int quote);
 
 /**
  * remove_all_quotes
@@ -33,7 +34,6 @@ void	remove_all_quotes(t_node *list, int quote)
 {
 	t_node		*node;
 	t_tokens	*token;
-	int			i;
 
 	node = list;
 	while (node)
@@ -41,23 +41,29 @@ void	remove_all_quotes(t_node *list, int quote)
 		token = node->token;
 		while (token)
 		{
-			i = 0;
 			if (token->word == NULL)
 			{
 				token = token->next;
 				continue ;
 			}
-			while (i <= (int)my_strlen(token->word) && token->word[i])
-			{
-				if (token->word[i] == quote && quote_is_valid(token->word, i,
-						quote) == TRUE)
-					remove_quote(&(token->word), i, quote);
-				else
-					i++;
-			}
+			remove_quotes_from_word(&(token->word), quote);
 			token = token->next;
 		}
 		node = node->next;
+	}
+}
+
+static void	remove_quotes_from_word(char **word, int quote)
+{
+	int	i;
+
+	i = 0;
+	while (i <= (int)my_strlen(*word) && (*word)[i])
+	{
+		if ((*word)[i] == quote && quote_is_valid(*word, i, quote) == TRUE)
+			remove_quote(word, i, quote);
+		else
+			i++;
 	}
 }
 

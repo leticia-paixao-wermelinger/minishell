@@ -12,6 +12,9 @@
 
 #include "../../includes/minishell.h"
 
+static void	remove_empty_tokens_in_sentence(t_tokens **first, \
+		t_tokens *tword, t_node *sentence);
+
 /**
  * @brief remove_env - Removes an environment variable node from the linked list.
  *
@@ -130,35 +133,42 @@ void	remove_empty_nodes(t_node *main_node)
 	t_node		*sentence;
 	t_tokens	*first;
 	t_tokens	*tword;
-	t_tokens	*temp;
 
 	sentence = main_node;
 	while (sentence)
 	{
 		first = sentence->token;
 		tword = first;
-		while (first && my_strlen(first->word) == 0)
-		{
-			temp = first->next;
-			remove_word_token(tword, first, sentence);
-			tword = temp;
-			first = temp;
-			sentence->token = first;
-		}
-		while (tword)
-		{
-			if (tword->next != NULL)
-			{
-				if (my_strlen(tword->next->word) == 0)
-					remove_word_token(tword->next, first, sentence);
-				else
-					tword = tword->next;
-			}
-			else
-				break ;
-		}
+		remove_empty_tokens_in_sentence(&first, tword, sentence);
 		if (!first)
 			sentence->token = NULL;
 		sentence = sentence->next;
+	}
+}
+
+static void	remove_empty_tokens_in_sentence(t_tokens **first, \
+		t_tokens *tword, t_node *sentence)
+{
+	t_tokens	*temp;
+
+	while (*first && my_strlen((*first)->word) == 0)
+	{
+		temp = (*first)->next;
+		remove_word_token(tword, *first, sentence);
+		tword = temp;
+		*first = temp;
+		sentence->token = *first;
+	}
+	while (tword)
+	{
+		if (tword->next != NULL)
+		{
+			if (my_strlen(tword->next->word) == 0)
+				remove_word_token(tword->next, *first, sentence);
+			else
+				tword = tword->next;
+		}
+		else
+			break ;
 	}
 }

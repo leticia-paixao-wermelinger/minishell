@@ -34,11 +34,11 @@ int	first_input_validation(t_command *command)
 		return (ERROR);
 	else if (only_spaces(command->input) == ERROR)
 		return (ERROR);
-	remove_closed_in_quotes_metas(command->input);
+	remove_closed_in_quotes_metas(command->input, OFF, OFF);
 	command->input = remove_init_and_end_spaces(command->input);
 	if (check_pipe_init_and_end(command->input) == ERROR)
 		return (ERROR);
-	else if (n_quote_validation(command->input) == ERROR)
+	else if (n_quote_validation(command->input, OFF, OFF) == ERROR)
 		return (ERROR);
 	else if (check_following_pipes(command->input) == ERROR)
 		return (ERROR);

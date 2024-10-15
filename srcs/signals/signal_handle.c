@@ -132,7 +132,6 @@ void	heredoc_signal_handle(int sig)
 	{
 		signal(SIGINT, SIG_IGN);
 		g_status(USED_CTRL_C);
-		exit(130);
 	}
 	else
 	{

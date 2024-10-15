@@ -54,4 +54,11 @@ typedef struct s_command
 	t_env				*my_env;
 }						t_command;
 
+typedef struct s_heredoc
+{
+	char	*delimiter;
+	char	*str;
+	int		written_to_pipe;
+	int		size;
+}						t_heredoc;
 #endif

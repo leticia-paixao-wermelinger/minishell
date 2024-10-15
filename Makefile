@@ -61,7 +61,8 @@ srcs/error_handle/print_general_error.c \
 srcs/error_handle/print_syntax_error.c \
 srcs/error_handle/print_builtin_error.c \
 srcs/error_handle/quote_validation.c \
-srcs/error_handle/quote_validation_2.c \
+srcs/error_handle/meta_closed_quote_validation.c \
+srcs/error_handle/single_quote_validation.c \
 srcs/error_handle/redir_validation.c \
 srcs/error_handle/remove_quotes.c \
 srcs/error_handle/errors_utils.c \
@@ -83,6 +84,7 @@ srcs/linked_list/heredoc_list.c \
 \
 srcs/redirections/find_redir.c \
 srcs/redirections/do_redir.c \
+srcs/redirections/heredoc_utils.c \
 srcs/redirections/redir_utils.c \
 \
 srcs//variable_expansion/var_exp.c \

@@ -77,12 +77,15 @@ void		print_heredoc_ctrld(int count, char *delimiter);
 // print_builtin_error.c
 void		print_cd_error(char *str, char *err);
 // quote_validation.c
-int			n_quote_validation(char *str);
+int			n_quote_validation(char *str, \
+				enum e_flag double_quote, enum e_flag simple_quote);
 int			dollar_is_closed_by_quote(char **str, int quote);
-void		single_quotes_to_unprintable(t_node *list);
-// quote_validation_2.c
-void		remove_closed_in_quotes_metas(char *str);
+// meta_closed_quote_validation.c
+void		remove_closed_in_quotes_metas(char *str, enum e_flag double_quote, \
+				enum e_flag single_quote);
 void		return_closed_in_quotes_metas(char *str);
+// single_quote_validation.c
+void		single_quotes_to_unprintable(t_node *list);
 // redir_validation.c
 int			input_ends_with_redir(char *str);
 int			check_following_redirs(t_tokens *node);
@@ -167,7 +170,8 @@ t_env		*my_getenv_by_list(const char *name, t_env *my_env);
 
 //--------------------REDIRECTIONS--------------------
 // find_redir.c
-int			redirections(t_node *sentence, t_command *command);
+int			redirections(t_node *sentence, t_command *command, \
+				int ret, int flag_first);
 int			find_heredoc(t_node *sentence);
 // do_redir.c
 int			do_heredoc(t_node *sentence, t_tokens *redir_node,
@@ -175,6 +179,8 @@ int			do_heredoc(t_node *sentence, t_tokens *redir_node,
 int			do_append(t_node *sentence, t_tokens *redir_node);
 int			do_redir_out(t_node *sentence, t_tokens *redir_node);
 int			do_redir_in(t_node *sentence, t_tokens *word);
+// heredoc_utils.c
+void		heredoc_child_process(int *fds, t_tokens *redir_node, t_command *command);
 // redir_utils.c
 int			check_permissions(char *pathname, int flag);
 void		remove_redir_nodes(t_node *sentence, t_tokens *redir_node);

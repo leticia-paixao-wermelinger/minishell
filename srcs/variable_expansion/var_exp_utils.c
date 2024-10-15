@@ -34,10 +34,13 @@ int	print_global_var(t_tokens *token, char *str, int j)
 	char	*number;
 	char	*temp;
 	int		index;
+	int		arr[2];
 
 	number = my_itoa(g_status(-1));
 	index = my_strlen(number);
-	temp = join_strs(str, number, (j - 1), 1, &index);
+	arr[0] = (j - 1);
+	arr[1] = 1;
+	temp = join_strs(str, number, arr, &index);
 	free(token->word);
 	token->word = my_strdup(temp);
 	free(temp);
@@ -63,9 +66,12 @@ int	double_dollar(t_tokens *token, char *str, int j)
 {
 	int		index;
 	char	*temp;
+	int		arr[2];
 
 	index = 0;
-	temp = join_strs(str, "$", (j - 1), 1, &index);
+	arr[0] = j - 1;
+	arr[1] = 1;
+	temp = join_strs(str, "$", arr, &index);
 	free(token->word);
 	token->word = my_strdup(temp);
 	free(temp);
@@ -97,19 +103,22 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 	char	*temp;
 	char	*key;
 	t_env	*node;
+	int		arr[2];
 
 	index = 0;
 	key = take_name_var(str, j);
 	node = my_getenv_by_list(key, env);
+	arr[0] = j - 1;
 	if (!node || (my_str_end_cmp(node->key, key) != 0))
 	{
-		temp = join_strs(str, "", (j - 1), (my_strlen(key)), &index);
+		arr[1] = my_strlen(key);
+		temp = join_strs(str, "", arr, &index);
 		index = my_strlen(key) - 1;
 	}
 	else
 	{
-		temp = join_strs(str, node->value, (j - 1), (my_strlen(node->key)),
-				&index);
+		arr[1] = my_strlen(node->key);
+		temp = join_strs(str, node->value, arr, &index);
 		if (!temp)
 			return (free(key), ERROR);
 	}
@@ -137,7 +146,7 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
  * @return A dynamically allocated string representing the joined result.
  */
 
-char	*join_strs(char *str, char *middle, int j, int jump, int *index)
+char	*join_strs(char *str, char *middle, int *arr, int *index)
 {
 	char	*temp1;
 	char	*temp2;
@@ -145,13 +154,13 @@ char	*join_strs(char *str, char *middle, int j, int jump, int *index)
 	int		size_temp1;
 
 	temp3 = NULL;
-	temp1 = my_strldup(str, j);
+	temp1 = my_strldup(str, arr[0]);
 	temp2 = my_strjoin(temp1, middle);
 	size_temp1 = my_strlen(temp1);
-	if ((int)my_strlen(str) != (size_temp1 + jump))
+	if ((int)my_strlen(str) != (size_temp1 + arr[1]))
 	{
 		free(temp1);
-		temp1 = fromstrldup(str, size_temp1 + jump);
+		temp1 = fromstrldup(str, size_temp1 + arr[1]);
 		temp3 = my_strjoin(temp2, temp1);
 		*index = my_strlen(temp2) - 1;
 	}

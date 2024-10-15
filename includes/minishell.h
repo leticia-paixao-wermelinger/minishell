@@ -159,7 +159,7 @@ int			check_post_dollar(t_tokens *token, char *str, int j, t_env *env);
 int			print_global_var(t_tokens *token, char *str, int j);
 int			double_dollar(t_tokens *token, char *str, int j);
 int			expand_variable(t_tokens *token, t_env *env, char *str, int j);
-char		*join_strs(char *str, char *middle, int j, int jump, int *index);
+char		*join_strs(char *str, char *middle, int *arr, int *index);
 // heredoc_exp.c
 char		*expand_heredoc_variables(char *str, t_env *env);
 

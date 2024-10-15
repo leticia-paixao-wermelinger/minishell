@@ -146,7 +146,6 @@ int	do_redir_in(t_node *sentence, t_tokens *redir_node)
 	filename = redir_node->next->word;
 	if (access(filename, F_OK) < 0)
 	{
-		printf("Veio do redir_in\n");
 		no_such_file(filename);
 		remove_redir_nodes(sentence, redir_node);
 		return (ERROR);

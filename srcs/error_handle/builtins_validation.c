@@ -18,7 +18,7 @@
 
 int	validate_args(t_tokens *node)
 {
-	if (node->next != NULL)
+	if (node && node->next != NULL)
 	{
 		print_cd_error("", ": too many arguments\n");
 		return (ERROR);

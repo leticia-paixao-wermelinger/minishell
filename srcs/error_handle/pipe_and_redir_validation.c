@@ -59,7 +59,8 @@ int	check_pipes_with_redir(char *str)
  *              errors are detected, such as a less-than symbol without a
  *              valid input.
  *
-/*static int	pipe_first(char *str, int i)
+
+static int	pipe_first(char *str, int i)
 {
 	char	*s_err;
 
@@ -84,8 +85,7 @@ int	check_pipes_with_redir(char *str)
 		i++;
 	}
 	return (NO_ERROR);
-}
- */
+}*/
 
 /**
  * redir_first - Checks for errors related to redirection operators.

@@ -59,6 +59,7 @@ srcs/error_handle/pipe_and_redir_validation.c \
 srcs/error_handle/pipe_validation.c \
 srcs/error_handle/print_general_error.c \
 srcs/error_handle/print_syntax_error.c \
+srcs/error_handle/print_builtin_error.c \
 srcs/error_handle/quote_validation.c \
 srcs/error_handle/quote_validation_2.c \
 srcs/error_handle/redir_validation.c \
@@ -67,6 +68,7 @@ srcs/error_handle/errors_utils.c \
 srcs/error_handle/spaces_validation.c \
 srcs/error_handle/spaces_validation_2.c \
 srcs/error_handle/general_status.c \
+srcs/error_handle/builtins_validation.c \
 \
 srcs/general_functions/is_chars_functions.c \
 srcs/general_functions/is_chars_functions_2.c \

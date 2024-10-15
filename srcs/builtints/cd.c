@@ -15,8 +15,7 @@
 static void	go_home(t_env *env, char *old_pwd);
 static void	change_pwd(char *new_value, t_env *env);
 static void	change_old_pwd(char *new_value, t_env *env);
-static int	validate_args(t_tokens *node);
-static void	print_cd_error(char *str, char *err);
+static void	cd_error_handle(char *old_pwd, t_tokens *node);
 
 /**
  * my_cd - Implements the behavior of the 'cd' built-in command.
@@ -56,13 +55,7 @@ int	my_cd(t_tokens *node, t_env *env)
 	ret = chdir(node->word);
 	if (ret != 0)
 	{
-		if (errno == EACCES)
-			print_cd_error(node->word, ": Permission denied\n");
-		else if (errno == ENOENT)
-			print_cd_error(node->word, ": No such file or directory\n");
-		else
-			print_cd_error(node->word, ": unable to access this path\n");
-		free(old_pwd);
+		cd_error_handle(old_pwd, node);
 		return (ERROR);
 	}
 	change_pwd(getcwd(cwd, sizeof(cwd)), env);
@@ -98,6 +91,21 @@ static void	go_home(t_env *env, char *old_pwd)
 	chdir(home->value);
 	change_pwd(home->value, env);
 	change_old_pwd(old_pwd, env);
+}
+
+/*
+*
+*/
+
+static void	cd_error_handle(char *old_pwd, t_tokens *node)
+{
+	if (errno == EACCES)
+		print_cd_error(node->word, ": Permission denied\n");
+	else if (errno == ENOENT)
+		print_cd_error(node->word, ": No such file or directory\n");
+	else
+		print_cd_error(node->word, ": unable to access this path\n");
+	free(old_pwd);
 }
 
 /**
@@ -160,22 +168,4 @@ static void	change_old_pwd(char *new_value, t_env *env)
 		node->value = my_strdup(new_value);
 	}
 	free(old_pwd);
-}
-
-static int	validate_args(t_tokens *node)
-{
-	if (node->next != NULL)
-	{
-		//too_many_args("cd");
-		print_cd_error("", ": too many arguments\n");
-		return (ERROR);
-	}
-	return (NO_ERROR);
-}
-
-static void	print_cd_error(char *str, char *err)
-{
-	print_error("minishell: cd: ");
-	print_error(str);
-	print_error(err);
 }

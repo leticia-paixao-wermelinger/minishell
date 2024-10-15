@@ -74,6 +74,8 @@ int			no_such_file(char *str);
 int			permission_denied(char *str);
 void		print_no_such_file(char **argv);
 void		print_heredoc_ctrld(int count, char *delimiter);
+// print_builtin_error.c
+void		print_cd_error(char *str, char *err);
 // quote_validation.c
 int			n_quote_validation(char *str);
 int			dollar_is_closed_by_quote(char **str, int quote);
@@ -98,6 +100,8 @@ char		*remove_init_and_end_spaces(char *str);
 char		*fix_lack_of_spaces(char *s);
 // general_status.c
 int			g_status(int number);
+// builtins_validation.c
+int			validate_args(t_tokens *node);
 
 //----------------GENERAL_FUNCTIONS------------------
 // is_chars_functions.c
@@ -204,6 +208,7 @@ int			pipe_execution(t_command *command, t_node *node);
 int			run_pipe_builtin(t_command *command, t_tokens *token, t_env *env,
 				int fd);
 void		run_pipe_execve(t_command *command, t_node *list);
+char		*check_path(t_command *cmd, t_node *node, char **env_array);
 // EXECVE
 // clean_execve.c
 void		execve_clean(char **args, char **env_array);

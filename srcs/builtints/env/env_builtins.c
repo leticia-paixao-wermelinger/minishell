@@ -12,6 +12,8 @@
 
 #include "../../../includes/minishell.h"
 
+static void	process_export(t_env *env, t_tokens *temp);
+
 /**
  * print_env - Prints all environment variables.
  *
@@ -58,17 +60,11 @@ void	print_env(t_env *list, int fd)
 
 void	my_export(t_env *env, t_tokens *node_t, int fd)
 {
-	char		*str;
-	t_env		*node_env;
 	t_tokens	*temp;
 
-	str = NULL;
-	node_env = NULL;
 	temp = node_t;
 	if (node_t == NULL)
-	{
 		print_env_for_export(env, fd);
-	}
 	while (temp)
 	{
 		if (is_valid_ev(temp->word) == ERROR)
@@ -77,17 +73,23 @@ void	my_export(t_env *env, t_tokens *node_t, int fd)
 			continue ;
 		}
 		else
-		{
-			node_env = my_getenv_by_list(temp->word, env);
-			str = fromstrcdup(temp->word, '=');
-			if (node_env != NULL)
-				change_env_value(node_env, str);
-			else
-				create_new_ev(temp->word, env);
-			free(str);
-		}
+			process_export(env, temp);
 		temp = temp->next;
 	}
+}
+
+static void	process_export(t_env *env, t_tokens *temp)
+{
+	char	*str;
+	t_env	*node_env;
+
+	str = fromstrcdup(temp->word, '=');
+	node_env = my_getenv_by_list(temp->word, env);
+	if (node_env != NULL)
+		change_env_value(node_env, str);
+	else
+		create_new_ev(temp->word, env);
+	free(str);
 }
 
 /**

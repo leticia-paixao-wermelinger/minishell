@@ -12,6 +12,8 @@
 
 #include "../../includes/minishell.h"
 
+static int	handle_dollar(t_tokens *token, int i, t_env *env);
+
 /**
  * @brief Expands variables for all tokens in a command.
  *
@@ -67,21 +69,24 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 		while (token->word[i])
 		{
 			if (token->word[i] == DOLLAR)
-			{
-				if (dollar_is_closed_by_quote(&(token->word),
-						UNPRINT_CHAR) == TRUE)
-					i++;
-				else
-				{
-					if (check_post_dollar(token, token->word, i, env) == CLOSE)
-						i++;
-				}
-			}
+				i = handle_dollar(token, i, env);
 			else
 				i++;
 		}
 		token = token->next;
 	}
+}
+
+static int	handle_dollar(t_tokens *token, int i, t_env *env)
+{
+	if (dollar_is_closed_by_quote(&(token->word), UNPRINT_CHAR) == TRUE)
+		i++;
+	else
+	{
+		if (check_post_dollar(token, token->word, i, env) == CLOSE)
+			i++;
+	}
+	return (i);
 }
 
 /**

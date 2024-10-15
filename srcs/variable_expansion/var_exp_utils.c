@@ -13,6 +13,7 @@
 #include "../../includes/minishell.h"
 
 static char	*take_name_var(char *str, int j);
+static void	cleaning_expansion(t_tokens *token, char **temp, char **key);
 
 /**
  * @brief Replaces a token's word with the string representation of the global
@@ -122,11 +123,16 @@ int	expand_variable(t_tokens *token, t_env *env, char *str, int j)
 		if (!temp)
 			return (free(key), ERROR);
 	}
-	free(token->word);
-	token->word = my_strdup(temp);
-	free(temp);
-	free(key);
+	cleaning_expansion(token, &temp, &key);
 	return (index);
+}
+
+static void	cleaning_expansion(t_tokens *token, char **temp, char **key)
+{
+	free(token->word);
+	token->word = my_strdup(*temp);
+	free(*temp);
+	free(*key);
 }
 
 /**

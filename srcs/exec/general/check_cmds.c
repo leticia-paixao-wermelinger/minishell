@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 16:22:22 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/14 23:00:15 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 20:07:16 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,15 @@ int	check_cmds(t_node *sentence)
 			return (ERROR);
 	}
 	if (is_there_space(sentence->token->word))
-		print_errno(sentence);
+	{
+		if (!sentence->next)
+		{
+			print_errno(sentence);
+			return (ERROR);
+		}
+		else
+			sentence = sentence->next;
+	}
 	return (NO_ERROR);
 }
 

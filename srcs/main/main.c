@@ -54,7 +54,8 @@ void	ms_loop(t_command command)
 			continue ;
 		}
 		add_history(command.input);
-		parser(&command);
+		if (parser(&command) == ERROR)
+			continue ;
 		if (pre_exec(&command) == ERROR)
 		{
 			clear_loop_end(&command);

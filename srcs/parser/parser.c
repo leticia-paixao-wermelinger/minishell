@@ -6,26 +6,29 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 20:41:24 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 00:34:58 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:36:48 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
- * parser - Parses the given command.
- * 
- * This function performs an initial error validation, primarily focused on 
- * syntax errors in the user's input. It then splits the input string by pipes, 
- * creates a list from the processed input, and performs additional validations. 
- * If any errors are detected during parsing, the function clears the relevant 
- * data structures and returns an error code.
+ * @brief parser - Parses the input command and generates a list of tokens.
  *
- * @param command: A pointer to the t_command structure that holds the user's 
- * input and necessary information for Bash processing.
+ * This function performs validation on the user's input command,
+ * splits the command by the pipe character ('|'), and generates
+ * a linked list of commands. It also searches for tokens and
+ * performs additional validation on the tokens created.
  *
- * @return int: Returns NO_ERROR if parsing is successful, or ERROR if any 
- * validation or processing fails.
+ * @param command A pointer to a t_command structure that contains
+ *                the user input and necessary data for parsing.
+ *
+ * @return Returns NO_ERROR (0) on successful parsing,
+ *         or ERROR (-1) if any validation fails or if parsing
+ *         cannot be completed.
+ *
+ * @note If the input command is invalid, the function clears the
+ *       command input and associated resources before returning.
  */
 
 int	parser(t_command *command)
@@ -49,36 +52,44 @@ int	parser(t_command *command)
 }
 
 /**
- * split_sentence_by_char - Splits a string by a given character, 
- * respecting the quote state.
+ * @brief split_sentence_by_char - Splits a string by a specified character
+ *                                  while respecting quotes.
  *
- * This function iterates through the input string, checking if the characters 
- * are inside single or double quotes. If they are not inside quotes, the function 
- * replaces the separator character with a non-printable character (UNPRINT_CHAR) 
- * to facilitate splitting later.
+ * This function processes the input string and replaces occurrences of a
+ * specified character (usually a delimiter) with a special unprintable
+ * character, allowing for the splitting of the string into an array
+ * of substrings. It respects quoted sections, meaning that delimiters
+ * within quotes are ignored.
  *
- * @param input: The input string to be split.
- * @param c: The character by which the string will be split.
+ * @param input A pointer to the input string that needs to be split.
+ * @param c The character by which the string will be split.
  *
- * @return char**: A vector of strings resulting from the original string split.
+ * @return Returns an array of strings (char**) containing the split
+ *         substrings, or NULL if an error occurs during processing.
+ *
+ * @note The caller is responsible for freeing the returned array and
+ *       the individual strings it contains. The function assumes that
+ *       the input string is properly formatted and does not contain
+ *       unbalanced quotes.
  */
 
-char    **split_sentence_by_char(char *input, char c)
+char	**split_sentence_by_char(char *input, char c)
 {
-    int quote_state;
-    int i;
+	int	quote_state;
+	int	i;
 
-    quote_state = 0;
-    i = 0;
-    while (input[i])
-    {
-            if (is_simple_quote(input[i]) && (quote_state == 0 || quote_state == 1))
-                quote_state ^= 1;
-            else if (is_double_quote(input[i]) && (quote_state == 0 || quote_state == 2))
-                quote_state ^= 2;
-            else if (is_char(input[i], c) && quote_state == 0)
-                    input[i] = UNPRINT_CHAR;
-            i++;
-    }
-    return (my_split(input, UNPRINT_CHAR));
+	quote_state = 0;
+	i = 0;
+	while (input[i])
+	{
+		if (is_simple_quote(input[i]) && (quote_state == 0 || quote_state == 1))
+			quote_state ^= 1;
+		else if (is_double_quote(input[i]) && (quote_state == 0
+				|| quote_state == 2))
+			quote_state ^= 2;
+		else if (is_char(input[i], c) && quote_state == 0)
+			input[i] = UNPRINT_CHAR;
+		i++;
+	}
+	return (my_split(input, UNPRINT_CHAR));
 }

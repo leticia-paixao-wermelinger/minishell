@@ -3,19 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   my_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:18:16 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/02/17 00:18:20 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:28:12 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
-
-
+#include "libft.h"
 #include <stdio.h>
-
-
 
 size_t	my_strlen(const char *s)
 {

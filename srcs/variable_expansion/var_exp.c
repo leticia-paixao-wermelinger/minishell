@@ -6,11 +6,23 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 16:25:31 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/26 09:22:36 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:21:49 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief Expands variables for all tokens in a command.
+ *
+ * This function iterates through the linked list of tokens in the provided
+ * command structure (`t_command`) and calls `search_dollar` for each token.
+ * This is crucial for expanding environment variables and special tokens
+ * like "$?" and "$$" during command execution in the minishell.
+ *
+ * @param command The command structure containing the list of tokens
+ *                to process for variable expansion.
+ */
 
 void	var_exp(t_command *command)
 {
@@ -23,6 +35,20 @@ void	var_exp(t_command *command)
 		node = node->next;
 	}
 }
+
+/**
+ * @brief Searches for dollar signs in a token list and expands them.
+ *
+ * This function traverses a list of tokens, looking for dollar signs
+ * that indicate variable expansion. It handles cases where the dollar
+ * sign is closed by quotes or followed by specific characters like
+ * "?" or "$". The function modifies tokens in place to reflect the
+ * expanded values, enabling dynamic command construction in the minishell.
+ *
+ * @param node_token The first token in the linked list to search for
+ *                   dollar signs and expand variables.
+ * @param env The linked list of environment variables used for expansion.
+ */
 
 void	search_dollar(t_tokens *node_token, t_env *env)
 {
@@ -42,7 +68,8 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 		{
 			if (token->word[i] == DOLLAR)
 			{
-				if (dollar_is_closed_by_quote(&(token->word), UNPRINT_CHAR) == TRUE)
+				if (dollar_is_closed_by_quote(&(token->word),
+						UNPRINT_CHAR) == TRUE)
 					i++;
 				else
 				{
@@ -56,6 +83,23 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 		token = token->next;
 	}
 }
+
+/**
+ * @brief Checks and expands variables following a dollar sign in a token.
+ *
+ * This function analyzes the character following a dollar sign in a token
+ * to determine the appropriate expansion action. It handles special cases
+ * for "$?" (exit status) and "$$" (process ID) and calls the relevant
+ * expansion functions. The index of the next character to process is
+ * returned, enabling continuous processing of the token's string.
+ *
+ * @param token The token containing the dollar sign to expand.
+ * @param str The string of the token that may contain variables.
+ * @param j The index of the dollar sign within the token's string.
+ * @param env The linked list of environment variables used for expansion.
+ * @return The updated index after processing the dollar sign, or
+ *         CLOSE if no further expansion is needed.
+ */
 
 int	check_post_dollar(t_tokens *token, char *str, int j, t_env *env)
 {

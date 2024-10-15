@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 00:41:47 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/09 21:46:10 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 23:31:22 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,25 @@
 volatile unsigned int	g_flag;
 
 /**
- * ms_loop - The main loop of the minishell.
+ * @brief ms_loop - The main loop of the minishell that processes user input.
  *
- * This function runs the main loop of the shell, continuously prompting for user input,
- * parsing it, and executing commands until the user exits. It handles errors,
- * input clearing, and command execution. The loop terminates when the user inputs
- * an empty line, presses `Ctrl+D`, or when a critical error occurs.
+ * This function continuously prompts the user for input, processes the
+ * input command, and executes it. The loop will terminate when the
+ * input is NULL or an error occurs during command processing.
  *
- * @param command: A structure of type `t_command` that holds the command input,
- * environment variables, and other necessary data for shell execution.
+ * @param command: A t_command structure that holds information about
+ *                 the command to be executed, including input and
+ *                 tokenized commands.
+ *
+ * @note The loop will:
+ *       - Call `set_command` to set the input command.
+ *       - Clear the input if it is NULL or empty, and skip the iteration.
+ *       - Add the input command to the history if it is valid.
+ *       - Parse the command using the `parser` function.
+ *       - Pre-execute checks with `pre_exec`.
+ *       - Execute the command through the `executor`.
+ *       - Clear the command structure for the next iteration.
+ *       - The loop runs indefinitely until it is explicitly broken.
  */
 
 void	ms_loop(t_command command)
@@ -35,7 +45,7 @@ void	ms_loop(t_command command)
 		if (command.input == NULL)
 		{
 			clear_input(&command);
-			g_status(NO_ERROR); // Verificar se ta funcionando depois com execve, c ./minishell e vendo o retorno com echo $? depois de dar ctrl + d
+			g_status(NO_ERROR);
 			break ;
 		}
 		else if (my_strlen(command.input) == 0)
@@ -44,8 +54,7 @@ void	ms_loop(t_command command)
 			continue ;
 		}
 		add_history(command.input);
-		if (parser(&command) == ERROR)
-			continue ;
+		parser(&command);
 		if (pre_exec(&command) == ERROR)
 		{
 			clear_loop_end(&command);
@@ -57,17 +66,23 @@ void	ms_loop(t_command command)
 }
 
 /**
- * main - The entry point of the minishell program.
+ * @brief main - The entry point of the minishell program.
  *
- * The `main` function initializes the `t_command` structure, checks for
- * command-line arguments (minishell does not accept any), sets up signal handling,
- * and begins the main shell loop (`ms_loop`). It also ensures that environment variables
- * are loaded and properly clears resources before exiting.
+ * This function initializes the command structure, sets up the signal
+ * handling, retrieves environment variables, and enters the main loop
+ * of the minishell. It also checks for command-line arguments.
  *
- * @param argc: The argument count (should be 1 for minishell to run correctly).
- * @param argv: The argument vector (array of command-line arguments).
+ * @param argc: The count of command-line arguments.
+ * @param argv: An array of command-line argument strings.
  *
- * @return int: Returns an error code if more than one argument is passed or upon critical failure.
+ * @return int: Returns ERROR if there are command-line arguments other
+ *              than the program name, otherwise returns the result of
+ *              the `ms_loop` function.
+ *
+ * @note If there are command-line arguments, it prints an error message
+ *       and returns ERROR. It initializes the command structure using
+ *       `my_bzero` and calls `setup_signal_handling` to handle signals
+ *       appropriately during command execution.
  */
 
 int	main(int argc, char *argv[])

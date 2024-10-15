@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   my_str_end_cmp.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:18:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/06 16:57:29 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:26:19 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
 #include <stdio.h>
-
 
 int	my_str_end_cmp(const char *s1, const char *s2)
 {
@@ -51,5 +50,6 @@ int	main()
 	printf("Função original: %i, \n", strcmp(str1, str2));
 }
 
-Compilar: cc -Wall -Wextra -Werror -g my_str_end_cmp.c my_strlen.c && valgrind --leak-check=full --show-leak-kinds=all ./a.out
+Compilar: cc -Wall -Wextra -Werror -g my_str_end_cmp.c my_strlen.c && valgrind
+--leak-check=full --show-leak-kinds=all ./a.out
 */

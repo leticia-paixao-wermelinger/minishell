@@ -6,13 +6,27 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/12 21:27:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/14 18:07:37 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 18:36:21 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static void	change_sh_level(t_env *node);
+
+/**
+ * get_env - Initializes the environment variable linked list from environ.
+ *
+ * This function populates the `my_env` linked list in the command structure
+ * using the global `environ` variable. It counts the number of environment
+ * variables, creates the first node of the linked list, and then iteratively
+ * adds each subsequent environment variable as a new node. Finally, it calls
+ * `change_sh_level()` to update the shell level variable.
+ *
+ * @param command: The command structure to hold the environment variables.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	get_env(t_command *command)
 {
@@ -33,6 +47,21 @@ void	get_env(t_command *command)
 	change_sh_level(command->my_env);
 }
 
+/**
+ * my_getenv_by_list - Searches for an environment variable by key.
+ *
+ * This function traverses the linked list of environment variables and 
+ * returns the node corresponding to the specified variable name. It compares
+ * the provided name with the keys in the linked list and returns the first
+ * match found.
+ *
+ * @param name: The name of the environment variable to search for.
+ * @param my_env: The linked list of environment variables to search in.
+ *
+ * @return t_env*: A pointer to the environment variable node if found, 
+ *                 otherwise NULL.
+ */
+
 t_env	*my_getenv_by_list(const char *name, t_env *my_env)
 {
 	t_env	*temp;
@@ -48,6 +77,19 @@ t_env	*my_getenv_by_list(const char *name, t_env *my_env)
 	}
 	return (NULL);
 }
+
+/**
+ * change_sh_level - Increments the shell level environment variable.
+ *
+ * This function retrieves the current shell level from the environment
+ * variables, increments its value by one, and updates the variable in the
+ * linked list. It allocates new memory for the updated value and frees the
+ * old one.
+ *
+ * @param node: The linked list of environment variables containing SHLVL.
+ *
+ * @return void: This function does not return a value.
+ */
 
 static void	change_sh_level(t_env *node) // TESTAR JUNTO COM A EXECUÇÃO
 {

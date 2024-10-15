@@ -6,11 +6,25 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 22:18:49 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/03 23:43:01 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 23:19:11 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+/**
+ * @brief remove_env - Removes an environment variable node from the linked list.
+ *
+ * This function traverses the linked list of environment variables
+ * to find and remove a specified node. It updates the pointers in the
+ * previous node to bypass the removed node and frees the allocated memory
+ * for the key and value of the environment variable.
+ *
+ * @param node: The environment variable node to be removed.
+ * @param start: The head of the environment variable linked list.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	remove_env(t_env *node, t_env *start)
 {
@@ -31,37 +45,56 @@ void	remove_env(t_env *node, t_env *start)
 	}
 }
 
+/**
+ * @brief remove_first_word_token - Removes the first token word from a command.
+ *
+ * This function removes the first token from the linked list of tokens
+ * in a command. It updates the sentence to point to the next token
+ * in the list and frees the memory allocated for the removed token's
+ * word and the token itself.
+ *
+ * @param start: The first token in the linked list to be removed.
+ * @param sentence: The current command node whose token list will be updated.
+ *
+ * @return void: This function does not return a value.
+ */
+
 void	remove_first_word_token(t_tokens *start, t_node *sentence)
 {
-//	printf("Entereço do q deve ser o novo head da lista = %p, com %s\n", start->next, start->next->word);
 	sentence->token = start->next;
 	free(start->word);
 	free(start);
 	if (!(sentence->token))
 		sentence->token = NULL;
-//	printf("Endereço do novo head da lista: %p, com %s\n", sentence->token, sentence->token->word);
 }
+
+/**
+ * @brief remove_word_token - Removes a specified token word from the linked
+ * list.
+ *
+ * This function removes a specific token from the linked list of tokens
+ * associated with a command. It handles both the case where the token is
+ * the first in the list and where it is elsewhere. The function frees the
+ * memory allocated for the word and the token itself.
+ *
+ * @param node: The token node to be removed.
+ * @param start: The head of the token linked list.
+ * @param sentence: The current command node whose token list will be updated.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
 {
-	t_tokens *temp;
+	t_tokens	*temp;
 
 	temp = start;
-//	printf("--------REMOÇÃO DE NODE:----------\n");
-//	printf("start = %p, com %s\n", start, start->word);
-//	printf("node = %p, com %s\n", node, node->word);
 	if (start == node)
-	{
-//		printf("start = node\n");
-		remove_first_word_token(start, sentence);
-		return ;
-	}
+		return (remove_first_word_token(start, sentence));
 	while (temp)
 	{
-//		printf("No loop: temp = %p\n", temp);
 		if (temp->next == node)
 		{
-//			printf("Está no if de temp->next = node, com next = %p\n", temp->next);
 			if (temp->next)
 				temp->next = node->next;
 			else
@@ -76,11 +109,21 @@ void	remove_word_token(t_tokens *node, t_tokens *start, t_node *sentence)
 			temp = temp->next;
 	}
 	if (!start)
-	{
-//		printf("Entrou no if de word não existe, da linha 73\n");
 		sentence->token = NULL;
-	}
 }
+
+/**
+ * @brief remove_empty_nodes - Removes empty token nodes from the command list.
+ *
+ * This function traverses each command in the linked list of commands
+ * and removes any tokens that are empty (i.e., have a length of 0).
+ * It checks both the first token and subsequent tokens, ensuring that
+ * the command structure remains valid after removal.
+ *
+ * @param main_node: The head of the linked list of command nodes.
+ *
+ * @return void: This function does not return a value.
+ */
 
 void	remove_empty_nodes(t_node *main_node)
 {
@@ -90,7 +133,7 @@ void	remove_empty_nodes(t_node *main_node)
 	t_tokens	*temp;
 
 	sentence = main_node;
-	while(sentence)
+	while (sentence)
 	{
 		first = sentence->token;
 		tword = first;
@@ -102,7 +145,7 @@ void	remove_empty_nodes(t_node *main_node)
 			first = temp;
 			sentence->token = first;
 		}
-		while(tword)
+		while (tword)
 		{
 			if (tword->next != NULL)
 			{

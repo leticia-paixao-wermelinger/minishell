@@ -6,26 +6,28 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 14:58:14 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/09/25 14:22:09 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/14 23:39:33 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 static void	do_redir(t_tokens *token, enum e_token value);
-static int 	check_start(t_tokens *token);
+static int	check_start(t_tokens *token);
 
 /**
- * search_tokens - Processes tokens in each node and assigns types to them.
- * 
- * This function iterates through a linked list of nodes (`t_node`), and for each node,
- * it processes its token list (`t_tokens`). It checks if the first token in each node 
- * represents the start of a command and then sets the token types based on the 
- * content of each token. The token type could be a built-in command, an executable, 
- * an argument, or a redirection operator.
+ * @brief search_tokens - Assigns types to tokens in a linked list
+ *                       of input nodes based on their position and
+ *                       value.
  *
- * @param input: A pointer to the head of the linked list of input nodes (`t_node`), where 
- * each node contains a list of tokens.
+ * This function traverses through each node in the input linked list,
+ * processes the tokens, and assigns types to each token. The type
+ * of each token is determined by its position in the command
+ * sequence and its value. The function also considers leading
+ * redirection tokens.
+ *
+ * @param input A pointer to the head of the linked list of input nodes.
+ *               Each node contains a list of tokens to be processed.
  */
 
 void	search_tokens(t_node *input)
@@ -54,16 +56,17 @@ void	search_tokens(t_node *input)
 }
 
 /**
- * set_token - Assigns a type to a token based on its content and position.
- * 
- * This function checks the content of a token and assigns an appropriate type to it. 
- * The type could be a built-in command, an executable, a file redirection, or an argument. 
- * It processes redirection tokens such as append, input, output, and heredoc, ensuring 
- * that the next token in the sequence is treated as a redirection target (e.g., a file).
+ * @brief set_token - Sets the type of a given token based on its value
+ *                    and position in the command sequence.
  *
- * @param token: A pointer to the current token (`t_tokens`) that is being processed.
- * @param command: An integer representing the position of the command token in the list.
- * @param count: The current index of the token in the token list for the current command.
+ * This function checks the token's word and assigns a type such as
+ * BUILTIN, EXEC, REDIR, or ARGUMENT. The function also handles
+ * redirection tokens and determines if they are valid based on their
+ * next token.
+ *
+ * @param token A pointer to the token whose type is to be set.
+ * @param command The position of the command in the sequence.
+ * @param count The index of the current token being processed.
  */
 
 void	set_token(t_tokens *token, int command, int count)
@@ -89,16 +92,14 @@ void	set_token(t_tokens *token, int command, int count)
 }
 
 /**
- * do_redir - Sets the token type for a redirection operation.
- * 
- * This static helper function is used to assign the correct type to tokens that represent 
- * redirection operators (e.g., `>`, `>>`, `<`, `<<`). It recursively processes subsequent 
- * tokens to determine if they are part of the redirection sequence and marks them 
- * appropriately. For heredoc operations, the end-of-file token is also marked.
+ * @brief do_redir - Sets the type of a token for redirection and
+ *                   propagates redirection types to subsequent tokens.
  *
- * @param token: A pointer to the current token (`t_tokens`) being processed.
- * @param value: An enumeration value (`e_token`) that represents the type of redirection 
- *               (e.g., `REDIR_APPEND`, `REDIR_OUT`, `REDIR_IN`, etc.).
+ * This function assigns a type to a token and recursively checks the
+ * next token to assign the appropriate redirection type based on its value.
+ *
+ * @param token A pointer to the token being processed for redirection.
+ * @param value The type of redirection to assign.
  */
 
 static void	do_redir(t_tokens *token, enum e_token value)
@@ -119,17 +120,16 @@ static void	do_redir(t_tokens *token, enum e_token value)
 }
 
 /**
- * check_start - Determines if the first token is a redirection and calculates an offset.
- * 
- * This function checks the beginning of a token list to determine if the first tokens 
- * are redirection operators (e.g., `>`, `>>`, `<`). It counts the number of redirection 
- * tokens and skips them, returning an offset indicating how many tokens to skip 
- * before reaching the actual command token.
+ * @brief check_start - Checks the initial tokens in a sequence
+ *                      to determine how many leading redirection
+ *                      tokens are present.
  *
- * @param token: A pointer to the first token (`t_tokens`) in the list.
+ * This function counts leading redirection tokens in a list of tokens
+ * and returns the count. If the first token is not a redirection,
+ * it returns the current count.
  *
- * @return int: The number of tokens to skip if redirection is found, or 0 if no 
- * redirection is present at the start.
+ * @param token A pointer to the first token in the sequence.
+ * @return The number of leading redirection tokens.
  */
 
 static int	check_start(t_tokens *token)
@@ -156,15 +156,13 @@ static int	check_start(t_tokens *token)
 }
 
 /**
- * is_builtin - Checks if a string corresponds to a built-in shell command.
- * 
- * This function compares a given string to a set of known built-in shell commands 
- * (e.g., `echo`, `cd`, `pwd`, `export`, `unset`, `env`, `exit`). If the string matches 
- * one of these commands, it returns `TRUE`. Otherwise, it returns `FALSE`.
+ * @brief is_builtin - Checks if the given string is a built-in command.
  *
- * @param s: The string to be checked.
+ * This function compares the input string with known built-in commands
+ * and returns TRUE if it matches any of them, otherwise returns FALSE.
  *
- * @return int: Returns `TRUE` if the string is a built-in command, `FALSE` otherwise.
+ * @param s A pointer to the string to be checked.
+ * @return Returns TRUE if the string is a built-in command, otherwise FALSE.
  */
 
 int	is_builtin(char *s)

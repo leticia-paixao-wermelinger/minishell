@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   my_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lpaixao- <lpaixao-@student.42.rio>         +#+  +:+       +#+        */
+/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/17 00:18:08 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/02/17 00:18:11 by lpaixao-         ###   ########.fr       */
+/*   Updated: 2024/10/15 00:26:41 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h" 
+#include "libft.h"
 
 static long unsigned int	my_own_strlen(const char *str)
 {
@@ -45,10 +45,11 @@ size_t	my_strlcat(char *dst, const char *src, size_t size)
 int	main()
 {
 	unsigned long int	st;
-	char				dst1[200] = "Continue a nadar, continue a nadar, nadar, nadar...";
+	char				dst1[200] = "Continue a nadar, continue a nadar, nadar,
+	nadar...";
 	char				src1[] = "Pra achar a solução... Nadar!";
 	unsigned int		n = 10;
-	
+
 	st = my_strlcat(dst1, src1, n);
 	printf("\n Minha my_strlcat(): %s\n", dst1);
 	printf("Meu retorno: %lu \n\n", st);

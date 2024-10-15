@@ -6,11 +6,25 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:07:06 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 16:28:02 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:58:45 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+/**
+ * @brief get_executable_path - Finds the executable path of a command.
+ *
+ * This function retrieves the executable path for a given command by
+ * searching through directories listed in the PATH environment variable.
+ * It returns the absolute path if found or NULL if not.
+ *
+ * @param command: A pointer to the command structure containing environment
+ *                 variables.
+ * @param node: A pointer to the node containing the command token.
+ *
+ * @return char*: The absolute path of the executable or NULL if not found.
+ */
 
 char	*get_executable_path(t_command *command, t_node *node)
 {
@@ -40,6 +54,19 @@ char	*get_executable_path(t_command *command, t_node *node)
 	return (print_errno(node), free_matrix(dir), NULL);
 }
 
+/**
+ * @brief cmd_list_to_array - Converts a list of command tokens to an array.
+ *
+ * This function traverses a linked list of command tokens and converts
+ * them into a dynamically allocated array of strings. It returns the
+ * array of command arguments.
+ *
+ * @param sentences: A pointer to the head node of the command tokens.
+ *
+ * @return char**: An array of strings representing the command arguments
+ *                 or NULL if an error occurs.
+ */
+
 char	**cmd_list_to_array(t_node *sentences)
 {
 	int			i;
@@ -67,6 +94,19 @@ char	**cmd_list_to_array(t_node *sentences)
 	args[i] = NULL;
 	return (args);
 }
+
+/**
+ * @brief envp_list_to_array - Converts an environment list to an array.
+ *
+ * This function converts a linked list of environment variables into a
+ * dynamically allocated array of strings, with each string formatted as
+ * "KEY=VALUE". It returns the array of environment strings.
+ *
+ * @param env_list: A pointer to the head of the environment list.
+ *
+ * @return char**: An array of strings representing environment variables
+ *                 or NULL if an error occurs.
+ */
 
 char	**envp_list_to_array(t_env *env_list)
 {

@@ -6,11 +6,23 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 17:46:24 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/09 16:27:57 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/14 22:57:57 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
+
+/**
+ * @brief env_list_size - Calculates the size of the environment list.
+ *
+ * This function traverses the linked list of environment variables
+ * and counts the number of nodes in the list. It returns the total
+ * count as an integer.
+ *
+ * @param list: A pointer to the head of the environment list.
+ *
+ * @return int: The number of nodes in the environment list.
+ */
 
 int	env_list_size(t_env *list)
 {
@@ -24,6 +36,18 @@ int	env_list_size(t_env *list)
 	}
 	return (i);
 }
+
+/**
+ * @brief count_tokens_in_node - Counts tokens in a node of commands.
+ *
+ * This function counts all the tokens present in a linked list of
+ * nodes representing commands. It iterates through each node and
+ * sums the total number of tokens.
+ *
+ * @param sentence: A pointer to the head node of the command list.
+ *
+ * @return int: The total count of tokens in the command nodes.
+ */
 
 int	count_tokens_in_node(t_node *sentence)
 {

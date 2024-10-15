@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 23:51:30 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/14 23:50:45 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 18:06:29 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static int	check_redir(t_node *temp, t_tokens *word, t_command *command,
 				int first_flag);
-static int	handle_redirections_first(t_node *temp, \
-		t_tokens **word, t_command *command, int *flag_first);
-static int	handle_redirections_second(t_node *temp, t_tokens **word, \
-		t_command *command, int flag_first);
+static int	handle_redirections_first(t_node *temp, t_tokens **word,
+				t_command *command, int *flag_first);
+static int	handle_redirections_second(t_node *temp, t_tokens **word,
+				t_command *command, int flag_first);
 
 /**
  * @brief redirections - Handles redirections for a linked list of commands.
@@ -38,68 +38,70 @@ static int	handle_redirections_second(t_node *temp, t_tokens **word, \
 int	redirections(t_node *sentence, t_command *command, int ret, int flag_first)
 {
 	t_node		*temp;
-    t_tokens	*word;
+	t_tokens	*word;
 
-    temp = sentence;
-    while (temp)
-    {
-        word = temp->token;
-        flag_first = ON;
-        while (word)
-        {
-            if (flag_first == ON)
-                ret = handle_redirections_first(temp, &word, command, &flag_first);
-            if (!(sentence->token))
-            {
-                sentence->token = NULL;
-                return (ret);
-            }
-            if (word != NULL)
-                ret = handle_redirections_second(temp, &word, command, flag_first);
-            if (ret == ERROR)
-                return (ERROR);
-        }
-        temp = temp->next;
-    }
-    return (ret);
+	temp = sentence;
+	while (temp)
+	{
+		word = temp->token;
+		flag_first = ON;
+		while (word)
+		{
+			if (flag_first == ON)
+				ret = handle_redirections_first(temp, &word, command,
+						&flag_first);
+			if (!(sentence->token))
+			{
+				sentence->token = NULL;
+				return (ret);
+			}
+			if (word != NULL)
+				ret = handle_redirections_second(temp, &word, command,
+						flag_first);
+			if (ret == ERROR)
+				return (ERROR);
+		}
+		temp = temp->next;
+	}
+	return (ret);
 }
 
-static int handle_redirections_first(t_node *temp, \
-		t_tokens **word, t_command *command, int *flag_first)
+static int	handle_redirections_first(t_node *temp, t_tokens **word,
+		t_command *command, int *flag_first)
 {
-    t_tokens *temp_token;
-    int ret;
+	t_tokens	*temp_token;
+	int			ret;
 
-    while (*word && token_is_redir(*word) == TRUE)
-    {
-        temp_token = *word;
-        ret = check_redir(temp, temp_token, command, *flag_first);
-        if (temp->token != NULL)
-            *word = temp->token;
-        else
-            *word = NULL;
-        if (ret == ERROR)
-            temp->exit_status = 1;
-    }
+	while (*word && token_is_redir(*word) == TRUE)
+	{
+		temp_token = *word;
+		ret = check_redir(temp, temp_token, command, *flag_first);
+		if (temp->token != NULL)
+			*word = temp->token;
+		else
+			*word = NULL;
+		if (ret == ERROR)
+			temp->exit_status = 1;
+	}
 	*flag_first = OFF;
-    return ret;
+	return (ret);
 }
 
-static int handle_redirections_second(t_node *temp, t_tokens **word, \
+static int	handle_redirections_second(t_node *temp, t_tokens **word,
 		t_command *command, int flag_first)
 {
-    int ret;
+	int	ret;
 
 	ret = NO_ERROR;
-    if ((*word)->next != NULL)
-    {
-        ret = check_redir(temp, *word, command, flag_first);
-        if (ret == -1)
-            *word = (*word)->next;
-    }
-    else
-        *word = (*word)->next;
-    return	ret;
+	if ((*word)->next != NULL)
+	{
+		ret = check_redir(temp, *word, command, flag_first);
+		if (ret == -1)
+			*word = (*word)->next;
+	}
+	else
+		*word = (*word)->next;
+	return (ret);
 }
 
 /**

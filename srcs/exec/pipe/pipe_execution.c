@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 12:06:43 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/14 23:13:47 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 18:40:45 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,19 @@
  *              executed command if an error occurs.
  */
 
+void	check_next_node(t_node *node)
+{
+	if (node->next->token == NULL)
+		do_dup2(node);
+	else
+	{
+		if (node->fd_in != STDIN_FILENO)
+			dup2(node->fd_in, STDIN_FILENO);
+		if (node->fd_out != STDOUT_FILENO)
+			dup2(node->fd_out, STDOUT_FILENO);
+	}
+}
+
 int	pipe_execution(t_command *command, t_node *node)
 {
 	int	ret;
@@ -44,7 +57,7 @@ int	pipe_execution(t_command *command, t_node *node)
 			run_pipe_execve(command, node);
 		else
 		{
-			do_dup2(node);
+			check_next_node(node);
 			ret = run_pipe_builtin(command, node->token, command->my_env,
 					node->fd_out);
 			close_all_node_fds(node);
@@ -148,7 +161,8 @@ int	run_pipe_builtin(t_command *command, t_tokens *token, t_env *env, int fd)
 }
 
 /**
- * @brief check_path - Verifies if a command's executable and retrieves its path.
+ * @brief check_path
+	- Verifies if a command's executable and retrieves its path.
  *
  * This function checks if the command specified in the given `t_node`
  * structure is accessible and executable. If the command is not found

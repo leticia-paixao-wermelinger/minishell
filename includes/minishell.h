@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 15:05:26 by lpaixao-          #+#    #+#             */
-/*   Updated: 2024/10/15 00:32:41 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 18:40:40 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ void		print_heredoc_ctrld(int count, char *delimiter);
 // print_builtin_error.c
 void		print_cd_error(char *str, char *err);
 // quote_validation.c
-int			n_quote_validation(char *str, \
-				enum e_flag double_quote, enum e_flag simple_quote);
+int			n_quote_validation(char *str, enum e_flag double_quote,
+				enum e_flag simple_quote);
 int			dollar_is_closed_by_quote(char **str, int quote);
 // meta_closed_quote_validation.c
-void		remove_closed_in_quotes_metas(char *str, enum e_flag double_quote, \
+void		remove_closed_in_quotes_metas(char *str, enum e_flag double_quote,
 				enum e_flag single_quote);
 void		return_closed_in_quotes_metas(char *str);
 // single_quote_validation.c
@@ -170,8 +170,8 @@ t_env		*my_getenv_by_list(const char *name, t_env *my_env);
 
 //--------------------REDIRECTIONS--------------------
 // find_redir.c
-int			redirections(t_node *sentence, t_command *command, \
-				int ret, int flag_first);
+int			redirections(t_node *sentence, t_command *command, int ret,
+				int flag_first);
 int			find_heredoc(t_node *sentence);
 // do_redir.c
 int			do_heredoc(t_node *sentence, t_tokens *redir_node,
@@ -180,7 +180,8 @@ int			do_append(t_node *sentence, t_tokens *redir_node);
 int			do_redir_out(t_node *sentence, t_tokens *redir_node);
 int			do_redir_in(t_node *sentence, t_tokens *word);
 // heredoc_utils.c
-void		heredoc_child_process(int *fds, t_tokens *redir_node, t_command *command);
+void		heredoc_child_process(int *fds, t_tokens *redir_node,
+				t_command *command);
 // redir_utils.c
 int			check_permissions(char *pathname, int flag);
 void		remove_redir_nodes(t_node *sentence, t_tokens *redir_node);
@@ -213,6 +214,7 @@ void		make_pipe(t_node *sentence);
 int			pipe_execution(t_command *command, t_node *node);
 int			run_pipe_builtin(t_command *command, t_tokens *token, t_env *env,
 				int fd);
+void		check_next_node(t_node *node);
 void		run_pipe_execve(t_command *command, t_node *list);
 char		*check_path(t_command *cmd, t_node *node, char **env_array);
 // EXECVE

@@ -6,7 +6,7 @@
 /*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/05 15:43:07 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/15 00:15:01 by lraggio          ###   ########.fr       */
+/*   Updated: 2024/10/15 18:05:37 by lraggio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ void	heredoc_signal_handle(int sig)
 	{
 		signal(SIGINT, SIG_IGN);
 		g_status(USED_CTRL_C);
+		ioctl(STDIN_FILENO, TIOCSTI, "\n");
 	}
 	else
 	{

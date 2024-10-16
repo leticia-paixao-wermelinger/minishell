@@ -34,7 +34,7 @@
 
 void	check_next_node(t_node *node)
 {
-	if (node->next->token == NULL)
+	if (node->next != NULL && node->next->token == NULL)
 		do_dup2(node);
 	else
 	{

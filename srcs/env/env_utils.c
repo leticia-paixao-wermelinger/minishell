@@ -91,7 +91,7 @@ t_env	*my_getenv_by_list(const char *name, t_env *my_env)
  * @return void: This function does not return a value.
  */
 
-static void	change_sh_level(t_env *node) // TESTAR JUNTO COM A EXECUÇÃO
+static void	change_sh_level(t_env *node)
 {
 	t_env	*level;
 	int		number;

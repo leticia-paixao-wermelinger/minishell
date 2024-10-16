@@ -79,7 +79,7 @@ void	search_dollar(t_tokens *node_token, t_env *env)
 
 static int	handle_dollar(t_tokens *token, int i, t_env *env)
 {
-	if (dollar_is_closed_by_quote(&(token->word), UNPRINT_CHAR) == TRUE)
+	if (dollar_is_closed_by_quote(&(token->word), i, UNPRINT_CHAR) == TRUE)
 		i++;
 	else
 	{

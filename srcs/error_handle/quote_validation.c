@@ -68,7 +68,7 @@ int	n_quote_validation(char *str, enum e_flag double_quote, \
  *         FALSE if there is no enclosing quote for the dollar sign.
  */
 
-int	dollar_is_closed_by_quote(char **str, int quote)
+int	dollar_is_closed_by_quote(char **str, int index_dollar, int quote)
 {
 	int			i;
 	int			quote_index;
@@ -77,14 +77,14 @@ int	dollar_is_closed_by_quote(char **str, int quote)
 	i = 0;
 	(void)quote_index;
 	quote_flag = OFF;
-	while ((*str)[i])
+	while ((*str)[i] && i <= index_dollar)
 	{
 		if ((*str)[i] == quote && quote_flag == OFF)
 		{
 			quote_index = i;
 			quote_flag = ON;
 		}
-		else if ((*str)[i] == DOLLAR && quote_flag == ON)
+		else if ((*str)[index_dollar] == DOLLAR && quote_flag == ON)
 			return (TRUE);
 		i++;
 	}

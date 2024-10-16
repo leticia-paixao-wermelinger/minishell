@@ -80,7 +80,7 @@ void		print_cd_error(char *str, char *err);
 // quote_validation.c
 int			n_quote_validation(char *str, enum e_flag double_quote,
 				enum e_flag simple_quote);
-int			dollar_is_closed_by_quote(char **str, int quote);
+int			dollar_is_closed_by_quote(char **str, int index_dollar, int quote);
 // meta_closed_quote_validation.c
 void		remove_closed_in_quotes_metas(char *str, enum e_flag double_quote,
 				enum e_flag single_quote);

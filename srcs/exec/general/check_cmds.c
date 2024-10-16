@@ -63,7 +63,6 @@ int	check_cmds(t_node *sentence)
  *              an invalid command is found.
  */
 
-
 int	is_valid_cmd(t_node *sentence)
 {
 	while (sentence->token == NULL)

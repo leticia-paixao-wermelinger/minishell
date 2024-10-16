@@ -34,7 +34,7 @@
 
 void	check_next_node(t_node *node)
 {
-	if (node->next->token == NULL)
+	if (node->next != NULL && node->next->token == NULL)
 		do_dup2(node);
 	else
 	{
@@ -58,6 +58,10 @@ int	pipe_execution(t_command *command, t_node *node)
 		else
 		{
 			check_next_node(node);
+			/*if (node->fd_in != STDIN_FILENO)
+			dup2(node->fd_in, STDIN_FILENO);
+			if (node->fd_out != STDOUT_FILENO)
+			dup2(node->fd_out, STDOUT_FILENO);*/
 			ret = run_pipe_builtin(command, node->token, command->my_env,
 					node->fd_out);
 			close_all_node_fds(node);

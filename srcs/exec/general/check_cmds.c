@@ -63,6 +63,7 @@ int	check_cmds(t_node *sentence)
  *              an invalid command is found.
  */
 
+
 int	is_valid_cmd(t_node *sentence)
 {
 	while (sentence->token == NULL)
@@ -73,7 +74,17 @@ int	is_valid_cmd(t_node *sentence)
 			sentence = sentence->next;
 		}
 		else
-			return (close_all_node_fds(sentence), FALSE);
+			return (close_all_node_fds(sentence), ERROR);
+	}
+	if (is_there_space(sentence->token->word))
+	{
+		if (!sentence->next)
+		{
+			print_errno(sentence);
+			return (ERROR);
+		}
+		else
+			sentence = sentence->next;
 	}
 	return (NO_ERROR);
 }

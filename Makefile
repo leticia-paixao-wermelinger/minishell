@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/20 14:45:35 by lpaixao-          #+#    #+#              #
-#    Updated: 2024/10/15 18:46:21 by lraggio          ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 # GE = GREEN
 # BL = BLUE
@@ -119,7 +108,7 @@ srcs/cleaning/clear_loop.c
 OBJS = ${SRCS:.c=.o}
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $< -o $@
+	@$(CC) $(FLAGS) -c $< -o $@
 
 LIBFT = libs/my_libft/libft.a
 
@@ -131,20 +120,20 @@ all: $(NAME)
 	@echo "$(BLINK)$(BOLD)$(BL)✅ minishell is ready to be used$(RESET)"
 
 $(LIBS):
-	make -s -C $(LIBFT_PATH)
+	@make -s -C $(LIBFT_PATH)
 	@echo "$(BL)📚 libft is ready to be used$(RESET)"
 
 $(NAME): $(LIBS) $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) $(LIBS) $(RL_FLAG) -o $(NAME)
+	@$(CC) $(FLAGS) $(OBJS) $(LIBS) $(RL_FLAG) -o $(NAME)
 
 clean:
 	make clean -C $(LIBFT_PATH)
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
 	@echo "$(BOLD)$(RD)📤 Objects deleted$(RESET)"
 
 fclean: clean
-	make fclean -C $(LIBFT_PATH)
-	rm -f $(NAME)
+	@make fclean -C $(LIBFT_PATH)
+	@rm -f $(NAME)
 	@echo "$(BLINK)$(BOLD)$(RD)🧼 All cleaned$(RESET)"
 
 re: fclean all

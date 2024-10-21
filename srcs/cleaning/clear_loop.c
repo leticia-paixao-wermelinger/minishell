@@ -1,22 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   clear_loop.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lraggio <lraggio@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/14 18:21:42 by lraggio           #+#    #+#             */
-/*   Updated: 2024/10/14 18:23:16 by lraggio          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
 /**
  * clear_loop_end - Frees resources associated with the command loop.
  *
- * This function is called to free the resources related to the current command 
- * loop. It invokes `free_list()` to free the linked list of input tokens and 
+ * This function is called to free the resources related to the current command
+ * loop. It invokes `free_list()` to free the linked list of input tokens and
  * `clear_input()` to free the command prompt and input.
  *
  * @param command: The command structure containing resources to be freed.
